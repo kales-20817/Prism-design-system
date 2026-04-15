@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — UEMS Design System</title>
+<style>
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extralight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrablack.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular_italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --prism-black: #0a0a0c; --prism-violet: #2563eb; --prism-violet-light: #60a5fa;
+    --prism-fuchsia: #0ea5e9; --prism-cyan: #06b6d4;
+    --prism-surface: rgba(255,255,255,0.05); --prism-surface-hover: rgba(255,255,255,0.09);
+    --prism-border: rgba(255,255,255,0.07); --prism-text: rgba(255,255,255,0.92);
+    --prism-text-muted: rgba(255,255,255,0.48); --nav-bg: rgba(10,10,12,0.75);
+    --nav-link-color: var(--prism-text-muted);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+  }
+  [data-theme="light"] {
+    --prism-black: #ffffff; --prism-violet: #2563eb; --prism-violet-light: #1d4ed8;
+    --prism-fuchsia: #0284c7; --prism-cyan: #0891b2;
+    --prism-surface: rgba(37,99,235,0.028); --prism-surface-hover: rgba(37,99,235,0.055);
+    --prism-border: rgba(37,99,235,0.10); --prism-text: #1a1a2e;
+    --prism-text-muted: #64748b; --nav-bg: rgba(255,255,255,0.82);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --nav-link-color: #475569;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Zoho Puvi', sans-serif; background: var(--prism-black); color: var(--prism-text); transition: background 0.5s cubic-bezier(0.4,0,0.2,1), color 0.4s ease; }
+  [data-theme="light"] body { background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%); }
+  [data-theme="light"] .nav { background: rgba(255,255,255,0.78); border-bottom: 1px solid rgba(37,99,235,0.06); box-shadow: 0 1px 3px rgba(37,99,235,0.04), 0 4px 24px rgba(37,99,235,0.03); }
+  [data-theme="light"] .nav-links a { color: #64748b; }
+  [data-theme="light"] .nav-links a:hover { color: #1e293b; background: rgba(37,99,235,0.05); }
+  [data-theme="light"] .nav-links a.active { color: #2563eb; background: rgba(37,99,235,0.06); }
+  [data-theme="light"] .icon-btn { color: #94a3b8; }
+  [data-theme="light"] .icon-btn:hover { color: #1e293b; background: rgba(37,99,235,0.06); }
+
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); border-bottom: 1px solid var(--prism-border); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); }
+  .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .nav-logo-mark { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-right: 0.1em; padding-bottom: 0.1em; }
+  .nav-logo-sub { font-size: 13px; font-weight: 700; color: var(--prism-text); letter-spacing: 0.05em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a { color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none; }
+  .nav-links a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .nav-links a.active { color: var(--prism-violet); background: rgba(37,99,235,0.08); border: none; }
+  .icon-btn { background: transparent; border: none; cursor: pointer; color: var(--prism-text-muted); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; margin-left: 4px; }
+  .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+
+  /* Ambient Glows */
+  .bg-glow { position: fixed; border-radius: 50%; width: 60vw; height: 60vh; filter: blur(140px); z-index: -1; pointer-events: none; opacity: 0.15; }
+  .glow-1 { top: -20%; right: -10%; background: var(--prism-violet); }
+  .glow-2 { bottom: -20%; left: -10%; background: var(--prism-cyan); }
+  [data-theme="light"] .bg-glow { opacity: 0.09; filter: blur(180px); }
+
+  /* Page layout */
+  .page-content { padding: 120px 64px 64px; max-width: 1200px; margin: 0 auto; }
+  .page-title {
+    font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    display: inline-block; padding-right: 8px; padding-bottom: 4px;
+  }
+  .page-desc { color: var(--prism-text-muted); font-size: 20px; font-weight: 400; line-height: 1.5; margin-bottom: 48px; max-width: 700px; }
+
+  /* Slider tabs */
+  .lib-tabs {
+    display: flex; gap: 4px; margin-bottom: 48px;
+    background: var(--prism-surface); padding: 4px; border-radius: 999px;
+    width: max-content; border: 1px solid var(--prism-border);
+  }
+  .lib-tab {
+    display: flex; align-items: center; gap: 8px;
+    background: transparent; border: none; font-family: inherit;
+    font-size: 14px; font-weight: 600; color: var(--prism-text-muted);
+    padding: 10px 24px; cursor: pointer; transition: all 0.3s ease;
+    border-radius: 999px;
+  }
+  .lib-tab:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .lib-tab.active { color: #fff; background: var(--prism-violet); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+  .lib-tab.active svg { color: #fff; }
+  .lib-tab svg { width: 18px; height: 18px; color: var(--prism-text-muted); transition: color 0.3s ease; }
+  [data-theme="light"] .lib-tabs { background: rgba(255,255,255,0.7); border: 1px solid rgba(37,99,235,0.08); box-shadow: 0 1px 4px rgba(37,99,235,0.04); }
+  [data-theme="light"] .lib-tab:hover { color: #1e293b; background: rgba(37,99,235,0.05); }
+  [data-theme="light"] .lib-tab.active { color: #fff; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 2px 8px rgba(37,99,235,0.30); }
+
+  /* Slider panel */
+  .lib-panel { display: none; animation: fadeSlide 0.4s ease; }
+  .lib-panel.active { display: block; }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Section heading */
+  .lib-section-title { font-size: 28px; font-weight: 700; color: var(--prism-text); margin-bottom: 8px; }
+  .lib-section-desc { font-size: 16px; color: var(--prism-text-muted); line-height: 1.6; margin-bottom: 32px; max-width: 640px; }
+
+  /* Card grid */
+  .lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+  .lib-card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 32px 16px 20px; border-radius: 16px;
+    background: var(--prism-surface); border: 1px solid var(--prism-border);
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1); cursor: default;
+    min-height: 140px;
+  }
+  .lib-card:hover { border-color: rgba(37,99,235,0.35); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(37,99,235,0.12); }
+  [data-theme="light"] .lib-card { background: #fff; border: 1px solid rgba(37,99,235,0.08); box-shadow: 0 1px 4px rgba(37,99,235,0.04); }
+  [data-theme="light"] .lib-card:hover { border-color: rgba(37,99,235,0.25); box-shadow: 0 8px 28px rgba(37,99,235,0.10); }
+  .lib-card-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: var(--prism-text); margin-bottom: 14px; }
+  .lib-card-icon svg { width: 32px; height: 32px; }
+  .lib-card-label { font-size: 13px; font-weight: 600; color: var(--prism-text); text-align: center; }
+  .lib-card-sub { font-size: 11px; color: var(--prism-text-muted); margin-top: 4px; text-align: center; }
+
+  /* Logo grid — larger cards */
+  .lib-grid-logo { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .lib-card-logo { padding: 40px 24px 24px; min-height: 160px; }
+  .lib-card-logo img, .lib-card-logo svg { max-height: 48px; width: auto; margin-bottom: 16px; }
+
+  /* Illustration grid — wider cards */
+  .lib-grid-illust { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .lib-card-illust {
+    padding: 0; min-height: 200px; overflow: hidden;
+  }
+  .lib-card-illust-preview {
+    width: 100%; height: 140px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(6,182,212,0.04) 100%);
+    border-bottom: 1px solid var(--prism-border);
+  }
+  html:not([data-theme="light"]) .lib-card-illust-preview { background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(6,182,212,0.06) 100%); }
+  .lib-card-illust-info { padding: 14px 16px; }
+  .lib-card-illust-info .lib-card-label { text-align: left; }
+  .lib-card-illust-info .lib-card-sub { text-align: left; }
+</style>
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <nav class="nav">
+    <a class="nav-logo" href="index.html"><span class="nav-logo-mark">Prism</span><span class="nav-logo-sub">Design System</span></a>
+    <div class="nav-links">
+      <a href="Foundation.html">Foundation</a>
+      <a href="Components.html">Components</a>
+      <a href="AI-Experience.html">AI Experience</a>
+      <a href="Library.html">Resource</a>
+      <a href="Library.html" class="active">Resource</a>
+      <div style="width:16px;"></div>
+      <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+        <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <h1 class="page-title">Library</h1>
+    <p class="page-desc">Browse and access the design system's shared assets. Icons, product logos, and illustrations used across all UEMS products.</p>
+
+    <!-- Slider Tabs -->
+    <div class="lib-tabs">
+      <button class="lib-tab active" data-panel="icons">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Icons
+      </button>
+      <button class="lib-tab" data-panel="logos">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+        Logo
+      </button>
+      <button class="lib-tab" data-panel="illustrations">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21zM10.5 8.25a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0z"/></svg>
+        Illustrations
+      </button>
+    </div>
+
+    <!-- ========== Icons Panel ========== -->
+    <div class="lib-panel active" id="panel-icons">
+      <h2 class="lib-section-title">Icons</h2>
+      <p class="lib-section-desc">System icons used across UEMS products. Outlined stroke style, 24px grid, 2px stroke weight. Designed for clarity at small sizes.</p>
+      <div class="lib-grid">
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg></div>
+          <span class="lib-card-label">Home</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+          <span class="lib-card-label">Search</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+          <span class="lib-card-label">Settings</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+          <span class="lib-card-label">Notification</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+          <span class="lib-card-label">User</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+          <span class="lib-card-label">Bookmark</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+          <span class="lib-card-label">Link</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></div>
+          <span class="lib-card-label">Edit</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></div>
+          <span class="lib-card-label">Delete</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></div>
+          <span class="lib-card-label">Add</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></div>
+          <span class="lib-card-label">Download</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg></div>
+          <span class="lib-card-label">Filter</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+          <span class="lib-card-label">Chevron Right</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+          <span class="lib-card-label">Check</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+          <span class="lib-card-label">Close</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <span class="lib-card-label">Warning</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <span class="lib-card-label">Info</span>
+        </div>
+        <div class="lib-card">
+          <div class="lib-card-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg></div>
+          <span class="lib-card-label">Transfer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== Logo Panel ========== -->
+    <div class="lib-panel" id="panel-logos">
+      <h2 class="lib-section-title">Logo</h2>
+      <p class="lib-section-desc">Product logos and brand marks used across the UEMS product suite. Available in SVG format for pixel-perfect rendering at any size.</p>
+      <div class="lib-grid lib-grid-logo">
+        <div class="lib-card lib-card-logo">
+          <img src="assets/Endpoint Central.svg" alt="Endpoint Central" style="width:48px;height:48px;">
+          <span class="lib-card-label">Endpoint Central</span>
+          <span class="lib-card-sub">SVG</span>
+        </div>
+        <div class="lib-card lib-card-logo">
+          <div style="width:48px;height:48px;background:#16A34A;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="28" height="28" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <span class="lib-card-label">Mobile Device Manager Plus</span>
+          <span class="lib-card-sub">SVG</span>
+        </div>
+        <div class="lib-card lib-card-logo">
+          <div style="width:48px;height:48px;background:#0891B2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="28" height="28" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+          </div>
+          <span class="lib-card-label">Patch Manager Plus</span>
+          <span class="lib-card-sub">SVG</span>
+        </div>
+        <div class="lib-card lib-card-logo">
+          <div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <span style="font-size:36px;font-weight:800;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">P</span>
+          </div>
+          <span class="lib-card-label">Prism Design System</span>
+          <span class="lib-card-sub">Brand Mark</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== Illustrations Panel ========== -->
+    <div class="lib-panel" id="panel-illustrations">
+      <h2 class="lib-section-title">Illustrations</h2>
+      <p class="lib-section-desc">Contextual illustrations for empty states, onboarding flows, error pages, and success moments. Consistent visual language across all products.</p>
+      <div class="lib-grid lib-grid-illust">
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <rect x="20" y="30" width="80" height="60" rx="8" fill="rgba(37,99,235,0.08)" stroke="rgba(37,99,235,0.2)" stroke-width="2"/>
+              <circle cx="60" cy="55" r="12" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" stroke-width="2"/>
+              <path d="M54 55l4 4 8-8" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="35" y="75" width="50" height="6" rx="3" fill="rgba(37,99,235,0.1)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Empty State &#8212; Success</span><span class="lib-card-sub">Used after completing onboarding</span></div>
+        </div>
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <rect x="20" y="30" width="80" height="60" rx="8" fill="rgba(239,68,68,0.06)" stroke="rgba(239,68,68,0.2)" stroke-width="2"/>
+              <circle cx="60" cy="52" r="10" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="2"/>
+              <path d="M56 48l8 8M64 48l-8 8" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="40" y="72" width="40" height="5" rx="2.5" fill="rgba(239,68,68,0.08)"/>
+              <rect x="48" y="80" width="24" height="4" rx="2" fill="rgba(239,68,68,0.06)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Empty State &#8212; Error</span><span class="lib-card-sub">Connection or server errors</span></div>
+        </div>
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <rect x="25" y="35" width="70" height="50" rx="8" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="2"/>
+              <circle cx="45" cy="52" r="6" fill="rgba(37,99,235,0.1)"/>
+              <rect x="55" y="48" width="30" height="4" rx="2" fill="rgba(37,99,235,0.12)"/>
+              <rect x="55" y="55" width="20" height="3" rx="1.5" fill="rgba(37,99,235,0.08)"/>
+              <circle cx="45" cy="68" r="6" fill="rgba(37,99,235,0.1)"/>
+              <rect x="55" y="64" width="30" height="4" rx="2" fill="rgba(37,99,235,0.12)"/>
+              <rect x="55" y="71" width="20" height="3" rx="1.5" fill="rgba(37,99,235,0.08)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Empty State &#8212; No Data</span><span class="lib-card-sub">Empty lists, tables, or dashboards</span></div>
+        </div>
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <circle cx="60" cy="50" r="20" fill="rgba(6,182,212,0.08)" stroke="rgba(6,182,212,0.2)" stroke-width="2"/>
+              <path d="M52 50l5 5 11-11" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="30" y="78" width="60" height="5" rx="2.5" fill="rgba(6,182,212,0.1)"/>
+              <rect x="40" y="86" width="40" height="4" rx="2" fill="rgba(6,182,212,0.06)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Onboarding &#8212; Complete</span><span class="lib-card-sub">Setup wizard final step</span></div>
+        </div>
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <rect x="20" y="35" width="35" height="50" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="2"/>
+              <rect x="65" y="35" width="35" height="50" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="2"/>
+              <path d="M55 55h10M60 50v10" stroke="rgba(37,99,235,0.3)" stroke-width="2" stroke-linecap="round"/>
+              <rect x="28" y="45" width="20" height="3" rx="1.5" fill="rgba(37,99,235,0.1)"/>
+              <rect x="28" y="52" width="14" height="3" rx="1.5" fill="rgba(37,99,235,0.08)"/>
+              <rect x="73" y="45" width="20" height="3" rx="1.5" fill="rgba(37,99,235,0.1)"/>
+              <rect x="73" y="52" width="14" height="3" rx="1.5" fill="rgba(37,99,235,0.08)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Empty State &#8212; Add First</span><span class="lib-card-sub">Prompt to add first item</span></div>
+        </div>
+        <div class="lib-card lib-card-illust">
+          <div class="lib-card-illust-preview">
+            <svg width="80" height="80" fill="none" viewBox="0 0 120 120">
+              <circle cx="60" cy="50" r="22" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.2)" stroke-width="2"/>
+              <path d="M60 40v14M60 60v2" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+              <rect x="35" y="80" width="50" height="5" rx="2.5" fill="rgba(251,191,36,0.1)"/>
+            </svg>
+          </div>
+          <div class="lib-card-illust-info"><span class="lib-card-label">Warning State</span><span class="lib-card-sub">Caution or degraded service</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Slider tab switching
+    document.querySelectorAll('.lib-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.lib-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.lib-panel').forEach(function(p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        var panel = document.getElementById('panel-' + tab.getAttribute('data-panel'));
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // Theme toggle
+    var themeToggle = document.getElementById('themeToggle');
+    var moonIcon = document.getElementById('moonIcon');
+    var sunIcon = document.getElementById('sunIcon');
+    if ((localStorage.getItem('theme') || 'light') === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+    }
+    themeToggle.addEventListener('click', function() {
+      if (document.documentElement.getAttribute('data-theme') === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
