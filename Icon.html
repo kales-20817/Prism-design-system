@@ -685,8 +685,8 @@
   [data-theme="light"] .cp-select { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
   .cp-select:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
   .cp-preview { padding: 60px; min-height: 240px; display: flex; align-items: center; justify-content: center; position: relative; transition: background 0.3s ease; }
-  .cp-preview[data-preview-theme="dark"] { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
-  .cp-preview[data-preview-theme="light"] { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+  .cp-preview { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+  [data-theme="light"] .cp-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
   .cp-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
   [data-theme="light"] .cp-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
   .cp-code-actions { display: flex; gap: 12px; }
@@ -700,11 +700,11 @@
   .cp-code-area .token-attr { color: #38bdf8; }
   .cp-code-area .token-punct { color: #94a3b8; }
 
-  /* Dark theme overrides for preview buttons */
-  .cp-preview[data-preview-theme="dark"] .ib-secondary { background: rgba(234,240,252,0.12); color: #60a5fa; }
-  .cp-preview[data-preview-theme="dark"] .ib-tertiary { background: transparent; color: #60a5fa; }
-  .cp-preview[data-preview-theme="dark"] .ib-outline { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; }
-  .cp-preview[data-preview-theme="dark"] .ib-tertiary-grey { background: transparent; color: #94a3b8; }
+  /* Dark theme overrides for preview buttons (follows global theme) */
+  html:not([data-theme="light"]) .cp-preview .ib-secondary { background: rgba(234,240,252,0.12); color: #60a5fa; }
+  html:not([data-theme="light"]) .cp-preview .ib-tertiary { background: transparent; color: #60a5fa; }
+  html:not([data-theme="light"]) .cp-preview .ib-outline { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+  html:not([data-theme="light"]) .cp-preview .ib-tertiary-grey { background: transparent; color: #94a3b8; }
 </style>
 </head>
 <body>
@@ -1196,13 +1196,6 @@
           <div class="code-playground">
             <div class="cp-toolbar">
               <div class="cp-control-group">
-                <label class="cp-label">Theme</label>
-                <select class="cp-select" id="pg-theme">
-                  <option value="light">Light</option>
-                  <option value="dark">Dark</option>
-                </select>
-              </div>
-              <div class="cp-control-group">
                 <label class="cp-label">Type</label>
                 <select class="cp-select" id="pg-type">
                   <option value="primary">Primary</option>
@@ -1231,7 +1224,7 @@
               </div>
             </div>
 
-            <div class="cp-preview" id="pg-preview-area" data-preview-theme="light">
+            <div class="cp-preview" id="pg-preview-area">
               <button id="pg-button-element" class="ib-base ib-primary ib-xl ib-square" aria-label="Edit">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               </button>
@@ -1510,7 +1503,6 @@
 
     // ── Code Playground ──
     (function() {
-      const pgTheme = document.getElementById('pg-theme');
       const pgType = document.getElementById('pg-type');
       const pgSize = document.getElementById('pg-size');
       const pgShape = document.getElementById('pg-shape');
@@ -1521,7 +1513,7 @@
       const pgShowMoreBtn = document.getElementById('pg-show-more-btn');
       const pgShowMoreFade = document.getElementById('pg-show-more-fade');
 
-      if (!pgTheme) return;
+      if (!pgType) return;
 
       let isCodeExpanded = false;
 
@@ -1564,12 +1556,9 @@
       };
 
       function updatePlayground() {
-        const theme = pgTheme.value;
         const type = pgType.value;
         const size = pgSize.value;
         const shape = pgShape.value;
-
-        pgPreviewArea.setAttribute('data-preview-theme', theme);
 
         pgButtonElement.className = 'ib-base ib-' + type + ' ib-' + size + ' ib-' + shape;
 
@@ -1615,7 +1604,6 @@
         pgCodeOutput.innerHTML = highlightedHTML;
       }
 
-      pgTheme.addEventListener('change', updatePlayground);
       pgType.addEventListener('change', updatePlayground);
       pgSize.addEventListener('change', updatePlayground);
       pgShape.addEventListener('change', updatePlayground);

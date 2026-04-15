@@ -1251,8 +1251,8 @@
           .cp-select:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
           
           .cp-preview { padding: 60px; min-height: 240px; display: flex; align-items: center; justify-content: center; position: relative; transition: background 0.3s ease; }
-          .cp-preview[data-preview-theme="dark"] { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
-          .cp-preview[data-preview-theme="light"] { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .cp-preview { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .cp-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
           
           .cp-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
           [data-theme="light"] .cp-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
@@ -1276,22 +1276,15 @@
             transition: all 0.2s; border-radius: 8px;
           }
           
-          /* Dark Theme Button Overrides */
-          .cp-preview[data-preview-theme="dark"] .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
-          .cp-preview[data-preview-theme="dark"] .btn-secondary:hover { background: rgba(255,255,255,0.15); }
-          .cp-preview[data-preview-theme="dark"] .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; background: transparent; }
-          .cp-preview[data-preview-theme="dark"] .btn-outline:hover { background: rgba(255,255,255,0.05); }
+          /* Dark Theme Button Overrides (follows global theme) */
+          html:not([data-theme="light"]) .cp-preview .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
+          html:not([data-theme="light"]) .cp-preview .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+          html:not([data-theme="light"]) .cp-preview .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; background: transparent; }
+          html:not([data-theme="light"]) .cp-preview .btn-outline:hover { background: rgba(255,255,255,0.05); }
         </style>
 
         <div class="code-playground">
           <div class="cp-toolbar">
-            <div class="cp-control-group">
-              <label class="cp-label">Theme</label>
-              <select class="cp-select" id="pg-theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </div>
             <div class="cp-control-group">
               <label class="cp-label">Variant</label>
               <select class="cp-select" id="pg-variant">
@@ -1330,7 +1323,7 @@
             </div>
           </div>
           
-          <div class="cp-preview" id="pg-preview-area" data-preview-theme="light">
+          <div class="cp-preview" id="pg-preview-area">
             <button id="pg-button-element" class="preview-btn uems-btn btn-primary btn-l">Action Button</button>
           </div>
           
@@ -1359,7 +1352,6 @@
         </div>
 
         <script>
-          const pgTheme = document.getElementById('pg-theme');
           const pgVariant = document.getElementById('pg-variant');
           const pgSize = document.getElementById('pg-size');
           const pgIcon = document.getElementById('pg-icon');
@@ -1399,14 +1391,12 @@
           }
           
           function updatePlayground() {
-            const theme = pgTheme.value;
             const variant = pgVariant.value;
             const size = pgSize.value;
             const icon = pgIcon.value;
             const direction = pgDirection.value;
-            
-            // Update Preview Theme and Direction
-            pgPreviewArea.setAttribute('data-preview-theme', theme);
+
+            // Update Direction
             pgPreviewArea.style.direction = direction === 'rtl' ? 'rtl' : 'ltr';
             
             // Update Button Classes
@@ -1479,7 +1469,6 @@
             pgCodeOutput.innerHTML = highlightedHTML;
           }
           
-          pgTheme.addEventListener('change', updatePlayground);
           pgVariant.addEventListener('change', updatePlayground);
           pgSize.addEventListener('change', updatePlayground);
           pgIcon.addEventListener('change', updatePlayground);

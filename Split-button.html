@@ -1326,8 +1326,8 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
             .cp-select:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
 
             .cp-preview { padding: 60px; min-height: 240px; display: flex; align-items: center; justify-content: center; position: relative; transition: background 0.3s ease; }
-            .cp-preview[data-preview-theme="dark"] { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
-            .cp-preview[data-preview-theme="light"] { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+            .cp-preview { background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+            [data-theme="light"] .cp-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
 
             .cp-code-header-code { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
             [data-theme="light"] .cp-code-header-code { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
@@ -1340,13 +1340,6 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
 
           <div class="code-playground">
             <div class="cp-toolbar">
-              <div class="cp-control-group">
-                <label class="cp-label">Theme</label>
-                <select class="cp-select" id="pg-theme">
-                  <option value="light">Light</option>
-                  <option value="dark">Dark</option>
-                </select>
-              </div>
               <div class="cp-control-group">
                 <label class="cp-label">Size</label>
                 <select class="cp-select" id="pg-size">
@@ -1365,7 +1358,7 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
               </div>
             </div>
 
-            <div class="cp-preview" id="pg-preview-area" data-preview-theme="light">
+            <div class="cp-preview" id="pg-preview-area">
               <div id="pg-split-element" class="uems-split-btn sb-l">
                 <button class="split-btn-part split-btn-action">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
@@ -1397,7 +1390,6 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
           </div>
 
           <script>
-            const pgTheme = document.getElementById('pg-theme');
             const pgSize = document.getElementById('pg-size');
             const pgState = document.getElementById('pg-state');
             const pgPreviewArea = document.getElementById('pg-preview-area');
@@ -1431,11 +1423,8 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
             }
 
             function updatePlayground() {
-              const theme = pgTheme.value;
               const size = pgSize.value;
               const state = pgState.value;
-
-              pgPreviewArea.setAttribute('data-preview-theme', theme);
 
               const disabledClass = state === 'disabled' ? ' split-btn-disabled' : '';
               const disabledAttr = state === 'disabled' ? ' disabled' : '';
@@ -1484,7 +1473,6 @@ Variant=Primary Split, Size=Large, State=Default, RTL=False
               pgCodeOutput.innerHTML = highlightedHTML;
             }
 
-            pgTheme.addEventListener('change', updatePlayground);
             pgSize.addEventListener('change', updatePlayground);
             pgState.addEventListener('change', updatePlayground);
 
