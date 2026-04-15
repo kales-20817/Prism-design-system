@@ -29,7 +29,6 @@ open index.html
 
 - **Light & dark theme** support across every page
 - **Interactive AI components** with live demos for Zia patterns
-- **Atlassian-style component grid** with categorized cards
 - **Responsive layouts** that scale across screen sizes
 - **Token-driven** styling using CSS custom properties
 
