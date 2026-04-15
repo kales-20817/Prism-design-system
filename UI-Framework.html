@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI Framework — UEMS Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extralight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrablack.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular_italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+</style>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --prism-black: #0a0a0c;
+    --prism-violet: #2563eb;
+    --prism-violet-light: #60a5fa;
+    --prism-fuchsia: #0ea5e9;
+    --prism-cyan: #06b6d4;
+    --prism-surface: rgba(255, 255, 255, 0.05);
+    --prism-surface-hover: rgba(255, 255, 255, 0.09);
+    --prism-border: rgba(255, 255, 255, 0.07);
+    --prism-text: rgba(255, 255, 255, 0.92);
+    --prism-text-muted: rgba(255, 255, 255, 0.48);
+    --nav-bg: rgba(10,10,12,0.75);
+    --nav-link-color: var(--prism-text-muted);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 10px rgba(37, 99, 235, 0.3));
+    --radius: 20px;
+  }
+
+  [data-theme="light"] {
+    --prism-black: #f8fafc;
+    --prism-violet-light: #1d4ed8;
+    --prism-surface: rgba(0, 0, 0, 0.05);
+    --prism-surface-hover: rgba(0, 0, 0, 0.09);
+    --prism-border: rgba(0, 0, 0, 0.15);
+    --prism-text: #050505;
+    --prism-text-muted: #3a3a40;
+    --nav-bg: rgba(250,250,250,0.85);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+    --nav-link-color: #000000;
+  }
+
+  body {
+    font-family: 'Zoho Puvi', sans-serif;
+    background: var(--prism-black);
+    color: var(--prism-text);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 32px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--prism-border);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  }
+
+  .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .nav-logo-mark {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    padding-right: 0.1em; padding-bottom: 0.1em;
+   
+  }
+  .nav-logo-sub {
+    font-size: 13px; font-weight: 700; color: var(--prism-text);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none;
+  }
+  .nav-links a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .nav-links a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); border: none; }
+
+  .icon-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--prism-text-muted); padding: 8px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; margin-left: 4px;
+  }
+  .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+
+  .page-content {
+    padding: 140px 64px 64px;
+    width: 100%;
+    min-height: 100vh;
+  }
+  .page-title { font-size: 48px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-mark">Prism</span>
+      <span class="nav-logo-sub">Design System</span>
+    </a>
+    <div class="nav-links">      <a href="Foundation.html" >Foundation</a>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html" >AI Experience</a><a href="Resource.html">Resource</a>
+      
+      <div style="width: 16px;"></div> <!-- Spacer -->
+      
+
+      <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+        <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <h1 class="page-title">UI Framework</h1>
+    <p style="color: var(--prism-text-muted); font-size: 18px;">This page is currently under development.</p>
+  </main>
+  
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    if (currentTheme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

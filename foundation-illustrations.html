@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Illustrations — Foundation — UEMS Design System</title>
+<style>
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extralight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrablack.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular_italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --prism-black: #0a0a0c; --prism-violet: #2563eb; --prism-violet-light: #60a5fa;
+    --prism-fuchsia: #0ea5e9; --prism-cyan: #06b6d4;
+    --prism-surface: rgba(255, 255, 255, 0.05); --prism-surface-hover: rgba(255, 255, 255, 0.09);
+    --prism-border: rgba(255, 255, 255, 0.07); --prism-text: rgba(255, 255, 255, 0.92);
+    --prism-text-muted: rgba(255, 255, 255, 0.48); --nav-bg: rgba(10,10,12,0.75);
+    --nav-link-color: var(--prism-text-muted);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 10px rgba(37, 99, 235, 0.3));
+  }
+  [data-theme="light"] {
+    --prism-black: #ffffff; --prism-violet: #2563eb; --prism-violet-light: #1d4ed8;
+    --prism-fuchsia: #0284c7; --prism-cyan: #0891b2;
+    --prism-surface: rgba(37, 99, 235, 0.028); --prism-surface-hover: rgba(37, 99, 235, 0.055);
+    --prism-border: rgba(37, 99, 235, 0.10); --prism-text: #1a1a2e; --prism-text-muted: #64748b;
+    --nav-bg: rgba(255, 255, 255, 0.82);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 12px rgba(37, 99, 235, 0.25)); --nav-link-color: #475569;
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+  body { font-family: 'Zoho Puvi', sans-serif; background: var(--prism-black); color: var(--prism-text); transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease; }
+  [data-theme="light"] body { background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%); }
+  [data-theme="light"] .nav { background: rgba(255, 255, 255, 0.78); border-bottom: 1px solid rgba(37, 99, 235, 0.06); box-shadow: 0 1px 3px rgba(37, 99, 235, 0.04), 0 4px 24px rgba(37, 99, 235, 0.03); }
+  [data-theme="light"] .sidebar { border-right: 1px solid rgba(37, 99, 235, 0.06); background: linear-gradient(180deg, rgba(248, 250, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%); }
+  [data-theme="light"] .foundation-link { color: #64748b; }
+  [data-theme="light"] .foundation-link:hover { color: #1e293b; background: rgba(37, 99, 235, 0.05); }
+  [data-theme="light"] .foundation-link.active { color: #2563eb; background: rgba(37, 99, 235, 0.06); box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08); }
+  [data-theme="light"] .sidebar-search { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(37, 99, 235, 0.10); box-shadow: 0 1px 4px rgba(37, 99, 235, 0.04); }
+  [data-theme="light"] .sidebar-search:focus-within { background: #fff; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10), 0 2px 8px rgba(37, 99, 235, 0.06); }
+  [data-theme="light"] .icon-btn { color: #94a3b8; }
+  [data-theme="light"] .icon-btn:hover { color: #1e293b; background: rgba(37, 99, 235, 0.06); }
+  [data-theme="light"] .nav-links a { color: #64748b; }
+  [data-theme="light"] .nav-links a:hover { color: #1e293b; background: rgba(37, 99, 235, 0.05); }
+  [data-theme="light"] .nav-links a.active { color: #2563eb; background: rgba(37, 99, 235, 0.06); }
+  [data-theme="light"] .feedback-banner { background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%); border: 1px solid rgba(37, 99, 235, 0.12); box-shadow: 0 2px 12px rgba(37, 99, 235, 0.06); }
+  [data-theme="light"] .feedback-btn { background: #fff; border: 1px solid rgba(37, 99, 235, 0.12); box-shadow: 0 1px 3px rgba(37, 99, 235, 0.04); }
+  [data-theme="light"] .feedback-btn.primary { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-color: transparent; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25); }
+
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); border-bottom: 1px solid var(--prism-border); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); }
+  .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .nav-logo-mark { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-right: 0.1em; padding-bottom: 0.1em; }
+  .nav-logo-sub { font-size: 13px; font-weight: 700; color: var(--prism-text); letter-spacing: 0.05em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a { color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none; }
+  .nav-links a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .nav-links a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); border: none; }
+  .icon-btn { background: transparent; border: none; cursor: pointer; color: var(--prism-text-muted); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; margin-left: 4px; }
+  .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+
+  .components-layout { display: grid; grid-template-columns: 260px 1fr; width: 100%; padding-top: 72px; min-height: 100vh; }
+  .sidebar { grid-column: 1; grid-row: 1; width: 260px; border-right: 1px solid var(--prism-border); padding: 32px 24px 64px; position: sticky; top: 72px; height: calc(100vh - 72px); overflow-y: auto; }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--prism-border); border-radius: 4px; }
+  .sidebar-heading { font-size: 11px; font-weight: 700; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; padding-left: 12px; }
+  .sidebar, .toc-sidebar { background: transparent; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+  .sidebar-search { display: flex; align-items: center; background: var(--prism-surface); border: 1px solid var(--prism-border); border-radius: 999px; padding: 8px 16px; margin-bottom: 24px; transition: all 0.2s ease; }
+  .sidebar-search:focus-within { border-color: var(--prism-violet); background: transparent; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+  .sidebar-search svg { color: var(--prism-text-muted); }
+  .sidebar-search input { background: transparent; border: none; outline: none; color: var(--prism-text); font-family: inherit; font-size: 14px; width: 100%; margin-left: 10px; }
+  .sidebar-search input::placeholder { color: var(--prism-text-muted); }
+  .search-shortcut { font-size: 11px; font-weight: 600; color: var(--prism-text-muted); background: var(--prism-surface-hover); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--prism-border); }
+
+  .main-panel { grid-column: 2; grid-row: 1; padding: 48px 64px 0 64px; display: flex; flex-direction: column; }
+  .page-header-area { width: 100%; max-width: none; }
+  .page-title { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-right: 8px; padding-bottom: 4px; }
+  .page-desc { color: var(--prism-text); font-size: 20px; font-weight: 400; line-height: 1.5; margin-bottom: 32px; margin-top: 8px; max-width: 900px; }
+  .main-content-area { display: grid; grid-template-columns: 1fr 240px; gap: 0; flex: 1; align-items: start; }
+  .main-content-inner { padding-bottom: 64px; min-width: 0; }
+
+  .bg-glow { position: fixed; border-radius: 50%; width: 60vw; height: 60vh; filter: blur(140px); z-index: -1; pointer-events: none; opacity: 0.15; transition: opacity 0.6s ease, filter 0.6s ease; }
+  .glow-1 { top: -20%; right: -10%; background: var(--prism-violet); }
+  .glow-2 { bottom: -20%; left: -10%; background: var(--prism-cyan); }
+  [data-theme="light"] .bg-glow { opacity: 0.09; filter: blur(180px); }
+
+  .foundation-nav { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; margin: 0; }
+  .foundation-link { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; font-size: 14px; font-weight: 500; color: var(--prism-text-muted); text-decoration: none; border-radius: 8px; transition: all 0.2s ease; }
+  .foundation-link:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .foundation-link.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); font-weight: 600; }
+
+  .toc-sidebar { width: 240px; padding: 20px; position: sticky; top: 72px; height: calc(100vh - 72px); overflow-y: auto; align-self: start; }
+  .toc-heading { font-size: 11px; font-weight: 700; color: var(--prism-text); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .toc-nav { list-style: none; display: flex; flex-direction: column; gap: 10px; border-left: 1px solid var(--prism-border); padding-left: 16px; margin-left: 4px; }
+  .toc-link { display: block; font-size: 13px; font-weight: 500; color: var(--prism-text-muted); text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+  .toc-link:hover { color: var(--prism-text); }
+  .toc-link.active { color: var(--prism-violet); font-weight: 600; }
+  .quick-actions-card { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--prism-border); display: flex; flex-direction: column; gap: 4px; }
+  .quick-actions-title { font-size: 11px; font-weight: 700; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+  .action-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--prism-text-muted); text-decoration: none; padding: 6px 0; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  .action-link:hover { color: var(--prism-text); transform: translateX(2px); }
+  .action-link:hover svg { opacity: 1; color: var(--prism-violet); }
+
+  .placeholder-card { padding: 64px 40px; background: var(--prism-surface); border: 2px dashed var(--prism-border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; transition: all 0.3s ease; }
+  .placeholder-card svg { color: var(--prism-text-muted); opacity: 0.4; }
+  .placeholder-card .placeholder-title { font-size: 18px; font-weight: 600; color: var(--prism-text); }
+  .placeholder-card .placeholder-sub { font-size: 14px; color: var(--prism-text-muted); max-width: 460px; line-height: 1.6; }
+
+  .feedback-banner { margin-top: 72px; padding: 32px; border-radius: 16px; background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(6,182,212,0.06) 100%); border: 1px solid var(--prism-border); display: flex; align-items: center; justify-content: space-between; }
+  .feedback-banner .fb-text { font-size: 16px; font-weight: 600; color: var(--prism-text); }
+  .feedback-banner .fb-sub { font-size: 13.5px; color: var(--prism-text-muted); margin-top: 4px; }
+  .feedback-btn { padding: 10px 28px; border-radius: 999px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: 1px solid var(--prism-border); background: var(--prism-surface); color: var(--prism-text); }
+  .feedback-btn.primary { background: var(--prism-violet); color: #fff; border-color: var(--prism-violet); }
+  .feedback-btn.primary:hover { background: #1d4ed8; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3); transform: translateY(-1px); }
+  [data-theme="light"] .doc-list li::before { color: #2563eb; }
+  [data-theme="light"] .do-card { background: rgba(37, 99, 235, 0.03); border-color: rgba(16, 185, 129, 0.2); }
+  [data-theme="light"] .dont-card { background: rgba(37, 99, 235, 0.03); border-color: rgba(239, 68, 68, 0.2); }
+  [data-theme="light"] .toc-sidebar { background: transparent; }
+
+  /* Doc content styles */
+  .doc-section { margin-top: 48px; }
+  .doc-section h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; scroll-margin-top: 100px; }
+  .doc-section h3 { font-size: 20px; font-weight: 600; margin-top: 32px; margin-bottom: 12px; }
+  .doc-section h4 { font-size: 16px; font-weight: 600; margin-top: 24px; margin-bottom: 8px; }
+  .doc-section p { font-size: 15px; line-height: 1.7; color: var(--prism-text); margin-bottom: 16px; max-width: 720px; }
+  .doc-section strong { font-weight: 600; }
+  .doc-divider { border: none; border-top: 1px solid var(--prism-border); margin: 48px 0; }
+  .doc-list { list-style: none; padding: 0; margin: 0 0 20px 0; }
+  .doc-list li { position: relative; padding-left: 20px; font-size: 14.5px; line-height: 1.7; color: var(--prism-text); margin-bottom: 6px; }
+  .doc-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--prism-violet); font-weight: 700; }
+
+  /* Do / Don't cards */
+  .do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 32px; }
+  .do-card, .dont-card { padding: 24px; border-radius: 12px; border: 1px solid var(--prism-border); }
+  .do-card { background: rgba(16, 185, 129, 0.04); border-color: rgba(16, 185, 129, 0.15); }
+  .dont-card { background: rgba(239, 68, 68, 0.04); border-color: rgba(239, 68, 68, 0.15); }
+  .do-card .card-label { font-size: 13px; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .dont-card .card-label { font-size: 13px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .do-card p, .dont-card p { font-size: 14px; line-height: 1.6; color: var(--prism-text); margin: 0 0 6px; }
+
+  /* Illustration type cards */
+  .illus-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0 32px; }
+  .illus-type-card { padding: 28px 24px; border-radius: 16px; background: var(--prism-surface); border: 1px solid var(--prism-border); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; transition: all 0.2s ease; }
+  .illus-type-card:hover { background: var(--prism-surface-hover); border-color: var(--prism-violet); transform: translateY(-2px); }
+  .illus-type-card svg { color: var(--prism-text); opacity: 0.7; }
+  .illus-type-card .illus-type-name { font-size: 16px; font-weight: 600; color: var(--prism-text); }
+  .illus-type-card .illus-type-desc { font-size: 13px; color: var(--prism-text-muted); line-height: 1.5; }
+
+  /* Tone mapping table */
+  .tone-table { width: 100%; border-collapse: collapse; margin: 20px 0 32px; font-size: 14px; }
+  .tone-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--prism-text-muted); border-bottom: 2px solid var(--prism-border); }
+  .tone-table td { padding: 12px 16px; border-bottom: 1px solid var(--prism-border); vertical-align: middle; }
+  .tone-table tr:last-child td { border-bottom: none; }
+  .tone-table tbody tr:hover { background: var(--prism-surface); }
+
+  /* Pattern cards */
+  .pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 32px; }
+  .pattern-card { padding: 24px; border-radius: 12px; background: var(--prism-surface); border: 1px solid var(--prism-border); }
+  .pattern-card .pattern-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--prism-text); display: flex; align-items: center; gap: 8px; }
+  .pattern-card .pattern-title svg { color: var(--prism-violet); opacity: 0.8; }
+
+  /* Principle card */
+  .principle-card { padding: 32px; border-radius: 16px; background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(6,182,212,0.04) 100%); border: 1px solid var(--prism-border); margin: 24px 0; }
+  .principle-card p { margin-bottom: 8px; }
+  .principle-card p:last-child { margin-bottom: 0; }
+
+  /* Example cards */
+  .example-row { display: flex; gap: 12px; margin: 12px 0 20px; flex-wrap: wrap; }
+  .example-tag { font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); display: inline-flex; align-items: center; gap: 6px; }
+
+  /* Figma reference showcase */
+  .illus-showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 24px 0 32px; }
+  .illus-showcase-card { border-radius: 16px; background: var(--prism-surface); border: 1px solid var(--prism-border); overflow: hidden; transition: all 0.25s ease; }
+  .illus-showcase-card:hover { border-color: var(--prism-violet); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(37, 99, 235, 0.10); }
+  .illus-showcase-preview { display: flex; align-items: center; justify-content: center; padding: 32px 24px; background: #f0f4ff; min-height: 200px; }
+  [data-theme="light"] .illus-showcase-preview { background: #f0f4ff; }
+  :not([data-theme="light"]) .illus-showcase-preview { background: rgba(255,255,255,0.03); }
+  .illus-showcase-preview svg { width: 100%; max-width: 220px; height: auto; }
+  .illus-showcase-meta { padding: 20px 24px; border-top: 1px solid var(--prism-border); }
+  .illus-showcase-name { font-size: 15px; font-weight: 600; color: var(--prism-text); margin-bottom: 6px; }
+  .illus-showcase-type { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--prism-violet); margin-bottom: 8px; }
+  .illus-showcase-desc { font-size: 13px; color: var(--prism-text-muted); line-height: 1.5; margin: 0; }
+  .illus-showcase-size { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text-muted); margin-top: 10px; }
+  .figma-source-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--prism-text-muted); margin-top: 10px; padding: 4px 12px; border-radius: 999px; background: var(--prism-surface); border: 1px solid var(--prism-border); }
+  .figma-source-badge svg { width: 14px; height: 14px; }
+</style>
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-mark">Prism</span>
+      <span class="nav-logo-sub">Design System</span>
+    </a>
+    <div class="nav-links">      <a href="Foundation.html" class="active">Foundation</a>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><a href="Resource.html">Resource</a>
+      <div style="width: 16px;"></div>
+      <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+        <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="components-layout">
+    <aside class="sidebar">
+      <div class="sidebar-search">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" placeholder="Search...">
+        <span class="search-shortcut">&#8984;K</span>
+      </div>
+      <h3 class="sidebar-heading" id="foundations">Foundations</h3>
+      <ul class="foundation-nav">
+        <li><a href="foundation-tokens.html" class="foundation-link">Tokens</a></li>
+        <!-- Accessibility (standalone) -->
+        <li><a href="foundation-accessibility.html" class="foundation-link">Accessibility</a></li>
+        <li><a href="foundation-content.html" class="foundation-link">Content</a></li>
+        <li><a href="foundation-spacing.html" class="foundation-link">Spacing</a></li>
+        <li><a href="foundation-grid.html" class="foundation-link">Grid</a></li>
+        <li><a href="foundation-color.html" class="foundation-link">Color</a></li>
+        <li><a href="foundation-typography.html" class="foundation-link">Typography</a></li>
+        <li><a href="foundation-iconography.html" class="foundation-link">Iconography</a></li>
+        <li><a href="foundation-illustrations.html" class="foundation-link active">Illustrations</a></li>
+        <li><a href="foundation-logos.html" class="foundation-link">Logos</a></li>
+        <li><a href="foundation-patterns.html" class="foundation-link">Patterns</a></li>
+        <li><a href="foundation-elevation.html" class="foundation-link">Elevation</a></li>
+        <li><a href="foundation-border.html" class="foundation-link">Border</a></li>
+        <li><a href="foundation-radius.html" class="foundation-link">Radius</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-panel">
+      <div class="page-header-area">
+        <h1 class="page-title">Illustrations</h1>
+        <p class="page-desc">Use illustrations to guide action, explain complex workflows, and reduce uncertainty across endpoint management experiences.</p>
+      </div>
+
+      <div class="main-content-area">
+        <div class="main-content-inner">
+
+          <!-- Intro -->
+          <div class="doc-section" style="margin-top: 16px;">
+            <p>In Prism, illustrations are functional visual aids. They help clarify empty states, explain deployment workflows, support onboarding, reinforce AI guidance, and humanize error recovery.</p>
+            <p>A strong illustration system improves comprehension without increasing cognitive load in dense enterprise environments.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Why illustrations matter -->
+          <div class="doc-section" id="why-illustrations">
+            <h2>Why illustrations matter in endpoint products</h2>
+            <p>Endpoint workflows often include:</p>
+            <ul class="doc-list">
+              <li>Empty device groups</li>
+              <li>First-time onboarding</li>
+              <li>Failed patch states</li>
+              <li>Threat remediation guidance</li>
+              <li>AI-generated workflow explanations</li>
+              <li>Policy setup walkthroughs</li>
+              <li>Remote troubleshooting steps</li>
+              <li>Success confirmations</li>
+              <li>Upgrade and migration announcements</li>
+            </ul>
+            <p>Without a clear illustration system, these moments become text-heavy, emotionally flat, and harder to act on.</p>
+            <p>A strong illustration foundation improves:</p>
+            <ul class="doc-list">
+              <li>Better task comprehension</li>
+              <li>Faster first-use learning</li>
+              <li>Reduced empty-state confusion</li>
+              <li>Better AI explanation UX</li>
+              <li>Stronger product warmth</li>
+              <li>Better enterprise brand recall</li>
+            </ul>
+            <p>Illustrations must support the workflow -- not distract from it.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Illustration types -->
+          <div class="doc-section" id="illustration-types">
+            <h2>Illustration types</h2>
+            <p>Prism supports <strong>three in-product illustration types</strong>.</p>
+
+            <div class="illus-type-grid">
+              <div class="illus-type-card">
+                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+                <div class="illus-type-name">Spot illustrations</div>
+                <div class="illus-type-desc">One clear concept or outcome. Empty states, success moments, error recovery.</div>
+              </div>
+              <div class="illus-type-card">
+                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+                <div class="illus-type-name">Low-fi workflow UI</div>
+                <div class="illus-type-desc">Complex system explanations. Onboarding, AI walkthroughs, feature education.</div>
+              </div>
+              <div class="illus-type-card">
+                <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                <div class="illus-type-name">Ambient patterns</div>
+                <div class="illus-type-desc">Light visual texture. Dashboard zones, AI cards, promo modules, welcome screens.</div>
+              </div>
+            </div>
+
+            <!-- Spot illustrations -->
+            <h3 id="spot-illustrations">1. Spot illustrations</h3>
+            <p>Spot illustrations represent <strong>one clear concept or outcome</strong>.</p>
+            <p>Use for:</p>
+            <ul class="doc-list">
+              <li>Empty states (no devices, no threats, no patches)</li>
+              <li>Patch completed</li>
+              <li>Threat resolved</li>
+              <li>Policy not assigned</li>
+              <li>Missing agent</li>
+              <li>Upgrade available</li>
+              <li>Success celebrations</li>
+            </ul>
+
+            <h4>Rules</h4>
+            <ul class="doc-list">
+              <li>Must represent one idea only</li>
+              <li>Use centered compositions</li>
+              <li>Keep conceptual metaphor obvious</li>
+              <li>Support adjacent copy</li>
+              <li>Never replace core message text</li>
+            </ul>
+
+            <p><strong>Examples</strong></p>
+            <div class="example-row">
+              <span class="example-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12"/></svg> + <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg> Protected endpoint</span>
+              <span class="example-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"/></svg> No managed devices</span>
+              <span class="example-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg> Successful rollout</span>
+            </div>
+
+            <!-- Low-fi workflow UI -->
+            <h3 id="low-fi-workflow">2. Low-fidelity workflow UI</h3>
+            <p>Use low-fi UI illustrations for <strong>complex system explanations</strong>. Avoid real screen-within-screen screenshots in product.</p>
+            <p>Use for:</p>
+            <ul class="doc-list">
+              <li>Guided onboarding</li>
+              <li>AI remediation walkthroughs</li>
+              <li>Spotlight tours</li>
+              <li>Feature education</li>
+              <li>Multi-step deployment explanation</li>
+              <li>Automation flow previews</li>
+              <li>Tree navigation tutorials</li>
+            </ul>
+
+            <h4>Rules</h4>
+            <ul class="doc-list">
+              <li>Use neutral gray UI blocks</li>
+              <li>Sharp corners for structural clarity</li>
+              <li>Simplified component shapes</li>
+              <li>No realistic screenshots</li>
+              <li>No exact UI replication</li>
+              <li>Highlight only the learning concept</li>
+            </ul>
+
+            <!-- Ambient patterns -->
+            <h3 id="ambient-patterns">3. Ambient patterns</h3>
+            <p>Ambient patterns add <strong>light visual texture</strong> without introducing new meaning.</p>
+            <p>Use for:</p>
+            <ul class="doc-list">
+              <li>Empty dashboard zones</li>
+              <li>AI recommendation cards</li>
+              <li>Upgrade banners</li>
+              <li>Promo modules</li>
+              <li>Workspace welcome screens</li>
+              <li>Module landing pages</li>
+            </ul>
+
+            <h4>Rules</h4>
+            <ul class="doc-list">
+              <li>Must stay behind content</li>
+              <li>Never compete with text contrast</li>
+              <li>Use subtle neutral or semantic tones</li>
+              <li>No strong directional meaning</li>
+              <li>Use only for large supporting surfaces</li>
+            </ul>
+            <p>Ambient patterns should create brand atmosphere, not workflow confusion.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Reference examples from Figma -->
+          <div class="doc-section" id="reference-examples">
+            <h2>Reference examples</h2>
+            <p>These illustrations are sourced directly from the <strong>UEMS Icon Library</strong> Figma file. Each follows the Prism outline style: rounded geometric shapes, 1.5px strokes, semantic accent colors, and a centered composition with a prominent action affordance (+ button).</p>
+
+            <div class="illus-showcase-grid">
+
+              <!-- Create configuration -->
+              <div class="illus-showcase-card">
+                <div class="illus-showcase-preview">
+                  <svg width="292" height="244" viewBox="0 0 292 244" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M168.943 82.7973C167.572 77.4592 166.398 74.2102 164.376 71.8049C161.914 68.8696 158.588 66.7916 154.875 65.8686C150.662 64.8242 145.745 65.9893 135.91 68.3197L98.4475 77.1956C88.6115 79.5261 83.6956 80.6912 80.3943 83.5147C77.4862 86.0065 75.4395 89.3576 74.5475 93.0876C73.5283 97.3365 74.6989 102.306 77.04 112.244L91.5347 173.76C93.8769 183.698 95.0485 188.667 97.8552 192.01C100.208 194.813 103.352 196.838 106.873 197.818C107.656 197.986 108.514 198.157 108.28 198.144" stroke="#4E7FDB" stroke-width="1.83017" stroke-linecap="round"/>
+<path d="M129.381 82.8922H167.83C173.971 82.8922 178.158 82.8953 181.345 83.3219L195.668 102.058C195.75 104.493 195.75 107.377 195.75 110.892V189.183C195.748 189.199 195.745 189.218 195.742 189.241C195.729 189.321 195.708 189.443 195.676 189.6C195.613 189.915 195.509 190.37 195.348 190.919C195.026 192.018 194.48 193.475 193.587 194.919C191.82 197.778 188.704 200.593 183.137 200.525C177.848 200.46 168.808 200.963 160.377 201.542H129.381C124.32 201.542 120.578 201.541 117.619 201.298C114.67 201.057 112.579 200.58 110.802 199.672C107.785 198.131 105.296 195.728 103.645 192.774L103.327 192.175C102.422 190.392 101.947 188.294 101.707 185.337C101.465 182.37 101.464 178.619 101.464 173.546V110.892C101.464 105.817 101.465 102.065 101.707 99.0973C101.947 96.1401 102.424 94.0417 103.33 92.2594C104.969 89.0312 107.586 86.4065 110.803 84.7613L110.802 84.7603C112.579 83.8526 114.671 83.3769 117.62 83.1353C120.579 82.8929 124.32 82.8922 129.381 82.8922Z" stroke="#75A4FE" stroke-width="1.83017"/>
+<path d="M181.73 84.4821L180.727 93.549C180.363 96.8426 182.738 99.8095 186.031 100.176L195.004 101.174" fill="#9FB7FF"/>
+<path d="M181.73 84.4821L180.727 93.549C180.363 96.8427 182.738 99.8095 186.031 100.176L195.004 101.174" stroke="#75A4FE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<path d="M159.811 164.368H130.846H127.653H117.998C117.609 164.368 117.219 164.927 117.219 165.709C117.219 166.38 117.531 167.051 117.998 167.051H127.653H130.846H159.811C160.2 167.051 160.59 166.492 160.59 165.709C160.512 164.927 160.2 164.368 159.811 164.368Z" fill="#75A4FE"/>
+<path d="M176.328 150.098H161.388H156.3H118.302C117.761 150.098 117.219 150.656 117.219 151.439C117.219 152.11 117.653 152.78 118.302 152.78H156.3H161.388H176.328C176.869 152.78 177.411 152.221 177.411 151.439C177.302 150.656 176.869 150.098 176.328 150.098Z" fill="#75A4FE"/>
+<path d="M176.426 135.828H172.544H168.661H118.298C117.759 135.828 117.219 136.387 117.219 137.169C117.219 137.84 117.651 138.511 118.298 138.511H168.661H172.975H176.318C176.857 138.511 177.397 137.952 177.397 137.169C177.504 136.498 176.965 135.828 176.426 135.828Z" fill="#75A4FE"/>
+<path d="M21.6648 126.593V129.759" stroke="#7E90B0" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21.6648 133.979V137.145" stroke="#7E90B0" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.4056 131.868H19.5621" stroke="#7E90B0" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.7701 131.868H26.9266" stroke="#7E90B0" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M210.201 164.958V170.323M207.527 167.64H212.876" stroke="#7E90B0" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M171.529 36.1816V39.9114M169.669 38.0465H173.388M179.399 51.9062L178.109 48.5428C177.899 47.9958 177.794 47.7223 177.631 47.4923C177.487 47.2884 177.309 47.1103 177.106 46.9653C176.876 46.8017 176.603 46.6965 176.058 46.4862L172.704 45.1925L176.058 43.8989C176.603 43.6885 176.876 43.5834 177.106 43.4198C177.309 43.2748 177.487 43.0967 177.631 42.8928C177.794 42.6628 177.899 42.3893 178.109 41.8423L179.399 38.4789L180.689 41.8423C180.899 42.3893 181.004 42.6628 181.167 42.8928C181.312 43.0967 181.489 43.2748 181.693 43.4198C181.922 43.5834 182.195 43.6885 182.74 43.8989L186.094 45.1925L182.74 46.4862C182.195 46.6965 181.922 46.8017 181.693 46.9653C181.489 47.1103 181.312 47.2884 181.167 47.4923C181.004 47.7223 180.899 47.9958 180.689 48.5428L179.399 51.9062Z" stroke="#5BC1A5" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="186.662" cy="187.738" r="20.0807" fill="#7E90B0"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M187.318 177.485C187.318 176.811 186.771 176.265 186.097 176.265C185.424 176.265 184.877 176.811 184.877 177.485V186.5H175.887C175.213 186.5 174.667 187.046 174.667 187.72C174.667 188.394 175.213 188.94 175.887 188.94H184.877V197.957C184.877 198.631 185.424 199.177 186.097 199.177C186.771 199.177 187.318 198.631 187.318 197.957V188.94H196.303C196.976 188.94 197.523 188.394 197.523 187.72C197.523 187.046 196.976 186.5 196.303 186.5H187.318V177.485Z" fill="white"/>
+<path d="M126.038 110.261V108.426C126.038 107.342 126.922 106.445 128.014 106.445C129.896 106.445 130.665 105.111 129.719 103.474C129.178 102.536 129.501 101.316 130.447 100.774L132.246 99.7416C133.067 99.2516 134.128 99.5435 134.616 100.367L134.731 100.565C135.666 102.202 137.205 102.202 138.151 100.565L138.266 100.367C138.754 99.5435 139.815 99.2516 140.636 99.7416L142.435 100.774C143.381 101.316 143.704 102.536 143.163 103.474C142.217 105.111 142.986 106.445 144.868 106.445C145.949 106.445 146.844 107.332 146.844 108.426V110.261C146.844 111.346 145.96 112.242 144.868 112.242C142.986 112.242 142.217 113.577 143.163 115.214C143.704 116.162 143.381 117.372 142.435 117.914L140.636 118.946C139.815 119.436 138.754 119.144 138.266 118.321L138.151 118.122C137.216 116.486 135.677 116.486 134.731 118.122L134.616 118.321C134.128 119.144 133.067 119.436 132.246 118.946L130.447 117.914C129.501 117.372 129.178 116.152 129.719 115.214C130.665 113.577 129.896 112.242 128.014 112.242C126.922 112.242 126.038 111.346 126.038 110.261Z" stroke="#75A4FE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M136.439 112.472C138.162 112.472 139.558 111.071 139.558 109.344C139.558 107.616 138.162 106.215 136.439 106.215C134.716 106.215 133.32 107.616 133.32 109.344C133.32 111.071 134.716 112.472 136.439 112.472Z" stroke="#75A4FE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M149.068 118.84V117.391C149.068 116.534 149.766 115.826 150.628 115.826C152.114 115.826 152.722 114.772 151.974 113.48C151.547 112.739 151.802 111.775 152.549 111.347L153.97 110.532C154.618 110.145 155.456 110.376 155.842 111.026L155.932 111.183C156.671 112.475 157.886 112.475 158.633 111.183L158.724 111.026C159.11 110.376 159.947 110.145 160.596 110.532L162.016 111.347C162.763 111.775 163.018 112.739 162.591 113.48C161.844 114.772 162.451 115.826 163.938 115.826C164.792 115.826 165.498 116.526 165.498 117.391V118.84C165.498 119.696 164.8 120.404 163.938 120.404C162.451 120.404 161.844 121.458 162.591 122.751C163.018 123.5 162.763 124.455 162.016 124.883L160.596 125.698C159.947 126.085 159.11 125.855 158.724 125.204L158.633 125.048C157.894 123.755 156.679 123.755 155.932 125.048L155.842 125.204C155.456 125.855 154.618 126.085 153.97 125.698L152.549 124.883C151.802 124.455 151.547 123.492 151.974 122.751C152.722 121.458 152.114 120.404 150.628 120.404C149.766 120.404 149.068 119.696 149.068 118.84Z" stroke="#75A4FE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M157.282 120.585C158.642 120.585 159.745 119.479 159.745 118.115C159.745 116.751 158.642 115.645 157.282 115.645C155.921 115.645 154.818 116.751 154.818 118.115C154.818 119.479 155.921 120.585 157.282 120.585Z" stroke="#75A4FE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M189.942 140.593C202.675 146.832 241.024 148.104 229.731 129.435C215.615 106.099 198.26 133.282 219.434 137.351C245.585 142.378 252.573 111.585 253.708 107.239" stroke="#75A4FE" stroke-width="1.22012" stroke-linecap="round" stroke-dasharray="2.44 2.44"/>
+<path d="M236.269 84.5599V81.0915C236.269 79.042 237.939 77.3473 240.003 77.3473C243.56 77.3473 245.014 74.8248 243.226 71.7308C242.204 69.9572 242.813 67.6514 244.602 66.6267L248.002 64.6757C249.554 63.7495 251.559 64.3013 252.483 65.8581L252.699 66.2326C254.468 69.3265 257.376 69.3265 259.165 66.2326L259.381 65.8581C260.305 64.3013 262.309 63.7495 263.862 64.6757L267.262 66.6267C269.05 67.6514 269.659 69.9572 268.637 71.7308C266.849 74.8248 268.303 77.3473 271.861 77.3473C273.904 77.3473 275.595 79.0223 275.595 81.0915V84.5599C275.595 86.6094 273.924 88.3042 271.861 88.3042C268.303 88.3042 266.849 90.8267 268.637 93.9207C269.659 95.714 269.05 98 267.262 99.0248L263.862 100.976C262.309 101.902 260.305 101.35 259.381 99.7934L259.165 99.4189C257.396 96.3249 254.487 96.3249 252.699 99.4189L252.483 99.7934C251.559 101.35 249.554 101.902 248.002 100.976L244.602 99.0248C242.813 98 242.204 95.6943 243.226 93.9207C245.014 90.8267 243.56 88.3042 240.003 88.3042C237.939 88.3042 236.269 86.6094 236.269 84.5599Z" stroke="#75A4FE" stroke-width="1.22012" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M255.928 88.7367C259.185 88.7367 261.824 86.0898 261.824 82.8246C261.824 79.5593 259.185 76.9125 255.928 76.9125C252.672 76.9125 250.032 79.5593 250.032 82.8246C250.032 86.0898 252.672 88.7367 255.928 88.7367Z" stroke="#75A4FE" stroke-width="1.22012" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63.886 113.896L76.0855 157.357" stroke="#75A4FE" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.44 4.88"/>
+<path d="M79.3899 171.055L81.9062 181.124" stroke="#75A4FE" stroke-width="1.83017" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.44 4.88"/>
+<circle cx="221.047" cy="105.707" r="3.35532" stroke="#E56470" stroke-width="1.83017"/>
+<circle cx="57.1911" cy="185.394" r="1.96616" stroke="#E56470" stroke-width="1.83017"/>
+                  </svg>
+                </div>
+                <div class="illus-showcase-meta">
+                  <div class="illus-showcase-type">Spot illustration</div>
+                  <div class="illus-showcase-name">Create configuration</div>
+                  <p class="illus-showcase-desc">Empty state for policy/configuration setup. Document with gear icons invites the admin to create their first configuration.</p>
+                  <span class="illus-showcase-size">292 &times; 244</span>
+                </div>
+              </div>
+
+              <!-- Create custom report -->
+              <div class="illus-showcase-card">
+                <div class="illus-showcase-preview">
+                  <svg width="292" height="244" viewBox="0 0 292 244" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M191.395 207.34H108.545C99.465 207.34 92.075 199.95 92.075 190.87V85.51C92.075 76.43 99.465 69.04 108.545 69.04H159.745C163.855 69.04 167.785 70.56 170.825 73.32L202.485 102.14C205.865 105.22 207.815 109.59 207.865 114.16C207.875 114.22 207.885 114.27 207.885 114.33V190.87C207.885 199.95 200.495 207.34 191.415 207.34H191.395ZM108.545 70.84C100.455 70.84 93.875 77.42 93.875 85.51V190.87C93.875 198.96 100.455 205.54 108.545 205.54H191.395C199.485 205.54 206.065 198.96 206.065 190.87V114.48C206.055 114.42 206.045 114.37 206.045 114.31C206.045 110.19 204.295 106.24 201.255 103.47L169.595 74.65C166.885 72.19 163.385 70.83 159.725 70.83H108.525L108.545 70.84Z" fill="#4E7FDB"/>
+<path d="M61.015 170.94C60.505 170.94 60.095 170.53 60.095 170.02V168.25H58.335C57.825 168.25 57.415 167.84 57.415 167.33C57.415 166.82 57.825 166.41 58.335 166.41H60.095V164.64C60.095 164.13 60.505 163.72 61.015 163.72C61.525 163.72 61.935 164.13 61.935 164.64V166.41H63.695C64.205 166.41 64.615 166.82 64.615 167.33C64.615 167.84 64.205 168.25 63.695 168.25H61.935V170.02C61.935 170.53 61.525 170.94 61.015 170.94Z" fill="#7E90B0"/>
+<path d="M206.645 93.09C206.425 93.09 206.215 93.01 206.035 92.86L174.375 64.04C171.665 61.58 168.165 60.22 164.505 60.22H133.285C132.785 60.22 132.385 59.82 132.385 59.32C132.385 58.82 132.785 58.42 133.285 58.42H164.505C168.615 58.42 172.545 59.94 175.585 62.7L207.245 91.52C207.615 91.85 207.635 92.42 207.305 92.79C207.125 92.99 206.885 93.08 206.635 93.08L206.645 93.09Z" fill="#75A4FE"/>
+<path d="M208.045 43.1101C207.675 43.1101 207.335 42.8801 207.205 42.5301L205.125 37.1101C204.805 36.2801 204.655 35.8901 204.455 35.6101C204.285 35.3701 204.075 35.1601 203.815 34.9701C203.535 34.7801 203.145 34.6201 202.325 34.3001L196.915 32.2201C196.565 32.0901 196.335 31.7501 196.335 31.3801C196.335 31.0101 196.565 30.6701 196.915 30.5401L202.325 28.4601C203.145 28.1501 203.535 27.9901 203.825 27.7901C204.065 27.6201 204.285 27.4101 204.465 27.1501C204.655 26.8801 204.815 26.4801 205.135 25.6601L207.215 20.2401C207.345 19.8901 207.685 19.6601 208.055 19.6601C208.425 19.6601 208.765 19.8901 208.895 20.2401L210.975 25.6601C211.295 26.4801 211.445 26.8801 211.645 27.1601C211.835 27.4201 212.045 27.6301 212.285 27.8001C212.565 27.9901 212.955 28.1501 213.775 28.4701L219.185 30.5501C219.535 30.6801 219.765 31.0201 219.765 31.3901C219.765 31.7601 219.535 32.1001 219.185 32.2301L213.775 34.3101C212.935 34.6401 212.545 34.7901 212.265 34.9801C212.025 35.1501 211.815 35.3601 211.625 35.6201C211.435 35.9001 211.275 36.2901 210.955 37.1101L208.875 42.5301C208.745 42.8801 208.405 43.1101 208.035 43.1101H208.045ZM199.745 31.3801L202.965 32.6201C203.925 32.9901 204.395 33.1801 204.845 33.5001C205.275 33.8101 205.635 34.1701 205.925 34.5801C206.255 35.0601 206.465 35.5801 206.805 36.4701L208.045 39.7001L209.285 36.4701C209.625 35.5801 209.825 35.0601 210.165 34.5801C210.475 34.1501 210.835 33.7901 211.245 33.5001C211.715 33.1701 212.255 32.9601 213.135 32.6201L216.365 31.3801L213.145 30.1401C212.265 29.8001 211.735 29.6001 211.265 29.2701C210.865 28.9901 210.525 28.6401 210.205 28.2201C209.855 27.7201 209.645 27.1901 209.305 26.3101L208.065 23.0801L206.825 26.3101C206.485 27.2001 206.275 27.7201 205.955 28.2001C205.645 28.6301 205.285 28.9901 204.875 29.2801C204.415 29.6001 203.955 29.7901 202.985 30.1601L199.765 31.4001L199.745 31.3801ZM195.345 23.7501C194.845 23.7501 194.445 23.3501 194.445 22.8501V20.7501H192.345C191.845 20.7501 191.445 20.3501 191.445 19.8501C191.445 19.3501 191.845 18.9501 192.345 18.9501H194.445V16.8301C194.445 16.3301 194.845 15.9301 195.345 15.9301C195.845 15.9301 196.245 16.3301 196.245 16.8301V18.9501H198.345C198.845 18.9501 199.245 19.3501 199.245 19.8501C199.245 20.3501 198.845 20.7501 198.345 20.7501H196.245V22.8501C196.245 23.3501 195.845 23.7501 195.345 23.7501Z" fill="#5BC1A5"/>
+<path d="M248.935 128.45C245.445 128.45 242.615 125.61 242.615 122.13C242.615 118.65 245.455 115.81 248.935 115.81C252.415 115.81 255.255 118.65 255.255 122.13C255.255 125.61 252.415 128.45 248.935 128.45ZM248.935 117.61C246.445 117.61 244.415 119.64 244.415 122.13C244.415 124.62 246.445 126.65 248.935 126.65C251.425 126.65 253.455 124.62 253.455 122.13C253.455 119.64 251.425 117.61 248.935 117.61Z" fill="#E56470"/>
+<path d="M46.1351 103.36C45.6351 103.36 45.2351 102.96 45.2351 102.46V97.3399C45.2351 96.8399 45.6351 96.4399 46.1351 96.4399C46.6351 96.4399 47.0351 96.8399 47.0351 97.3399V102.46C47.0351 102.96 46.6351 103.36 46.1351 103.36Z" fill="#7E90B0"/>
+<path d="M46.1351 115.29C45.6351 115.29 45.2351 114.89 45.2351 114.39V109.28C45.2351 108.78 45.6351 108.38 46.1351 108.38C46.6351 108.38 47.0351 108.78 47.0351 109.28V114.39C47.0351 114.89 46.6351 115.29 46.1351 115.29Z" fill="#7E90B0"/>
+<path d="M42.7451 106.77H37.6451C37.1451 106.77 36.7451 106.37 36.7451 105.87C36.7451 105.37 37.1451 104.97 37.6451 104.97H42.7451C43.2451 104.97 43.6451 105.37 43.6451 105.87C43.6451 106.37 43.2451 106.77 42.7451 106.77Z" fill="#7E90B0"/>
+<path d="M54.635 106.77H49.535C49.035 106.77 48.635 106.37 48.635 105.87C48.635 105.37 49.035 104.97 49.535 104.97H54.635C55.135 104.97 55.535 105.37 55.535 105.87C55.535 106.37 55.135 106.77 54.635 106.77Z" fill="#7E90B0"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M139.525 156.28V174.48L149.485 166.66L160.425 174.48V156.44" fill="#9FB7FF"/>
+<path d="M139.525 175.38C139.395 175.38 139.255 175.35 139.135 175.29C138.825 175.14 138.625 174.83 138.625 174.48V156.28C138.625 155.78 139.025 155.38 139.525 155.38C140.025 155.38 140.425 155.78 140.425 156.28V172.62L148.925 165.94C149.245 165.69 149.685 165.69 150.005 165.92L159.525 172.73V156.44C159.525 155.94 159.925 155.54 160.425 155.54C160.925 155.54 161.325 155.94 161.325 156.44V174.48C161.325 174.82 161.135 175.13 160.835 175.28C160.535 175.43 160.175 175.41 159.905 175.21L149.515 167.78L140.095 175.19C139.935 175.32 139.735 175.38 139.535 175.38H139.525Z" fill="#75A4FE"/>
+<path d="M46.5849 228.07C44.2149 228.07 42.2849 226.14 42.2849 223.77C42.2849 221.4 44.2149 219.47 46.5849 219.47C48.9549 219.47 50.8849 221.4 50.8849 223.77C50.8849 226.14 48.9549 228.07 46.5849 228.07ZM46.5849 221.26C45.2049 221.26 44.0849 222.38 44.0849 223.76C44.0849 225.14 45.2049 226.26 46.5849 226.26C47.9649 226.26 49.0849 225.14 49.0849 223.76C49.0849 222.38 47.9649 221.26 46.5849 221.26Z" fill="#E56470"/>
+<path d="M155.595 157.85H144.345C139.575 157.85 135.125 155.28 132.725 151.14L127.105 141.39C124.705 137.25 124.705 132.11 127.105 127.97L132.715 118.23C135.115 114.09 139.565 111.52 144.335 111.52H155.585C160.355 111.52 164.805 114.09 167.205 118.23L172.825 127.98C175.225 132.12 175.225 137.26 172.825 141.4L167.215 151.14C164.815 155.28 160.365 157.85 155.595 157.85ZM144.345 113.32C140.215 113.32 136.355 115.55 134.285 119.13L128.675 128.87C126.595 132.45 126.595 136.91 128.675 140.49L134.295 150.24C136.365 153.82 140.225 156.05 144.355 156.05H155.605C159.735 156.05 163.595 153.82 165.665 150.24L171.275 140.5C173.355 136.92 173.355 132.46 171.275 128.88L165.655 119.13C163.575 115.55 159.725 113.32 155.595 113.32H144.345Z" fill="#75A4FE"/>
+<path d="M206.695 223.33C221.605 223.33 233.685 211.25 233.685 196.34C233.685 181.43 221.595 169.35 206.695 169.35C191.795 169.35 179.705 181.44 179.705 196.34C179.705 211.24 191.795 223.33 206.695 223.33Z" fill="#7E90B0"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M208.665 183.17C208.665 182.27 207.925 181.52 207.015 181.52C206.105 181.52 205.365 182.25 205.365 183.17V195.29H193.275C192.375 195.29 191.625 196.02 191.625 196.94C191.625 197.86 192.355 198.59 193.275 198.59H205.365V210.71C205.365 211.61 206.105 212.36 207.015 212.36C207.925 212.36 208.665 211.63 208.665 210.71V198.59H220.755C221.655 198.59 222.405 197.86 222.405 196.94C222.405 196.02 221.675 195.29 220.755 195.29H208.665V183.17Z" fill="white"/>
+                  </svg>
+                </div>
+                <div class="illus-showcase-meta">
+                  <div class="illus-showcase-type">Spot illustration</div>
+                  <div class="illus-showcase-name">Create custom report</div>
+                  <p class="illus-showcase-desc">Empty state for reports module. Hexagonal badge with chart icon encourages the admin to build their first custom report.</p>
+                  <span class="illus-showcase-size">292 &times; 244</span>
+                </div>
+              </div>
+
+              <!-- Add certificate -->
+              <div class="illus-showcase-card">
+                <div class="illus-showcase-preview">
+                  <svg width="292" height="244" viewBox="0 0 292 244" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M109.78 199.94L108.9 199.9C108.78 199.9 108.67 199.86 108.56 199.82C108.41 199.79 108.19 199.74 107.94 199.69L107.48 199.59C104.04 198.64 101.06 196.71 98.8 194.02C96.12 190.82 95.03 186.24 92.88 177.1L79.74 121.34C77.59 112.2 76.51 107.61 77.48 103.55C78.34 99.96 80.27 96.79 83.07 94.39C86.23 91.69 90.77 90.61 99.82 88.47L101.29 88.12C101.78 88 102.27 88.31 102.39 88.8C102.51 89.29 102.2 89.78 101.71 89.9L100.24 90.25C91.48 92.33 87.08 93.37 84.26 95.78C81.76 97.93 80.02 100.76 79.26 103.97C78.39 107.61 79.43 112.05 81.52 120.9L94.66 176.67C96.75 185.53 97.79 189.97 100.2 192.83C102.22 195.24 104.89 196.96 107.92 197.8L108.32 197.88C109.33 198.09 110 198.23 109.89 199.09L109.78 199.93V199.94Z" fill="#4E7FDB"/>
+<path d="M150.04 202.63H130.23C119.7 202.63 114.41 202.63 110.24 200.52C106.55 198.65 103.6 195.73 101.72 192.06C99.6001 187.92 99.6001 182.66 99.6001 172.2V108.25C99.6001 97.78 99.6001 92.53 101.72 88.39C103.6 84.72 106.55 81.8 110.24 79.93C114.41 77.82 119.7 77.82 130.23 77.82H169.85C180.38 77.82 185.67 77.82 189.84 79.93C193.53 81.8 196.48 84.72 198.36 88.39C200.48 92.53 200.48 97.79 200.48 108.25V131C200.48 131.51 200.07 131.92 199.56 131.92C199.05 131.92 198.64 131.51 198.64 131V108.25C198.64 98.08 198.64 92.97 196.72 89.22C195.02 85.9 192.35 83.25 189 81.56C185.22 79.65 180.08 79.65 169.84 79.65H130.22C119.98 79.65 114.84 79.65 111.06 81.56C107.72 83.25 105.05 85.9 103.34 89.22C101.42 92.97 101.42 98.07 101.42 108.25V172.2C101.42 182.37 101.42 187.48 103.34 191.23C105.04 194.55 107.71 197.2 111.06 198.89C114.84 200.8 119.98 200.8 130.22 200.8H150.03C150.53 200.8 150.95 201.21 150.95 201.72C150.95 202.23 150.54 202.64 150.03 202.64L150.04 202.63Z" fill="#75A4FE"/>
+<path d="M154.1 169.1H120.29C119.9 169.1 119.51 169.52 119.51 170.1C119.51 170.6 119.82 171.1 120.29 171.1H154.1C154.49 171.1 154.88 170.68 154.88 170.1C154.8 169.52 154.49 169.1 154.1 169.1Z" fill="#75A4FE"/>
+<path d="M169.62 152.83H120.59C120.05 152.83 119.51 153.25 119.51 153.83C119.51 154.33 119.94 154.83 120.59 154.83H169.62C170.16 154.83 170.7 154.41 170.7 153.83C170.59 153.25 170.16 152.83 169.62 152.83Z" fill="#75A4FE"/>
+<path d="M161.34 137.57H127.19C125.77 137.57 125.06 137.57 124.39 137.3C123.76 137.05 123.25 136.64 122.92 136.12C122.51 135.48 122.51 134.79 122.51 133.65V110.95C122.51 109.81 122.51 109.12 122.92 108.49C123.26 107.97 123.77 107.56 124.4 107.31C125.07 107.04 125.79 107.04 127.2 107.04H136.35V103.66C136.35 102.52 136.35 101.83 136.76 101.19C137.09 100.67 137.6 100.26 138.23 100.01C138.9 99.74 139.62 99.74 141.04 99.74H147.5C148.92 99.74 149.63 99.74 150.3 100.01C150.93 100.27 151.44 100.67 151.78 101.19C152.19 101.83 152.19 102.51 152.19 103.65V114.33H161.34C162.76 114.33 163.47 114.33 164.14 114.6C164.77 114.85 165.28 115.26 165.62 115.79C166.03 116.43 166.03 117.11 166.03 118.25V133.66C166.03 134.8 166.03 135.49 165.62 136.12C165.29 136.64 164.78 137.05 164.15 137.3C163.48 137.57 162.76 137.57 161.35 137.57H161.34ZM152.19 135.57H161.34C162.43 135.57 163.08 135.57 163.4 135.44C163.64 135.34 163.83 135.2 163.94 135.03C164.03 134.89 164.03 134.34 164.03 133.65V118.24C164.03 117.58 164.03 117 163.94 116.86C163.83 116.69 163.64 116.54 163.4 116.45C163.09 116.32 162.43 116.32 161.34 116.32H152.19V135.56V135.57ZM138.35 135.57H150.19V103.65C150.19 102.99 150.19 102.41 150.1 102.27C149.99 102.1 149.8 101.95 149.56 101.86C149.25 101.73 148.59 101.73 147.5 101.73H141.04C139.95 101.73 139.29 101.73 138.98 101.86C138.74 101.96 138.55 102.1 138.44 102.27C138.35 102.41 138.35 102.99 138.35 103.65V135.57ZM127.2 109.03C126.11 109.03 125.46 109.03 125.14 109.16C124.9 109.26 124.71 109.4 124.6 109.57C124.51 109.71 124.51 110.26 124.51 110.95V133.65C124.51 134.34 124.51 134.89 124.6 135.03C124.71 135.2 124.9 135.34 125.14 135.44C125.45 135.57 126.11 135.57 127.2 135.57H136.35V109.03H127.2Z" fill="#75A4FE"/>
+<path d="M21.17 131.41C20.66 131.41 20.25 131 20.25 130.49V127.32C20.25 126.81 20.66 126.4 21.17 126.4C21.68 126.4 22.09 126.81 22.09 127.32V130.49C22.09 131 21.68 131.41 21.17 131.41Z" fill="#7E90B0"/>
+<path d="M21.17 138.79C20.66 138.79 20.25 138.38 20.25 137.87V134.7C20.25 134.19 20.66 133.78 21.17 133.78C21.68 133.78 22.09 134.19 22.09 134.7V137.87C22.09 138.38 21.68 138.79 21.17 138.79Z" fill="#7E90B0"/>
+<path d="M19.07 133.52H15.92C15.41 133.52 15 133.11 15 132.6C15 132.09 15.41 131.68 15.92 131.68H19.08C19.59 131.68 20 132.09 20 132.6C20 133.11 19.59 133.52 19.08 133.52H19.07Z" fill="#7E90B0"/>
+<path d="M26.4401 133.52H23.2801C22.7701 133.52 22.3601 133.11 22.3601 132.6C22.3601 132.09 22.7701 131.68 23.2801 131.68H26.4401C26.9501 131.68 27.3601 132.09 27.3601 132.6C27.3601 133.11 26.9501 133.52 26.4401 133.52Z" fill="#7E90B0"/>
+<path d="M235.71 172.97C235.2 172.97 234.79 172.56 234.79 172.05V170.28H233.03C232.52 170.28 232.11 169.87 232.11 169.36C232.11 168.85 232.52 168.44 233.03 168.44H234.79V166.67C234.79 166.16 235.2 165.75 235.71 165.75C236.22 165.75 236.63 166.16 236.63 166.67V168.44H238.39C238.9 168.44 239.31 168.85 239.31 169.36C239.31 169.87 238.9 170.28 238.39 170.28H236.63V172.05C236.63 172.56 236.22 172.97 235.71 172.97Z" fill="#7E90B0"/>
+<path d="M178.91 53.55C178.53 53.55 178.19 53.32 178.06 52.96L176.77 49.6C176.59 49.14 176.5 48.89 176.4 48.75C176.32 48.63 176.21 48.53 176.09 48.44C175.96 48.35 175.74 48.26 175.25 48.07L171.9 46.78C171.55 46.64 171.31 46.3 171.31 45.93C171.31 45.56 171.54 45.21 171.9 45.08L175.25 43.79C175.71 43.61 175.96 43.52 176.1 43.42C176.22 43.33 176.32 43.23 176.41 43.11C176.51 42.97 176.6 42.72 176.78 42.27L178.07 38.9C178.21 38.55 178.55 38.31 178.92 38.31C179.29 38.31 179.64 38.54 179.77 38.9L181.06 42.26C181.25 42.75 181.34 42.98 181.43 43.11C181.52 43.23 181.62 43.34 181.74 43.42C181.87 43.51 182.12 43.61 182.57 43.78L185.94 45.08C186.29 45.22 186.53 45.56 186.53 45.93C186.53 46.3 186.3 46.65 185.94 46.78L182.59 48.07C182.13 48.25 181.88 48.34 181.74 48.44C181.62 48.53 181.52 48.63 181.43 48.75C181.34 48.88 181.25 49.11 181.06 49.6L179.77 52.96C179.63 53.31 179.29 53.55 178.92 53.55H178.91ZM174.76 45.93L175.9 46.37C176.48 46.59 176.82 46.72 177.15 46.96C177.44 47.17 177.69 47.42 177.89 47.7C178.12 48.02 178.24 48.35 178.47 48.94L178.91 50.09L179.35 48.95C179.58 48.35 179.71 48.02 179.94 47.7C180.14 47.41 180.39 47.16 180.68 46.96C181 46.73 181.33 46.6 181.93 46.37L183.07 45.93L181.93 45.49C181.33 45.26 181 45.13 180.68 44.9C180.39 44.69 180.14 44.44 179.94 44.16C179.71 43.84 179.58 43.51 179.35 42.91L178.91 41.77L178.47 42.91C178.24 43.51 178.11 43.84 177.88 44.16C177.68 44.44 177.43 44.7 177.14 44.9C176.82 45.13 176.49 45.26 175.89 45.49L174.75 45.93H174.76ZM171.04 41.56C170.53 41.56 170.12 41.15 170.12 40.64V39.69H169.17C168.66 39.69 168.25 39.28 168.25 38.77C168.25 38.26 168.66 37.85 169.17 37.85H170.12V36.9C170.12 36.39 170.53 35.98 171.04 35.98C171.55 35.98 171.96 36.39 171.96 36.9V37.85H172.9C173.41 37.85 173.82 38.26 173.82 38.77C173.82 39.28 173.41 39.69 172.9 39.69H171.96V40.64C171.96 41.15 171.55 41.56 171.04 41.56Z" fill="#5BC1A5"/>
+<path d="M186.17 208.55C197.26 208.55 206.25 199.56 206.25 188.47C206.25 177.38 197.26 168.39 186.17 168.39C175.08 168.39 166.09 177.38 166.09 188.47C166.09 199.56 175.08 208.55 186.17 208.55Z" fill="#7E90B0"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M186.83 178.22C186.83 177.55 186.28 177 185.61 177C184.94 177 184.39 177.55 184.39 178.22V187.23H175.4C174.73 187.23 174.18 187.78 174.18 188.45C174.18 189.12 174.73 189.67 175.4 189.67H184.39V198.69C184.39 199.36 184.94 199.91 185.61 199.91C186.28 199.91 186.83 199.36 186.83 198.69V189.67H195.82C196.49 189.67 197.04 189.12 197.04 188.45C197.04 187.78 196.49 187.23 195.82 187.23H186.83V178.22Z" fill="white"/>
+<path d="M212.92 153.21C212.51 153.21 212.18 152.88 212.17 152.47C212.17 152.06 212.49 151.71 212.91 151.71C214.27 151.69 215.59 151.61 216.85 151.5C217.25 151.45 217.63 151.76 217.67 152.18C217.71 152.59 217.4 152.96 216.99 153C215.7 153.12 214.34 153.19 212.94 153.22H212.93L212.92 153.21ZM208.92 153.16C208.92 153.16 208.9 153.16 208.89 153.16C207.56 153.1 206.2 153 204.86 152.86C204.45 152.82 204.15 152.45 204.19 152.04C204.23 151.63 204.6 151.33 205.01 151.37C206.33 151.5 207.66 151.6 208.96 151.66C209.37 151.68 209.69 152.03 209.68 152.44C209.66 152.84 209.33 153.16 208.93 153.16H208.92ZM220.87 152.44C220.52 152.44 220.2 152.19 220.13 151.83C220.05 151.42 220.32 151.03 220.72 150.95C222.1 150.68 223.35 150.34 224.47 149.93C224.86 149.79 225.29 149.99 225.43 150.38C225.57 150.77 225.37 151.2 224.98 151.34C223.8 151.77 222.46 152.13 221.01 152.42C220.96 152.42 220.91 152.43 220.86 152.43L220.87 152.44ZM200.96 152.34C200.96 152.34 200.88 152.34 200.84 152.34C199.47 152.12 198.13 151.86 196.86 151.57C196.46 151.48 196.2 151.08 196.3 150.67C196.39 150.27 196.79 150.01 197.2 150.11C198.44 150.39 199.74 150.64 201.08 150.86C201.49 150.93 201.77 151.31 201.7 151.72C201.64 152.09 201.32 152.35 200.96 152.35V152.34ZM193.17 150.54C193.09 150.54 193.02 150.53 192.94 150.5C191.49 150.04 190.21 149.53 189.12 149C188.75 148.82 188.59 148.37 188.78 148C188.96 147.63 189.41 147.47 189.78 147.66C190.81 148.16 192.02 148.64 193.4 149.08C193.79 149.21 194.01 149.63 193.89 150.02C193.79 150.34 193.49 150.54 193.18 150.54H193.17ZM228.28 149.57C228.05 149.57 227.82 149.46 227.67 149.26C227.43 148.93 227.5 148.46 227.83 148.21C228.8 147.5 229.52 146.69 229.97 145.79C228.84 146.04 227.68 146.22 226.51 146.31C226.11 146.35 225.74 146.03 225.7 145.62C225.67 145.21 225.98 144.85 226.39 144.81C227.69 144.71 228.97 144.5 230.2 144.19C230.6 144.09 231.01 144.33 231.11 144.73C231.14 144.85 231.14 144.98 231.11 145.09C231.48 145.26 231.65 145.69 231.49 146.06C230.95 147.33 230.02 148.45 228.72 149.4C228.59 149.5 228.43 149.54 228.28 149.54V149.57ZM222.46 146.31C222.46 146.31 222.42 146.31 222.4 146.31C221.23 146.22 220.02 146.06 218.8 145.82L218.34 145.73C217.93 145.64 217.68 145.25 217.76 144.84C217.84 144.43 218.24 144.18 218.65 144.26L219.08 144.35C220.24 144.57 221.39 144.73 222.51 144.81C222.92 144.84 223.23 145.2 223.2 145.61C223.17 146 222.84 146.3 222.45 146.3L222.46 146.31ZM214.71 144.51C214.6 144.51 214.5 144.49 214.39 144.44C213.01 143.8 211.83 142.99 210.89 142.04C210.6 141.75 210.6 141.27 210.89 140.98C211.19 140.69 211.66 140.69 211.95 140.98C212.76 141.8 213.8 142.5 215.02 143.07C215.4 143.24 215.56 143.69 215.38 144.07C215.25 144.34 214.98 144.5 214.7 144.5L214.71 144.51ZM234.15 144.36C233.87 144.36 233.59 144.2 233.47 143.92C233.3 143.54 233.47 143.1 233.84 142.93C235 142.41 236.13 141.77 237.2 141.03C237.54 140.8 238.01 140.89 238.24 141.23C238.47 141.57 238.39 142.04 238.04 142.27C236.89 143.05 235.69 143.73 234.45 144.29C234.35 144.34 234.24 144.36 234.14 144.36H234.15ZM231.16 142.62C230.8 142.62 230.49 142.37 230.42 142C230.22 140.92 229.79 139.73 229.12 138.48C228.93 138.11 229.06 137.66 229.43 137.47C229.8 137.27 230.25 137.41 230.44 137.78C231.18 139.17 231.67 140.5 231.89 141.74C231.96 142.15 231.69 142.54 231.28 142.61C231.24 142.61 231.19 142.62 231.15 142.62H231.16ZM240.74 139.89C240.54 139.89 240.34 139.81 240.19 139.65C239.91 139.35 239.92 138.87 240.23 138.59C241.15 137.73 242.04 136.77 242.89 135.74C243.15 135.42 243.63 135.37 243.95 135.64C244.27 135.9 244.32 136.38 244.05 136.7C243.16 137.78 242.22 138.79 241.26 139.69C241.12 139.83 240.93 139.89 240.75 139.89H240.74ZM209.38 138.88C209.06 138.88 208.76 138.67 208.66 138.34C208.43 137.57 208.31 136.76 208.31 135.95C208.31 135.3 208.38 134.65 208.53 134.01C208.62 133.61 209.03 133.36 209.43 133.45C209.83 133.54 210.09 133.94 210 134.35C209.88 134.88 209.82 135.42 209.82 135.96C209.82 136.63 209.92 137.29 210.1 137.93C210.22 138.33 209.99 138.74 209.6 138.86C209.53 138.88 209.46 138.89 209.39 138.89L209.38 138.88ZM227.65 135.51C227.42 135.51 227.19 135.4 227.04 135.2C226.23 134.08 225.38 133.09 224.53 132.25C224.24 131.96 224.23 131.48 224.53 131.19C224.82 130.89 225.3 130.89 225.59 131.19C226.5 132.09 227.4 133.14 228.26 134.33C228.5 134.66 228.43 135.13 228.09 135.38C227.96 135.48 227.8 135.52 227.65 135.52V135.51ZM245.83 133.74C245.69 133.74 245.55 133.7 245.42 133.62C245.07 133.39 244.98 132.93 245.2 132.58C245.89 131.52 246.57 130.38 247.19 129.19C247.38 128.82 247.84 128.68 248.2 128.88C248.57 129.07 248.7 129.53 248.51 129.89C247.86 131.12 247.16 132.3 246.45 133.4C246.31 133.62 246.07 133.74 245.82 133.74H245.83ZM211.04 131.38C210.87 131.38 210.7 131.32 210.56 131.2C210.24 130.93 210.2 130.46 210.47 130.14C211.43 129.01 212.64 128.13 213.99 127.62C214.38 127.47 214.81 127.66 214.96 128.05C215.11 128.44 214.92 128.87 214.53 129.02C213.42 129.45 212.41 130.17 211.62 131.11C211.47 131.29 211.26 131.38 211.05 131.38H211.04ZM221.92 130.01C221.79 130.01 221.66 129.98 221.54 129.91C220.39 129.24 219.22 128.81 218.08 128.65C217.67 128.59 217.39 128.21 217.44 127.8C217.5 127.39 217.87 127.11 218.29 127.16C219.63 127.35 220.98 127.84 222.3 128.61C222.66 128.82 222.78 129.28 222.57 129.64C222.43 129.88 222.18 130.01 221.92 130.01ZM249.59 126.68C249.49 126.68 249.39 126.66 249.29 126.62C248.91 126.45 248.74 126.01 248.9 125.63C249.41 124.46 249.9 123.22 250.35 121.95C250.49 121.56 250.92 121.36 251.31 121.5C251.7 121.64 251.9 122.07 251.76 122.46C251.29 123.76 250.79 125.03 250.27 126.23C250.15 126.51 249.87 126.68 249.58 126.68H249.59ZM252.3 119.14C252.23 119.14 252.16 119.14 252.09 119.11C251.69 118.99 251.46 118.58 251.58 118.18C251.95 116.92 252.21 115.89 252.38 115.21L252.49 114.78C252.59 114.38 253 114.14 253.4 114.24C253.8 114.34 254.04 114.75 253.94 115.15L253.83 115.57C253.65 116.26 253.39 117.3 253.01 118.59C252.91 118.92 252.62 119.13 252.29 119.13L252.3 119.14Z" fill="#75A4FE"/>
+<path d="M186.17 208.55C197.26 208.55 206.25 199.56 206.25 188.47C206.25 177.38 197.26 168.39 186.17 168.39C175.08 168.39 166.09 177.38 166.09 188.47C166.09 199.56 175.08 208.55 186.17 208.55Z" fill="#7E90B0"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M186.83 178.22C186.83 177.55 186.28 177 185.61 177C184.94 177 184.39 177.55 184.39 178.22V187.23H175.4C174.73 187.23 174.18 187.78 174.18 188.45C174.18 189.12 174.73 189.67 175.4 189.67H184.39V198.69C184.39 199.36 184.94 199.91 185.61 199.91C186.28 199.91 186.83 199.36 186.83 198.69V189.67H195.82C196.49 189.67 197.04 189.12 197.04 188.45C197.04 187.78 196.49 187.23 195.82 187.23H186.83V178.22Z" fill="white"/>
+<path d="M220.56 110.71C218.21 110.71 216.29 108.79 216.29 106.44C216.29 104.09 218.21 102.17 220.56 102.17C222.91 102.17 224.83 104.09 224.83 106.44C224.83 108.79 222.91 110.71 220.56 110.71ZM220.56 104C219.21 104 218.12 105.09 218.12 106.44C218.12 107.79 219.21 108.88 220.56 108.88C221.91 108.88 223 107.79 223 106.44C223 105.09 221.91 104 220.56 104Z" fill="#E56470"/>
+<path d="M56.7001 189.01C55.1101 189.01 53.8201 187.72 53.8201 186.13C53.8201 184.54 55.1101 183.25 56.7001 183.25C58.2901 183.25 59.5801 184.54 59.5801 186.13C59.5801 187.72 58.2901 189.01 56.7001 189.01ZM56.7001 185.08C56.1201 185.08 55.6501 185.55 55.6501 186.13C55.6501 186.71 56.1201 187.18 56.7001 187.18C57.2801 187.18 57.7501 186.71 57.7501 186.13C57.7501 185.55 57.2801 185.08 56.7001 185.08Z" fill="#E56470"/>
+<path d="M257.53 106.63C255.69 106.63 253.84 106.36 252.08 105.83C249.13 104.94 246.42 103.33 244.23 101.17C242.04 99.01 240.4 96.31 239.48 93.37C238.56 90.43 238.37 87.28 238.93 84.25C239.49 81.22 240.8 78.35 242.72 75.94C244.63 73.53 247.14 71.61 249.96 70.37C250.41 70.17 250.95 70.37 251.15 70.83C251.35 71.29 251.15 71.82 250.69 72.02C248.14 73.13 245.87 74.88 244.14 77.06C242.41 79.24 241.22 81.84 240.71 84.58C240.2 87.32 240.37 90.17 241.2 92.83C242.03 95.49 243.52 97.93 245.5 99.89C247.48 101.85 249.94 103.31 252.6 104.11C255.27 104.91 258.12 105.05 260.85 104.51C263.58 103.97 266.17 102.75 268.33 101C270.49 99.24 272.21 96.96 273.29 94.39C273.48 93.93 274.01 93.72 274.47 93.91C274.93 94.1 275.14 94.63 274.95 95.09C273.75 97.93 271.86 100.45 269.47 102.4C267.08 104.35 264.23 105.69 261.21 106.28C260 106.52 258.77 106.64 257.54 106.64L257.53 106.63ZM274.09 88.62H258.96C258.37 88.62 257.99 88.62 257.6 88.42C257.26 88.25 256.99 87.98 256.81 87.63C256.61 87.25 256.61 86.86 256.61 86.27V71.13C256.61 70.54 256.61 70.15 256.83 69.75C257.02 69.41 257.33 69.12 257.68 68.96C258.1 68.78 258.49 68.81 259.02 68.85C260.99 69.01 262.92 69.47 264.75 70.23C267.06 71.19 269.12 72.57 270.89 74.33C272.66 76.1 274.04 78.16 274.99 80.47C275.74 82.3 276.21 84.22 276.37 86.2C276.41 86.73 276.44 87.12 276.26 87.54C276.1 87.9 275.81 88.21 275.47 88.4C275.07 88.62 274.68 88.62 274.09 88.62ZM258.44 70.63C258.44 70.63 258.4 70.63 258.38 70.63C258.42 70.65 258.42 70.9 258.42 71.14V86.28C258.42 86.53 258.42 86.79 258.44 86.86C258.45 86.82 258.71 86.82 258.96 86.82H274.09C274.33 86.82 274.58 86.82 274.66 86.8C274.62 86.79 274.6 86.54 274.58 86.35C274.44 84.56 274.02 82.82 273.33 81.17C272.47 79.08 271.22 77.21 269.62 75.62C268.02 74.02 266.16 72.77 264.07 71.91C262.42 71.22 260.67 70.81 258.89 70.66C258.72 70.65 258.54 70.63 258.44 70.63Z" fill="#75A4FE"/>
+                  </svg>
+                </div>
+                <div class="illus-showcase-meta">
+                  <div class="illus-showcase-type">Spot illustration</div>
+                  <div class="illus-showcase-name">Add certificate</div>
+                  <p class="illus-showcase-desc">Empty state for certificate management. Document with bar chart and donut chart elements prompts the admin to add their first certificate.</p>
+                  <span class="illus-showcase-size">292 &times; 244</span>
+                </div>
+              </div>
+
+            </div>
+
+            <h3>Visual anatomy</h3>
+            <p>All three examples follow a consistent construction pattern from the UEMS illustration library:</p>
+            <ul class="doc-list">
+              <li><strong>Primary document shape</strong> -- Rounded rectangle with 1.83px stroke (#75A4FE) as the focal anchor</li>
+              <li><strong>Secondary background layer</strong> -- Offset document in darker blue (#4E7FDB) adds depth</li>
+              <li><strong>Content detail</strong> -- Gear icons, chart bars, certificate badge communicate the specific context</li>
+              <li><strong>Decorative accents</strong> -- Sparkle stars (#5BC1A5), small circles (#E56470), cross marks (#7E90B0) add energy without competing</li>
+              <li><strong>Dashed connection lines</strong> -- Subtle flow indicators link elements contextually</li>
+              <li><strong>Action affordance</strong> -- Gray circle with white + icon (#7E90B0) signals "create new" as a clear CTA</li>
+            </ul>
+
+            <div class="figma-source-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.5 3.21a4.29 4.29 0 0 0 0 8.58h2.15V7.5A4.29 4.29 0 0 0 5.5 3.21zm0 10.72a4.29 4.29 0 0 0 0 8.57 4.29 4.29 0 0 0 4.29-4.29v-4.28H5.5zm6.43-10.72a4.29 4.29 0 0 0 0 8.58h4.29V3.21h-4.29zm6.43 4.29a4.29 4.29 0 1 0-4.29 4.29h4.29V7.5zm-4.29 6.43a4.29 4.29 0 1 0 4.29 4.29 4.29 4.29 0 0 0-4.29-4.29z"/></svg>
+              Source: UEMS Icon Library &mdash; Empty state illustrations
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Illustration principles -->
+          <div class="doc-section" id="illustration-principles">
+            <h2>Illustration principles</h2>
+
+            <h3>1. Use illustration intentionally</h3>
+            <p>Before adding an illustration, ask: <strong>Does this improve task clarity?</strong></p>
+
+            <div class="do-dont-grid">
+              <div class="do-card">
+                <div class="card-label">Good use cases</div>
+                <p>Explain patch rollback</p>
+                <p>Clarify empty inventory</p>
+                <p>Encourage first action</p>
+                <p>Reduce fear in failure states</p>
+                <p>Celebrate successful deployment</p>
+              </div>
+              <div class="dont-card">
+                <div class="card-label">Bad use cases</div>
+                <p>Decorative filler in dense tables</p>
+                <p>Background art in modals</p>
+                <p>Repeated illustrations inside drawers</p>
+                <p>Random AI sparkle graphics</p>
+                <p>Decorative dashboard corners</p>
+              </div>
+            </div>
+
+            <h3>2. Support the copy, never replace it</h3>
+            <p>Illustrations must reinforce text. The user must still understand the message with the image hidden.</p>
+
+            <div class="do-dont-grid">
+              <div class="do-card">
+                <div class="card-label">Good</div>
+                <p>Device + shield illustration beside "All endpoints protected"</p>
+                <p>Clear headline paired with spot illustration</p>
+                <p>Written CTA beside visual</p>
+              </div>
+              <div class="dont-card">
+                <div class="card-label">Bad</div>
+                <p>Illustration only with no clear headline</p>
+                <p>Using illustration as severity indicator</p>
+                <p>No written CTA beside visual</p>
+              </div>
+            </div>
+
+            <h3>3. Match operational emotion</h3>
+            <p>Endpoint products include emotionally sensitive moments: malware found, policy failed, remote wipe triggered, deployment success, AI recommendation confidence.</p>
+            <p>Illustration tone should match the emotional weight.</p>
+
+            <table class="tone-table">
+              <thead>
+                <tr><th>Tone</th><th>Context</th><th>Visual approach</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Neutral</strong></td><td>Empty states</td><td>Calm, minimal, informational</td></tr>
+                <tr><td><strong>Calm confidence</strong></td><td>Onboarding</td><td>Welcoming, guiding, structured</td></tr>
+                <tr><td><strong>Encouraging</strong></td><td>Retry flows</td><td>Supportive, forward-looking</td></tr>
+                <tr><td><strong>Reassuring</strong></td><td>Recovery</td><td>Safe, settled, restored</td></tr>
+                <tr><td><strong>Celebratory</strong></td><td>Large rollout success</td><td>Achievement, completion, pride</td></tr>
+              </tbody>
+            </table>
+
+            <p>Never use playful visuals for destructive or security-risk workflows.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Endpoint-specific patterns -->
+          <div class="doc-section" id="endpoint-patterns">
+            <h2>Endpoint-specific illustration patterns</h2>
+
+            <div class="pattern-grid">
+              <div class="pattern-card">
+                <div class="pattern-title">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"/></svg>
+                  Empty states
+                </div>
+                <p style="font-size:14px;color:var(--prism-text-muted);margin:0 0 12px;">Best use case for spot illustrations. Each must pair: spot illustration + clear headline + single next-step CTA.</p>
+                <ul class="doc-list" style="margin-bottom:0;">
+                  <li>No devices enrolled</li>
+                  <li>No failed patches</li>
+                  <li>No active threats</li>
+                  <li>No software inventory</li>
+                  <li>No compliance violations</li>
+                </ul>
+              </div>
+              <div class="pattern-card">
+                <div class="pattern-title">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+                  AI guidance
+                </div>
+                <p style="font-size:14px;color:var(--prism-text-muted);margin:0 0 12px;">Use low-fi workflow UI. Critical for trust in AI-assisted endpoint workflows.</p>
+                <ul class="doc-list" style="margin-bottom:0;">
+                  <li>"How AI isolates devices"</li>
+                  <li>"How auto-remediation works"</li>
+                  <li>"What this workflow will change"</li>
+                </ul>
+              </div>
+              <div class="pattern-card">
+                <div class="pattern-title">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                  Security recovery
+                </div>
+                <p style="font-size:14px;color:var(--prism-text-muted);margin:0 0 12px;">Use calm, confidence-building spot illustrations. Avoid danger-red once issue is resolved.</p>
+                <ul class="doc-list" style="margin-bottom:0;">
+                  <li>Threat neutralized</li>
+                  <li>Isolation completed</li>
+                  <li>Rollback successful</li>
+                  <li>Policy restored</li>
+                </ul>
+              </div>
+              <div class="pattern-card">
+                <div class="pattern-title">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+                  Success moments
+                </div>
+                <p style="font-size:14px;color:var(--prism-text-muted);margin:0 0 12px;">Use celebratory spot illustrations sparingly for major milestones.</p>
+                <ul class="doc-list" style="margin-bottom:0;">
+                  <li>100% patch rollout</li>
+                  <li>All devices compliant</li>
+                  <li>Zero critical threats</li>
+                  <li>Migration completed</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Style system -->
+          <div class="doc-section" id="style-system">
+            <h2>Style system</h2>
+            <p>Prism illustrations must visually align with Zoho Puvi typography, 1.5px icon strokes, rounded interface corners, semantic color tokens, and dark mode surfaces.</p>
+
+            <h3>Style rules</h3>
+            <ul class="doc-list">
+              <li>Rounded geometric shapes</li>
+              <li>Clean enterprise-friendly metaphors</li>
+              <li>Minimal scene depth</li>
+              <li>Clear foreground focus</li>
+              <li>Neutral supporting objects</li>
+              <li>Optional semantic accent colors</li>
+              <li>Dark-mode-safe surfaces</li>
+            </ul>
+            <p>Never mix illustration styles across modules.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Accessibility -->
+          <div class="doc-section" id="accessibility">
+            <h2>Accessibility</h2>
+            <p>Illustrations must never carry critical meaning alone.</p>
+            <h3>Rules</h3>
+            <ul class="doc-list">
+              <li>Always pair with text</li>
+              <li>Decorative visuals must use <code style="font-size:13px; background:var(--prism-surface); padding:3px 8px; border-radius:6px; color:var(--prism-violet-light); border:1px solid var(--prism-border);">aria-hidden</code></li>
+              <li>Informative visuals require alt text</li>
+              <li>Preserve contrast in dark mode</li>
+              <li>Avoid flashing success animations</li>
+              <li>Do not embed text inside illustration art</li>
+            </ul>
+            <p>Illustrations support clarity, not accessibility bypass.</p>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Anti-patterns -->
+          <div class="doc-section" id="anti-patterns">
+            <h2>Anti-patterns</h2>
+            <p>Avoid these common enterprise UX failures:</p>
+            <ul class="doc-list">
+              <li>Decorative threat illustrations in dense dashboards</li>
+              <li>Screenshot-style UI inside onboarding</li>
+              <li>Different illustration styles per module</li>
+              <li>AI-only purple magic graphics</li>
+              <li>Overly playful malware scenes</li>
+              <li>Dense background patterns behind tables</li>
+              <li>Large illustrations inside confirmation modals</li>
+              <li>Using illustration instead of clear CTA text</li>
+            </ul>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- Principle -->
+          <div class="doc-section" id="principle">
+            <h2>Principle</h2>
+            <div class="principle-card">
+              <p>In Prism, illustrations reduce uncertainty.</p>
+              <p>The right illustration system helps admins <strong>understand workflows faster</strong>, <strong>recover confidently</strong>, and <strong>trust complex endpoint actions</strong>.</p>
+            </div>
+          </div>
+
+          <!-- Feedback -->
+          <div class="feedback-banner" style="margin-top: 64px;">
+            <div>
+              <div class="fb-text">Help us improve this page</div>
+              <div class="fb-sub">Share your feedback to help shape the Illustrations documentation.</div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button class="feedback-btn primary">Give Feedback</button>
+            </div>
+          </div>
+
+        </div>
+
+        <aside class="toc-sidebar">
+          <h4 class="toc-heading">On this page</h4>
+          <ul class="toc-nav" id="toc-nav"></ul>
+          <div class="quick-actions-card">
+            <div class="quick-actions-title">Resources</div>
+            <a href="Foundation.html" class="action-link">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
+              Back to Foundation
+            </a>
+            <a href="https://www.figma.com/design/DahIgbIJrSkzyP3OoHaDaG/UEMS---Design-System-3.0" target="_blank" class="action-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.5C12 14.1569 10.6569 15.5 9 15.5C7.34315 15.5 6 14.1569 6 12.5C6 10.8431 7.34315 9.5 9 9.5H12V12.5Z" /><path d="M9 9.5C7.34315 9.5 6 8.15685 6 6.5C6 4.84315 7.34315 3.5 9 3.5H12V9.5H9Z" /><path d="M12 3.5H15C16.6569 3.5 18 4.84315 18 6.5C18 8.15685 16.6569 9.5 15 9.5H12V3.5Z" /><path d="M12 15.5V20.5C12 22.1569 10.6569 23.5 9 23.5C7.34315 23.5 6 22.1569 6 20.5C6 18.8431 7.34315 17.5 9 17.5H12V15.5Z" /><path d="M12 12.5C13.6569 12.5 15 11.1569 15 9.5C16.6569 9.5 18 10.8431 18 12.5C18 14.1569 16.6569 15.5 15 15.5C13.3431 15.5 12 14.1569 12 12.5Z" /></svg>
+              Figma Design
+            </a>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+    }
+    themeToggle.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        moonIcon.style.display = 'block'; sunIcon.style.display = 'none';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        moonIcon.style.display = 'none'; sunIcon.style.display = 'block';
+      }
+    });
+
+    // Dynamic TOC with scroll-spy
+    (function() {
+      const sections = document.querySelectorAll('.doc-section[id]');
+      const tocNav = document.getElementById('toc-nav');
+      sections.forEach(sec => {
+        const h2 = sec.querySelector('h2');
+        if (h2) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.className = 'toc-link';
+          a.href = '#' + sec.id;
+          a.textContent = h2.textContent;
+          li.appendChild(a);
+          tocNav.appendChild(li);
+        }
+      });
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+            const link = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0.1 });
+      sections.forEach(sec => obs.observe(sec));
+    })();
+  </script>
+</body>
+</html>

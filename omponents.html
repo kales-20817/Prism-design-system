@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patterns & Components — UEMS Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extralight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrablack.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular_italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+</style>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --prism-black: #0a0a0c;
+    --prism-violet: #2563eb;
+    --prism-violet-light: #60a5fa;
+    --prism-fuchsia: #0ea5e9;
+    --prism-cyan: #06b6d4;
+    --prism-emerald: #10b981;
+    --prism-orange: #f97316;
+    --prism-red: #ef4444;
+    --prism-surface: rgba(255, 255, 255, 0.05);
+    --prism-surface-hover: rgba(255, 255, 255, 0.09);
+    --prism-border: rgba(255, 255, 255, 0.07);
+    --prism-text: rgba(255, 255, 255, 0.92);
+    --prism-text-muted: rgba(255, 255, 255, 0.48);
+    --prism-glow: 0 0 80px rgba(37, 99, 235, 0.12);
+    --nav-bg: rgba(10,10,12,0.75);
+    --card-bg: rgba(12,12,16,0.5);
+    --chip-bg: rgba(12,12,16,0.45);
+    --hero-gradient: linear-gradient(135deg, #fff 10%, var(--prism-violet-light) 50%, var(--prism-fuchsia) 90%);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 10px rgba(37, 99, 235, 0.3));
+    --video-overlay: rgba(0, 0, 0, 0.7);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --radius-xs: 8px;
+    --sidebar-w: 260px;
+    --header-h: 72px;
+  }
+
+  [data-theme="light"] {
+    --prism-black: #f8fafc; /* Crisp blue-tinted cool white */
+    --prism-violet-light: #1d4ed8;
+    --prism-surface: rgba(0, 0, 0, 0.03);
+    --prism-surface-hover: rgba(0, 0, 0, 0.06);
+    --prism-border: rgba(0, 0, 0, 0.08); /* Softer borders for light mode */
+    --prism-text: #0f172a; /* Slate 900 */
+    --prism-text-muted: #64748b; /* Slate 500 */
+    --prism-glow: 0 0 80px rgba(37, 99, 235, 0.08);
+    --nav-bg: #ffffff;
+    --card-bg: #ffffff;
+    --chip-bg: #ffffff;
+    --hero-gradient: linear-gradient(135deg, #0f172a 10%, var(--prism-violet-light) 50%, var(--prism-fuchsia) 90%);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+    --nav-link-color: #334155; /* Slate 700 */
+    --video-overlay: rgba(255, 255, 255, 0.65);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Zoho Puvi', -apple-system, sans-serif;
+    background: var(--prism-black);
+    color: var(--prism-text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ═══ NAV ═══ */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 32px; height: var(--header-h);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--prism-border);
+    transition: background 0.3s ease;
+  }
+
+  .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .nav-logo-mark {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    padding-right: 0.1em; padding-bottom: 0.1em;
+   
+  }
+  .nav-logo-sub {
+    font-size: 13px; font-weight: 700; color: var(--prism-text);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none;
+  }
+  .nav-links a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .nav-links a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); border: none; }
+
+  .icon-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--prism-text-muted); padding: 8px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 4px;
+  }
+  .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+
+  /* ═══ LAYOUT ═══ */
+  .layout-wrapper {
+    display: flex;
+    margin-top: var(--header-h);
+    flex: 1;
+  }
+
+  /* ═══ SIDEBAR ═══ */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    border-right: 1px solid var(--prism-border);
+    height: calc(100vh - var(--header-h));
+    position: sticky;
+    top: var(--header-h);
+    overflow-y: auto;
+    padding: 24px 16px;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--prism-border); border-radius: 4px; }
+
+  .sidebar-section { margin-bottom: 32px; }
+  .sidebar-title {
+    font-size: 11px; font-weight: 700; color: var(--prism-text-muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 12px; padding-left: 12px;
+  }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  
+  .sidebar-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 12px; border-radius: var(--radius-xs);
+    color: var(--prism-text-muted); text-decoration: none;
+    font-size: 13.5px; font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .sidebar-link svg { width: 16px; height: 16px; opacity: 0.6; }
+  .sidebar-link:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .sidebar-link:hover svg { opacity: 1; color: var(--prism-violet); }
+  
+  /* ═══ MAIN CONTENT ═══ */
+  .main-content {
+    flex: 1;
+    padding: 32px 48px;
+    max-width: 1200px;
+  }
+
+  .content-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--prism-text-muted); font-weight: 500;
+  }
+  .breadcrumb svg { width: 14px; height: 14px; }
+  .breadcrumb span { color: var(--prism-text); font-weight: 600; }
+
+  .copy-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--prism-border); background: var(--card-bg);
+    color: var(--prism-text-muted); font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease;
+  }
+  .copy-btn:hover { color: var(--prism-text); border-color: var(--prism-text-muted); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .copy-btn svg { width: 14px; height: 14px; }
+
+  /* ═══ HERO BANNER ═══ */
+  .banner {
+    position: relative;
+    border-radius: var(--radius);
+    padding: 64px 48px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    background: #0f172a; /* Fallback */
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 280px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  }
+
+  /* Stunning Fluid Blue Custom Gradient matching the aesthetic reference */
+  .banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 60%),
+      radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(2, 132, 199, 0.3) 0%, transparent 60%),
+      linear-gradient(120deg, #1e293b 0%, #0f172a 100%);
+    z-index: 0;
+  }
+
+  /* SVG Wave Overlay to mimic fluid graphic */
+  .banner::after {
+    content: ''; position: absolute; inset: 0;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,150 C200,50 400,250 600,100 C800,-50 1000,200 1200,150 L1200,300 L0,300 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .banner-content { position: relative; z-index: 2; color: #fff; }
+  
+  .banner-tag {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 12px; color: rgba(255,255,255,0.7);
+    display: block;
+  }
+  .banner-title {
+    font-size: 42px; font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.1; margin-bottom: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  .page-intro {
+    font-size: 20px; line-height: 1.6; color: var(--prism-text);
+    font-weight: 500; max-width: 800px;
+    margin-bottom: 48px;
+  }
+
+  /* ═══ SECTION: EXPLORE TOPICS ═══ */
+  .section-h2 {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 24px; color: var(--prism-text);
+  }
+
+  .cards-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+
+  .topic-card {
+    background: var(--card-bg);
+    border: 1px solid var(--prism-border);
+    border-radius: var(--radius-sm);
+    padding: 32px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+  }
+
+  .topic-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--prism-violet-light);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02), 0 0 0 1px var(--prism-violet-light);
+  }
+
+  .topic-icon {
+    width: 48px; height: 48px; border-radius: var(--radius-xs);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .topic-card:nth-child(1) .topic-icon { background: rgba(37, 99, 235, 0.1); color: var(--prism-violet); }
+  .topic-card:nth-child(2) .topic-icon { background: rgba(147, 51, 234, 0.1); color: #9333ea; }
+  
+  .topic-icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+
+  .topic-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--prism-text);
+  }
+  .topic-desc {
+    font-size: 15px; color: var(--prism-text-muted); line-height: 1.6;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-mark">Prism</span>
+      <span class="nav-logo-sub">Design System</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Overview</a>
+      <a href="#">UI Framework</a>
+      <a href="#" class="active">Patterns & Components</a>
+      <a href="#">Foundation</a>
+      <a href="#">Zia Experience (AI)</a>
+      <a href="#">Inclusiveness</a>
+      
+      <div style="width: 16px;"></div> <!-- Spacer -->
+      
+      <button class="icon-btn" title="Search">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" title="Settings">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </button>
+      <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+        <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="layout-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Patterns Category -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Patterns</div>
+        <ul class="sidebar-links">
+          <li><a href="#" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+            Data &amp; Interaction Patterns
+          </a></li>
+          <li><a href="#" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Input &amp; Configuration Patterns
+          </a></li>
+          <li><a href="#" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Communication Patterns
+          </a></li>
+          <li><a href="#" class="sidebar-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+            Layout &amp; Navigation Patterns
+          </a></li>
+        </ul>
+      </div>
+
+      <!-- Components Category -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Components</div>
+        <ul class="sidebar-links">
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/></svg> Action Button</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4M15 5h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/></svg> Split Button</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="16" cy="12" r="3" fill="currentColor"/></svg> Toggle</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Link</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="1"/><line x1="6" y1="12" x2="6.01" y2="12"/></svg> Text Field</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"/><polyline points="9 12 11 14 15 10"/></svg> Checkbox</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Radio Button</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg> Breadcrumb</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8 10 12 14 16 10"/></svg> Dropdown</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2z"/><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7H3z"/></svg> Tabs</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> Tables</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Alert Modal</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M8 8h8v8H8z" fill="currentColor" fill-opacity="0.3"/></svg> Modal Dialog</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M9 16l3 4 3-4"/></svg> Tooltip</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="16" width="16" height="6" rx="2"/><circle cx="8" cy="19" r="1" fill="currentColor"/></svg> Toast Message</a></li>
+          <li><a href="#" class="sidebar-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="12" y2="12"/><line x1="4" y1="18" x2="16" y2="18"/></svg> Legends</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Body Area -->
+    <main class="main-content">
+      
+      <!-- Top controls -->
+      <div class="content-header">
+        <div class="breadcrumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          UEMS Design System / <span>Patterns &amp; Components</span>
+        </div>
+        <button class="copy-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy page
+        </button>
+      </div>
+
+      <!-- Banner -->
+      <div class="banner">
+        <div class="banner-content">
+          <span class="banner-tag">Patterns &amp; Components</span>
+          <h1 class="banner-title">Patterns &amp; Components</h1>
+        </div>
+      </div>
+
+      <!-- Intro Text -->
+      <p class="page-intro">
+        Reusable interaction patterns and component guidance for scalable UI construction.
+      </p>
+
+      <!-- Cards Grid -->
+      <h2 class="section-h2">Explore Topics</h2>
+      <div class="cards-grid">
+        
+        <!-- Card 1 -->
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="topic-title">Patterns</h3>
+          <p class="topic-desc">Reusable interaction models that bring consistency to behavior and decision-making across the platform.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <h3 class="topic-title">Components</h3>
+          <p class="topic-desc">Individual UI building blocks with detailed anatomy, variants, states, and usage guidance.</p>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+<script>
+  // Simple Theme Toggle Script matching Index logic
+  const themeToggle = document.getElementById('themeToggle');
+  const moonIcon = document.getElementById('moonIcon');
+  const sunIcon = document.getElementById('sunIcon');
+  
+  // Enforce Light theme by default for this page, or honor localStorage
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.removeAttribute('data-theme');
+    moonIcon.style.display = 'block';
+    sunIcon.style.display = 'none';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'block';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'light') {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      moonIcon.style.display = 'none';
+      sunIcon.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

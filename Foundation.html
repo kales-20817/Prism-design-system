@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation — UEMS Design System</title>
+<style>
+  /* Zoho Puvi Font Family */
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extralight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_extrablack.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_regular_italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --prism-black: #0a0a0c;
+    --prism-violet: #2563eb;
+    --prism-violet-light: #60a5fa;
+    --prism-fuchsia: #0ea5e9;
+    --prism-cyan: #06b6d4;
+    --prism-surface: rgba(255, 255, 255, 0.05);
+    --prism-surface-hover: rgba(255, 255, 255, 0.09);
+    --prism-border: rgba(255, 255, 255, 0.07);
+    --prism-text: rgba(255, 255, 255, 0.92);
+    --prism-text-muted: rgba(255, 255, 255, 0.48);
+    --nav-bg: rgba(10,10,12,0.75);
+    --nav-link-color: var(--prism-text-muted);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 10px rgba(37, 99, 235, 0.3));
+    --radius: 20px;
+  }
+
+  [data-theme="light"] {
+    --prism-black: #ffffff;
+    --prism-violet: #2563eb;
+    --prism-violet-light: #1d4ed8;
+    --prism-fuchsia: #0284c7;
+    --prism-cyan: #0891b2;
+    --prism-surface: rgba(37, 99, 235, 0.028);
+    --prism-surface-hover: rgba(37, 99, 235, 0.055);
+    --prism-border: rgba(37, 99, 235, 0.10);
+    --prism-text: #1a1a2e;
+    --prism-text-muted: #64748b;
+    --nav-bg: rgba(255, 255, 255, 0.82);
+    --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    --logo-filter: drop-shadow(0 2px 12px rgba(37, 99, 235, 0.25));
+    --nav-link-color: #475569;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+  body {
+    font-family: 'Zoho Puvi', sans-serif;
+    background: var(--prism-black);
+    color: var(--prism-text);
+    transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+  }
+
+  /* ── Premium Light Theme Global Enhancements ── */
+  [data-theme="light"] body {
+    background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+  }
+  [data-theme="light"] .nav {
+    background: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.06);
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.04), 0 4px 24px rgba(37, 99, 235, 0.03);
+  }
+  [data-theme="light"] .sidebar {
+    border-right: 1px solid rgba(37, 99, 235, 0.06);
+    background: linear-gradient(180deg, rgba(248, 250, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);
+  }
+  [data-theme="light"] .sidebar-link {
+    color: #64748b;
+  }
+  [data-theme="light"] .sidebar-link:hover {
+    color: #1e293b;
+    background: rgba(37, 99, 235, 0.05);
+  }
+  [data-theme="light"] .sidebar-link.active {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.06);
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+  }
+  [data-theme="light"] .sidebar-search {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(37, 99, 235, 0.10);
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.04);
+  }
+  [data-theme="light"] .sidebar-search:focus-within {
+    background: #fff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10), 0 2px 8px rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .foundation-link {
+    color: #64748b;
+  }
+  [data-theme="light"] .foundation-link:hover {
+    color: #1e293b;
+    background: rgba(37, 99, 235, 0.05);
+  }
+  [data-theme="light"] .foundation-link.active {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.06);
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+  }
+  [data-theme="light"] .toc-sidebar {
+    background: transparent;
+  }
+  [data-theme="light"] .toc-link {
+    color: #94a3b8;
+  }
+  [data-theme="light"] .toc-link:hover {
+    color: #475569;
+  }
+  [data-theme="light"] .toc-link.active {
+    color: #2563eb;
+    font-weight: 600;
+  }
+  [data-theme="light"] .toc-nav {
+    border-left: 2px solid rgba(37, 99, 235, 0.08);
+  }
+  [data-theme="light"] .quick-actions-card {
+    border-top: 1px solid rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .action-link {
+    color: #94a3b8;
+  }
+  [data-theme="light"] .action-link:hover {
+    color: #1e293b;
+  }
+  [data-theme="light"] .doc-divider {
+    border-top: 1px solid rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .icon-btn {
+    color: #94a3b8;
+  }
+  [data-theme="light"] .icon-btn:hover {
+    color: #1e293b;
+    background: rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .nav-links a {
+    color: #64748b;
+  }
+  [data-theme="light"] .nav-links a:hover {
+    color: #1e293b;
+    background: rgba(37, 99, 235, 0.05);
+  }
+  [data-theme="light"] .nav-links a.active {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .placeholder-card {
+    background: #fff;
+    border: 1px solid rgba(37, 99, 235, 0.10);
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.05);
+  }
+  [data-theme="light"] .feedback-banner {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.06);
+  }
+  [data-theme="light"] .feedback-btn {
+    background: #fff;
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.04);
+  }
+  [data-theme="light"] .feedback-btn:hover {
+    background: rgba(37, 99, 235, 0.04);
+    border-color: rgba(37, 99, 235, 0.25);
+  }
+  [data-theme="light"] .feedback-btn.primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  }
+  [data-theme="light"] .feedback-btn.primary:hover {
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+  }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 32px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--prism-border);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  }
+
+  .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .nav-logo-mark {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.03em;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    padding-right: 0.1em; padding-bottom: 0.1em;
+   
+  }
+  .nav-logo-sub {
+    font-size: 13px; font-weight: 700; color: var(--prism-text);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-links a {
+    color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none;
+  }
+  .nav-links a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+  .nav-links a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); border: none; }
+
+  .icon-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--prism-text-muted); padding: 8px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; margin-left: 4px;
+  }
+  .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
+
+  .components-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    width: 100%;
+    padding-top: 72px;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    width: 260px;
+    border-right: 1px solid var(--prism-border);
+    padding: 32px 24px 64px;
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--prism-border); border-radius: 4px; }
+
+  .sidebar-heading {
+    font-size: 11px; font-weight: 700; color: var(--prism-text-muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px; padding-left: 12px;
+  }
+
+  .main-panel {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 48px 64px 0 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .page-header-area {
+    width: 100%;
+    max-width: none;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    display: inline-block; padding-right: 8px; padding-bottom: 4px;
+  }
+  .page-desc {
+    color: var(--prism-text); font-size: 20px; font-weight: 400;
+    line-height: 1.5; margin-bottom: 32px; margin-top: 8px;
+    max-width: 900px;
+  }
+  .main-content-area {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 0;
+    flex: 1;
+    align-items: start;
+  }
+  .main-content-inner {
+    padding-bottom: 64px;
+    min-width: 0;
+  }
+
+  /* Modern Ambient Glows */
+  .bg-glow {
+    position: fixed; border-radius: 50%; width: 60vw; height: 60vh;
+    filter: blur(140px); z-index: -1; pointer-events: none; opacity: 0.15;
+    transition: opacity 0.6s ease, filter 0.6s ease;
+  }
+  .glow-1 { top: -20%; right: -10%; background: var(--prism-violet); }
+  .glow-2 { bottom: -20%; left: -10%; background: var(--prism-cyan); }
+  [data-theme="light"] .bg-glow { opacity: 0.09; filter: blur(180px); }
+
+  /* Glassmorphic Sidebars */
+  .sidebar, .toc-sidebar {
+    background: transparent;
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* Sidebar Search */
+  .sidebar-search {
+    display: flex; align-items: center; background: var(--prism-surface);
+    border: 1px solid var(--prism-border); border-radius: 999px;
+    padding: 8px 16px; margin-bottom: 24px; transition: all 0.2s ease;
+  }
+  .sidebar-search:focus-within {
+    border-color: var(--prism-violet); background: transparent;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+  .sidebar-search svg { color: var(--prism-text-muted); }
+  .sidebar-search input {
+    background: transparent; border: none; outline: none;
+    color: var(--prism-text); font-family: inherit; font-size: 14px;
+    width: 100%; margin-left: 10px;
+  }
+  .sidebar-search input::placeholder { color: var(--prism-text-muted); }
+  .search-shortcut {
+    font-size: 11px; font-weight: 600; color: var(--prism-text-muted);
+    background: var(--prism-surface-hover); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--prism-border);
+  }
+
+  /* Right Side TOC */
+  .toc-sidebar {
+    width: 240px; padding: 20px;
+    position: sticky; top: 72px; height: calc(100vh - 72px);
+    overflow-y: auto;
+    align-self: start;
+  }
+  .toc-heading {
+    font-size: 11px; font-weight: 700; color: var(--prism-text);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .toc-nav {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+    border-left: 1px solid var(--prism-border); padding-left: 16px; margin-left: 4px;
+  }
+  .toc-link {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--prism-text-muted); text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; padding-left: 0;
+  }
+  .toc-link:hover { color: var(--prism-text); }
+  .toc-link.active {
+    color: var(--prism-violet); font-weight: 600;
+  }
+
+  /* Quick Action Links */
+  .quick-actions-card {
+    margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--prism-border);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .quick-actions-title {
+    font-size: 11px; font-weight: 700; color: var(--prism-text-muted);
+    text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+  }
+  .action-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 600; color: var(--prism-text-muted);
+    text-decoration: none; padding: 6px 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .action-link svg {
+    opacity: 0.8; transition: all 0.2s ease;
+  }
+  .action-link:hover {
+    color: var(--prism-text); transform: translateX(2px);
+  }
+  .action-link:hover svg {
+    opacity: 1; transform: scale(1.05); color: var(--prism-violet);
+  }
+
+  /* ── Modern Documentation Styles ── */
+  .doc-section {
+    margin-bottom: 64px;
+  }
+  .doc-section-title {
+    font-size: 32px; font-weight: 400; color: var(--prism-text);
+    margin-bottom: 12px;
+  }
+  .doc-section-subtitle {
+    font-size: 16px; color: var(--prism-text-muted); line-height: 1.6;
+    margin-bottom: 32px; max-width: 720px;
+  }
+  .doc-divider {
+    border: none; border-top: 1px solid var(--prism-border); margin: 56px 0;
+  }
+
+  /* Feedback banner */
+  .feedback-banner {
+    margin-top: 72px; padding: 32px; border-radius: 16px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(6,182,212,0.06) 100%);
+    border: 1px solid var(--prism-border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .feedback-banner .fb-text {
+    font-size: 16px; font-weight: 600; color: var(--prism-text);
+  }
+  .feedback-banner .fb-sub {
+    font-size: 13.5px; color: var(--prism-text-muted); margin-top: 4px;
+  }
+  .feedback-btn {
+    padding: 10px 28px; border-radius: 999px; font-family: inherit;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s ease; border: 1px solid var(--prism-border);
+    background: var(--prism-surface); color: var(--prism-text);
+  }
+  .feedback-btn:hover {
+    border-color: var(--prism-violet); color: var(--prism-violet);
+    background: rgba(37, 99, 235, 0.08);
+  }
+  .feedback-btn.primary {
+    background: var(--prism-violet); color: #fff; border-color: var(--prism-violet);
+  }
+  .feedback-btn.primary:hover {
+    background: #1d4ed8; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* ── Foundation Sidebar Tree ── */
+  .foundation-nav { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; margin: 0; }
+
+
+
+
+  .foundation-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px; font-size: 14px; font-weight: 500;
+    color: var(--prism-text-muted); text-decoration: none;
+    border-radius: 8px; transition: all 0.2s ease;
+  }
+  .foundation-link:hover {
+    color: var(--prism-text); background: var(--prism-surface-hover);
+  }
+  .foundation-link.active {
+    color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); font-weight: 600;
+  }
+
+
+  /* Placeholder card for upcoming content */
+  .placeholder-card {
+    padding: 48px 40px;
+    background: var(--prism-surface);
+    border: 1px solid var(--prism-border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+  }
+  .placeholder-card svg {
+    color: var(--prism-text-muted);
+    opacity: 0.5;
+  }
+  .placeholder-card .placeholder-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--prism-text);
+  }
+  #logo-grad stop:nth-child(1) { stop-color: var(--prism-violet); }
+  #logo-grad stop:nth-child(2) { stop-color: var(--prism-fuchsia); }
+  #logo-grad stop:nth-child(3) { stop-color: var(--prism-cyan); }
+  .placeholder-card .placeholder-sub {
+    font-size: 14px;
+    color: var(--prism-text-muted);
+    max-width: 400px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="logo-grad" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" style="stop-color:var(--prism-violet)"/><stop offset="50%" style="stop-color:var(--prism-fuchsia)"/><stop offset="100%" style="stop-color:var(--prism-cyan)"/></linearGradient></defs></svg>
+  <div id="bg-glow" class="bg-glow glow-1"></div>
+  <div id="bg-glow-2" class="bg-glow glow-2"></div>
+
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-mark">Prism</span>
+      <span class="nav-logo-sub">Design System</span>
+    </a>
+    <div id="nav-links" class="nav-links">      <a href="Foundation.html" class="active">Foundation</a>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><a href="Resource.html">Resource</a>
+
+      <div id="div" style="width: 16px;"></div>
+
+      <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+        <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="components-layout" class="components-layout">
+    <aside class="sidebar">
+      <div id="sidebar-search" class="sidebar-search">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" placeholder="Search...">
+        <span class="search-shortcut">&#8984;K</span>
+      </div>
+      <h3 class="sidebar-heading" id="foundations">Foundations</h3>
+      <ul class="foundation-nav">
+        <!-- Tokens group -->
+        <li><a href="foundation-tokens.html" class="foundation-link">Tokens</a></li>
+        <!-- Accessibility (standalone) -->
+        <li><a href="foundation-accessibility.html" class="foundation-link">Accessibility</a></li>
+        <!-- Content group -->
+        <li><a href="foundation-content.html" class="foundation-link">Content</a></li>
+        <!-- Spacing group -->
+        <li><a href="foundation-spacing.html" class="foundation-link">Spacing</a></li>
+        <!-- Grid group (Beta) -->
+        <li><a href="foundation-grid.html" class="foundation-link">Grid</a></li>
+        <!-- Color group -->
+        <li><a href="foundation-color.html" class="foundation-link">Color</a></li>
+        <!-- Typography group -->
+        <li><a href="foundation-typography.html" class="foundation-link">Typography</a></li>
+        <!-- Plain items -->
+        <li><a href="foundation-iconography.html" class="foundation-link">Iconography</a></li>
+        <li><a href="foundation-illustrations.html" class="foundation-link">Illustrations</a></li>
+        <li><a href="foundation-elevation.html" class="foundation-link">Elevation</a></li>
+        <li><a href="foundation-border.html" class="foundation-link">Border</a></li>
+        <li><a href="foundation-radius.html" class="foundation-link">Radius</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-panel">
+      <div id="page-header-area" class="page-header-area">
+        <h1 class="page-title">Foundation</h1>
+        <p class="page-desc">
+          The foundational design tokens, color systems, typography, spacing, and visual constants that underpin every component in the UEMS Design System.
+        </p>
+      </div>
+
+      <div id="main-content-area" class="main-content-area">
+        <div id="main-content-inner" class="main-content-inner">
+
+          <!-- Tokens Section -->
+          <div id="doc-section" class="doc-section">
+            <h2 id="tokens" class="doc-section-title">Tokens</h2>
+            <p class="doc-section-subtitle">Design tokens are the single source of truth for storing visual design attributes such as colors, spacing, and typography scales.</p>
+            <div id="placeholder-card" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <div id="placeholder-title" class="placeholder-title"><a href="http://localhost:8080/foundation-tokens.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tokens</a></div>
+              <div id="placeholder-sub" class="placeholder-sub">Comprehensive token documentation including naming conventions, semantic mappings, and platform-specific implementations.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Tokens > Accessibility -->
+          <div id="doc-section-2" class="doc-section">
+            <h2 id="tokens-accessibility" class="doc-section-title">Accessibility</h2>
+            <p class="doc-section-subtitle">Accessibility tokens ensure that contrast ratios, focus indicators, and motion preferences are maintained across the entire design system.</p>
+            <div id="placeholder-card-2" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <div id="placeholder-title-2" class="placeholder-title"><a href="http://localhost:8080/foundation-tokens-accessibility.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tokens Accessibility</a></div>
+              <div id="placeholder-sub-2" class="placeholder-sub">Guidelines for WCAG-compliant tokens covering color contrast, focus rings, reduced-motion preferences, and screen reader support.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Content Section -->
+          <div id="doc-section-3" class="doc-section">
+            <h2 id="content" class="doc-section-title">Content</h2>
+            <p class="doc-section-subtitle">Content guidelines define the voice, tone, and writing patterns used across all UI surfaces to ensure clarity and consistency.</p>
+            <div id="placeholder-card-3" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+              <div id="placeholder-title-3" class="placeholder-title"><a href="http://localhost:8080/foundation-content.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Content</a></div>
+              <div id="placeholder-sub-3" class="placeholder-sub">Voice and tone framework, UX writing conventions, and content patterns for labels, messages, and microcopy.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Spacing Section -->
+          <div id="doc-section-4" class="doc-section">
+            <h2 id="spacing" class="doc-section-title">Spacing</h2>
+            <p class="doc-section-subtitle">The spacing scale provides a consistent set of values for margins, paddings, and gaps that maintain visual rhythm throughout interfaces.</p>
+            <div id="placeholder-card-4" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
+              <div id="placeholder-title-4" class="placeholder-title"><a href="http://localhost:8080/foundation-spacing.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Spacing</a></div>
+              <div id="placeholder-sub-4" class="placeholder-sub">Spacing scale definitions, density modes, and practical usage examples for building consistent layouts.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Grid Section -->
+          <div id="doc-section-5" class="doc-section">
+            <h2 id="grid" class="doc-section-title">Grid</h2>
+            <p class="doc-section-subtitle">The grid system defines responsive column layouts, breakpoints, and alignment rules that structure page content across all viewport sizes.</p>
+            <div id="placeholder-card-5" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M10.875 12c-.621 0-1.125.504-1.125 1.125M12 12c.621 0 1.125.504 1.125 1.125m0 0v1.5c0 .621-.504 1.125-1.125 1.125m0-2.625c0 .621.504 1.125 1.125 1.125"/></svg>
+              <div id="placeholder-title-5" class="placeholder-title"><a href="http://localhost:8080/foundation-grid.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Grid</a></div>
+              <div id="placeholder-sub-5" class="placeholder-sub">Grid column specifications, breakpoint definitions, gutter sizes, and responsive layout patterns.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Color Section -->
+          <div id="doc-section-6" class="doc-section">
+            <h2 id="color" class="doc-section-title">Color</h2>
+            <p class="doc-section-subtitle">The color system provides semantic palettes, theming support, and accessible color combinations for all UI elements.</p>
+            <div id="placeholder-card-6" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"/></svg>
+              <div id="placeholder-title-6" class="placeholder-title"><a href="http://localhost:8080/foundation-color.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Color</a></div>
+              <div id="placeholder-sub-6" class="placeholder-sub">Primary, secondary, neutral, and semantic color palettes with light/dark theme mappings and usage guidance.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Typography Section -->
+          <div id="doc-section-7" class="doc-section">
+            <h2 id="typography" class="doc-section-title">Typography</h2>
+            <p class="doc-section-subtitle">Typography defines the type scale, font families, weights, and line heights used to establish clear visual hierarchy and readability.</p>
+            <div id="placeholder-card-7" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+              <div id="placeholder-title-7" class="placeholder-title"><a href="http://localhost:8080/foundation-typography.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Typography</a></div>
+              <div id="placeholder-sub-7" class="placeholder-sub">Type scale, font families, weight mappings, line-height ratios, and responsive typography guidelines.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Iconography Section -->
+          <div id="doc-section-8" class="doc-section">
+            <h2 id="iconography" class="doc-section-title">Iconography</h2>
+            <p class="doc-section-subtitle">The icon system provides a consistent set of vector icons with defined sizing, stroke weights, and color application rules.</p>
+            <div id="placeholder-card-8" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+              <div id="placeholder-title-8" class="placeholder-title"><a href="http://localhost:8080/foundation-iconography.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Iconography</a></div>
+              <div id="placeholder-sub-8" class="placeholder-sub">Icon library overview, sizing conventions, stroke specifications, and implementation patterns.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Illustrations Section -->
+          <div id="doc-section-9" class="doc-section">
+            <h2 id="illustrations" class="doc-section-title">Illustrations</h2>
+            <p class="doc-section-subtitle">Illustration guidelines cover the visual style, usage contexts, and theming rules for spot and full-page illustrations.</p>
+            <div id="placeholder-card-9" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+              <div id="placeholder-title-9" class="placeholder-title"><a href="http://localhost:8080/foundation-illustrations.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Illustrations</a></div>
+              <div id="placeholder-sub-9" class="placeholder-sub">Illustration style guide, empty state illustrations, onboarding graphics, and theming support.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Elevation Section -->
+          <div id="doc-section-11" class="doc-section">
+            <h2 id="elevation" class="doc-section-title">Elevation</h2>
+            <p class="doc-section-subtitle">Elevation tokens define shadow depths and layering to communicate hierarchy and interactive affordances across surfaces.</p>
+            <div id="placeholder-card-11" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0l4.179 2.25-9.75 5.25-9.75-5.25 4.179-2.25"/></svg>
+              <div id="placeholder-title-11" class="placeholder-title"><a href="http://localhost:8080/foundation-elevation.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Elevation</a></div>
+              <div id="placeholder-sub-11" class="placeholder-sub">Shadow depth scale, z-index layering system, and elevation usage patterns for cards, modals, and popovers.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Border Section -->
+          <div id="doc-section-12" class="doc-section">
+            <h2 id="border" class="doc-section-title">Border</h2>
+            <p class="doc-section-subtitle">Border tokens specify widths, styles, and color treatments for dividers, outlines, and interactive element boundaries.</p>
+            <div id="placeholder-card-12" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"/></svg>
+              <div id="placeholder-title-12" class="placeholder-title"><a href="http://localhost:8080/foundation-border.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Border</a></div>
+              <div id="placeholder-sub-12" class="placeholder-sub">Border width tokens, style variations, color mappings, and contextual usage patterns.</div>
+            </div>
+          </div>
+
+          <hr class="doc-divider" />
+
+          <!-- Radius Section -->
+          <div id="doc-section-13" class="doc-section">
+            <h2 id="radius" class="doc-section-title">Radius</h2>
+            <p class="doc-section-subtitle">Border radius tokens define the curvature scale applied to containers, buttons, inputs, and other interactive elements.</p>
+            <div id="placeholder-card-13" class="placeholder-card">
+              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.564A.562.562 0 019 14.437V9.564z"/></svg>
+              <div id="placeholder-title-13" class="placeholder-title"><a href="http://localhost:8080/foundation-radius.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Radius</a></div>
+              <div id="placeholder-sub-13" class="placeholder-sub">Radius scale tokens, component-specific radius mappings, and pill/circle shape conventions.</div>
+            </div>
+          </div>
+
+          <!-- Feedback banner -->
+          <div id="feedback-banner" class="feedback-banner">
+            <div id="div-2">
+              <div id="fb-text" class="fb-text">Help us improve Foundation docs</div>
+              <div id="fb-sub" class="fb-sub">Share your feedback to help shape the design system.</div>
+            </div>
+            <div id="div-3" style="display: flex; gap: 12px;">
+              <button class="feedback-btn primary">Give Feedback</button>
+            </div>
+          </div>
+
+        </div>
+
+        <aside class="toc-sidebar">
+          <h4 class="toc-heading">On this page</h4>
+          <ul class="toc-nav" id="toc-nav">
+          </ul>
+
+          <div id="quick-actions-card" class="quick-actions-card">
+            <div id="quick-actions-title" class="quick-actions-title">Resources</div>
+            <a href="https://www.figma.com/design/DahIgbIJrSkzyP3OoHaDaG/UEMS---Design-System-3.0" target="_blank" class="action-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.5C12 14.1569 10.6569 15.5 9 15.5C7.34315 15.5 6 14.1569 6 12.5C6 10.8431 7.34315 9.5 9 9.5H12V12.5Z" /><path d="M9 9.5C7.34315 9.5 6 8.15685 6 6.5C6 4.84315 7.34315 3.5 9 3.5H12V9.5H9Z" /><path d="M12 3.5H15C16.6569 3.5 18 4.84315 18 6.5C18 8.15685 16.6569 9.5 15 9.5H12V3.5Z" /><path d="M12 15.5V20.5C12 22.1569 10.6569 23.5 9 23.5C7.34315 23.5 6 22.1569 6 20.5C6 18.8431 7.34315 17.5 9 17.5H12V15.5Z" /><path d="M12 12.5C13.6569 12.5 15 11.1569 15 9.5C16.6569 9.5 18 10.8431 18 12.5C18 14.1569 16.6569 15.5 15 15.5C13.3431 15.5 12 14.1569 12 12.5Z" /></svg>
+              Figma Design
+            </a>
+          </div>
+        </aside>
+
+      </div> <!-- close main-content-area -->
+    </main>
+  </div>
+
+  <script>
+    // ── Scroll-spy observer reference ──
+    let _tocObserver = null;
+
+    // ── Dynamic TOC ──
+    function buildTOC() {
+      const tocList = document.getElementById('toc-nav');
+      if (!tocList) return;
+      tocList.innerHTML = '';
+      const contentInner = document.querySelector('.main-content-inner');
+      if (!contentInner) return;
+
+      const headings = contentInner.querySelectorAll('h2[id]');
+      headings.forEach(h => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.className = 'toc-link';
+        let text = Array.from(h.childNodes).filter(n => n.nodeType === 3).map(n => n.textContent).join('').trim();
+        if (!text) text = h.innerText;
+        a.textContent = text;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+
+      initScrollSpy();
+    }
+
+    function initScrollSpy() {
+      if (_tocObserver) _tocObserver.disconnect();
+
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const sectionIds = Array.from(tocLinks).map(link => link.getAttribute('href').slice(1));
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      if (sections.length === 0) return;
+
+      _tocObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+      sections.forEach(section => _tocObserver.observe(section));
+    }
+
+    // Initialize TOC
+    buildTOC();
+
+    // ── Theme toggle ──
+    const themeToggle = document.getElementById('themeToggle');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    if (currentTheme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
