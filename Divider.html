@@ -352,7 +352,7 @@
         <li><a href="Snackbar.html" class="sidebar-link">Toast Message</a></li>
         <li><a href="Split-button.html" class="sidebar-link">Split button</a></li>
         <li><a href="Status-indicator.html" class="sidebar-link">Status indicator</a></li>
-        <li><a href="Switch.html" class="sidebar-link">Switch</a></li>
+        <li><a href="Switch.html" class="sidebar-link">Toggle</a></li>
         <li><a href="Tabs.html" class="sidebar-link">Tabs</a></li>
         <li><a href="Tag.html" class="sidebar-link">Tag</a></li>
         <li><a href="Text-area.html" class="sidebar-link">Text area</a></li>
@@ -967,6 +967,43 @@
       if (document.documentElement.getAttribute('data-theme')==='light') { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme','dark'); moonIcon.style.display='block'; sunIcon.style.display='none'; }
       else { document.documentElement.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); moonIcon.style.display='none'; sunIcon.style.display='block'; }
     });
+
+    // Sidebar search filter
+    (function(){
+      var searchInput = document.querySelector('.sidebar-search input');
+      if (!searchInput) return;
+      var items = document.querySelectorAll('.sidebar-nav li');
+      searchInput.addEventListener('input', function(){
+        var q = this.value.toLowerCase().trim();
+        items.forEach(function(li){
+          var link = li.querySelector('a');
+          if (!link) return;
+          var text = link.textContent.toLowerCase();
+          li.style.display = (!q || text.indexOf(q) !== -1) ? '' : 'none';
+        });
+      });
+      // Cmd+K / Ctrl+K shortcut to focus search
+      document.addEventListener('keydown', function(e){
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+      });
+    })();
+
+    // Scroll sidebar to active link on page load
+    (function(){
+      var active = document.querySelector('.sidebar-link.active');
+      if (active) {
+        var sidebar = active.closest('.sidebar');
+        if (sidebar) {
+          var top = active.offsetTop - sidebar.offsetTop - (sidebar.clientHeight / 3);
+          sidebar.scrollTop = Math.max(0, top);
+        }
+      }
+    })();
+
   </script>
 </body>
 </html>

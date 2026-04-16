@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switch — UEMS Design System</title>
+<title>Toggle — UEMS Design System</title>
 <style>
   /* Zoho Puvi Font Family */
   @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
@@ -724,7 +724,7 @@
         <li><a href="Snackbar.html" class="sidebar-link">Toast Message</a></li>
         <li><a href="Split-button.html" class="sidebar-link">Split button</a></li>
         <li><a href="Status-indicator.html" class="sidebar-link">Status indicator</a></li>
-        <li><a href="Switch.html" class="sidebar-link active">Switch</a></li>
+        <li><a href="Switch.html" class="sidebar-link active">Toggle</a></li>
         <li><a href="Tabs.html" class="sidebar-link">Tabs</a></li>
         <li><a href="Tag.html" class="sidebar-link">Tag</a></li>
         <li><a href="Text-area.html" class="sidebar-link">Text area</a></li>
@@ -735,7 +735,7 @@
     </aside>
     <main class="main-panel">
       <div class="page-header-area">
-        <h1 class="page-title">Switch</h1>
+        <h1 class="page-title">Toggle</h1>
         <p class="page-desc">
           The Toggle (Switch) is a binary switch control that allows users to turn a setting or feature on or off. It represents an immediate, persistent state change with 96 total variants across 3 sizes, 2 toggled states, 4 interaction states, and optional text labels.
         </p>
@@ -1173,7 +1173,7 @@
 
         <div class="doc-section">
           <h3 id="color-tokens" class="doc-h3">Color Tokens</h3>
-          <p class="doc-section-subtitle">Design tokens used by the Switch component across themes.</p>
+          <p class="doc-section-subtitle">Design tokens used by the Toggle component across themes.</p>
           <table class="style-table">
             <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
             <tbody>
@@ -1190,7 +1190,7 @@
 
         <div class="doc-section">
           <h3 id="interaction-states" class="doc-h3">Interaction States</h3>
-          <p class="doc-section-subtitle">The four interaction states of the Switch component.</p>
+          <p class="doc-section-subtitle">The four interaction states of the Toggle component.</p>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px;">
             <div class="state-card">
               <div style="display: flex; justify-content: center;">
@@ -1234,7 +1234,7 @@
 
         <div class="doc-section">
           <h3 id="when-to-use" class="doc-h3">When to Use</h3>
-          <p class="doc-section-subtitle">Guidelines for choosing the Switch component over alternatives.</p>
+          <p class="doc-section-subtitle">Guidelines for choosing the Toggle component over alternatives.</p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
             <div>
               <h4 style="font-size: 16px; font-weight: 600; color: #22c55e; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -1295,7 +1295,7 @@
 
         <div class="doc-section">
           <h3 id="rtl-support" class="doc-h3">RTL Support</h3>
-          <p class="doc-section-subtitle">Right-to-left layout behavior for the Switch component.</p>
+          <p class="doc-section-subtitle">Right-to-left layout behavior for the Toggle component.</p>
           <ul class="doc-list">
             <li>In RTL mode, the thumb position is mirrored: <strong>Off = right</strong>, <strong>On = left</strong>.</li>
             <li>The track shape and dimensions remain unchanged.</li>
@@ -1412,7 +1412,7 @@
 
         <div class="doc-section">
           <h3 id="component-api-properties" class="doc-h3">Component API</h3>
-          <p class="doc-section-subtitle">Properties accepted by the Switch component.</p>
+          <p class="doc-section-subtitle">Properties accepted by the Toggle component.</p>
           <table class="style-table">
             <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
@@ -1515,7 +1515,7 @@
 
         <div class="doc-section">
           <h3 id="color-contrast" class="doc-h3">Color Contrast</h3>
-          <p class="doc-section-subtitle">WCAG 2.1 Level AA compliance for the Switch component.</p>
+          <p class="doc-section-subtitle">WCAG 2.1 Level AA compliance for the Toggle component.</p>
           <div style="display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
             <div style="padding: 16px 24px; background: var(--prism-surface); border: 1px solid var(--prism-border); border-radius: 12px; display: flex; align-items: center; gap: 12px;">
               <span style="display: inline-block; padding: 4px 10px; border-radius: 999px; background: #16a34a; color: #fff; font-size: 11px; font-weight: 700;">PASS</span>
@@ -1808,6 +1808,43 @@
         sunIcon.style.display = 'block';
       }
     });
+
+    // Sidebar search filter
+    (function(){
+      var searchInput = document.querySelector('.sidebar-search input');
+      if (!searchInput) return;
+      var items = document.querySelectorAll('.sidebar-nav li');
+      searchInput.addEventListener('input', function(){
+        var q = this.value.toLowerCase().trim();
+        items.forEach(function(li){
+          var link = li.querySelector('a');
+          if (!link) return;
+          var text = link.textContent.toLowerCase();
+          li.style.display = (!q || text.indexOf(q) !== -1) ? '' : 'none';
+        });
+      });
+      // Cmd+K / Ctrl+K shortcut to focus search
+      document.addEventListener('keydown', function(e){
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+      });
+    })();
+
+    // Scroll sidebar to active link on page load
+    (function(){
+      var active = document.querySelector('.sidebar-link.active');
+      if (active) {
+        var sidebar = active.closest('.sidebar');
+        if (sidebar) {
+          var top = active.offsetTop - sidebar.offsetTop - (sidebar.clientHeight / 3);
+          sidebar.scrollTop = Math.max(0, top);
+        }
+      }
+    })();
+
   </script>
 </body>
 </html>
