@@ -180,11 +180,12 @@
         z-index: 10;
     }
     .hero-section {
-        min-height: 80vh;
+        position: relative;
+        min-height: 62vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0px 20px 0px;
+        padding: 80px 20px 100px;
     }
     .showcase-section {
         padding: 0px 0 0px;
@@ -301,56 +302,56 @@
         margin: 0 auto 40px;
         text-shadow: 0 1px 20px var(--text-glow);
     }
-    .cta-group {
-        display: flex;
-        gap: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-        pointer-events: auto;
-    }
-    .cta {
+    .scroll-btn {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
         display: inline-flex;
+        flex-direction: column;
         align-items: center;
-        gap: 8px;
-        padding: 14px 28px;
-        font-family: inherit;
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        border-radius: 100px;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                    box-shadow 0.25s ease,
-                    background 0.25s ease;
-        text-decoration: none;
-    }
-    .cta.primary {
-        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
-        color: #fff;
-        /* box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2); */
-    }
-    .cta.primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
-        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
-    }
-    .cta.secondary {
-        background: var(--surface-strong);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        gap: 10px;
         color: var(--text);
-        border: 1px solid var(--border);
+        opacity: 0.7;
+        text-decoration: none;
+        pointer-events: auto;
+        transition: opacity 0.25s ease;
+        z-index: 10;
     }
-    .cta.secondary:hover {
-        background: var(--surface-hover);
-        transform: translateY(-2px);
+    .scroll-btn:hover { opacity: 1; }
+    .scroll-mouse {
+        position: relative;
+        width: 24px;
+        height: 38px;
+        border: 1.5px solid currentColor;
+        border-radius: 12px;
+        display: inline-block;
     }
-    .cta .arrow {
-        transition: transform 0.25s ease;
+    .scroll-wheel {
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        width: 3px;
+        height: 7px;
+        margin-left: -1.5px;
+        background: currentColor;
+        border-radius: 2px;
+        animation: scrollWheel 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
-    .cta:hover .arrow {
-        transform: translateX(4px);
+    .scroll-btn-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+    @keyframes scrollWheel {
+        0%   { transform: translateY(0); opacity: 1; }
+        60%  { transform: translateY(14px); opacity: 0; }
+        61%  { transform: translateY(0); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .scroll-wheel { animation: none; }
     }
 
     .hero-showcase {
@@ -372,10 +373,18 @@
         display: flex;
         gap: 18px;
         width: max-content;
-        animation: marquee-left 60s linear infinite;
+        opacity: 0;
+        animation: rowEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0s both,
+                   marquee-left 60s linear 0.9s infinite;
     }
-    .marquee-row.right { animation: marquee-right 75s linear infinite; }
-    .marquee-row.left-fast { animation: marquee-left 45s linear infinite; }
+    .marquee-row.right {
+        animation: rowEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both,
+                   marquee-right 75s linear 1.6s infinite;
+    }
+    .marquee-row.left-fast {
+        animation: rowEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both,
+                   marquee-left 45s linear 2.3s infinite;
+    }
     @keyframes marquee-left {
         from { transform: translateX(0); }
         to { transform: translateX(-50%); }
@@ -383,6 +392,13 @@
     @keyframes marquee-right {
         from { transform: translateX(-50%); }
         to { transform: translateX(0); }
+    }
+    @keyframes rowEnter {
+        from { opacity: 0; filter: blur(6px); }
+        to   { opacity: 1; filter: blur(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-row { opacity: 1; animation: none; }
     }
     .sc-card {
         background: var(--prism-surface);
@@ -701,20 +717,15 @@
     <p class="subtext">
         Everything teams need to design, build, and scale consistent endpoint workflows—from tokens and foundations to production-ready components.
     </p>
-    <div class="cta-group">
-        <a href="Components.html" class="cta primary">
-            View Component
-            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="#" class="cta secondary">
-            <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.00005 2.04999H5.52505C4.71043 2.04999 4.05005 2.71037 4.05005 3.52499C4.05005 4.33961 4.71043 4.99999 5.52505 4.99999H7.00005V2.04999ZM7.00005 1.04999H8.00005H9.47505C10.842 1.04999 11.95 2.15808 11.95 3.52499C11.95 4.33163 11.5642 5.04815 10.9669 5.49999C11.5642 5.95184 11.95 6.66836 11.95 7.475C11.95 8.8419 10.842 9.95 9.47505 9.95C8.92236 9.95 8.41198 9.76884 8.00005 9.46266V9.95L8.00005 11.425C8.00005 12.7919 6.89195 13.9 5.52505 13.9C4.15814 13.9 3.05005 12.7919 3.05005 11.425C3.05005 10.6183 3.43593 9.90184 4.03317 9.44999C3.43593 8.99814 3.05005 8.28163 3.05005 7.475C3.05005 6.66836 3.43594 5.95184 4.03319 5.5C3.43594 5.04815 3.05005 4.33163 3.05005 3.52499C3.05005 2.15808 4.15814 1.04999 5.52505 1.04999H7.00005ZM8.00005 2.04999V4.99999H9.47505C10.2897 4.99999 10.95 4.33961 10.95 3.52499C10.95 2.71037 10.2897 2.04999 9.47505 2.04999H8.00005ZM5.52505 8.94998H7.00005L7.00005 7.4788L7.00005 7.475L7.00005 7.4712V6H5.52505C4.71043 6 4.05005 6.66038 4.05005 7.475C4.05005 8.28767 4.70727 8.94684 5.5192 8.94999L5.52505 8.94998ZM4.05005 11.425C4.05005 10.6123 4.70727 9.95315 5.5192 9.94999L5.52505 9.95H7.00005L7.00005 11.425C7.00005 12.2396 6.33967 12.9 5.52505 12.9C4.71043 12.9 4.05005 12.2396 4.05005 11.425ZM8.00005 7.47206C8.00164 6.65879 8.66141 6 9.47505 6C10.2897 6 10.95 6.66038 10.95 7.475C10.95 8.28962 10.2897 8.95 9.47505 8.95C8.66141 8.95 8.00164 8.29121 8.00005 7.47794V7.47206Z" fill="currentColor"/></svg>
-            Figma
-        </a>
-    </div>
 </main>
-
+<a href="#showcase" class="scroll-btn" aria-label="Scroll down">
+    <span class="scroll-mouse">
+        <span class="scroll-wheel"></span>
+    </span>
+    <span class="scroll-btn-label">Scroll Down</span>
+</a>
 </section>
-<section class="showcase-section">
+<section id="showcase" class="showcase-section">
 <div class="hero-showcase">
   <div class="marquee-wrapper">
     <div class="marquee-row left">
@@ -1139,157 +1150,6 @@
       </div>
     </div>
 
-    <div class="marquee-row left-fast">
-      <!-- Enterprise Tier -->
-      <div id="sc-enterprise-tier" class="sc-card sc-hover-anim" style="min-width: 250px; text-align:center;">
-        <div style="width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
-          <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <h4 class="sc-card-title">Enterprise Tier</h4>
-        <div style="font-size:32px; font-weight:800; background:linear-gradient(135deg, var(--prism-violet), var(--prism-fuchsia)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0;">$499<span style="font-size:14px; font-weight:500; -webkit-text-fill-color:var(--prism-text-muted);">/mo</span></div>
-        <div style="display:flex; gap:6px; justify-content:center; margin-bottom:12px;">
-          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.1); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Unlimited Users</span>
-          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(217,70,239,0.1); color:var(--prism-fuchsia); border:1px solid rgba(217,70,239,0.2);">Priority SLA</span>
-        </div>
-        <button class="upgrade-btn" style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; width:100%;">Upgrade Plan</button>
-      </div>
-      <!-- Network Latency -->
-      <div class="sc-card sc-hover-anim" style="min-width: 240px; text-align:center; align-items:center;" id="sc-network-latency-card">
-        <div id="spt-network-latency" class="sc-progress-title" style="margin:0 0 6px; text-align:center; width:100%;">Network Latency</div>
-        <div style="font-size:22px; font-weight:800; color:var(--prism-cyan); margin-bottom:12px;">24ms</div>
-        <div style="display:flex; align-items:flex-end; justify-content:center; gap:5px; height:55px; margin-bottom:10px; width:100%;">
-          <div class="bar-anim" style="width:20px; height:30%; background:rgba(0,88,255,0.2); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:50%; background:rgba(0,88,255,0.35); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:80%; background:linear-gradient(180deg, #0058ff, #0fd095); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:40%; background:rgba(60,80,255,0.3); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:60%; background:rgba(15,208,149,0.35); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:35%; background:rgba(15,208,149,0.2); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-          <div class="bar-anim" style="width:20px; height:70%; background:rgba(0,88,255,0.4); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
-        </div>
-        <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--prism-text-muted); width:100%;">
-          <span>12:00</span><span>13:00</span><span>14:00</span><span>Now</span>
-        </div>
-      </div>
-      <!-- Threat Intelligence -->
-      <div id="sc-threat-intelligence" class="sc-card sc-hover-anim" style="min-width: 280px;">
-        <div id="spt-threat-intelligence-1" class="sc-progress-title" style="margin:0 0 12px; text-align:center;">Threat Intelligence</div>
-        <div style="display:flex; gap:8px; margin-bottom:12px;">
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-red);">47</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Blocked</div>
-          </div>
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-orange);">5</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Mitigated</div>
-          </div>
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-emerald);">99.2%</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Safe</div>
-          </div>
-        </div>
-        <div style="padding:8px 10px; border-radius:8px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); margin-bottom:6px;">
-          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">SQL Injection Attempt</div>
-          <div style="font-size:10px; color:var(--prism-red); font-weight:500;">Critical · Blocked · 3m ago</div>
-        </div>
-        <div style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);">
-          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">Brute Force Detected</div>
-          <div style="font-size:10px; color:var(--prism-orange); font-weight:500;">High · Mitigated · 8m ago</div>
-        </div>
-      </div>
-      <!-- Active Modules -->
-      <div id="sc-active-modules" class="sc-card sc-hover-anim" style="min-width: 240px;">
-        <div id="spt-active-modules-1" class="sc-progress-title" style="margin:0 0 14px; text-align:center;">Active Modules</div>
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
-            <span style="font-size:12px; font-weight:600;">Firewall</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
-            <span style="font-size:12px; font-weight:600;">VPN Gateway</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);">
-            <span style="font-size:12px; font-weight:600;">MDM Core</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-orange);">Updating</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.15);">
-            <span style="font-size:12px; font-weight:600;">DLP Engine</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-violet-light);">Standby</span>
-          </div>
-        </div>
-      </div>
-      <!-- Syncing Nodes -->
-      <div id="sc-syncing-nodes" class="sc-card sc-hover-anim" style="min-width: 200px; text-align:center; align-items:center; justify-content:center;">
-        <div style="position:relative; width:60px; height:60px; margin:0 auto 14px;">
-          <div class="ring-anim" style="width:60px; height:60px; border-radius:50%; border:3px solid rgba(0,88,255,0.15); border-top-color:#0058ff; animation: spin 3s linear infinite;"></div>
-          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-            <svg width="22" height="22" fill="none" stroke-width="2" viewBox="0 0 24 24"><defs><linearGradient id="syncGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0058ff"/><stop offset="40%" stop-color="#3c50ff"/><stop offset="100%" stop-color="#0fd095"/></linearGradient></defs><polyline points="23 4 23 10 17 10" stroke="url(#syncGradient)"/><polyline points="1 20 1 14 7 14" stroke="url(#syncGradient)"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" stroke="url(#syncGradient)"/></svg>
-          </div>
-        </div>
-        <div id="spt-syncing-nodes" class="sc-progress-title" style="margin:0 0 6px;">Syncing Nodes</div>
-        <div style="font-size:10px; color:var(--prism-text-muted); margin-bottom:10px;">3 of 5 nodes synced</div>
-        <div class="sc-progress-bar"><div class="sc-progress-fill" style="width:60%; background:linear-gradient(90deg, var(--prism-fuchsia), var(--prism-violet));"></div></div>
-      </div>
-      <!-- Duplicates -->
-      <div id="sc-enterprise-tier-dup" class="sc-card sc-hover-anim" style="min-width: 250px; text-align:center;">
-        <div style="width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
-          <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <h4 class="sc-card-title">Enterprise Tier</h4>
-        <div style="font-size:32px; font-weight:800; background:linear-gradient(135deg, var(--prism-violet), var(--prism-fuchsia)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0;">$499<span style="font-size:14px; font-weight:500; -webkit-text-fill-color:var(--prism-text-muted);">/mo</span></div>
-        <div style="display:flex; gap:6px; justify-content:center; margin-bottom:12px;">
-          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.1); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Unlimited Users</span>
-          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(217,70,239,0.1); color:var(--prism-fuchsia); border:1px solid rgba(217,70,239,0.2);">Priority SLA</span>
-        </div>
-        <button class="upgrade-btn" style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; width:100%;">Upgrade Plan</button>
-      </div>
-      <div id="sc-threat-intelligence-dup" class="sc-card sc-hover-anim" style="min-width: 280px;">
-        <div id="spt-threat-intelligence-2" class="sc-progress-title" style="margin:0 0 12px; text-align:center;">Threat Intelligence</div>
-        <div style="display:flex; gap:8px; margin-bottom:12px;">
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-red);">47</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Blocked</div>
-          </div>
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-orange);">5</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Mitigated</div>
-          </div>
-          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
-            <div style="font-size:18px; font-weight:800; color:var(--prism-emerald);">99.2%</div>
-            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Safe</div>
-          </div>
-        </div>
-        <div style="padding:8px 10px; border-radius:8px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); margin-bottom:6px;">
-          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">SQL Injection Attempt</div>
-          <div style="font-size:10px; color:var(--prism-red); font-weight:500;">Critical · Blocked · 3m ago</div>
-        </div>
-        <div style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);">
-          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">Brute Force Detected</div>
-          <div style="font-size:10px; color:var(--prism-orange); font-weight:500;">High · Mitigated · 8m ago</div>
-        </div>
-      </div>
-      <div id="sc-active-modules-dup" class="sc-card sc-hover-anim" style="min-width: 240px;">
-        <div id="spt-active-modules-2" class="sc-progress-title" style="margin:0 0 14px; text-align:center;">Active Modules</div>
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
-            <span style="font-size:12px; font-weight:600;">Firewall</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
-            <span style="font-size:12px; font-weight:600;">VPN Gateway</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);">
-            <span style="font-size:12px; font-weight:600;">MDM Core</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-orange);">Updating</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.15);">
-            <span style="font-size:12px; font-weight:600;">DLP Engine</span>
-            <span style="font-size:10px; font-weight:700; color:var(--prism-violet-light);">Standby</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 </section>
