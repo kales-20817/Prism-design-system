@@ -103,33 +103,23 @@
 
     /* ═══ NAV ═══ */
     .nav {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-        padding: 0 48px; height: 72px;
-        display: flex; align-items: center; justify-content: space-between;
-        background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border-bottom: 1px solid transparent;
-        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 32px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .nav.scrolled {
-        background: var(--nav-bg);
-        backdrop-filter: blur(24px) saturate(1.4);
-        -webkit-backdrop-filter: blur(24px) saturate(1.4);
-        border-bottom: 1px solid var(--prism-border);
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom: 1px solid var(--prism-border);
     }
-    [data-theme="light"] .nav {
-        background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border-bottom: 1px solid transparent;
-    }
-    [data-theme="light"] .nav.scrolled {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(24px) saturate(1.4);
-        -webkit-backdrop-filter: blur(24px) saturate(1.4);
-        border-bottom: 1px solid var(--prism-border);
-    }
+    [data-theme="light"] .nav { background: transparent; border-bottom: 1px solid transparent; box-shadow: none; }
+  [data-theme="light"] .nav.scrolled { background: rgba(255, 255, 255, 0.78); border-bottom: 1px solid rgba(37, 99, 235, 0.06); box-shadow: 0 1px 3px rgba(37, 99, 235, 0.04), 0 4px 24px rgba(37, 99, 235, 0.03); }
     .nav-logo { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0; text-decoration: none; line-height: 1; }
     .nav-logo-mark {
         font-size: 26px; font-weight: 900; letter-spacing: -0.03em;
@@ -143,14 +133,8 @@
         font-size: 10px; font-weight: 600; color: var(--prism-text-muted);
         letter-spacing: 0.08em; text-transform: none;
         margin-top: 2px;
-        max-height: 20px; opacity: 1;
-        transition: max-height 0.25s ease, opacity 0.2s ease, margin-top 0.25s ease;
-        overflow: hidden;
     }
     .nav-logo-sub .caps { text-transform: uppercase; }
-    .nav.scrolled .nav-logo-sub {
-        max-height: 0; opacity: 0; margin-top: 0;
-    }
     .nav-links { display: flex; align-items: center; gap: 6px; }
     .nav-links a {
         color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600;
@@ -609,11 +593,23 @@
     }
     [data-theme="light"] .sc-toggle:not(.active) { background: rgba(0, 0, 0, 0.15); }
 
+    /* Hamburger + mobile drawer (mobile-only — visible by default, hidden on desktop) */
+    .nav .nav-hamburger { display: inline-flex; align-items: center; justify-content: center; background: transparent; border: none; color: var(--prism-text); padding: 8px; margin-right: 8px; cursor: pointer; border-radius: 8px; width: 40px; height: 40px; order: -1; }
+    .nav .nav-hamburger:hover { background: var(--prism-surface-hover); }
+    @media (min-width: 769px) { .nav .nav-hamburger { display: none; } }
+    .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; opacity: 0; transition: opacity 0.25s ease; }
+    .sidebar-backdrop.open { display: block; opacity: 1; }
+    .mobile-drawer { display: none; position: fixed; top: 0; left: 0; width: 300px; max-width: 86vw; height: 100vh; padding: 24px 18px 32px; border-right: 1px solid var(--prism-border); overflow-y: auto; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 96; background: var(--prism-black); }
+    [data-theme="light"] .mobile-drawer { background: #ffffff; }
+    .mobile-drawer.open { transform: translateX(0); box-shadow: 12px 0 40px rgba(0,0,0,0.25); }
+    body.sidebar-locked { overflow: hidden; }
+    .mobile-drawer h4 { font-size: 11px; font-weight: 700; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 20px 0 10px; padding-left: 4px; }
+    .mobile-drawer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .mobile-drawer a { display: block; padding: 10px 12px; font-size: 14px; font-weight: 600; color: var(--prism-text); text-decoration: none; border-radius: 8px; transition: all 0.2s ease; }
+    .mobile-drawer a:hover { background: var(--prism-surface-hover); color: var(--prism-violet); }
+
     @media (max-width: 900px) {
         .nav { padding: 0 24px; }
-    }
-    @media (max-width: 640px) {
-        .nav-links { display: none; }
     }
 
     /* ═══ Component Functional Hovers ═══ */
@@ -781,6 +777,15 @@
         .site-footer-bottom span { font-size: 12px !important; }
     }
 
+    /* Hamburger drawer — placed LAST so it wins the cascade at ≤ 768 px */
+    @media (max-width: 768px) {
+        .nav { padding: 0 16px !important; justify-content: flex-start !important; gap: 4px !important; }
+        .nav-links { display: flex !important; margin-left: auto !important; gap: 0 !important; }
+        .nav-links > a,
+        .nav-links > .nav-dropdown { display: none !important; }
+        .mobile-drawer { display: block; }
+    }
+
     /* Ensure no horizontal overflow anywhere */
     html, body { overflow-x: hidden; }
     img, svg, video { max-width: 100%; height: auto; }
@@ -797,6 +802,9 @@
 </div>
 
 <nav class="nav" id="nav">
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
     <a class="nav-logo" href="index.html">
       <span class="nav-logo-mark">Prism</span>
       <span class="nav-logo-sub">powered by <span class="caps">UEMS</span></span>
@@ -809,6 +817,21 @@
       </button>
     </div>
   </nav>
+  <aside class="mobile-drawer" aria-label="Mobile navigation">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="Foundation.html">Foundation</a></li>
+      <li><a href="Components.html">Components</a></li>
+      <li><a href="zia-experience.html">Zia Experience</a></li>
+    </ul>
+    <h4>Resources</h4>
+    <ul>
+      <li><a href="Icons.html">Icons</a></li>
+      <li><a href="Logos.html">Product Logo</a></li>
+      <li><a href="Illustrations.html">Illustrations</a></li>
+    </ul>
+  </aside>
+  <div class="sidebar-backdrop" aria-hidden="true"></div>
 
 <div class="page">
 <section class="hero-section">
@@ -2972,17 +2995,6 @@ new p5(function (p) {
 })();
 
 // Nav scroll effect
-(function () {
-    const nav = document.getElementById('nav');
-    if (!nav) return;
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-})();
 
 // SC-Card interactivity: toggles, calendar dates, radio buttons
 (function () {
@@ -3065,6 +3077,42 @@ new p5(function (p) {
         });
     }, { threshold: 0.5 });
     observer.observe(el);
+})();
+</script>
+<script>
+(function(){
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const toggle = () => {
+    if (window.scrollY > 10) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+})();
+</script>
+<script>
+(function(){
+  const hamburger = document.querySelector('.nav-hamburger');
+  const drawer = document.querySelector('.mobile-drawer');
+  const backdrop = document.querySelector('.sidebar-backdrop');
+  if (!hamburger || !drawer || !backdrop) return;
+  const open = () => {
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.classList.add('sidebar-locked');
+    hamburger.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.classList.remove('sidebar-locked');
+    hamburger.setAttribute('aria-expanded', 'false');
+  };
+  hamburger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('open')) close(); });
+  drawer.addEventListener('click', (e) => { if (e.target.closest('a')) close(); });
 })();
 </script>
 </body>
