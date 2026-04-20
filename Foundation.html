@@ -101,18 +101,6 @@
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10), 0 2px 8px rgba(37, 99, 235, 0.06);
   }
-  [data-theme="light"] .foundation-link {
-    color: #64748b;
-  }
-  [data-theme="light"] .foundation-link:hover {
-    color: #1e293b;
-    background: rgba(37, 99, 235, 0.05);
-  }
-  [data-theme="light"] .foundation-link.active {
-    color: #2563eb;
-    background: rgba(37, 99, 235, 0.06);
-    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
-  }
   [data-theme="light"] .toc-sidebar {
     background: transparent;
   }
@@ -158,11 +146,6 @@
   [data-theme="light"] .nav-links a.active {
     color: #2563eb;
     background: rgba(37, 99, 235, 0.06);
-  }
-  [data-theme="light"] .placeholder-card {
-    background: #fff;
-    border: 1px solid rgba(37, 99, 235, 0.10);
-    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.05);
   }
   [data-theme="light"] .feedback-banner {
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
@@ -441,58 +424,83 @@
     transform: translateY(-1px);
   }
 
-  /* ── Foundation Sidebar Tree ── */
-  .foundation-nav { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; margin: 0; }
-
-
-
-
-  .foundation-link {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 12px; font-size: 14px; font-weight: 500;
+  /* ── Sidebar Nav ── */
+  .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .sidebar-link {
+    display: flex; align-items: center;
+    padding: 8px 12px; font-size: 13.5px; font-weight: 500;
     color: var(--prism-text-muted); text-decoration: none;
     border-radius: 8px; transition: all 0.2s ease;
   }
-  .foundation-link:hover {
+  .sidebar-link:hover {
     color: var(--prism-text); background: var(--prism-surface-hover);
+    transform: translateX(4px);
   }
-  .foundation-link.active {
+  .sidebar-link.active {
     color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); font-weight: 600;
   }
+  .sidebar-link.active::before {
+    content: ''; width: 4px; height: 16px; background: var(--prism-violet);
+    border-radius: 4px; margin-right: 12px; margin-left: -4px;
+  }
 
 
-  /* Placeholder card for upcoming content */
-  .placeholder-card {
-    padding: 48px 40px;
-    background: var(--prism-surface);
+  /* Component Grid */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 1100px) { .comp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 700px) { .comp-grid { grid-template-columns: 1fr; } }
+
+  .comp-card {
+    display: flex; flex-direction: column;
+    border-radius: 12px;
     border: 1px solid var(--prism-border);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 16px;
-    transition: all 0.3s ease;
+    background: var(--prism-surface);
+    overflow: hidden; text-decoration: none; color: inherit;
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1), border-color 0.25s ease;
+    cursor: pointer;
   }
-  .placeholder-card svg {
-    color: var(--prism-text-muted);
-    opacity: 0.5;
+  .comp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    border-color: rgba(37,99,235,0.22);
   }
-  .placeholder-card .placeholder-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--prism-text);
+  [data-theme="light"] .comp-card {
+    background: #fff;
+    border: 1px solid rgba(37,99,235,0.08);
+    box-shadow: 0 1px 3px rgba(37,99,235,0.04);
   }
+  [data-theme="light"] .comp-card:hover {
+    border-color: rgba(37,99,235,0.22);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.10);
+  }
+  .comp-card-preview {
+    height: 140px;
+    background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--prism-border);
+  }
+  [data-theme="light"] .comp-card-preview { background: #f4f5fa; }
+  :root:not([data-theme="light"]) .comp-card-preview { background: #1e1e24; }
+  .comp-card-preview svg { opacity: 0.55; }
+  .comp-card:hover .comp-card-preview {
+    background: linear-gradient(135deg, rgba(0,88,255,0.1) 40%, rgba(60,80,255,0.1) 30%, rgba(15,208,149,0.1) 100%);
+  }
+  .comp-card-body { padding: 16px 18px 18px; }
+  .comp-card-name { font-size: 15px; font-weight: 700; color: var(--prism-text); margin-bottom: 4px; transition: all 0.2s; }
+  .comp-card:hover .comp-card-name {
+    background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .comp-card-desc { font-size: 13px; line-height: 1.5; color: var(--prism-text-muted); }
+
   #logo-grad stop:nth-child(1) { stop-color: var(--prism-violet); }
   #logo-grad stop:nth-child(2) { stop-color: var(--prism-fuchsia); }
   #logo-grad stop:nth-child(3) { stop-color: var(--prism-cyan); }
-  .placeholder-card .placeholder-sub {
-    font-size: 14px;
-    color: var(--prism-text-muted);
-    max-width: 400px;
-    line-height: 1.5;
-  }
 </style>
 </head>
 <body>
@@ -506,7 +514,7 @@
       <span class="nav-logo-sub">Design System</span>
     </a>
     <div id="nav-links" class="nav-links">      <a href="Foundation.html" class="active">Foundation</a>
-      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Icons.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Logos.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Illustrations.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
 
       <div id="div" style="width: 16px;"></div>
 
@@ -525,27 +533,19 @@
         <span class="search-shortcut">&#8984;K</span>
       </div>
       <h3 class="sidebar-heading" id="foundations">Foundations</h3>
-      <ul class="foundation-nav">
-        <!-- Tokens group -->
-        <li><a href="foundation-tokens.html" class="foundation-link">Tokens</a></li>
-        <!-- Accessibility (standalone) -->
-        <li><a href="foundation-accessibility.html" class="foundation-link">Accessibility</a></li>
-        <!-- Content group -->
-        <li><a href="foundation-content.html" class="foundation-link">Content</a></li>
-        <!-- Spacing group -->
-        <li><a href="foundation-spacing.html" class="foundation-link">Spacing</a></li>
-        <!-- Grid group (Beta) -->
-        <li><a href="foundation-grid.html" class="foundation-link">Grid</a></li>
-        <!-- Color group -->
-        <li><a href="foundation-color.html" class="foundation-link">Color</a></li>
-        <!-- Typography group -->
-        <li><a href="foundation-typography.html" class="foundation-link">Typography</a></li>
-        <!-- Plain items -->
-        <li><a href="foundation-iconography.html" class="foundation-link">Iconography</a></li>
-        <li><a href="foundation-illustrations.html" class="foundation-link">Illustrations</a></li>
-        <li><a href="foundation-elevation.html" class="foundation-link">Elevation</a></li>
-        <li><a href="foundation-border.html" class="foundation-link">Border</a></li>
-        <li><a href="foundation-radius.html" class="foundation-link">Radius</a></li>
+      <ul class="sidebar-nav">
+        <li><a href="foundation-tokens.html" class="sidebar-link">Tokens</a></li>
+        <li><a href="foundation-accessibility.html" class="sidebar-link">Accessibility</a></li>
+        <li><a href="foundation-content.html" class="sidebar-link">Content</a></li>
+        <li><a href="foundation-spacing.html" class="sidebar-link">Spacing</a></li>
+        <li><a href="foundation-grid.html" class="sidebar-link">Grid</a></li>
+        <li><a href="foundation-color.html" class="sidebar-link">Color</a></li>
+        <li><a href="foundation-typography.html" class="sidebar-link">Typography</a></li>
+        <li><a href="foundation-iconography.html" class="sidebar-link">Iconography</a></li>
+        <li><a href="foundation-illustrations.html" class="sidebar-link">Illustrations</a></li>
+        <li><a href="foundation-elevation.html" class="sidebar-link">Elevation</a></li>
+        <li><a href="foundation-border.html" class="sidebar-link">Border</a></li>
+        <li><a href="foundation-radius.html" class="sidebar-link">Radius</a></li>
       </ul>
     </aside>
 
@@ -560,158 +560,189 @@
       <div id="main-content-area" class="main-content-area">
         <div id="main-content-inner" class="main-content-inner">
 
-          <!-- Tokens Section -->
-          <div id="doc-section" class="doc-section">
-            <h2 id="tokens" class="doc-section-title">Tokens</h2>
-            <p class="doc-section-subtitle">Design tokens are the single source of truth for storing visual design attributes such as colors, spacing, and typography scales.</p>
-            <div id="placeholder-card" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              <div id="placeholder-title" class="placeholder-title"><a href="http://localhost:8080/foundation-tokens.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tokens</a></div>
-              <div id="placeholder-sub" class="placeholder-sub">Comprehensive token documentation including naming conventions, semantic mappings, and platform-specific implementations.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Tokens > Accessibility -->
-          <div id="doc-section-2" class="doc-section">
-            <h2 id="tokens-accessibility" class="doc-section-title">Accessibility</h2>
-            <p class="doc-section-subtitle">Accessibility tokens ensure that contrast ratios, focus indicators, and motion preferences are maintained across the entire design system.</p>
-            <div id="placeholder-card-2" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              <div id="placeholder-title-2" class="placeholder-title"><a href="http://localhost:8080/foundation-tokens-accessibility.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Tokens Accessibility</a></div>
-              <div id="placeholder-sub-2" class="placeholder-sub">Guidelines for WCAG-compliant tokens covering color contrast, focus rings, reduced-motion preferences, and screen reader support.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Content Section -->
-          <div id="doc-section-3" class="doc-section">
-            <h2 id="content" class="doc-section-title">Content</h2>
-            <p class="doc-section-subtitle">Content guidelines define the voice, tone, and writing patterns used across all UI surfaces to ensure clarity and consistency.</p>
-            <div id="placeholder-card-3" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
-              <div id="placeholder-title-3" class="placeholder-title"><a href="http://localhost:8080/foundation-content.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Content</a></div>
-              <div id="placeholder-sub-3" class="placeholder-sub">Voice and tone framework, UX writing conventions, and content patterns for labels, messages, and microcopy.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Spacing Section -->
-          <div id="doc-section-4" class="doc-section">
-            <h2 id="spacing" class="doc-section-title">Spacing</h2>
-            <p class="doc-section-subtitle">The spacing scale provides a consistent set of values for margins, paddings, and gaps that maintain visual rhythm throughout interfaces.</p>
-            <div id="placeholder-card-4" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
-              <div id="placeholder-title-4" class="placeholder-title"><a href="http://localhost:8080/foundation-spacing.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Spacing</a></div>
-              <div id="placeholder-sub-4" class="placeholder-sub">Spacing scale definitions, density modes, and practical usage examples for building consistent layouts.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Grid Section -->
-          <div id="doc-section-5" class="doc-section">
-            <h2 id="grid" class="doc-section-title">Grid</h2>
-            <p class="doc-section-subtitle">The grid system defines responsive column layouts, breakpoints, and alignment rules that structure page content across all viewport sizes.</p>
-            <div id="placeholder-card-5" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M10.875 12c-.621 0-1.125.504-1.125 1.125M12 12c.621 0 1.125.504 1.125 1.125m0 0v1.5c0 .621-.504 1.125-1.125 1.125m0-2.625c0 .621.504 1.125 1.125 1.125"/></svg>
-              <div id="placeholder-title-5" class="placeholder-title"><a href="http://localhost:8080/foundation-grid.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Grid</a></div>
-              <div id="placeholder-sub-5" class="placeholder-sub">Grid column specifications, breakpoint definitions, gutter sizes, and responsive layout patterns.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Color Section -->
-          <div id="doc-section-6" class="doc-section">
-            <h2 id="color" class="doc-section-title">Color</h2>
-            <p class="doc-section-subtitle">The color system provides semantic palettes, theming support, and accessible color combinations for all UI elements.</p>
-            <div id="placeholder-card-6" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"/></svg>
-              <div id="placeholder-title-6" class="placeholder-title"><a href="http://localhost:8080/foundation-color.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Color</a></div>
-              <div id="placeholder-sub-6" class="placeholder-sub">Primary, secondary, neutral, and semantic color palettes with light/dark theme mappings and usage guidance.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Typography Section -->
-          <div id="doc-section-7" class="doc-section">
-            <h2 id="typography" class="doc-section-title">Typography</h2>
-            <p class="doc-section-subtitle">Typography defines the type scale, font families, weights, and line heights used to establish clear visual hierarchy and readability.</p>
-            <div id="placeholder-card-7" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
-              <div id="placeholder-title-7" class="placeholder-title"><a href="http://localhost:8080/foundation-typography.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Typography</a></div>
-              <div id="placeholder-sub-7" class="placeholder-sub">Type scale, font families, weight mappings, line-height ratios, and responsive typography guidelines.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Iconography Section -->
-          <div id="doc-section-8" class="doc-section">
-            <h2 id="iconography" class="doc-section-title">Iconography</h2>
-            <p class="doc-section-subtitle">The icon system provides a consistent set of vector icons with defined sizing, stroke weights, and color application rules.</p>
-            <div id="placeholder-card-8" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
-              <div id="placeholder-title-8" class="placeholder-title"><a href="http://localhost:8080/foundation-iconography.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Iconography</a></div>
-              <div id="placeholder-sub-8" class="placeholder-sub">Icon library overview, sizing conventions, stroke specifications, and implementation patterns.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Illustrations Section -->
-          <div id="doc-section-9" class="doc-section">
-            <h2 id="illustrations" class="doc-section-title">Illustrations</h2>
-            <p class="doc-section-subtitle">Illustration guidelines cover the visual style, usage contexts, and theming rules for spot and full-page illustrations.</p>
-            <div id="placeholder-card-9" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-              <div id="placeholder-title-9" class="placeholder-title"><a href="http://localhost:8080/foundation-illustrations.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Illustrations</a></div>
-              <div id="placeholder-sub-9" class="placeholder-sub">Illustration style guide, empty state illustrations, onboarding graphics, and theming support.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Elevation Section -->
-          <div id="doc-section-11" class="doc-section">
-            <h2 id="elevation" class="doc-section-title">Elevation</h2>
-            <p class="doc-section-subtitle">Elevation tokens define shadow depths and layering to communicate hierarchy and interactive affordances across surfaces.</p>
-            <div id="placeholder-card-11" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0l4.179 2.25-9.75 5.25-9.75-5.25 4.179-2.25"/></svg>
-              <div id="placeholder-title-11" class="placeholder-title"><a href="http://localhost:8080/foundation-elevation.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Elevation</a></div>
-              <div id="placeholder-sub-11" class="placeholder-sub">Shadow depth scale, z-index layering system, and elevation usage patterns for cards, modals, and popovers.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Border Section -->
-          <div id="doc-section-12" class="doc-section">
-            <h2 id="border" class="doc-section-title">Border</h2>
-            <p class="doc-section-subtitle">Border tokens specify widths, styles, and color treatments for dividers, outlines, and interactive element boundaries.</p>
-            <div id="placeholder-card-12" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"/></svg>
-              <div id="placeholder-title-12" class="placeholder-title"><a href="http://localhost:8080/foundation-border.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Border</a></div>
-              <div id="placeholder-sub-12" class="placeholder-sub">Border width tokens, style variations, color mappings, and contextual usage patterns.</div>
-            </div>
-          </div>
-
-          <hr class="doc-divider" />
-
-          <!-- Radius Section -->
-          <div id="doc-section-13" class="doc-section">
-            <h2 id="radius" class="doc-section-title">Radius</h2>
-            <p class="doc-section-subtitle">Border radius tokens define the curvature scale applied to containers, buttons, inputs, and other interactive elements.</p>
-            <div id="placeholder-card-13" class="placeholder-card">
-              <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.564A.562.562 0 019 14.437V9.564z"/></svg>
-              <div id="placeholder-title-13" class="placeholder-title"><a href="http://localhost:8080/foundation-radius.html" style="color:inherit;text-decoration:none;background:var(--logo-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Radius</a></div>
-              <div id="placeholder-sub-13" class="placeholder-sub">Radius scale tokens, component-specific radius mappings, and pill/circle shape conventions.</div>
-            </div>
+          <div class="comp-grid">
+            <a href="foundation-tokens.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; flex-direction:column; gap:0; align-items:flex-start; position:relative; padding:12px 0;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:8px; background:var(--prism-surface); border:1px solid var(--prism-border);">
+                      <div style="width:12px; height:12px; border-radius:3px; background:#0058ff;"></div>
+                      <span style="font-size:10px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--prism-text);">BG-Button-Primary</span>
+                    </div>
+                  </div>
+                  <div style="width:1px; height:14px; background:var(--prism-border); margin-left:24px;"></div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:8px; background:var(--prism-surface); border:1px solid var(--prism-border);">
+                      <div style="width:12px; height:12px; border-radius:3px; background:#ebf4ff;"></div>
+                      <span style="font-size:10px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--prism-text);">Background</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Tokens</div><div class="comp-card-desc">Naming conventions, semantic mappings, and platform-specific implementations.</div></div>
+            </a>
+            <a href="foundation-accessibility.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:center; gap:6px; padding:8px;">
+                  <!-- Color drop -->
+                  <div style="width:28px; height:36px; display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="30" viewBox="0 0 22 30" fill="none"><path d="M11 2C11 2 2 12 2 18a9 9 0 0018 0C20 12 11 2 11 2z" fill="#f5a623"/></svg>
+                  </div>
+                  <!-- Aa text -->
+                  <div style="font-size:28px; font-weight:900; font-family:'Zoho Puvi',sans-serif; color:var(--prism-text); line-height:1; margin-top:4px;">Aa</div>
+                  <!-- Design frame -->
+                  <div style="width:36px; height:36px; background:#5380ef; border-radius:3px; position:relative; margin-top:4px;">
+                    <div style="position:absolute; top:-4px; left:-4px; width:6px; height:6px; background:#6366f1; border-radius:50%;"></div>
+                    <div style="position:absolute; top:-4px; right:-4px; width:6px; height:6px; background:#6366f1; border-radius:50%;"></div>
+                    <div style="position:absolute; bottom:-4px; left:-4px; width:6px; height:6px; background:#6366f1; border-radius:50%;"></div>
+                    <div style="position:absolute; bottom:-4px; right:-4px; width:6px; height:6px; background:#6366f1; border-radius:50%;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Accessibility</div><div class="comp-card-desc">WCAG-compliant color contrast, focus rings, and screen reader support.</div></div>
+            </a>
+            <a href="foundation-content.html" class="comp-card">
+              <div class="comp-card-preview"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
+              <div class="comp-card-body"><div class="comp-card-name">Content</div><div class="comp-card-desc">Voice and tone framework, UX writing conventions, and content patterns.</div></div>
+            </a>
+            <a href="foundation-spacing.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; align-items:center; gap:0; justify-content:center;">
+                  <div style="width:48px; height:48px; border-radius:12px; background:var(--prism-surface); border:1px solid var(--prism-border); display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
+                    <span style="font-size:8px; font-weight:700; color:#ef4444; font-family:'JetBrains Mono',monospace;">16</span>
+                    <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
+                  </div>
+                  <div style="width:48px; height:48px; border-radius:12px; background:var(--prism-surface); border:1px solid var(--prism-border); display:flex; align-items:center; justify-content:center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h8"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Spacing</div><div class="comp-card-desc">Spacing scale definitions, density modes, and consistent layout patterns.</div></div>
+            </a>
+            <a href="foundation-grid.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; flex-direction:column; gap:4px; width:100%; padding:10px;">
+                  <div style="display:flex; gap:4px;">
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.15); border-radius:3px;"></div>
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.15); border-radius:3px;"></div>
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.15); border-radius:3px;"></div>
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.15); border-radius:3px;"></div>
+                  </div>
+                  <div style="display:flex; gap:4px;">
+                    <div style="flex:2; height:40px; background:rgba(37,99,235,0.08); border:1px solid rgba(37,99,235,0.12); border-radius:3px;"></div>
+                    <div style="flex:1; height:40px; background:rgba(37,99,235,0.08); border:1px solid rgba(37,99,235,0.12); border-radius:3px;"></div>
+                  </div>
+                  <div style="display:flex; gap:4px;">
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.1); border-radius:3px;"></div>
+                    <div style="flex:2; height:20px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.1); border-radius:3px;"></div>
+                    <div style="flex:1; height:20px; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.1); border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Grid</div><div class="comp-card-desc">Responsive column layouts, breakpoints, and alignment rules.</div></div>
+            </a>
+            <a href="foundation-color.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; align-items:center; gap:12px; padding:8px;">
+                  <div style="width:36px; height:36px; border-radius:8px; background:#006aff; flex-shrink:0;"></div>
+                  <div>
+                    <div style="font-size:12px; font-weight:700; color:var(--prism-text);">BG-Button-Primary</div>
+                    <div style="font-size:11px; font-weight:600; color:#006aff; font-family:'JetBrains Mono',monospace;">#006aff</div>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Color</div><div class="comp-card-desc">Semantic palettes, theming support, and accessible color combinations.</div></div>
+            </a>
+            <a href="foundation-typography.html" class="comp-card">
+              <div class="comp-card-preview" style="padding:0;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; width:100%; height:100%; padding:16px;">
+                  <div style="font-size:36px; font-weight:800; font-family:'Zoho Puvi',sans-serif; color:var(--prism-violet); opacity:0.8; line-height:1;">Aa</div>
+                  <div style="display:flex; align-items:center; gap:6px; font-size:10px; color:var(--prism-text-muted);">
+                    <span style="font-weight:300;">Thin</span>
+                    <span style="width:3px; height:3px; border-radius:50%; background:var(--prism-border);"></span>
+                    <span style="font-weight:400;">Regular</span>
+                    <span style="width:3px; height:3px; border-radius:50%; background:var(--prism-border);"></span>
+                    <span style="font-weight:600;">Semi</span>
+                    <span style="width:3px; height:3px; border-radius:50%; background:var(--prism-border);"></span>
+                    <span style="font-weight:800;">Bold</span>
+                  </div>
+                  <span style="font-size:10px; font-weight:600; color:var(--prism-violet); font-family:'Zoho Puvi',sans-serif;">Zoho Puvi</span>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Typography</div><div class="comp-card-desc">Type scale, font families, weight mappings, and responsive guidelines.</div></div>
+            </a>
+            <a href="foundation-iconography.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; align-items:center; gap:12px; justify-content:center;">
+                  <svg width="24" height="24" fill="none" stroke="var(--prism-violet)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+                  <svg width="28" height="28" fill="none" stroke="var(--prism-violet)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="24" height="24" fill="none" stroke="var(--prism-violet)" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Iconography</div><div class="comp-card-desc">Icon library, sizing conventions, and stroke specifications.</div></div>
+            </a>
+            <a href="foundation-illustrations.html" class="comp-card">
+              <div class="comp-card-preview"><img src="assets/Illustration/chart-emptystate.svg" alt="chart emptystate" style="max-height:100px;max-width:90%;object-fit:contain;"></div>
+              <div class="comp-card-body"><div class="comp-card-name">Illustrations</div><div class="comp-card-desc">Style guide, empty states, onboarding graphics, and theming support.</div></div>
+            </a>
+            <a href="foundation-elevation.html" class="comp-card">
+              <div class="comp-card-preview"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="url(#logo-grad)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0l4.179 2.25-9.75 5.25-9.75-5.25 4.179-2.25"/></svg></div>
+              <div class="comp-card-body"><div class="comp-card-name">Elevation</div><div class="comp-card-desc">Shadow depth scale, z-index layering, and elevation usage patterns.</div></div>
+            </a>
+            <a href="foundation-border.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; align-items:flex-end; gap:10px; justify-content:center;">
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border-radius:8px; border:1px solid #2563eb; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">1px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border-radius:8px; border:2px solid #2563eb; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">2px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border-radius:8px; border:3px solid #2563eb; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">3px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border-radius:8px; border:2px dashed #2563eb; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">Dash</span>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Border</div><div class="comp-card-desc">Border width tokens, style variations, and color mappings.</div></div>
+            </a>
+            <a href="foundation-radius.html" class="comp-card">
+              <div class="comp-card-preview">
+                <div style="display:flex; align-items:flex-end; gap:10px; justify-content:center;">
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border:2px solid #2563eb; border-radius:0; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">0px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border:2px solid #2563eb; border-radius:4px; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">4px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border:2px solid #2563eb; border-radius:8px; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">8px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border:2px solid #2563eb; border-radius:16px; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">16px</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="width:36px; height:36px; border:2px solid #2563eb; border-radius:50%; background:rgba(37,99,235,0.05);"></div>
+                    <span style="font-size:8px; font-weight:700; color:var(--prism-text-muted); font-family:'JetBrains Mono',monospace; margin-top:4px; display:block;">Full</span>
+                  </div>
+                </div>
+              </div>
+              <div class="comp-card-body"><div class="comp-card-name">Radius</div><div class="comp-card-desc">Radius scale tokens, component mappings, and shape conventions.</div></div>
+            </a>
           </div>
 
           <!-- Feedback banner -->

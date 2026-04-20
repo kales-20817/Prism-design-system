@@ -44,7 +44,7 @@
         --cta-bg-hover: #fff;
         --text-glow: rgba(13, 13, 16, 0.6);
 
-        --prism-violet: #7c3aed;
+        --prism-violet: #2563eb;
         --prism-violet-light: #a78bfa;
         --prism-emerald: #10b981;
         --prism-cyan: #06b6d4;
@@ -65,7 +65,7 @@
 
     /* ═══ LIGHT MODE ═══ */
     [data-theme="light"] {
-        --bg: #ECF2FF;
+        --bg: #ffffff;
         --text: #111;
         --text-soft: #3a3a3a;
         --text-muted: rgba(0, 0, 0, 0.55);
@@ -84,7 +84,7 @@
         --prism-surface-hover: rgba(255, 255, 255, 0.95);
         --prism-border: rgba(0, 0, 0, 0.08);
 
-        --nav-bg: rgba(236,242,255,0.85);
+        --nav-bg: transparent;
         --logo-gradient: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
         --logo-filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
         --nav-link-color: #000000;
@@ -106,11 +106,29 @@
         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
         padding: 0 48px; height: 72px;
         display: flex; align-items: center; justify-content: space-between;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav.scrolled {
         background: var(--nav-bg);
         backdrop-filter: blur(24px) saturate(1.4);
         -webkit-backdrop-filter: blur(24px) saturate(1.4);
         border-bottom: 1px solid var(--prism-border);
-        transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    [data-theme="light"] .nav {
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: 1px solid transparent;
+    }
+    [data-theme="light"] .nav.scrolled {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(24px) saturate(1.4);
+        -webkit-backdrop-filter: blur(24px) saturate(1.4);
+        border-bottom: 1px solid var(--prism-border);
     }
     .nav-logo { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
     .nav-logo-mark {
@@ -169,7 +187,10 @@
         padding: 0px 20px 0px;
     }
     .showcase-section {
-        padding: 0px 0 100px;
+        padding: 0px 0 0px;
+    }
+    [data-theme="light"] .showcase-section {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
     }
     #container {
         position: absolute !important;
@@ -179,19 +200,43 @@
         height: 100vh;
         z-index: 1;
         pointer-events: none;
+        overflow: hidden;
     }
-    #container {
+    /* Light mode: fixed so the canvas ribbon scrolls with the page */
+    [data-theme="light"] #container {
         position: fixed;
         inset: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 1;
     }
-    #container canvas {
-        width: 100vw !important;
-        height: 100vh !important;
-        display: block;
+    #bgVideo, #bgVideoLight {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        transition: opacity 1s ease;
+    }
+    #bgVideo { opacity: 0.6; }
+    #bgVideoLight { opacity: 0.8; }
+    #bgVideo.fading, #bgVideoLight.fading { opacity: 0; }
+    /* Hide canvas in both themes */
+    #container canvas { display: none !important; }
+    /* Dark mode: show dark video, hide light video */
+    :root:not([data-theme="light"]) #bgVideo { display: block; }
+    :root:not([data-theme="light"]) #bgVideoLight { display: none; }
+    /* Light mode: show light video, hide dark video */
+    [data-theme="light"] #bgVideo { display: none; }
+    [data-theme="light"] #bgVideoLight { display: block; }
+    #container::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    [data-theme="light"] #container::after {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
     }
     .overlay {
         position: relative;
@@ -351,8 +396,8 @@
         flex-shrink: 0;
         font-size: 13px;
         color: var(--prism-text);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+        box-shadow: none;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         cursor: pointer;
     }
     .sc-cal-day:not(.empty):not(.active) {
@@ -375,8 +420,8 @@
     .sc-progress-title {
         font-size: 12px;
         font-weight: 700;
-        margin-bottom: 8px;
-        padding-bottom: 10px;
+        margin-bottom: 4px;
+        padding-bottom: 2px;
         color: var(--prism-text);
         text-transform: uppercase;
         letter-spacing: 0.04em;
@@ -410,6 +455,7 @@
     .sc-card-subtitle {
         font-size: 12px;
         color: var(--prism-text-muted);
+        margin-top: 4px;
         margin-bottom: 12px;
     }
     /* Calendar */
@@ -510,14 +556,15 @@
         width: 32px;
         height: 18px;
         border-radius: 99px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(239, 68, 68, 0.4);
         position: relative;
         cursor: pointer;
         transition: background 0.3s;
     }
     .sc-toggle.active {
-        background: var(--prism-violet);
+        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
     }
+    [data-theme="light"] .sc-toggle:not(.active) { background: rgba(239, 68, 68, 0.3); }
     .sc-toggle-knob {
         position: absolute;
         top: 2px;
@@ -532,7 +579,11 @@
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
-    [data-theme="light"] .sc-toggle { background: rgba(0, 0, 0, 0.15); }
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    [data-theme="light"] .sc-toggle:not(.active) { background: rgba(0, 0, 0, 0.15); }
 
     @media (max-width: 900px) {
         .nav { padding: 0 24px; }
@@ -542,6 +593,8 @@
     }
 
     /* ═══ Component Functional Hovers ═══ */
+    .sc-card svg { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .sc-card:hover svg { transform: scale(1.2); }
     .sc-card { cursor: pointer; }
     .sc-hover-anim {
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease;
@@ -562,10 +615,13 @@
     .sc-hover-anim:hover .file-fill { width: 100% !important; background: var(--prism-emerald) !important; }
     .sc-hover-anim.sc-calendar:hover .sc-cal-days { transform: scale(1.02); transition: transform 0.3s ease; }
     .sc-cal-day:not(.empty):hover { background: var(--prism-violet); color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,0.4); font-weight: 700; border-radius: 8px; }
+    .sc-radio-label { transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+    .sc-radio-label:hover { background: rgba(124, 58, 237, 0.06); border-color: rgba(124, 58, 237, 0.2); box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.1); }
     .sc-radio-label:hover .sc-radio-custom:not(.active) { border-color: var(--prism-violet); }
     .sc-radio-label:hover .sc-radio-custom:not(.active)::after { transform: translate(-50%, -50%) scale(1); opacity: 0.5; background: var(--prism-violet); }
-    .sc-toggle-row:hover .sc-toggle:not(.active) { background: var(--prism-emerald) !important; }
-    .sc-toggle-row:hover .sc-toggle:not(.active) .sc-toggle-knob { transform: translateX(20px); }
+    .sc-toggle-row:hover .sc-toggle:not(.active) { background: rgba(124, 58, 237, 0.3); }
+    .sc-toggle-row { transition: background 0.3s ease, transform 0.3s ease; }
+    .sc-toggle-row:hover { transform: translateX(4px); }
     .sc-hover-anim:hover .sc-profile-badge { background: var(--prism-violet) !important; color: #fff !important; }
     .sc-hover-anim:hover .icon-pulse { transform: scale(1.1) rotate(5deg); background: rgba(16,185,129,0.3) !important; }
     .sc-notif-item:hover .sc-notif-dot { transform: scale(1.5); box-shadow: 0 0 12px var(--prism-violet); }
@@ -577,8 +633,15 @@
         box-shadow: 0 0 24px rgba(217, 70, 239, 0.35);
     }
     .sc-hover-anim:hover .num-bump { transform: scale(1.05) translateY(-4px); }
-    .sc-hover-anim:hover .upgrade-btn { background: var(--prism-violet) !important; color:#fff !important; border-color:var(--prism-violet) !important; transform: scale(1.05); }
-    .sc-hover-anim:not(#sc-card-component-31):hover .bar-anim { height: 90% !important; border-color: var(--prism-violet-light) !important; box-shadow: 0 0 8px rgba(124,58,237,0.3); }
+    .sc-hover-anim:hover .upgrade-btn { background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%) !important; color:#fff !important; border-color:transparent !important; transform: scale(1.05); }
+    .sc-hover-anim:not(#sc-card-component-31):not(#sc-network-latency-card):hover .bar-anim { height: 90% !important; border-color: var(--prism-violet-light) !important; box-shadow: 0 0 8px rgba(124,58,237,0.3); }
+    #sc-network-latency-card:hover .bar-anim:nth-child(1) { height: 45% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(2) { height: 65% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(3) { height: 95% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(4) { height: 55% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(5) { height: 75% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(6) { height: 40% !important; }
+    #sc-network-latency-card:hover .bar-anim:nth-child(7) { height: 85% !important; }
     #sc-card-component-31 .bar-anim {
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         cursor: pointer;
@@ -592,6 +655,10 @@
     .sc-hover-anim:hover .shield-icon { background: var(--prism-red) !important; color: #fff !important; transform: scale(1.1); }
     .sc-hover-anim:hover .badge-anim { background: var(--prism-violet) !important; color: #fff !important; border-color:var(--prism-violet) !important; }
     .sc-hover-anim:hover .ring-anim { border-top-color: var(--prism-cyan) !important; animation-duration: 1s !important; }
+    .sc-card:hover .gauge-fill { stroke-dashoffset: 44 !important; }
+    .sc-vuln-stat { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease; }
+    .sc-vuln-card:hover .sc-vuln-stat { transform: translateY(-4px) scale(1.05); }
+    .sc-vuln-card:hover .sc-vuln-bar { width: 82% !important; background: linear-gradient(90deg, var(--prism-emerald), #34d399) !important; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease; }
 
     @media (max-width: 640px) {
         .meta { font-size: 0.7rem; gap: 16px; }
@@ -600,7 +667,14 @@
 </style>
 </head>
 <body>
-<div id="container"></div>
+<div id="container">
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="0_Wind_Flowing_1920x1080 (1).mp4" type="video/mp4">
+  </video>
+  <video id="bgVideoLight" autoplay muted loop playsinline>
+    <source src="0_Wind_Flowing_1920x1080.mp4" type="video/mp4">
+  </video>
+</div>
 
 <nav class="nav" id="nav">
     <a class="nav-logo" href="index.html">
@@ -608,7 +682,7 @@
       <span class="nav-logo-sub">Design System</span>
     </a>
     <div class="nav-links">      <a href="Foundation.html">Foundation</a>
-      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Icons.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Logos.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Illustrations.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
       <button id="themeToggle" class="btn btn-ghost" style="padding: 10px; margin-left:14px; border-radius: 50%; width: 42px; height: 42px; display:flex; justify-content:center; align-items:center;">
         <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:block;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -644,16 +718,45 @@
 <div class="hero-showcase">
   <div class="marquee-wrapper">
     <div class="marquee-row left">
-      <div class="sc-card sc-hover-anim" style="min-width: 250px;">
-        <div id="spt-patch-compliance-1" class="sc-progress-title">Patch Compliance</div>
+      <!-- Patch Compliance -->
+      <div id="sc-patch-compliance" class="sc-card sc-hover-anim" style="min-width: 270px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light);">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div>
+            <div id="spt-patch-compliance-1" class="sc-progress-title" style="margin:0;">Patch Compliance</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">1,240 devices managed</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.12); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-violet-light);">78%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Overall</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-emerald);">92%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Critical</div>
+          </div>
+        </div>
         <div class="sc-progress-bar"><div class="sc-progress-fill" style="width: 78%;"></div></div>
-        <div class="sc-progress-label"><span>78%</span><span>1,240 devices</span></div>
-        <div style="margin-top:14px">
+        <div class="sc-progress-label"><span>78%</span><span>All Patches</span></div>
+        <div style="margin-top:8px">
           <div class="sc-progress-bar"><div class="sc-progress-fill" style="width: 92%; background:linear-gradient(90deg,var(--prism-emerald),#34d399);"></div></div>
           <div class="sc-progress-label"><span style="color:var(--prism-emerald)">92%</span><span>Critical Server Patches</span></div>
         </div>
       </div>
-      <div class="sc-card sc-calendar sc-hover-anim" style="min-width: 220px;">
+      <!-- Calendar -->
+      <div id="sc-calendar" class="sc-card sc-calendar sc-hover-anim" style="min-width: 280px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(6,182,212,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-cyan);">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="sc-progress-title" style="margin:0;">Schedule</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">Deployment calendar</div>
+          </div>
+        </div>
         <div class="sc-cal-header">
           <button class="sc-cal-nav">&lsaquo;</button>
           <span class="sc-cal-month">January 2025</span>
@@ -668,39 +771,145 @@
           <span class="sc-cal-day">26</span><span class="sc-cal-day">27</span><span class="sc-cal-day">28</span><span class="sc-cal-day">29</span><span class="sc-cal-day">30</span><span class="sc-cal-day">31</span>
         </div>
       </div>
-      <div class="sc-card sc-profile sc-hover-anim" style="min-width: 200px;">
-        <div class="sc-profile-avatar" style="width: 48px; height: 48px; border-radius: 50%; background: var(--prism-violet); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <!-- Admin Profile -->
+      <div id="sc-admin-profile" class="sc-card sc-profile sc-hover-anim" style="min-width: 220px; text-align:center; align-items:center;">
+        <div style="position:relative; margin-bottom:14px;">
+          <div class="sc-profile-avatar" style="width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center;">
+            <svg width="26" height="26" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div style="position:absolute; bottom:0; right:-4px; width:16px; height:16px; border-radius:50%; background:var(--prism-emerald); border:2px solid var(--prism-surface); display:flex; align-items:center; justify-content:center;">
+            <svg width="8" height="8" fill="none" stroke="#fff" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
         </div>
-        <div class="sc-profile-name" style="font-size: 16px; font-weight: 700; color: var(--prism-text);">Admin Node</div>
-        <div class="sc-profile-status" style="font-size: 12px; color: var(--prism-text-muted);">Elevated Privilege</div>
-        <div class="sc-profile-badge" style="margin-top: 12px; display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 11px; background: rgba(124, 58, 237, 0.2); color: var(--prism-violet-light);">Sysadmin Tier 1</div>
-      </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 280px;">
-        <div id="spt-live-activity-1" class="sc-progress-title" style="margin-bottom:12px">Live Activity</div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-emerald);box-shadow:0 0 6px var(--prism-emerald)"></span><span><strong>Policy Enforced</strong> on 340 endpoints</span></div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-orange);box-shadow:0 0 6px var(--prism-orange)"></span><span><strong>Warning</strong> 12 devices degraded</span></div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-violet);box-shadow:0 0 6px var(--prism-violet)"></span><span><strong>Scan Complete</strong> at 09:30</span></div>
-      </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 220px; align-items: center; text-align: center;">
-        <div style="width:48px;height:48px;border-radius:12px;background:rgba(16, 185, 129, 0.15);color:var(--prism-emerald);display:flex;justify-content:center;align-items:center;margin-bottom:16px;">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        <div class="sc-profile-name" style="font-size:16px; font-weight:700; color:var(--prism-text);">Admin Node</div>
+        <div class="sc-profile-status" style="font-size:11px; color:var(--prism-text-muted); margin-bottom:10px;">Elevated Privilege</div>
+        <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+          <span style="padding:3px 10px; border-radius:99px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.12); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Sysadmin Tier 1</span>
+          <span style="padding:3px 10px; border-radius:99px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">Online</span>
         </div>
-        <h4 class="sc-card-title">Cluster Active</h4>
-        <div class="sc-card-subtitle" style="margin-bottom:0;">All systems operational</div>
-        <div style="margin-top:12px; font-size:11px; font-weight:700; color:var(--prism-emerald); border: 1px solid rgba(16,185,129,0.3); border-radius:99px; padding:4px 12px; background:rgba(16,185,129,0.05); display:inline-block;">99.9% Uptime</div>
+        <div style="display:flex; gap:12px; justify-content:center; margin-top:12px;">
+          <div style="text-align:center;">
+            <div style="font-size:14px; font-weight:800; color:var(--prism-text);">342</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:500;">Tasks</div>
+          </div>
+          <div style="width:1px; background:var(--prism-border);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:14px; font-weight:800; color:var(--prism-text);">28</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:500;">Policies</div>
+          </div>
+          <div style="width:1px; background:var(--prism-border);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:14px; font-weight:800; color:var(--prism-text);">5</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:500;">Alerts</div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-card sc-hover-anim" style="min-width: 300px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-emerald);">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div id="spt-live-activity-1" class="sc-progress-title" style="margin:0;">Live Activity</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px; padding:3px 10px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--prism-emerald); animation: pulse-dot 2s infinite;"></span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">LIVE</span>
+          </div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); margin-bottom:6px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Policy Enforced</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">340 endpoints · 2m ago</div></div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); margin-bottom:6px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Warning</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">12 devices degraded · 5m ago</div></div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(0,88,255,0.06); border:1px solid rgba(0,88,255,0.15); margin-bottom:0;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Scan Complete</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">Full audit passed · 09:30</div></div>
+        </div>
+      </div>
+      <div class="sc-card sc-hover-anim" style="min-width: 260px; text-align: center;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <div style="text-align:left;">
+            <h4 class="sc-card-title" style="margin:0; text-align:left;">Data Center</h4>
+            <div style="font-size:10px; color:var(--prism-emerald); font-weight:600; text-align:left;">All systems operational</div>
+          </div>
+          <div style="padding:3px 10px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);">
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">LIVE</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <div style="flex:1; padding:10px 8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15); border-radius:10px; text-align:center;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-emerald);">99.9%</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Uptime</div>
+          </div>
+          <div style="flex:1; padding:10px 8px; background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.15); border-radius:10px; text-align:center;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-cyan);">12ms</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Latency</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">US-East &#10003;</span>
+          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">EU-West &#10003;</span>
+          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(245,158,11,0.1); color:var(--prism-orange); border:1px solid rgba(245,158,11,0.2);">AP-South &#9888;</span>
+        </div>
+      </div>
+      <div class="sc-card sc-hover-anim sc-vuln-card" style="min-width: 280px;">
+        <div class="sc-progress-title" style="text-align:center; margin-bottom:14px;">Statistics Vulnerabilities</div>
+        <div style="display:flex; justify-content:space-between; gap:10px; margin-bottom:14px;">
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:12px;">
+            <div style="font-size:22px; font-weight:800; color:var(--prism-red);">24</div>
+            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">Critical</div>
+          </div>
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); border-radius:12px;">
+            <div style="font-size:22px; font-weight:800; color:var(--prism-orange);">87</div>
+            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">High</div>
+          </div>
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); border-radius:12px;">
+            <div style="font-size:22px; font-weight:800; color:var(--prism-cyan);">142</div>
+            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">Medium</div>
+          </div>
+        </div>
+        <div class="sc-progress-bar"><div class="sc-progress-fill sc-vuln-bar" style="width: 68%; background:linear-gradient(90deg, var(--prism-red), var(--prism-orange));"></div></div>
+        <div class="sc-progress-label"><span style="color:var(--prism-red);">68%</span><span>Remediated</span></div>
       </div>
       <!-- Duplicates for seamless loop -->
-      <div class="sc-card sc-hover-anim" style="min-width: 250px;">
-        <div id="spt-patch-compliance-2" class="sc-progress-title">Patch Compliance</div>
+      <div id="sc-patch-compliance-dup" class="sc-card sc-hover-anim" style="min-width: 270px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light);">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div>
+            <div id="spt-patch-compliance-2" class="sc-progress-title" style="margin:0;">Patch Compliance</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">1,240 devices managed</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.12); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-violet-light);">78%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Overall</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-emerald);">92%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Critical</div>
+          </div>
+        </div>
         <div class="sc-progress-bar"><div class="sc-progress-fill" style="width: 78%;"></div></div>
-        <div class="sc-progress-label"><span>78%</span><span>1,240 devices</span></div>
-        <div style="margin-top:14px">
+        <div class="sc-progress-label"><span>78%</span><span>All Patches</span></div>
+        <div style="margin-top:8px">
           <div class="sc-progress-bar"><div class="sc-progress-fill" style="width: 92%; background:linear-gradient(90deg,var(--prism-emerald),#34d399);"></div></div>
           <div class="sc-progress-label"><span style="color:var(--prism-emerald)">92%</span><span>Critical Server Patches</span></div>
         </div>
       </div>
-      <div class="sc-card sc-calendar sc-hover-anim" style="min-width: 220px;">
+      <div id="sc-calendar-dup" class="sc-card sc-calendar sc-hover-anim" style="min-width: 280px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(6,182,212,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-cyan);">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="sc-progress-title" style="margin:0;">Schedule</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">Deployment calendar</div>
+          </div>
+        </div>
         <div class="sc-cal-header"><button class="sc-cal-nav">&lsaquo;</button><span class="sc-cal-month">January 2025</span><button class="sc-cal-nav">&rsaquo;</button></div>
         <div class="sc-cal-days">
           <span class="sc-cal-weekday">S</span><span class="sc-cal-weekday">M</span><span class="sc-cal-weekday">T</span><span class="sc-cal-weekday">W</span><span class="sc-cal-weekday">T</span><span class="sc-cal-weekday">F</span><span class="sc-cal-weekday">S</span>
@@ -711,20 +920,45 @@
           <span class="sc-cal-day">26</span><span class="sc-cal-day">27</span><span class="sc-cal-day">28</span><span class="sc-cal-day">29</span><span class="sc-cal-day">30</span><span class="sc-cal-day">31</span>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 280px;">
-        <div id="spt-live-activity-2" class="sc-progress-title" style="margin-bottom:12px">Live Activity</div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-emerald)"></span><span><strong>Policy Enforced</strong> on 340 endpoints</span></div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-orange)"></span><span><strong>Warning</strong> 12 devices degraded</span></div>
-        <div class="sc-notif-item"><span class="sc-notif-dot" style="background:var(--prism-violet)"></span><span><strong>Scan Complete</strong> at 09:30</span></div>
+      <div class="sc-card sc-hover-anim" style="min-width: 300px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-emerald);">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div id="spt-live-activity-2" class="sc-progress-title" style="margin:0;">Live Activity</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px; padding:3px 10px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--prism-emerald); animation: pulse-dot 2s infinite;"></span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">LIVE</span>
+          </div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); margin-bottom:6px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Policy Enforced</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">340 endpoints · 2m ago</div></div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); margin-bottom:6px;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Warning</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">12 devices degraded · 5m ago</div></div>
+        </div>
+        <div class="sc-notif-item" style="padding:8px 10px; border-radius:8px; background:rgba(0,88,255,0.06); border:1px solid rgba(0,88,255,0.15); margin-bottom:0;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Scan Complete</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">Full audit passed · 09:30</div></div>
+        </div>
       </div>
     </div>
 
     <div class="marquee-row right">
       <div class="sc-card sc-hover-anim" style="min-width: 300px;">
-        <h4 class="sc-card-title">Network Policy</h4>
-        <label class="sc-radio-label"><div class="sc-radio-custom active"><div class="sc-radio-dot"></div></div>Strict Firewall (Recommended)</label>
-        <label class="sc-radio-label"><div class="sc-radio-custom"></div>Standard Cloud Access</label>
-        <label class="sc-radio-label"><div class="sc-radio-custom"></div>Open Developer Network</label>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <div class="shield-icon" style="width:40px; height:40px; background:rgba(124,58,237,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light); transition: all 0.4s ease;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <h4 class="sc-card-title" style="margin:0;">Network Policy</h4>
+            <div style="font-size:11px; color:var(--prism-emerald); font-weight:600;">Active & Enforced</div>
+          </div>
+        </div>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); margin-bottom:6px;"><div class="sc-radio-custom active"><div class="sc-radio-dot"></div></div><div style="flex:1;"><div>Strict Firewall</div><div style="font-size:10px; color:var(--prism-emerald); font-weight:500;">Recommended</div></div><svg width="14" height="14" fill="none" stroke="var(--prism-emerald)" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></label>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px; margin-bottom:6px;"><div class="sc-radio-custom"></div><div style="flex:1;">Standard Cloud Access</div></label>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px;"><div class="sc-radio-custom"></div><div style="flex:1;">Open Developer Network</div></label>
       </div>
       <div class="sc-card sc-hover-anim" style="min-width: 280px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
@@ -737,127 +971,322 @@
             <div style="font-size:16px; font-weight:800; color:var(--prism-violet-light);">1,204</div>
           </div>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <svg viewBox="0 0 120 65" width="120" height="65">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; width:100%;">
+          <svg viewBox="0 0 120 65" width="120" height="65" style="display:block; margin:0 auto;">
+            <defs>
+              <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0058ff"/>
+                <stop offset="40%" stop-color="#3c50ff"/>
+                <stop offset="100%" stop-color="#0fd095"/>
+              </linearGradient>
+            </defs>
             <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8" stroke-linecap="round"></path>
-            <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="var(--prism-violet)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="44"></path>
+            <path class="gauge-fill" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="url(#gaugeGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" style="transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);"></path>
           </svg>
           <div style="font-size:24px; font-weight:800; color:var(--prism-text); margin-top:-4px;">72%</div>
           <div style="font-size:11px; color:var(--prism-text-muted);">Patched: <span style="font-weight:700; color:var(--prism-text);">3,108</span></div>
         </div>
       </div>
       <div class="sc-card sc-hover-anim" style="min-width: 320px;">
-        <h4 class="sc-card-title">System Settings</h4>
-        <div class="sc-card-subtitle">Manage environment parameters</div>
-        <div class="sc-toggle-row"><span>Auto-deploy Updates</span><div class="sc-toggle active"><div class="sc-toggle-knob"></div></div></div>
-        <div class="sc-toggle-row"><span>Enforce 2FA Protocol</span><div class="sc-toggle"><div class="sc-toggle-knob"></div></div></div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <div style="width:40px; height:40px; border-radius:12px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <div>
+            <h4 class="sc-card-title" style="margin:0;">System Settings</h4>
+            <div style="font-size:11px; color:var(--prism-text-muted); font-weight:500;">Manage environment parameters</div>
+          </div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15); margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-emerald)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Auto-deploy Updates</span>
+          </div>
+          <div class="sc-toggle active"><div class="sc-toggle-knob"></div></div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px; margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-red)" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span>Enforce 2FA Protocol</span>
+          </div>
+          <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-text-muted)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Threat Monitoring</span>
+          </div>
+          <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
+        </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 180px; align-items:center; text-align:center;">
-        <div id="spt-enrolled-devices-1" class="sc-progress-title">Enrolled Devices</div>
-        <div style="font-size: 32px; font-weight: 800; background: linear-gradient(135deg, var(--prism-violet), var(--prism-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 4px 0 12px;">14,208</div>
+      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 240px; align-items:center; text-align:center;">
+        <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div id="spt-enrolled-devices-1" class="sc-progress-title" style="margin-bottom:4px;">Enrolled Devices</div>
+        <div class="num-bump" style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--prism-violet), var(--prism-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 4px 0 8px;">14,208</div>
+        <div style="display:flex; gap:16px; justify-content:center; margin-bottom:12px;">
+          <div style="text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--prism-emerald);">12,840</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Online</div>
+          </div>
+          <div style="width:1px; background:var(--prism-border);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--prism-orange);">1,368</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Offline</div>
+          </div>
+        </div>
+        <div class="sc-progress-bar" style="margin-bottom:6px;"><div class="sc-progress-fill" style="width:90%; background:linear-gradient(90deg, var(--prism-violet), var(--prism-cyan));"></div></div>
         <div class="sc-progress-label"><span><span style="color:var(--prism-emerald);">&#9650; 3%</span> vs last month</span></div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 260px;">
-        <div id="spt-terminal-health" class="sc-progress-title" style="margin-bottom:16px">Terminal Health</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--prism-border);">
-          <div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:var(--prism-emerald);"></div><span style="font-size:13px; font-weight:600;">Disk I/O</span></div>
-          <span style="font-size:12px; font-weight:700; color:var(--prism-emerald);">Stable</span>
+      <div id="sc-terminal-health" class="sc-card sc-hover-anim" style="min-width: 280px;">
+        <div id="spt-terminal-health" class="sc-progress-title" style="margin:0 0 12px; text-align:center;">Terminal Health</div>
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-emerald);">98%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Healthy</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-orange);">85°C</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">CPU Temp</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-cyan);">32%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Swap</div>
+          </div>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--prism-border);">
-          <div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:var(--prism-cyan);"></div><span style="font-size:13px; font-weight:600;">Swap Memory</span></div>
-          <span style="font-size:12px; font-weight:600; color:var(--prism-text-muted);">32%</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div style="display:flex; align-items:center; gap:10px;"><div style="width:8px; height:8px; border-radius:50%; background:var(--prism-orange); box-shadow: 0 0 8px var(--prism-orange);"></div><span style="font-size:13px; font-weight:600;">CPU Core Temp</span></div>
-          <span style="font-size:12px; font-weight:700; color:var(--prism-orange);">85&deg;C</span>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+            <span style="font-size:12px; font-weight:600;">Disk I/O</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Stable</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.15);">
+            <span style="font-size:12px; font-weight:600;">Swap Memory</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-cyan);">32%</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);">
+            <span style="font-size:12px; font-weight:600;">CPU Core Temp</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-orange);">85°C</span>
+          </div>
         </div>
       </div>
       <!-- Duplicates -->
       <div class="sc-card sc-hover-anim" style="min-width: 300px;">
-        <h4 class="sc-card-title">Network Policy</h4>
-        <label class="sc-radio-label"><div class="sc-radio-custom active"><div class="sc-radio-dot"></div></div>Strict Firewall (Recommended)</label>
-        <label class="sc-radio-label"><div class="sc-radio-custom"></div>Standard Cloud Access</label>
-        <label class="sc-radio-label"><div class="sc-radio-custom"></div>Open Developer Network</label>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <div class="shield-icon" style="width:40px; height:40px; background:rgba(124,58,237,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light); transition: all 0.4s ease;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <h4 class="sc-card-title" style="margin:0;">Network Policy</h4>
+            <div style="font-size:11px; color:var(--prism-emerald); font-weight:600;">Active & Enforced</div>
+          </div>
+        </div>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px; background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); margin-bottom:6px;"><div class="sc-radio-custom active"><div class="sc-radio-dot"></div></div><div style="flex:1;"><div>Strict Firewall</div><div style="font-size:10px; color:var(--prism-emerald); font-weight:500;">Recommended</div></div><svg width="14" height="14" fill="none" stroke="var(--prism-emerald)" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></label>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px; margin-bottom:6px;"><div class="sc-radio-custom"></div><div style="flex:1;">Standard Cloud Access</div></label>
+        <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px;"><div class="sc-radio-custom"></div><div style="flex:1;">Open Developer Network</div></label>
       </div>
       <div class="sc-card sc-hover-anim" style="min-width: 320px;">
-        <h4 class="sc-card-title">System Settings</h4>
-        <div class="sc-card-subtitle">Manage environment parameters</div>
-        <div class="sc-toggle-row"><span>Auto-deploy Updates</span><div class="sc-toggle active"><div class="sc-toggle-knob"></div></div></div>
-        <div class="sc-toggle-row"><span>Enforce 2FA Protocol</span><div class="sc-toggle"><div class="sc-toggle-knob"></div></div></div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <div style="width:40px; height:40px; border-radius:12px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:var(--prism-violet-light);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <div>
+            <h4 class="sc-card-title" style="margin:0;">System Settings</h4>
+            <div style="font-size:11px; color:var(--prism-text-muted); font-weight:500;">Manage environment parameters</div>
+          </div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15); margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-emerald)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Auto-deploy Updates</span>
+          </div>
+          <div class="sc-toggle active"><div class="sc-toggle-knob"></div></div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px; margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-red)" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span>Enforce 2FA Protocol</span>
+          </div>
+          <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
+        </div>
+        <div class="sc-toggle-row" style="padding:10px 12px; border-radius:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="var(--prism-text-muted)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Threat Monitoring</span>
+          </div>
+          <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
+        </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 180px; align-items:center; text-align:center;">
-        <div id="spt-enrolled-devices-2" class="sc-progress-title">Enrolled Devices</div>
-        <div style="font-size: 32px; font-weight: 800; background: linear-gradient(135deg, var(--prism-violet), var(--prism-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 4px 0 12px;">14,208</div>
+      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 240px; align-items:center; text-align:center;">
+        <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div id="spt-enrolled-devices-2" class="sc-progress-title" style="margin-bottom:4px;">Enrolled Devices</div>
+        <div class="num-bump" style="font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--prism-violet), var(--prism-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 4px 0 8px;">14,208</div>
+        <div style="display:flex; gap:16px; justify-content:center; margin-bottom:12px;">
+          <div style="text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--prism-emerald);">12,840</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Online</div>
+          </div>
+          <div style="width:1px; background:var(--prism-border);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:16px; font-weight:700; color:var(--prism-orange);">1,368</div>
+            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Offline</div>
+          </div>
+        </div>
+        <div class="sc-progress-bar" style="margin-bottom:6px;"><div class="sc-progress-fill" style="width:90%; background:linear-gradient(90deg, var(--prism-violet), var(--prism-cyan));"></div></div>
         <div class="sc-progress-label"><span><span style="color:var(--prism-emerald);">&#9650; 3%</span> vs last month</span></div>
       </div>
     </div>
 
     <div class="marquee-row left-fast">
-      <div class="sc-card sc-hover-anim" style="min-width: 220px; align-items:center; justify-content:center; text-align:center;">
+      <!-- Enterprise Tier -->
+      <div id="sc-enterprise-tier" class="sc-card sc-hover-anim" style="min-width: 250px; text-align:center;">
+        <div style="width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
+          <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
         <h4 class="sc-card-title">Enterprise Tier</h4>
-        <div style="font-size:24px; font-weight:800; color:var(--prism-text); margin:8px 0;">$499<span style="font-size:14px; font-weight:500; color:var(--prism-text-muted);">/mo</span></div>
-        <button style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:6px 16px; font-size:13px; font-weight:600; cursor:pointer; margin-top:8px;">Upgrade Plan</button>
+        <div style="font-size:32px; font-weight:800; background:linear-gradient(135deg, var(--prism-violet), var(--prism-fuchsia)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0;">$499<span style="font-size:14px; font-weight:500; -webkit-text-fill-color:var(--prism-text-muted);">/mo</span></div>
+        <div style="display:flex; gap:6px; justify-content:center; margin-bottom:12px;">
+          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.1); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Unlimited Users</span>
+          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(217,70,239,0.1); color:var(--prism-fuchsia); border:1px solid rgba(217,70,239,0.2);">Priority SLA</span>
+        </div>
+        <button class="upgrade-btn" style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; width:100%;">Upgrade Plan</button>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 200px; align-items:center; text-align:center;">
-        <div id="spt-network-latency" class="sc-progress-title">Network Latency</div>
-        <div style="display:flex; align-items:flex-end; gap:6px; height: 50px; margin-top:10px;">
-          <div style="width:20px; height:30%; background:rgba(0,0,0,0.08); border-radius:4px;"></div>
-          <div style="width:20px; height:50%; background:rgba(0,0,0,0.08); border-radius:4px;"></div>
-          <div style="width:20px; height:80%; background:var(--prism-violet-light); border-radius:4px;"></div>
-          <div style="width:20px; height:40%; background:rgba(0,0,0,0.08); border-radius:4px;"></div>
-          <div style="width:20px; height:60%; background:rgba(0,0,0,0.08); border-radius:4px;"></div>
+      <!-- Network Latency -->
+      <div class="sc-card sc-hover-anim" style="min-width: 240px; text-align:center; align-items:center;" id="sc-network-latency-card">
+        <div id="spt-network-latency" class="sc-progress-title" style="margin:0 0 6px; text-align:center; width:100%;">Network Latency</div>
+        <div style="font-size:22px; font-weight:800; color:var(--prism-cyan); margin-bottom:12px;">24ms</div>
+        <div style="display:flex; align-items:flex-end; justify-content:center; gap:5px; height:55px; margin-bottom:10px; width:100%;">
+          <div class="bar-anim" style="width:20px; height:30%; background:rgba(0,88,255,0.2); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:50%; background:rgba(0,88,255,0.35); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:80%; background:linear-gradient(180deg, #0058ff, #0fd095); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:40%; background:rgba(60,80,255,0.3); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:60%; background:rgba(15,208,149,0.35); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:35%; background:rgba(15,208,149,0.2); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+          <div class="bar-anim" style="width:20px; height:70%; background:rgba(0,88,255,0.4); border-radius:4px; transition:all 0.5s cubic-bezier(0.16,1,0.3,1);"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--prism-text-muted); width:100%;">
+          <span>12:00</span><span>13:00</span><span>14:00</span><span>Now</span>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 260px;">
-        <div id="spt-threat-intelligence-1" class="sc-progress-title">Threat Intelligence</div>
-        <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-          <div style="width:40px; height:40px; background:rgba(239,68,68,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--prism-red);">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      <!-- Threat Intelligence -->
+      <div id="sc-threat-intelligence" class="sc-card sc-hover-anim" style="min-width: 280px;">
+        <div id="spt-threat-intelligence-1" class="sc-progress-title" style="margin:0 0 12px; text-align:center;">Threat Intelligence</div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-red);">47</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Blocked</div>
           </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--prism-text);">2 High-Risk Alerts</div>
-            <div style="font-size:12px; color:var(--prism-red);">Requires immediate action</div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-orange);">5</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Mitigated</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-emerald);">99.2%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Safe</div>
+          </div>
+        </div>
+        <div style="padding:8px 10px; border-radius:8px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); margin-bottom:6px;">
+          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">SQL Injection Attempt</div>
+          <div style="font-size:10px; color:var(--prism-red); font-weight:500;">Critical · Blocked · 3m ago</div>
+        </div>
+        <div style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);">
+          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">Brute Force Detected</div>
+          <div style="font-size:10px; color:var(--prism-orange); font-weight:500;">High · Mitigated · 8m ago</div>
+        </div>
+      </div>
+      <!-- Active Modules -->
+      <div id="sc-active-modules" class="sc-card sc-hover-anim" style="min-width: 240px;">
+        <div id="spt-active-modules-1" class="sc-progress-title" style="margin:0 0 14px; text-align:center;">Active Modules</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+            <span style="font-size:12px; font-weight:600;">Firewall</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+            <span style="font-size:12px; font-weight:600;">VPN Gateway</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);">
+            <span style="font-size:12px; font-weight:600;">MDM Core</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-orange);">Updating</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.15);">
+            <span style="font-size:12px; font-weight:600;">DLP Engine</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-violet-light);">Standby</span>
           </div>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 220px;">
-        <div id="spt-active-modules-1" class="sc-progress-title" style="margin-bottom:12px;">Active Modules</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <span style="padding:4px 10px; background:var(--prism-surface-hover); border:1px solid var(--prism-border); border-radius:6px; font-size:11px; font-weight:600;">Firewall</span>
-          <span style="padding:4px 10px; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.3); border-radius:6px; font-size:11px; font-weight:600;">VPN Active</span>
-          <span style="padding:4px 10px; background:var(--prism-surface-hover); border:1px solid var(--prism-border); border-radius:6px; font-size:11px; font-weight:600;">MDM Core</span>
+      <!-- Syncing Nodes -->
+      <div id="sc-syncing-nodes" class="sc-card sc-hover-anim" style="min-width: 200px; text-align:center; align-items:center; justify-content:center;">
+        <div style="position:relative; width:60px; height:60px; margin:0 auto 14px;">
+          <div class="ring-anim" style="width:60px; height:60px; border-radius:50%; border:3px solid rgba(0,88,255,0.15); border-top-color:#0058ff; animation: spin 3s linear infinite;"></div>
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+            <svg width="22" height="22" fill="none" stroke-width="2" viewBox="0 0 24 24"><defs><linearGradient id="syncGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0058ff"/><stop offset="40%" stop-color="#3c50ff"/><stop offset="100%" stop-color="#0fd095"/></linearGradient></defs><polyline points="23 4 23 10 17 10" stroke="url(#syncGradient)"/><polyline points="1 20 1 14 7 14" stroke="url(#syncGradient)"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" stroke="url(#syncGradient)"/></svg>
+          </div>
         </div>
-      </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 180px;">
-        <div style="text-align: center;">
-          <div style="width:50px; height:50px; border-radius:50%; border:3px solid rgba(0,0,0,0.08); border-top-color:var(--prism-fuchsia); margin:0 auto 12px; animation: spin 4s linear infinite;"></div>
-          <div id="spt-syncing-nodes" class="sc-progress-title" style="margin:0;">Syncing Nodes...</div>
-        </div>
+        <div id="spt-syncing-nodes" class="sc-progress-title" style="margin:0 0 6px;">Syncing Nodes</div>
+        <div style="font-size:10px; color:var(--prism-text-muted); margin-bottom:10px;">3 of 5 nodes synced</div>
+        <div class="sc-progress-bar"><div class="sc-progress-fill" style="width:60%; background:linear-gradient(90deg, var(--prism-fuchsia), var(--prism-violet));"></div></div>
       </div>
       <!-- Duplicates -->
-      <div class="sc-card sc-hover-anim" style="min-width: 220px; align-items:center; justify-content:center; text-align:center;">
+      <div id="sc-enterprise-tier-dup" class="sc-card sc-hover-anim" style="min-width: 250px; text-align:center;">
+        <div style="width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">
+          <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
         <h4 class="sc-card-title">Enterprise Tier</h4>
-        <div style="font-size:24px; font-weight:800; color:var(--prism-text); margin:8px 0;">$499<span style="font-size:14px; font-weight:500; color:var(--prism-text-muted);">/mo</span></div>
-        <button style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:6px 16px; font-size:13px; font-weight:600; cursor:pointer; margin-top:8px;">Upgrade Plan</button>
+        <div style="font-size:32px; font-weight:800; background:linear-gradient(135deg, var(--prism-violet), var(--prism-fuchsia)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0;">$499<span style="font-size:14px; font-weight:500; -webkit-text-fill-color:var(--prism-text-muted);">/mo</span></div>
+        <div style="display:flex; gap:6px; justify-content:center; margin-bottom:12px;">
+          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.1); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Unlimited Users</span>
+          <span style="padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(217,70,239,0.1); color:var(--prism-fuchsia); border:1px solid rgba(217,70,239,0.2);">Priority SLA</span>
+        </div>
+        <button class="upgrade-btn" style="background:var(--prism-surface-hover); color:var(--prism-text); border:1px solid var(--prism-border); border-radius:99px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.3s ease; width:100%;">Upgrade Plan</button>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 260px;">
-        <div id="spt-threat-intelligence-2" class="sc-progress-title">Threat Intelligence</div>
-        <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-          <div style="width:40px; height:40px; background:rgba(239,68,68,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--prism-red);">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      <div id="sc-threat-intelligence-dup" class="sc-card sc-hover-anim" style="min-width: 280px;">
+        <div id="spt-threat-intelligence-2" class="sc-progress-title" style="margin:0 0 12px; text-align:center;">Threat Intelligence</div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-red);">47</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Blocked</div>
           </div>
-          <div>
-            <div style="font-size:14px; font-weight:700; color:var(--prism-text);">2 High-Risk Alerts</div>
-            <div style="font-size:12px; color:var(--prism-red);">Requires immediate action</div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-orange);">5</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Mitigated</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:8px 6px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); border-radius:10px;">
+            <div style="font-size:18px; font-weight:800; color:var(--prism-emerald);">99.2%</div>
+            <div style="font-size:9px; color:var(--prism-text-muted); font-weight:600;">Safe</div>
           </div>
         </div>
+        <div style="padding:8px 10px; border-radius:8px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.12); margin-bottom:6px;">
+          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">SQL Injection Attempt</div>
+          <div style="font-size:10px; color:var(--prism-red); font-weight:500;">Critical · Blocked · 3m ago</div>
+        </div>
+        <div style="padding:8px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.12);">
+          <div style="font-size:12px; font-weight:700; color:var(--prism-text);">Brute Force Detected</div>
+          <div style="font-size:10px; color:var(--prism-orange); font-weight:500;">High · Mitigated · 8m ago</div>
+        </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 220px;">
-        <div id="spt-active-modules-2" class="sc-progress-title" style="margin-bottom:12px;">Active Modules</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <span style="padding:4px 10px; background:var(--prism-surface-hover); border:1px solid var(--prism-border); border-radius:6px; font-size:11px; font-weight:600;">Firewall</span>
-          <span style="padding:4px 10px; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.3); border-radius:6px; font-size:11px; font-weight:600;">VPN Active</span>
-          <span style="padding:4px 10px; background:var(--prism-surface-hover); border:1px solid var(--prism-border); border-radius:6px; font-size:11px; font-weight:600;">MDM Core</span>
+      <div id="sc-active-modules-dup" class="sc-card sc-hover-anim" style="min-width: 240px;">
+        <div id="spt-active-modules-2" class="sc-progress-title" style="margin:0 0 14px; text-align:center;">Active Modules</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+            <span style="font-size:12px; font-weight:600;">Firewall</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15);">
+            <span style="font-size:12px; font-weight:600;">VPN Gateway</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">Active</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);">
+            <span style="font-size:12px; font-weight:600;">MDM Core</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-orange);">Updating</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-radius:8px; background:rgba(124,58,237,0.06); border:1px solid rgba(124,58,237,0.15);">
+            <span style="font-size:12px; font-weight:600;">DLP Engine</span>
+            <span style="font-size:10px; font-weight:700; color:var(--prism-violet-light);">Standby</span>
+          </div>
         </div>
       </div>
     </div>
@@ -933,25 +1362,17 @@
         display: flex;
         flex-direction: column;
       }
-      .wn-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(124, 58, 237, 0.2);
-        box-shadow: none;
-      }
-      .wn-card:hover .wn-card-img {
-        background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.18));
-      }
       .wn-card-img {
         width: 100%;
         height: 160px;
-        background: rgba(255, 255, 255, 0.03);
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         overflow: hidden;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        transition: transform 0.3s ease, filter 0.3s ease, background 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), filter 0.3s ease, background 0.3s ease;
         flex-shrink: 0;
       }
       .wn-card-img svg {
@@ -962,10 +1383,6 @@
         position: relative;
         z-index: 1;
         stroke: var(--prism-text);
-      }
-      .wn-card:hover .wn-card-img svg {
-        opacity: 0.65;
-        transform: scale(1.08);
       }
       .wn-card-img::before,
       .wn-card-img::after {
@@ -989,14 +1406,13 @@
         left: 18px;
         background: rgba(255, 255, 255, 0.08);
       }
-      .wn-card:hover .wn-card-img {
-        transform: translateY(-1px);
-        filter: saturate(1.03);
-      }
 
       .img-rtl {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(99, 102, 241, 0.03));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%);
         padding: 0;
+      }
+      .img-rtl:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%);
       }
 
       .rtl-split {
@@ -1004,14 +1420,14 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: var(--surface);
+        background: transparent;
         width: 100%;
         height: 100%;
         padding: 16px 12px;
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s;
       }
       [data-theme="light"] .rtl-split {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
+        background: transparent;
         border-color: rgba(0,0,0,0.06);
       }
       .rtl-split:hover,
@@ -1040,12 +1456,16 @@
       .rtl-line.title { height: 5px; width: 55%; border-radius: 3px; background: #3b82f6; opacity: 0.6; }
       .rtl-line.med { width: 80%; }
       .rtl-line.short { width: 60%; }
-      .rtl-btn { width: 36px; height: 10px; border-radius: 5px; background: #3b82f6; opacity: 0.5; margin-top: 2px; }
+      .rtl-btn { width: 36px; height: 10px; border-radius: 5px; background: #3b82f6; opacity: 0.5; margin-top: 2px; transition: background 0.3s ease, opacity 0.3s ease; }
+      .wn-card-img:hover .rtl-btn { background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); opacity: 0.8; }
       .rtl-mini-label { text-align: center; font-size: 9px; font-weight: 700; color: #3b82f6; font-family: 'Zoho Puvi', sans-serif; }
       .rtl-arrow { display: flex; align-items: center; flex-shrink: 0; }
       .img-theme {
-        background: linear-gradient(135deg, rgba(251, 191, 36, 0.05), rgba(99, 102, 241, 0.05));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%) !important;
         padding: 0;
+      }
+      .img-theme:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
       }
 
       .theme-minimal {
@@ -1053,10 +1473,18 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
         gap: 14px;
         width: 100%;
         height: 100%;
+        transition: background 0.3s ease;
+      }
+      .theme-minimal:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.12) 50%, rgba(60, 80, 255, 0.1) 60%, rgba(15, 208, 149, 0.08) 100%);
+      }
+      .theme-minimal:hover .theme-icon-sun svg,
+      .theme-minimal:hover .theme-icon-moon svg {
+        transform: scale(1.15);
+        transition: transform 0.3s ease;
       }
       .theme-label-light, .theme-label-dark {
         font-size: 11px;
@@ -1113,14 +1541,19 @@
         padding: 0;
       }
       .img-font {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(168, 85, 247, 0.04));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%) !important;
         padding: 0;
+      }
+      .img-font:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
       }
 
       .wcag-pills {
         display: flex; align-items: center; justify-content: center;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
-        gap: 12px; width: 100%; height: 100%;
+        gap: 12px; width: 100%; height: 100%; transition: background 0.3s ease;
+      }
+      .wcag-pills:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%);
       }
       .wcag-pill {
         padding: 8px 20px; border-radius: 20px;
@@ -1129,6 +1562,15 @@
         background: var(--prism-surface);
         border: 1px solid var(--prism-border);
         color: var(--prism-violet-light);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        cursor: pointer;
+      }
+      .wcag-pill:hover {
+        transform: translateY(-3px) scale(1.08);
+        box-shadow: 0 6px 20px rgba(0,88,255,0.2);
+        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+        color: #fff;
+        border-color: transparent;
       }
       .wcag-aa {
         background: rgba(37, 99, 235, 0.15);
@@ -1140,7 +1582,16 @@
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         gap: 8px; width: 100%; height: 100%; padding: 16px;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
+        background: transparent;
+        transition: background 0.3s ease;
+      }
+      .font-typo:hover .font-typo-aa {
+        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 1;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
       }
       .font-typo-aa {
         font-size: 46px; font-weight: 800;
@@ -1163,7 +1614,7 @@
         color: var(--prism-text-muted);
       }
 
-      .wn-card-body { padding: 28px 32px; }
+      .wn-card-body { padding: 28px 32px; transition: background 0.3s ease; }
       .wn-card-title {
         font-size: 20px; font-weight: 700;
         color: var(--prism-text);
@@ -1189,10 +1640,22 @@
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
         text-align: center; padding: 48px 32px; min-height: 200px;
+        transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, box-shadow 0.3s ease;
       }
       .wn-card.wn-cta:hover {
-        background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.18));
-        box-shadow: none;
+        transform: translateY(-4px) !important;
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.15) 40%, rgba(60, 80, 255, 0.12) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
+        box-shadow: 0 8px 32px rgba(0,88,255,0.2) !important;
+        border-color: rgba(0,88,255,0.25) !important;
+      }
+      .wn-card.wn-cta:hover .wn-cta-btn {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0,88,255,0.3);
+      }
+      .wn-card.wn-cta:hover .wn-cta-title {
+        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
       .wn-cta-title {
         font-size: 22px; font-weight: 800;
@@ -1222,25 +1685,32 @@
         border-color: rgba(0, 0, 0, 0.07);
         box-shadow: none;
       }
-      [data-theme="light"] .wn-card:hover {
-        box-shadow: none;
-        border-color: rgba(37, 99, 235, 0.18);
-      }
-      [data-theme="light"] .wn-card:hover .wn-card-img {
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.05));
-      }
       [data-theme="light"] .wn-card.wn-cta {
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(6, 182, 212, 0.03));
         border-color: rgba(37, 99, 235, 0.1);
+      }
+      .wn-card-img:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.2) 40%, rgba(60, 80, 255, 0.2) 30%, rgba(15, 208, 149, 0.2) 100%);
+        transform: scale(1.02);
+      }
+      .wn-card-img:hover svg {
+        opacity: 0.8;
+        transform: scale(1.1);
       }
       [data-theme="light"] .wn-card-img {
         border-bottom-color: rgba(0, 0, 0, 0.06);
       }
       [data-theme="light"] .img-rtl {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%) !important;
+      }
+      [data-theme="light"] .img-rtl:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
       }
       [data-theme="light"] .img-theme {
-        background: linear-gradient(135deg, rgba(251, 191, 36, 0.06), rgba(99, 102, 241, 0.06));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%) !important;
+      }
+      [data-theme="light"] .img-theme:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
       }
       [data-theme="light"] .rtl-card-mini {
         background: rgba(255,255,255,0.8);
@@ -1250,7 +1720,10 @@
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.05));
       }
       [data-theme="light"] .img-font {
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.05));
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.05) 40%, rgba(60, 80, 255, 0.05) 30%, rgba(15, 208, 149, 0.05) 100%) !important;
+      }
+      [data-theme="light"] .img-font:hover {
+        background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%) !important;
       }
 
       @media (max-width: 768px) {
@@ -1273,8 +1746,7 @@
 
     <div class="wn-section">
       <div class="wn-header reveal">
-        <span class="wn-tag">// What's New</span>
-        <h2 class="wn-title">Discover our <span>design system</span></h2>
+                <h2 class="wn-title">Discover our <span>design system</span></h2>
         <p class="wn-subtitle">The next evolution of UEMS brings powerful new capabilities — accessibility-first architecture, multi-language support, and deep theming control.</p>
       </div>
 
@@ -1399,7 +1871,7 @@
         <div class="wn-card wn-card--cta wn-cta reveal" style="transition-delay:0.3s">
           <div class="wn-cta-title">Explore the Full Roadmap</div>
           <div class="wn-cta-desc">See everything planned for Design System 3.0 and beyond.</div>
-          <a href="#" class="wn-cta-btn">View All <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="Foundation.html" class="wn-cta-btn">View All <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
     </div>
@@ -1416,7 +1888,11 @@
         overflow: hidden;
         position: relative;
       }
-      .zia-container {
+      :root:not([data-theme="light"]) .zia-container {
+        background: linear-gradient(330deg, rgba(119, -46, 113, 1.2) 0%, rgba(0, -174, 140, 11.04) 120%);
+        border-radius: 24px;
+      }
+      [data-theme="light"] .zia-container {
         background: linear-gradient(180deg, rgba(219, 24, 193, 0.05) 0%, rgba(0, 106, 230, 0.05) 100%);
         border-radius: 24px;
       }
@@ -1562,6 +2038,11 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+      :root:not([data-theme="light"]) .zia-title span {
+        background: none;
+        -webkit-text-fill-color: #fff;
+        color: #fff;
+      }
       .zia-subtitle {
         font-size: 20px;
         color: var(--text-muted);
@@ -1570,12 +2051,15 @@
         max-width: 480px;
         margin-left: 0;
       }
+      :root:not([data-theme="light"]) .zia-subtitle {
+        color: rgb(255 255 255 / 77%);
+      }
       .zia-cta {
         display: inline-flex;
         align-items: center;
         gap: 12px;
         padding: 14px 40px;
-        border-radius: 14px;
+        border-radius: 24px;
         font-size: 16px;
         font-weight: 700;
         color: #fff;
@@ -1682,7 +2166,7 @@
         gap: 20px;
       }
       .feat-card {
-        background: var(--surface);
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.04));
         border: 1px solid var(--border);
         border-radius: 20px;
         padding: 36px 32px;
@@ -1736,6 +2220,18 @@
       [data-theme="light"] .feat-notif {
         background: #fff;
         border-color: rgba(0,0,0,0.08);
+      }
+      .grid-bg {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(16px) saturate(1.4);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      }
+      [data-theme="light"] .grid-bg {
+        background: rgba(255,255,255,0.6);
+        border-color: rgba(0,0,0,0.06);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.06);
       }
       .feat-notif-icon {
         width: 36px;
@@ -1873,16 +2369,20 @@
         font-weight: 700;
         color: var(--text-soft);
         letter-spacing: 0.02em;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
         transition: transform 0.3s;
       }
       [data-theme="light"] .feat-installer-pill {
         background: #fff;
         border-color: rgba(0,0,0,0.08);
       }
-      .feat-installer-pill:hover { transform: translateY(-2px); }
+      .feat-installer-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px #072a68c2; background: var(--surface-hover); border-color: rgba(124,58,237,0.2); }
+      [data-theme="light"] .feat-installer-pill:hover { box-shadow: 0 6px 20px #b9d1fbc2; }
       .feat-installer-pill.active {
-        background: var(--surface-hover);
-        border-color: rgba(124,58,237,0.15);
+        background: linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%);
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(0,88,255,0.3);
       }
 
       @media (max-width: 900px) {
@@ -1913,15 +2413,27 @@
             </div>
           </div>
           <div class="feat-card">
-            <div class="feat-card-title">Access to Native APIs</div>
-            <div class="feat-card-desc">Prism ensures the underlying browser, performance improvements, security patches and additional features are always up to date.</div>
+            <div class="feat-card-title">Spacing that creates rhythm</div>
+            <div class="feat-card-desc">A disciplined 8px system that improves grouping, readability, and decision speed across dense screens.</div>
             <div class="feat-card-visual">
-              <div class="feat-api-row">
+              <div class="feat-api-row" style="position:relative;">
                 <div class="feat-api-icon brand">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 </div>
+                <!-- 16px spacing indicator -->
+                <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+                  <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
+                  <span style="font-size:8px; font-weight:700; color:#ef4444; font-family:'JetBrains Mono',monospace;">16</span>
+                  <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
+                </div>
                 <div class="feat-api-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h8"/></svg>
+                </div>
+                <!-- 16px spacing indicator -->
+                <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+                  <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
+                  <span style="font-size:8px; font-weight:700; color:#ef4444; font-family:'JetBrains Mono',monospace;">16</span>
+                  <div style="width:16px; height:2px; background:rgba(239,68,108,0.4);"></div>
                 </div>
                 <div class="feat-api-icon">API</div>
               </div>
@@ -1932,8 +2444,8 @@
         <!-- Column 2 -->
         <div class="features-col">
           <div class="feat-card">
-            <div class="feat-card-title">Auto Updates</div>
-            <div class="feat-card-desc">We'll ensure the underlying browser is up to date and deliver performance improvements, security patches, & additional features.</div>
+            <div class="feat-card-title">Words that guide action</div>
+            <div class="feat-card-desc">Clear, system-first language for alerts, patching, confirmations, and AI-powered decisions.</div>
             <div class="feat-card-visual">
               <div class="feat-update-badge">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0115.4-6.4L21 8"/></svg>
@@ -1942,13 +2454,18 @@
             </div>
           </div>
           <div class="feat-card" style="height:214px;">
-            <div class="feat-card-title">Customizable look and feel</div>
+            <div class="feat-card-title">Grid that structures complexity</div>
             <div class="feat-card-visual">
-              <div class="feat-window-mini">
-                <div class="feat-window-mini-bar">
-                  <span class="feat-window-mini-dot" style="background:#ff5f57;"></span>
-                  <span class="feat-window-mini-dot" style="background:#febc2e;"></span>
-                  <span class="feat-window-mini-dot" style="background:#28c840;"></span>
+              <div style="position:relative; padding:12px; border-radius:10px; overflow:hidden;">
+                <!-- Grid background -->
+                <div class="grid-bg" style="position:absolute; inset:0; border-radius:10px;"></div>
+                <!-- Scaling boxes -->
+                <div style="position:relative; display:flex; align-items:flex-end; gap:6px; padding:24px 8px 8px; min-height:80px;">
+                  <div style="width:6px; height:6px; border-radius:1px; background:#87a6eb;"></div>
+                  <div style="width:8px; height:8px; border-radius:1px; background:#87a6eb;"></div>
+                  <div style="width:12px; height:12px; border-radius:2px; background:#87a6eb;"></div>
+                  <div style="width:18px; height:18px; border-radius:2px; background:#87a6eb;"></div>
+                  <div style="width:26px; height:26px; border-radius:3px; background:#87a6eb;"></div>
                 </div>
               </div>
             </div>
@@ -1958,24 +2475,31 @@
         <!-- Column 3 -->
         <div class="features-col">
           <div class="feat-card" style="height:214px;">
-            <div class="feat-card-title">Plugins</div>
+            <div class="feat-card-title">Tokens as the single source</div>
             <div class="feat-card-visual">
-              <div class="feat-plugin-stack">
-                <div class="feat-plugin-card">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/></svg>
+              <div style="display:flex; flex-direction:column; gap:0; align-items:flex-start; position:relative; padding:12px 0;">
+                <!-- Component-specific token -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:8px; background:var(--surface-strong); border:1px solid var(--border);">
+                    <div style="width:12px; height:12px; border-radius:3px; background:#0058ff;"></div>
+                    <span style="font-size:11px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--text);">Background/BG-Button-Primary</span>
+                  </div>
                 </div>
-                <div class="feat-plugin-card main">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                </div>
-                <div class="feat-plugin-card">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/></svg>
+                <!-- Connector line -->
+                <div style="width:1px; height:20px; background:var(--border); margin-left:24px;"></div>
+                <!-- Alias token -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div style="display:flex; align-items:center; gap:8px; padding:6px 14px; border-radius:8px; background:var(--surface-strong); border:1px solid var(--border);">
+                    <div style="width:12px; height:12px; border-radius:3px; background:#ebf4ff;"></div>
+                    <span style="font-size:11px; font-weight:600; font-family:'JetBrains Mono',monospace; color:var(--text);">Background/Background</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="feat-card">
-            <div class="feat-card-title">Native Installers</div>
-            <div class="feat-card-desc">We even provide a magic link which will detect your users operating system & download the most up to date version of your app.</div>
+            <div class="feat-card-title">Layering with purpose</div>
+            <div class="feat-card-desc">Elevation tokens create clear layering across surfaces, guiding focus, interaction, and visual priority.</div>
             <div class="feat-card-visual">
               <div class="feat-installer-row">
                 <span class="feat-installer-pill">DMG</span>
@@ -2213,6 +2737,8 @@ new p5(function (p) {
     const toggle = document.getElementById('themeToggle');
     const moonIcon = document.getElementById('moonIcon');
     const sunIcon = document.getElementById('sunIcon');
+    const bgVideo = document.getElementById('bgVideo');
+    const bgVideoLight = document.getElementById('bgVideoLight');
     const currentTheme = localStorage.getItem('theme') || 'dark';
 
     // Apply saved theme on load
@@ -2220,10 +2746,14 @@ new p5(function (p) {
         document.documentElement.setAttribute('data-theme', 'light');
         moonIcon.style.display = 'none';
         sunIcon.style.display = 'block';
+        if (bgVideo) bgVideo.pause();
+        if (bgVideoLight) bgVideoLight.play();
     } else {
         document.documentElement.removeAttribute('data-theme');
         moonIcon.style.display = 'block';
         sunIcon.style.display = 'none';
+        if (bgVideo) bgVideo.play();
+        if (bgVideoLight) bgVideoLight.pause();
     }
 
     // Sync ribbon background with initial theme
@@ -2238,14 +2768,37 @@ new p5(function (p) {
             moonIcon.style.display = 'block';
             sunIcon.style.display = 'none';
             if (window.__prismSetTheme) window.__prismSetTheme(true);
+            if (bgVideo) bgVideo.play();
+            if (bgVideoLight) bgVideoLight.pause();
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
             moonIcon.style.display = 'none';
             sunIcon.style.display = 'block';
             if (window.__prismSetTheme) window.__prismSetTheme(false);
+            if (bgVideo) bgVideo.pause();
+            if (bgVideoLight) bgVideoLight.play();
         }
     });
+})();
+
+// Smooth video loop: fade out before end, fade in after restart
+(function () {
+    function smoothLoop(video) {
+        if (!video) return;
+        video.addEventListener('timeupdate', function () {
+            if (video.duration && video.currentTime >= video.duration - 1) {
+                video.classList.add('fading');
+            }
+        });
+        video.addEventListener('seeked', function () {
+            if (video.currentTime < 1) {
+                requestAnimationFrame(() => video.classList.remove('fading'));
+            }
+        });
+    }
+    smoothLoop(document.getElementById('bgVideo'));
+    smoothLoop(document.getElementById('bgVideoLight'));
 })();
 
 // Nav scroll effect
@@ -2268,6 +2821,16 @@ new p5(function (p) {
         toggle.addEventListener('click', function (e) {
             e.stopPropagation();
             this.classList.toggle('active');
+            const row = this.closest('.sc-toggle-row');
+            if (row) {
+                if (this.classList.contains('active')) {
+                    row.style.background = 'rgba(16,185,129,0.06)';
+                    row.style.border = '1px solid rgba(16,185,129,0.15)';
+                } else {
+                    row.style.background = '';
+                    row.style.border = '';
+                }
+            }
         });
     });
 

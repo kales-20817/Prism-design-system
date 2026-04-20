@@ -209,19 +209,39 @@
   .radio-options-top { display: flex; flex-direction: column; gap: 10px; }
   .radio-item { display: flex; align-items: center; gap: 8px; cursor: pointer; position: relative; }
   .radio-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-  .radio-control { flex-shrink: 0; border-radius: 50%; border: 2px solid #94a3b8; background: transparent; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+  /* Radio component — dark mode defaults */
+  .radio-control { flex-shrink: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); background: transparent; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
   .radio-control::after { content: ''; border-radius: 50%; background: transparent; transition: all 0.2s ease; }
-  .radio-item input[type="radio"]:checked + .radio-control { border-color: #2563eb; background: #2563eb; }
+  .radio-item input[type="radio"]:checked + .radio-control { border-color: #60a5fa; background: #60a5fa; }
   .radio-item input[type="radio"]:checked + .radio-control::after { background: #fff; }
-  .radio-item:hover .radio-control { border-color: #2563eb; }
-  .radio-item input[type="radio"]:focus-visible + .radio-control { box-shadow: 0 0 0 3px rgba(37,99,235,0.3); }
+  .radio-item:hover .radio-control { border-color: #60a5fa; }
+  .radio-item input[type="radio"]:focus-visible + .radio-control { box-shadow: 0 0 0 3px rgba(96,165,250,0.3); }
   .radio-item.disabled { cursor: not-allowed; opacity: 0.5; }
-  .radio-item.disabled .radio-control { border-color: #cbd5e1; background: #f1f5f9; }
-  .radio-item.error .radio-control { border-color: #ef4444; }
-  .radio-item.error input[type="radio"]:checked + .radio-control { border-color: #ef4444; background: #ef4444; }
+  .radio-item.disabled .radio-control { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); }
+  .radio-item.error .radio-control { border-color: #f87171; }
+  .radio-item.error input[type="radio"]:checked + .radio-control { border-color: #f87171; background: #f87171; }
   .radio-label { font-family: 'Zoho Puvi', sans-serif; color: var(--prism-text); }
   .radio-help-text { font-family: 'Zoho Puvi', sans-serif; font-size: 13px; color: var(--prism-text-muted); }
-  .radio-help-text.error { color: #ef4444; }
+  .radio-help-text.error { color: #fca5a5; }
+  /* Radio component — light mode overrides */
+  [data-theme="light"] .radio-control { border-color: #94a3b8; }
+  [data-theme="light"] .radio-item input[type="radio"]:checked + .radio-control { border-color: #2563eb; background: #2563eb; }
+  [data-theme="light"] .radio-item:hover .radio-control { border-color: #2563eb; }
+  [data-theme="light"] .radio-item input[type="radio"]:focus-visible + .radio-control { box-shadow: 0 0 0 3px rgba(37,99,235,0.3); }
+  [data-theme="light"] .radio-item.disabled .radio-control { border-color: #cbd5e1; background: #f1f5f9; }
+  [data-theme="light"] .radio-item.error .radio-control { border-color: #ef4444; }
+  [data-theme="light"] .radio-item.error input[type="radio"]:checked + .radio-control { border-color: #ef4444; background: #ef4444; }
+  [data-theme="light"] .radio-help-text.error { color: #ef4444; }
+  /* Disabled + checked overrides */
+  .radio-item.disabled input[type="radio"]:checked + .radio-control { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
+  .radio-item.disabled input[type="radio"]:checked + .radio-control::after { background: rgba(255,255,255,0.3); }
+  [data-theme="light"] .radio-item.disabled input[type="radio"]:checked + .radio-control { border-color: #cbd5e1; background: #e2e8f0; }
+  [data-theme="light"] .radio-item.disabled input[type="radio"]:checked + .radio-control::after { background: #94a3b8; }
+  /* Static demo helpers for hover/focus previews */
+  .radio-control.show-hover { border-color: #60a5fa; }
+  .radio-control.show-focus { border-color: #60a5fa; box-shadow: 0 0 0 3px rgba(96,165,250,0.3); }
+  [data-theme="light"] .radio-control.show-hover { border-color: #2563eb; }
+  [data-theme="light"] .radio-control.show-focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.3); }
   /* Size S */
   .radio-size-s .radio-control { width: 14px; height: 14px; }
   .radio-size-s .radio-control::after { width: 6px; height: 6px; }
@@ -295,7 +315,7 @@
       <a href="Foundation.html">Foundation</a>
       <a href="Components.html" class="active">Components</a>
       <a href="AI-Experience.html">AI Experience</a>
-      <div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Icons.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Logos.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Illustrations.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
       <div style="width:16px;"></div>
       <button id="themeToggle" class="icon-btn" title="Toggle Theme">
         <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -313,64 +333,72 @@
       <h3 class="sidebar-heading">Components</h3>
       <ul class="sidebar-nav">
         <li><a href="Accordion.html" class="sidebar-link">Accordion</a></li>
-        <li><a href="Action-bar.html" class="sidebar-link">Action bar</a></li>
-        <li><a href="Action-button.html" class="sidebar-link">Action button</a></li>
-        <li><a href="Action-list.html" class="sidebar-link">Action list</a></li>
-        <li><a href="Alert-banner.html" class="sidebar-link">Alert banner</a></li>
-        <li><a href="App-bar.html" class="sidebar-link">App bar</a></li>
-        <li><a href="Autocomplete.html" class="sidebar-link">Autocomplete</a></li>
         <li><a href="Avatar.html" class="sidebar-link">Avatar</a></li>
         <li><a href="Badges.html" class="sidebar-link">Badges</a></li>
-        <li><a href="Bottom-sheet.html" class="sidebar-link">Bottom sheet</a></li>
         <li><a href="Breadcrumbs.html" class="sidebar-link">Breadcrumbs</a></li>
         <li><a href="Button.html" class="sidebar-link">Button</a></li>
-        <li><a href="Button-group.html" class="sidebar-link">Button group</a></li>
-        <li><a href="Cards.html" class="sidebar-link">Cards</a></li>
+        <li><a href="Calendar.html" class="sidebar-link">Calendar</a></li>
         <li><a href="Checkbox.html" class="sidebar-link">Checkbox</a></li>
-        <li><a href="Code-snippet.html" class="sidebar-link">Code snippet</a></li>
-        <li><a href="Combobox.html" class="sidebar-link">Combobox</a></li>
+        <li><a href="Chip.html" class="sidebar-link">Chip</a></li>
         <li><a href="Counter.html" class="sidebar-link">Counter</a></li>
         <li><a href="Data-table.html" class="sidebar-link">Data table</a></li>
         <li><a href="Date-picker.html" class="sidebar-link">Date picker</a></li>
-        <li><a href="Dialog.html" class="sidebar-link">Dialog</a></li>
         <li><a href="Divider.html" class="sidebar-link">Divider</a></li>
-        <li><a href="Drawer.html" class="sidebar-link">Drawer</a></li>
         <li><a href="Dropdown.html" class="sidebar-link">Dropdown</a></li>
         <li><a href="Empty-state.html" class="sidebar-link">Empty state</a></li>
-        <li><a href="Filter-input.html" class="sidebar-link">Filter input</a></li>
-        <li><a href="Form.html" class="sidebar-link">Form</a></li>
         <li><a href="Header-navigation.html" class="sidebar-link">Header navigation</a></li>
-        <li><a href="Help-text.html" class="sidebar-link">Help text</a></li>
         <li><a href="Icon.html" class="sidebar-link">Icon</a></li>
         <li><a href="Inline-message.html" class="sidebar-link">Inline message</a></li>
-        <li><a href="Label.html" class="sidebar-link">Label</a></li>
+        <li><a href="Left-sidebar-navigation-level-1.html" class="sidebar-link">Sidebar Nav L1</a></li>
+        <li><a href="Left-sidebar-navigation-level-2.html" class="sidebar-link">Sidebar Nav L2</a></li>
         <li><a href="Link.html" class="sidebar-link">Link</a></li>
-        <li><a href="List.html" class="sidebar-link">List</a></li>
-        <li><a href="Menus.html" class="sidebar-link">Menus</a></li>
-        <li><a href="Modal.html" class="sidebar-link">Modal</a></li>
-        <li><a href="Navigation-bar.html" class="sidebar-link">Navigation bar</a></li>
         <li><a href="OTP-input.html" class="sidebar-link">OTP input</a></li>
         <li><a href="Page-header.html" class="sidebar-link">Page header</a></li>
-        <li><a href="Pagination.html" class="sidebar-link">Pagination</a></li>
-        <li><a href="Popover.html" class="sidebar-link">Popover</a></li>
         <li><a href="Progress-bar.html" class="sidebar-link">Progress bar</a></li>
-        <li><a href="Progress-indicator.html" class="sidebar-link">Progress indicator</a></li>
         <li><a href="Radio-button.html" class="sidebar-link active">Radio button</a></li>
-        <li><a href="Search.html" class="sidebar-link">Search</a></li>
-        <li><a href="Segmented-control.html" class="sidebar-link">Segmented control</a></li>
-        <li><a href="Select.html" class="sidebar-link">Select</a></li>
-        <li><a href="Sidebar.html" class="sidebar-link">Sidebar</a></li>
+        <li><a href="Rich-text-editor.html" class="sidebar-link">Rich text editor</a></li>
+        <li><a href="Right-pane.html" class="sidebar-link">Right pane</a></li>
+        <li><a href="Script-editor.html" class="sidebar-link">Script editor</a></li>
         <li><a href="Slider.html" class="sidebar-link">Slider</a></li>
         <li><a href="Snackbar.html" class="sidebar-link">Toast Message</a></li>
         <li><a href="Split-button.html" class="sidebar-link">Split button</a></li>
         <li><a href="Status-indicator.html" class="sidebar-link">Status indicator</a></li>
         <li><a href="Switch.html" class="sidebar-link">Toggle</a></li>
-        <li><a href="Tabs.html" class="sidebar-link">Tabs</a></li>
         <li><a href="Tag.html" class="sidebar-link">Tag</a></li>
         <li><a href="Text-area.html" class="sidebar-link">Text area</a></li>
         <li><a href="Text-field.html" class="sidebar-link">Text field</a></li>
         <li><a href="Tooltip.html" class="sidebar-link">Tooltip</a></li>
-        <li><a href="Tree-view.html" class="sidebar-link">Tree view</a></li>
+        <li style="padding:16px 12px 8px;"><span style="font-size:10px;font-weight:700;color:var(--prism-text-muted);text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;">Coming Soon</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action button</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action list</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Alert banner</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">App bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Autocomplete</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Bottom sheet</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Button group</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Cards</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Code snippet</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Combobox</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Dialog</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Drawer</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Filter input</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Form</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Help text</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Label</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">List</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Menus</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Modal</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Navigation bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Pagination</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Popover</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Progress indicator</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Search</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Segmented control</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Select</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Sidebar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Tabs</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Tree view</span></li>
       </ul>
     </aside>
 
@@ -410,7 +438,7 @@
                 <div style="position:absolute;left:-32px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
                 <label class="radio-item radio-size-m" style="cursor:default;">
                   <input type="radio" name="anat-demo" checked disabled>
-                  <span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span>
+                  <span class="radio-control"></span>
                   <span class="radio-label">Real-time</span>
                 </label>
                 <label class="radio-item radio-size-m" style="cursor:default;">
@@ -445,7 +473,7 @@
               <span style="font-size:15px;font-weight:600;color:var(--prism-text);">Select your preferred data export format</span>
               <label class="radio-item radio-size-m" style="cursor:default;">
                 <input type="radio" name="anat-top" checked disabled>
-                <span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span>
+                <span class="radio-control"></span>
                 <span class="radio-label">CSV &#8212; Comma-separated values</span>
               </label>
               <label class="radio-item radio-size-m" style="cursor:default;">
@@ -473,7 +501,7 @@
                 <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
                   <span style="font-size:14px;font-weight:600;color:var(--prism-text);">Size M &#8212; Left layout (default)</span>
                   <div style="display:flex;gap:20px;align-items:center;">
-                    <label class="radio-item radio-size-m"><input type="radio" name="demo-left" value="a" checked><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Option A</span></label>
+                    <label class="radio-item radio-size-m"><input type="radio" name="demo-left" value="a" checked><span class="radio-control"></span><span class="radio-label">Option A</span></label>
                     <label class="radio-item radio-size-m"><input type="radio" name="demo-left" value="b"><span class="radio-control"></span><span class="radio-label">Option B</span></label>
                     <label class="radio-item radio-size-m"><input type="radio" name="demo-left" value="c"><span class="radio-control"></span><span class="radio-label">Option C</span></label>
                   </div>
@@ -481,24 +509,24 @@
                 <!-- Size row -->
                 <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap;">
                   <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
-                    <label class="radio-item radio-size-s"><input type="radio" name="demo-s" checked><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Small</span></label>
+                    <label class="radio-item radio-size-s"><input type="radio" name="demo-s" checked><span class="radio-control"></span><span class="radio-label">Small</span></label>
                   </div>
                   <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
-                    <label class="radio-item radio-size-m"><input type="radio" name="demo-m" checked><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Medium</span></label>
+                    <label class="radio-item radio-size-m"><input type="radio" name="demo-m" checked><span class="radio-control"></span><span class="radio-label">Medium</span></label>
                   </div>
                   <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
-                    <label class="radio-item radio-size-l"><input type="radio" name="demo-l" checked><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:9px;height:9px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Large</span></label>
+                    <label class="radio-item radio-size-l"><input type="radio" name="demo-l" checked><span class="radio-control"></span><span class="radio-label">Large</span></label>
                   </div>
                 </div>
                 <!-- States row -->
                 <div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;">
                   <div style="display:flex;flex-direction:column;gap:6px;">
                     <span style="font-size:12px;font-weight:600;color:var(--prism-text-muted);text-transform:uppercase;letter-spacing:0.05em;">Disabled</span>
-                    <label class="radio-item radio-size-m disabled"><input type="radio" name="demo-dis" disabled checked><span class="radio-control" style="border-color:#cbd5e1;background:#f1f5f9;"></span><span class="radio-label" style="opacity:0.5;">Disabled</span></label>
+                    <label class="radio-item radio-size-m disabled"><input type="radio" name="demo-dis" disabled checked><span class="radio-control"></span><span class="radio-label" style="opacity:0.5;">Disabled</span></label>
                   </div>
                   <div style="display:flex;flex-direction:column;gap:6px;">
                     <span style="font-size:12px;font-weight:600;color:var(--prism-text-muted);text-transform:uppercase;letter-spacing:0.05em;">Error</span>
-                    <label class="radio-item radio-size-m error"><input type="radio" name="demo-err"><span class="radio-control" style="border-color:#ef4444;"></span><span class="radio-label">Error state</span></label>
+                    <label class="radio-item radio-size-m error"><input type="radio" name="demo-err"><span class="radio-control"></span><span class="radio-label">Error state</span></label>
                     <span class="radio-help-text error">Please select an option.</span>
                   </div>
                 </div>
@@ -582,23 +610,23 @@
             </table>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:24px;">
               <div style="padding:20px 12px;border-radius:14px;background:var(--prism-surface);border:1px solid var(--prism-border);text-align:center;">
-                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-def" checked disabled><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Selected</span></label>
+                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-def" checked disabled><span class="radio-control"></span><span class="radio-label">Selected</span></label>
                 <div style="font-size:13px;font-weight:600;color:var(--prism-text);margin-top:12px;">Default</div>
               </div>
               <div style="padding:20px 12px;border-radius:14px;background:var(--prism-surface);border:1px solid var(--prism-border);text-align:center;">
-                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-hov" disabled><span class="radio-control" style="border-color:#2563eb;"></span><span class="radio-label">Hover</span></label>
+                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-hov" disabled><span class="radio-control show-hover"></span><span class="radio-label">Hover</span></label>
                 <div style="font-size:13px;font-weight:600;color:var(--prism-text);margin-top:12px;">Hover</div>
               </div>
               <div style="padding:20px 12px;border-radius:14px;background:var(--prism-surface);border:1px solid var(--prism-border);text-align:center;">
-                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-foc" disabled><span class="radio-control" style="border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,0.3);"></span><span class="radio-label">Focus</span></label>
+                <label class="radio-item radio-size-m" style="justify-content:center;cursor:default;"><input type="radio" name="state-foc" disabled><span class="radio-control show-focus"></span><span class="radio-label">Focus</span></label>
                 <div style="font-size:13px;font-weight:600;color:var(--prism-text);margin-top:12px;">Focused</div>
               </div>
               <div style="padding:20px 12px;border-radius:14px;background:var(--prism-surface);border:1px solid var(--prism-border);text-align:center;">
-                <label class="radio-item radio-size-m disabled" style="justify-content:center;cursor:default;"><input type="radio" name="state-dis" disabled><span class="radio-control" style="border-color:#cbd5e1;background:#f1f5f9;"></span><span class="radio-label" style="opacity:0.5;">Disabled</span></label>
+                <label class="radio-item radio-size-m disabled" style="justify-content:center;cursor:default;"><input type="radio" name="state-dis" disabled><span class="radio-control"></span><span class="radio-label" style="opacity:0.5;">Disabled</span></label>
                 <div style="font-size:13px;font-weight:600;color:var(--prism-text);margin-top:12px;">Disabled</div>
               </div>
               <div style="padding:20px 12px;border-radius:14px;background:var(--prism-surface);border:1px solid var(--prism-border);text-align:center;">
-                <label class="radio-item radio-size-m error" style="justify-content:center;cursor:default;"><input type="radio" name="state-err" disabled><span class="radio-control" style="border-color:#ef4444;"></span><span class="radio-label">Error</span></label>
+                <label class="radio-item radio-size-m error" style="justify-content:center;cursor:default;"><input type="radio" name="state-err" disabled><span class="radio-control"></span><span class="radio-label">Error</span></label>
                 <div style="font-size:13px;font-weight:600;color:var(--prism-text);margin-top:12px;">Error</div>
               </div>
             </div>
@@ -612,10 +640,10 @@
             <table class="size-table">
               <thead><tr><th>Size</th><th>Radio Control</th><th>Label Font</th><th>Use Case</th><th>Preview</th></tr></thead>
               <tbody>
-                <tr><td><strong>Small (S)</strong></td><td>14 &times; 14 px</td><td>body/Small</td><td>Dense layouts, data tables</td><td><label class="radio-item radio-size-s" style="cursor:default;"><input type="radio" name="sz-s" checked disabled><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Label</span></label></td></tr>
-                <tr><td><strong>Medium (M)</strong></td><td>16 &times; 16 px</td><td>body/Default</td><td>Standard forms (default)</td><td><label class="radio-item radio-size-m" style="cursor:default;"><input type="radio" name="sz-m" checked disabled><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:7px;height:7px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Label</span></label></td></tr>
-                <tr><td><strong>Large (L)</strong></td><td>20 &times; 20 px</td><td>body/Large</td><td>Comfortable / onboarding flows</td><td><label class="radio-item radio-size-l" style="cursor:default;"><input type="radio" name="sz-l" checked disabled><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:9px;height:9px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Label</span></label></td></tr>
-                <tr><td><strong>Mobile</strong></td><td>20 &times; 20 px</td><td>body/Large</td><td>Touch targets on mobile viewports</td><td><label class="radio-item radio-size-mobile" style="cursor:default;"><input type="radio" name="sz-mob" checked disabled><span class="radio-control" style="border-color:#2563eb;background:#2563eb;"><span style="display:block;width:9px;height:9px;border-radius:50%;background:#fff;"></span></span><span class="radio-label">Label</span></label></td></tr>
+                <tr><td><strong>Small (S)</strong></td><td>14 &times; 14 px</td><td>body/Small</td><td>Dense layouts, data tables</td><td><label class="radio-item radio-size-s" style="cursor:default;"><input type="radio" name="sz-s" checked disabled><span class="radio-control"></span><span class="radio-label">Label</span></label></td></tr>
+                <tr><td><strong>Medium (M)</strong></td><td>16 &times; 16 px</td><td>body/Default</td><td>Standard forms (default)</td><td><label class="radio-item radio-size-m" style="cursor:default;"><input type="radio" name="sz-m" checked disabled><span class="radio-control"></span><span class="radio-label">Label</span></label></td></tr>
+                <tr><td><strong>Large (L)</strong></td><td>20 &times; 20 px</td><td>body/Large</td><td>Comfortable / onboarding flows</td><td><label class="radio-item radio-size-l" style="cursor:default;"><input type="radio" name="sz-l" checked disabled><span class="radio-control"></span><span class="radio-label">Label</span></label></td></tr>
+                <tr><td><strong>Mobile</strong></td><td>20 &times; 20 px</td><td>body/Large</td><td>Touch targets on mobile viewports</td><td><label class="radio-item radio-size-mobile" style="cursor:default;"><input type="radio" name="sz-mob" checked disabled><span class="radio-control"></span><span class="radio-label">Label</span></label></td></tr>
               </tbody>
             </table>
           </div>
@@ -798,17 +826,9 @@
                 var itemClass='radio-item '+sizeClass;
                 if(isDisabled)itemClass+=' disabled';
                 if(isError)itemClass+=' error';
-                var controlStyle='';
-                if(checked&&!isDisabled&&!isError)controlStyle='border-color:#2563eb;background:#2563eb;';
-                else if(checked&&isDisabled)controlStyle='border-color:#cbd5e1;background:#f1f5f9;';
-                else if(isError)controlStyle='border-color:#ef4444;';
-                else if(isDisabled)controlStyle='border-color:#cbd5e1;background:#f1f5f9;';
-                var dotSize=sz==='S'?6:sz==='M'?7:9;
                 html+='<label class="'+itemClass+'">';
                 html+='<input type="radio" name="pg-demo" value="'+optValues[i]+'"'+(checked?' checked':'')+(isDisabled?' disabled':'')+'>';
-                html+='<span class="radio-control" style="'+controlStyle+'">';
-                if(checked&&!isDisabled)html+='<span style="display:block;width:'+dotSize+'px;height:'+dotSize+'px;border-radius:50%;background:#fff;"></span>';
-                html+='</span>';
+                html+='<span class="radio-control"></span>';
                 html+='<span class="radio-label"'+(isDisabled?' style="opacity:0.5;"':'')+'>'+optLabels[i]+'</span>';
                 html+='</label>';
               }

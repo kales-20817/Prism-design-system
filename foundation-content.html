@@ -52,22 +52,6 @@
   [data-theme="light"] .sidebar-search:focus-within { background: #fff; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10), 0 2px 8px rgba(37, 99, 235, 0.06); }
   [data-theme="light"] .icon-btn { color: #94a3b8; }
   [data-theme="light"] .icon-btn:hover { color: #1e293b; background: rgba(37, 99, 235, 0.06); }
-
-  /* Nav dropdown */
-  .nav-dropdown { position: relative; }
-  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-  .nav-dropdown > a .nav-chevron { width: 12px; height: 12px; transition: transform 0.2s ease; }
-  .nav-dropdown:hover > a .nav-chevron { transform: rotate(180deg); }
-  .nav-dropdown-menu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; background: var(--prism-black); border: 1px solid var(--prism-border); border-radius: 12px; padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s cubic-bezier(0.4,0,0.2,1); z-index: 200; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-  .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .nav-dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); text-decoration: none; transition: all 0.2s ease; background: transparent; }
-  .nav-dropdown-menu a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
-  .nav-dropdown-menu a svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--prism-text-muted); opacity: 0.7; }
-  .nav-dropdown-menu a:hover svg { color: var(--prism-violet); opacity: 1; }
-  [data-theme="light"] .nav-dropdown-menu { background: #fff; border: 1px solid rgba(37,99,235,0.10); box-shadow: 0 8px 32px rgba(37,99,235,0.10), 0 2px 8px rgba(37,99,235,0.06); }
-  [data-theme="light"] .nav-dropdown-menu a { color: #64748b; }
-  [data-theme="light"] .nav-dropdown-menu a:hover { color: #1e293b; background: rgba(37,99,235,0.05); }
-  [data-theme="light"] .nav-dropdown-menu a:hover svg { color: #2563eb; }
   [data-theme="light"] .nav-links a { color: #64748b; }
   [data-theme="light"] .nav-links a:hover { color: #1e293b; background: rgba(37, 99, 235, 0.05); }
   [data-theme="light"] .nav-links a.active { color: #2563eb; background: rgba(37, 99, 235, 0.06); }
@@ -85,22 +69,6 @@
   .nav-links a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); border: none; }
   .icon-btn { background: transparent; border: none; cursor: pointer; color: var(--prism-text-muted); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; margin-left: 4px; }
   .icon-btn:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
-
-  /* Nav dropdown */
-  .nav-dropdown { position: relative; }
-  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
-  .nav-dropdown > a .nav-chevron { width: 12px; height: 12px; transition: transform 0.2s ease; }
-  .nav-dropdown:hover > a .nav-chevron { transform: rotate(180deg); }
-  .nav-dropdown-menu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; background: var(--prism-black); border: 1px solid var(--prism-border); border-radius: 12px; padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s cubic-bezier(0.4,0,0.2,1); z-index: 200; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
-  .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .nav-dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); text-decoration: none; transition: all 0.2s ease; background: transparent; }
-  .nav-dropdown-menu a:hover { color: var(--prism-text); background: var(--prism-surface-hover); }
-  .nav-dropdown-menu a svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--prism-text-muted); opacity: 0.7; }
-  .nav-dropdown-menu a:hover svg { color: var(--prism-violet); opacity: 1; }
-  [data-theme="light"] .nav-dropdown-menu { background: #fff; border: 1px solid rgba(37,99,235,0.10); box-shadow: 0 8px 32px rgba(37,99,235,0.10), 0 2px 8px rgba(37,99,235,0.06); }
-  [data-theme="light"] .nav-dropdown-menu a { color: #64748b; }
-  [data-theme="light"] .nav-dropdown-menu a:hover { color: #1e293b; background: rgba(37,99,235,0.05); }
-  [data-theme="light"] .nav-dropdown-menu a:hover svg { color: #2563eb; }
 
   .components-layout { display: grid; grid-template-columns: 260px 1fr; width: 100%; padding-top: 72px; min-height: 100vh; }
   .sidebar { grid-column: 1; grid-row: 1; width: 260px; border-right: 1px solid var(--prism-border); padding: 32px 24px 64px; position: sticky; top: 72px; height: calc(100vh - 72px); overflow-y: auto; }
@@ -174,6 +142,13 @@
   .do-card { border-top: 3px solid #22c55e; }
   .dont-card { border-top: 3px solid #ef4444; }
   [data-theme="light"] .do-card, [data-theme="light"] .dont-card { background: #fff; border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+  /* Error message demo card — theme-aware */
+  .error-demo-card { background: rgba(255, 255, 255, 0.04); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  .error-demo-card .err-label { color: rgba(255, 255, 255, 0.92); }
+  .error-demo-card .err-input { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.92); }
+  [data-theme="light"] .error-demo-card { background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); }
+  [data-theme="light"] .error-demo-card .err-label { color: #20242E; }
+  [data-theme="light"] .error-demo-card .err-input { background: #fff; border-color: #E3E4E9; color: #20242E; }
   [data-theme="light"] .do-card { border-top: 3px solid #16a34a; }
   [data-theme="light"] .dont-card { border-top: 3px solid #dc2626; }
   .do-card .card-label, .dont-card .card-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
@@ -262,7 +237,7 @@
       <span class="nav-logo-sub">Design System</span>
     </a>
     <div class="nav-links">      <a href="Foundation.html" class="active">Foundation</a>
-      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <a href="Components.html" >Components</a>      <a href="AI-Experience.html">AI Experience</a><a href="Resource.html">Resource</a>
       <div style="width: 16px;"></div>
       <button id="themeToggle" class="icon-btn" title="Toggle Theme">
         <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -315,29 +290,8 @@
           <!-- ═══ Why Content Matters ═══ -->
           <div class="doc-section" id="why-content-matters">
             <h2>Why content matters in Endpoint Central</h2>
-            <p>Endpoint Central is content-heavy by nature. Users constantly read:</p>
-            <ul class="doc-list">
-              <li>Patch deployment statuses</li>
-              <li>Device health states</li>
-              <li>Policy conflict warnings</li>
-              <li>Compliance summaries</li>
-              <li>AI-generated remediation suggestions</li>
-              <li>Threat alerts</li>
-              <li>Destructive confirmations</li>
-              <li>Remote troubleshooting steps</li>
-              <li>Audit logs</li>
-              <li>Setup guidance</li>
-            </ul>
-            <p>Without a disciplined content system, workflows become confusing, error-prone, and harder to trust. A strong content foundation improves:</p>
-            <ul class="doc-list">
-              <li>Faster task completion</li>
-              <li>Safer destructive actions</li>
-              <li>Better AI explainability</li>
-              <li>Stronger global consistency</li>
-              <li>Better accessibility</li>
-              <li>Easier localization</li>
-              <li>Stronger cross-module trust</li>
-            </ul>
+            <p>Endpoint Central is content-heavy by nature. Users constantly read patch deployment statuses, device health states, policy conflict warnings, compliance summaries, AI-generated remediation suggestions, threat alerts, destructive confirmations, remote troubleshooting steps, audit logs, and setup guidance.</p>
+            <p>Without a disciplined content system, workflows become confusing, error-prone, and harder to trust. A strong content foundation drives faster task completion, safer destructive actions, and better AI explainability&mdash;while reinforcing global consistency, accessibility, easier localization, and stronger cross-module trust.</p>
           </div>
 
           <hr class="doc-divider">
@@ -699,6 +653,54 @@
 
           <hr class="doc-divider">
 
+          <!-- ═══ Empty State ═══ -->
+          <div class="doc-section" id="empty-state">
+            <h2>Empty state</h2>
+            <p>Use empty states to guide, reassure, and motivate users when there is no data to display in Endpoint Central.</p>
+            <p>In Prism, empty states are action moments. They appear when a workflow is complete, when no data matches the current view, or when a user is starting a task for the first time.</p>
+            <p>A strong empty state reduces confusion, explains what happened, and clearly shows what users can do next.</p>
+            <div class="empty-state-container" style="border:1px solid var(--prism-border);border-radius:16px;padding:48px 24px;margin-top:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--prism-surface);min-height:240px;text-align:center;">
+              <img src="assets/empty-state.svg" alt="No package data illustration" style="width:220px;height:auto;margin-bottom:24px;" />
+              <h3 style="font-size:18px;font-weight:600;color:var(--prism-text);margin:0 0 8px 0;">No package data available yet</h3>
+              <p style="font-size:14px;color:var(--prism-text-muted);line-height:1.6;margin:0;max-width:480px;">The container scan is still running or may have failed. Installed packages will appear here once the scan completes successfully.</p>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+
+          <!-- ═══ Error Messages ═══ -->
+          <div class="doc-section" id="error-messages">
+            <h2>Error messages</h2>
+            <p>Use error messages to explain failures clearly, reduce recovery time, and help Endpoint Central users move forward confidently.</p>
+            <p>In Prism, error messages are recovery guidance. They appear after an action fails and must clearly explain what happened, what it affects, and what the user should do next.</p>
+            <p>A strong error message system reduces confusion, prevents repeated mistakes, and builds trust in high-risk endpoint workflows.</p>
+            <div class="error-messages-container" style="border:1px solid var(--prism-border);border-radius:16px;padding:48px 24px;margin-top:24px;display:flex;align-items:center;justify-content:center;background:var(--prism-surface);min-height:240px;">
+              <div class="error-demo-card" style="border-radius:8px;padding:32px 40px;width:100%;max-width:544px;">
+                <!-- Form row -->
+                <div style="display:flex;align-items:center;gap:24px;">
+                  <label class="err-label" style="font-size:14px;font-weight:500;white-space:nowrap;min-width:120px;">Port (Outgoing)</label>
+                  <div class="err-input" style="flex:1;border:1px solid;border-radius:7px;padding:8px 16px;">
+                    <span style="font-size:14px;">25</span>
+                  </div>
+                </div>
+                <!-- Error message row -->
+                <div style="display:flex;align-items:center;gap:6px;margin-top:16px;margin-left:144px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+                    <path d="M7 4.04v2.338M6.191 1.053l-4.809 8.305c-.266.461-.4.691-.38.88.017.165.103.315.238.413.153.111.419.111.952.111h9.616c.533 0 .799 0 .952-.111.135-.098.221-.248.238-.413.02-.189-.114-.419-.38-.88L7.809 1.053C7.544.594 7.411.365 7.238.288a.62.62 0 0 0-.476 0c-.173.077-.306.306-.571.765Z" stroke="#E42527" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.006 8.516v-.11" stroke="#E42527" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span style="font-size:13px;font-weight:500;color:#E42527;">Verify the entered Mail Server Port!</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;margin-left:4px;">
+                    <path d="M5.65 3.189l.47 1.307a3.56 3.56 0 0 0 2.114 2.114l1.306.47c.118.043.118.21 0 .252l-1.306.47a3.56 3.56 0 0 0-2.115 2.115l-.47 1.306c-.043.118-.21.118-.252 0l-.47-1.306a3.56 3.56 0 0 0-2.115-2.114l-1.306-.471c-.118-.043-.118-.21 0-.252l1.306-.47a3.56 3.56 0 0 0 2.115-2.115l.47-1.306c.043-.118.21-.118.252 0Z" fill="#226DB4"/>
+                    <path d="M11.529.05l.238.661a2.01 2.01 0 0 0 1.177 1.177l.662.238c.06.022.06.106 0 .128l-.662.238a2.01 2.01 0 0 0-1.177 1.177l-.238.661c-.022.06-.106.06-.128 0l-.238-.661a2.01 2.01 0 0 0-1.177-1.177l-.662-.238c-.06-.022-.06-.106 0-.128l.662-.238A2.01 2.01 0 0 0 11.163.711l.238-.661c.022-.06.106-.06.128 0Z" fill="#089949"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="doc-divider">
+
           <!-- ═══ Principle ═══ -->
           <div class="doc-section" id="principle">
             <h2>Principle</h2>
@@ -732,7 +734,7 @@
               Back to Foundation
             </a>
             <a href="https://www.figma.com/design/DahIgbIJrSkzyP3OoHaDaG/UEMS---Design-System-3.0" target="_blank" class="action-link">
-              <img src="assets/figma-icon.svg" alt="Figma" width="15" height="15" style="vertical-align:middle;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.5C12 14.1569 10.6569 15.5 9 15.5C7.34315 15.5 6 14.1569 6 12.5C6 10.8431 7.34315 9.5 9 9.5H12V12.5Z" /><path d="M9 9.5C7.34315 9.5 6 8.15685 6 6.5C6 4.84315 7.34315 3.5 9 3.5H12V9.5H9Z" /><path d="M12 3.5H15C16.6569 3.5 18 4.84315 18 6.5C18 8.15685 16.6569 9.5 15 9.5H12V3.5Z" /><path d="M12 15.5V20.5C12 22.1569 10.6569 23.5 9 23.5C7.34315 23.5 6 22.1569 6 20.5C6 18.8431 7.34315 17.5 9 17.5H12V15.5Z" /><path d="M12 12.5C13.6569 12.5 15 11.1569 15 9.5C16.6569 9.5 18 10.8431 18 12.5C18 14.1569 16.6569 15.5 15 15.5C13.3431 15.5 12 14.1569 12 12.5Z" /></svg>
               Figma Design
             </a>
           </div>

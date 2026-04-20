@@ -171,9 +171,36 @@
   .lib-card-sub { font-size: 11px; color: var(--prism-text-muted); margin-top: 4px; text-align: center; }
 
   /* Logo grid — larger cards */
-  .lib-grid-logo { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-  .lib-card-logo { padding: 32px 20px 20px; min-height: 150px; }
-  .lib-card-logo img, .lib-card-logo svg { max-height: 48px; width: auto; margin-bottom: 16px; }
+  .lib-grid-logo { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .lib-card-logo { padding: 0; min-height: auto; overflow: hidden; display: flex; flex-direction: column; }
+  .lib-card-logo .logo-preview { padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 140px; flex: 1; background: #2a2a32; border-radius: 12px 12px 0 0; transition: background 0.3s ease; }
+  /* Variant-aware backgrounds — dark mode defaults */
+  .lib-card-logo[data-variant="white"] .logo-preview { background: #1e1e24; }
+  .lib-card-logo[data-variant="black"] .logo-preview { background: #e8eaed; }
+  .lib-card-logo[data-variant="color"] .logo-preview { background: #2a2a32; }
+  .lib-card-logo[data-variant="icon"] .logo-preview  { background: #2a2a32; }
+  /* Variant-aware backgrounds — light mode */
+  [data-theme="light"] .lib-card-logo .logo-preview { background: #f1f5f9; }
+  [data-theme="light"] .lib-card-logo[data-variant="white"] .logo-preview { background: #1e293b; }
+  [data-theme="light"] .lib-card-logo[data-variant="black"] .logo-preview { background: #f1f5f9; }
+  [data-theme="light"] .lib-card-logo[data-variant="color"] .logo-preview { background: #f1f5f9; }
+  [data-theme="light"] .lib-card-logo[data-variant="icon"] .logo-preview  { background: #f1f5f9; }
+  /* Logo image sizing */
+  .lib-card-logo .logo-preview img, .lib-card-logo .logo-preview svg { max-width: 90%; height: auto; width: auto; object-fit: contain; filter: none !important; }
+  .lib-card-logo[data-variant="white"] .logo-preview img,
+  .lib-card-logo[data-variant="black"] .logo-preview img,
+  .lib-card-logo[data-variant="color"] .logo-preview img { max-height: 56px; }
+  .lib-card-logo[data-variant="icon"] .logo-preview img { max-height: 80px; }
+  /* Logo info & actions */
+  .lib-card-logo .logo-info { padding: 12px 16px; border-top: 1px solid var(--prism-border); display: flex; flex-direction: column; gap: 8px; }
+  .lib-card-logo .logo-name { font-size: 12px; font-weight: 600; color: var(--prism-text); line-height: 1.3; }
+  .lib-card-logo .logo-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lib-card-logo .logo-dl-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-family: inherit; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--prism-border); background: var(--prism-surface); color: var(--prism-text-muted); text-decoration: none; transition: all 0.2s; }
+  .lib-card-logo .logo-dl-btn:hover { border-color: var(--prism-violet); color: var(--prism-violet); background: rgba(37,99,235,0.06); }
+  .lib-card-logo .logo-dl-btn svg { width: 12px; height: 12px; }
+  [data-theme="light"] .lib-card-logo .logo-info { border-top-color: rgba(37,99,235,0.08); }
+  [data-theme="light"] .lib-card-logo .logo-dl-btn { background: #fff; border-color: rgba(37,99,235,0.12); }
+  [data-theme="light"] .lib-card-logo .logo-dl-btn:hover { background: rgba(37,99,235,0.04); border-color: #2563eb; color: #2563eb; }
 
   /* Logo groups */
   .lib-logo-group { margin-bottom: 48px; }
@@ -206,7 +233,7 @@
       <a href="Foundation.html">Foundation</a>
       <a href="Components.html">Components</a>
       <a href="AI-Experience.html">AI Experience</a>
-      <div class="nav-dropdown"><a href="Library.html" class="active">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <div class="nav-dropdown"><a href="Library.html" class="active">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Icons.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Logos.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Illustrations.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
       <div style="width:16px;"></div>
       <button id="themeToggle" class="icon-btn" title="Toggle Theme">
         <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -239,7 +266,32 @@
     <div class="lib-panel active" id="panel-icons">
       <h2 class="lib-section-title">Icons</h2>
       <p class="lib-section-desc">Product icons used across the UEMS product suite. 425 icons in SVG format. Hover any card to download.</p>
-      <div class="lib-grid">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <div style="flex:1;max-width:400px;display:flex;align-items:center;background:var(--prism-surface);border:1px solid var(--prism-border);border-radius:10px;padding:10px 16px;gap:8px;transition:all 0.2s;" id="icon-search-wrap">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;color:var(--prism-text-muted);"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="icon-search" placeholder="Search icons..." style="background:transparent;border:none;outline:none;color:var(--prism-text);font-family:inherit;font-size:14px;width:100%;">
+        </div>
+        <select id="icon-category-filter" style="background:var(--prism-surface-hover);border:1px solid var(--prism-border);color:var(--prism-text);padding:10px 14px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;outline:none;transition:all 0.2s;">
+          <option value="all">All Categories</option>
+          <option value="arrow">Arrows</option>
+          <option value="chart,graph,area-chart,bar-,donut,pie,funnel">Charts & Graphs</option>
+          <option value="file,folder,document,xlsx,pdf,csv,zip,txt">Files & Folders</option>
+          <option value="mobile,device,computer,laptop,monitor,tablet,phone">Devices</option>
+          <option value="lock,key,shield,security,encrypt,password,bio-metric">Security</option>
+          <option value="user,avatar,person,people,team,group">Users & People</option>
+          <option value="mail,email,message,chat,inbox,notification,bell,announcement">Communication</option>
+          <option value="setting,gear,config,tool,wrench,hammer">Settings & Tools</option>
+          <option value="add,edit,delete,remove,trash,close,check,copy,cut,paste,undo,redo,save">Actions</option>
+          <option value="search,filter,sort,zoom">Search & Filter</option>
+          <option value="cloud,server,database,network,api,antenna,wifi">Infrastructure</option>
+          <option value="patch,install,update,deploy,download,upload">Deployment</option>
+          <option value="align,layout,grid,column,row,list,table">Layout</option>
+          <option value="calendar,clock,time,schedule">Date & Time</option>
+          <option value="eye,view,hide,visible">Visibility</option>
+        </select>
+        <span id="icon-count" style="font-size:12px;font-weight:600;color:var(--prism-text-muted);white-space:nowrap;"></span>
+      </div>
+      <div class="lib-grid" id="icon-grid">
         <div class="lib-card"><a href="assets/Product Icon/active-directory.svg" download="active-directory.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-icon"><img src="assets/Product Icon/active-directory.svg" alt="active directory" width="32" height="32"></div><span class="lib-card-label">active directory</span></div>
         <div class="lib-card"><a href="assets/Product Icon/activity-stop-square.svg" download="activity-stop-square.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-icon"><img src="assets/Product Icon/activity-stop-square.svg" alt="activity stop square" width="32" height="32"></div><span class="lib-card-label">activity stop square</span></div>
         <div class="lib-card"><a href="assets/Product Icon/activity.svg" download="activity.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-icon"><img src="assets/Product Icon/activity.svg" alt="activity" width="32" height="32"></div><span class="lib-card-label">activity</span></div>
@@ -666,181 +718,957 @@
         <div class="lib-card"><a href="assets/Product Icon/zap.svg" download="zap.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-icon"><img src="assets/Product Icon/zap.svg" alt="zap" width="32" height="32"></div><span class="lib-card-label">zap</span></div>
         <div class="lib-card"><a href="assets/Product Icon/zoom-in.svg" download="zoom-in.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-icon"><img src="assets/Product Icon/zoom-in.svg" alt="zoom in" width="32" height="32"></div><span class="lib-card-label">zoom in</span></div>
       </div>
+      <script>
+      (function(){
+        var searchInput = document.getElementById('icon-search');
+        var catFilter = document.getElementById('icon-category-filter');
+        var countEl = document.getElementById('icon-count');
+        var grid = document.getElementById('icon-grid');
+        var cards = grid.querySelectorAll('.lib-card');
+        var searchWrap = document.getElementById('icon-search-wrap');
+        searchWrap.addEventListener('click', function(){ searchInput.focus(); });
+        searchInput.addEventListener('focus', function(){ searchWrap.style.borderColor = 'var(--prism-violet)'; searchWrap.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.15)'; });
+        searchInput.addEventListener('blur', function(){ searchWrap.style.borderColor = ''; searchWrap.style.boxShadow = ''; });
+        function filterIcons(){
+          var q = searchInput.value.toLowerCase().trim();
+          var cat = catFilter.value;
+          var catTerms = cat === 'all' ? [] : cat.split(',');
+          var visible = 0;
+          cards.forEach(function(card){
+            var label = card.querySelector('.lib-card-label');
+            if(!label) return;
+            var name = label.textContent.toLowerCase();
+            var matchSearch = !q || name.indexOf(q) !== -1;
+            var matchCat = catTerms.length === 0 || catTerms.some(function(t){ return name.indexOf(t.trim()) !== -1; });
+            var show = matchSearch && matchCat;
+            card.style.display = show ? '' : 'none';
+            if(show) visible++;
+          });
+          countEl.textContent = visible + ' of ' + cards.length;
+        }
+        searchInput.addEventListener('input', filterIcons);
+        catFilter.addEventListener('change', filterIcons);
+        filterIcons();
+      })();
+      </script>
     </div>
 
         <!-- ========== Logo Panel ========== -->
     <div class="lib-panel" id="panel-logos">
       <h2 class="lib-section-title">Product Logo</h2>
-      <p class="lib-section-desc">Product logos grouped by product. Color, Black, White, and ManageEngine branding variants. Hover any card to download.</p>
-        <div class="lib-logo-group">
+      <p class="lib-section-desc">Select a product to view its logo variants. Click to download SVG.</p>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;padding:16px 20px;background:var(--prism-surface);border:1px solid var(--prism-border);border-radius:12px;">
+        <label style="font-size:13px;font-weight:600;color:var(--prism-text-muted);white-space:nowrap;">Select Product</label>
+        <select id="logo-product-filter" style="flex:1;max-width:360px;background:var(--prism-surface-hover);border:1px solid var(--prism-border);color:var(--prism-text);padding:10px 14px;border-radius:8px;font-family:inherit;font-size:14px;font-weight:500;cursor:pointer;outline:none;">
+          <option value="all">All Products</option>
+          <option value="Application Control Plus">Application Control Plus</option>
+          <option value="Browser Security Plus">Browser Security Plus</option>
+          <option value="DEX Manager Plus">DEX Manager Plus</option>
+          <option value="Device Control Plus">Device Control Plus</option>
+          <option value="Endpoint Central">Endpoint Central</option>
+          <option value="Endpoint DLP Plus">Endpoint DLP Plus</option>
+          <option value="Malware Protection Plus">Malware Protection Plus</option>
+          <option value="Mobile Device Manager Plus">Mobile Device Manager Plus</option>
+          <option value="Mobile Device Manager Plus MSP">Mobile Device Manager Plus MSP</option>
+          <option value="OS Deployer">OS Deployer</option>
+          <option value="Patch Connect Plus">Patch Connect Plus</option>
+          <option value="Patch Manager Plus">Patch Manager Plus</option>
+          <option value="Ransomware Protection Plus">Ransomware Protection Plus</option>
+          <option value="Remote Access Plus">Remote Access Plus</option>
+          <option value="Vulnerability Manager Plus">Vulnerability Manager Plus</option>
+        </select>
+      </div>
+      <div id="logo-groups-container">
+        <div class="lib-logo-group" data-product="Application Control Plus">
           <h3 class="lib-logo-group-title">Application Control Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Application Control Plus (1).svg" download="Application Control Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Application Control Plus (1).svg" alt="Application Control Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Application Control Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Application Control Plus_Black.svg" download="Application Control Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Application Control Plus_Black.svg" alt="Application Control Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Application Control Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Application Control Plus_White.svg" download="Application Control Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Application Control Plus_White.svg" alt="Application Control Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Application Control Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Application Control Plus_with ME_Black.svg" download="Application Control Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Application Control Plus_with ME_Black.svg" alt="Application Control Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Application Control Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Application Control Plus_with ME_White.svg" download="Application Control Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Application Control Plus_with ME_White.svg" alt="Application Control Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Application Control Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Application Control Plus (1).svg" alt="Application Control Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Application Control Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Application Control Plus (1).svg" download="Application Control Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Application Control Plus_Black.svg" alt="Application Control Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Application Control Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Application Control Plus_Black.svg" download="Application Control Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Application Control Plus_White.svg" alt="Application Control Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Application Control Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Application Control Plus_White.svg" download="Application Control Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Application Control Plus_with ME_Black.svg" alt="Application Control Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Application Control Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Application Control Plus_with ME_Black.svg" download="Application Control Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Application Control Plus_with ME_White.svg" alt="Application Control Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Application Control Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Application Control Plus_with ME_White.svg" download="Application Control Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Browser Security Plus">
           <h3 class="lib-logo-group-title">Browser Security Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Browser Security Plus.svg" download="Browser Security Plus.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Browser Security Plus.svg" alt="Browser Security Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Browser Security Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Browser Security Plus_Black.svg" download="Browser Security Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Browser Security Plus_Black.svg" alt="Browser Security Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Browser Security Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Browser Security Plus_White.svg" download="Browser Security Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Browser Security Plus_White.svg" alt="Browser Security Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Browser Security Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Browser Security Plus_with ME_Black.svg" download="Browser Security Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Browser Security Plus_with ME_Black.svg" alt="Browser Security Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Browser Security Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Browser Security Plus_with ME_White.svg" download="Browser Security Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Browser Security Plus_with ME_White.svg" alt="Browser Security Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Browser Security Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Browser Security Plus.svg" alt="Browser Security Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Browser Security Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Browser Security Plus.svg" download="Browser Security Plus.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Browser Security Plus_Black.svg" alt="Browser Security Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Browser Security Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Browser Security Plus_Black.svg" download="Browser Security Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Browser Security Plus_White.svg" alt="Browser Security Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Browser Security Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Browser Security Plus_White.svg" download="Browser Security Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Browser Security Plus_with ME_Black.svg" alt="Browser Security Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Browser Security Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Browser Security Plus_with ME_Black.svg" download="Browser Security Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Browser Security Plus_with ME_White.svg" alt="Browser Security Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Browser Security Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Browser Security Plus_with ME_White.svg" download="Browser Security Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="DEX Manager Plus">
           <h3 class="lib-logo-group-title">DEX Manager Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/DEX Manager Plus (1).svg" download="DEX Manager Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/DEX Manager Plus (1).svg" alt="DEX Manager Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">DEX Manager Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/DEX Manager Plus_Black.svg" download="DEX Manager Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/DEX Manager Plus_Black.svg" alt="DEX Manager Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">DEX Manager Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/DEX Manager Plus_White.svg" download="DEX Manager Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/DEX Manager Plus_White.svg" alt="DEX Manager Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">DEX Manager Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/DEX Manager Plus_with ME_Black.svg" download="DEX Manager Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/DEX Manager Plus_with ME_Black.svg" alt="DEX Manager Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">DEX Manager Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/DEX Manager Plus_with ME_White.svg" download="DEX Manager Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/DEX Manager Plus_with ME_White.svg" alt="DEX Manager Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">DEX Manager Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/DEX Manager Plus (1).svg" alt="DEX Manager Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">DEX Manager Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/DEX Manager Plus (1).svg" download="DEX Manager Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/DEX Manager Plus_Black.svg" alt="DEX Manager Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">DEX Manager Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/DEX Manager Plus_Black.svg" download="DEX Manager Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/DEX Manager Plus_White.svg" alt="DEX Manager Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">DEX Manager Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/DEX Manager Plus_White.svg" download="DEX Manager Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/DEX Manager Plus_with ME_Black.svg" alt="DEX Manager Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">DEX Manager Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/DEX Manager Plus_with ME_Black.svg" download="DEX Manager Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/DEX Manager Plus_with ME_White.svg" alt="DEX Manager Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">DEX Manager Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/DEX Manager Plus_with ME_White.svg" download="DEX Manager Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Device Control Plus">
           <h3 class="lib-logo-group-title">Device Control Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Device Control Plus.svg" download="Device Control Plus.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Device Control Plus.svg" alt="Device Control Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Device Control Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Device Control Plus_Black.svg" download="Device Control Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Device Control Plus_Black.svg" alt="Device Control Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Device Control Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Device Control Plus_White.svg" download="Device Control Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Device Control Plus_White.svg" alt="Device Control Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Device Control Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Device Control Plus_with ME_Black.svg" download="Device Control Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Device Control Plus_with ME_Black.svg" alt="Device Control Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Device Control Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Device Control Plus_with ME_White.svg" download="Device Control Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Device Control Plus_with ME_White.svg" alt="Device Control Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Device Control Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Device Control Plus.svg" alt="Device Control Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Device Control Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Device Control Plus.svg" download="Device Control Plus.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Device Control Plus_Black.svg" alt="Device Control Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Device Control Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Device Control Plus_Black.svg" download="Device Control Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Device Control Plus_White.svg" alt="Device Control Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Device Control Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Device Control Plus_White.svg" download="Device Control Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Device Control Plus_with ME_Black.svg" alt="Device Control Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Device Control Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Device Control Plus_with ME_Black.svg" download="Device Control Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Device Control Plus_with ME_White.svg" alt="Device Control Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Device Control Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Device Control Plus_with ME_White.svg" download="Device Control Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Endpoint Central">
           <h3 class="lib-logo-group-title">Endpoint Central</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central (3).svg" download="Endpoint Central (3).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central (3).svg" alt="Endpoint Central" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_App Icon.svg" download="Endpoint Central_App Icon.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_App Icon.svg" alt="Endpoint Central App Icon" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central App Icon</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_Black (1).svg" download="Endpoint Central_Black (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_Black (1).svg" alt="Endpoint Central Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_MSP_App Icon (1).svg" download="Endpoint Central_MSP_App Icon (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_MSP_App Icon (1).svg" alt="Endpoint Central MSP App Icon" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central MSP App Icon</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_MSP_App Icon.svg" download="Endpoint Central_MSP_App Icon.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_MSP_App Icon.svg" alt="Endpoint Central MSP App Icon" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central MSP App Icon</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_White.svg" download="Endpoint Central_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_White.svg" alt="Endpoint Central White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_with ME_Black (1).svg" download="Endpoint Central_with ME_Black (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_with ME_Black (1).svg" alt="Endpoint Central with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint Central_with ME_White.svg" download="Endpoint Central_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint Central_with ME_White.svg" alt="Endpoint Central with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint Central with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central (3).svg" alt="Endpoint Central Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central (3).svg" download="Endpoint Central (3).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="icon">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_App Icon.svg" alt="Endpoint Central App Icon" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; App Icon</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_App Icon.svg" download="Endpoint Central_App Icon.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_Black (1).svg" alt="Endpoint Central Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_Black (1).svg" download="Endpoint Central_Black (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="icon">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_MSP_App Icon (1).svg" alt="Endpoint Central MSP App Icon" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; MSP App Icon</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_MSP_App Icon (1).svg" download="Endpoint Central_MSP_App Icon (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="icon">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_MSP_App Icon.svg" alt="Endpoint Central MSP App Icon" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; MSP App Icon</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_MSP_App Icon.svg" download="Endpoint Central_MSP_App Icon.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_White.svg" alt="Endpoint Central White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_White.svg" download="Endpoint Central_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_with ME_Black (1).svg" alt="Endpoint Central ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_with ME_Black (1).svg" download="Endpoint Central_with ME_Black (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint Central_with ME_White.svg" alt="Endpoint Central ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint Central &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint Central_with ME_White.svg" download="Endpoint Central_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Endpoint DLP Plus">
           <h3 class="lib-logo-group-title">Endpoint DLP Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus (1).svg" download="Endpoint DLP Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus (1).svg" alt="Endpoint DLP Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus.svg" download="Endpoint DLP Plus.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus.svg" alt="Endpoint DLP Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus_Black.svg" download="Endpoint DLP Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus_Black.svg" alt="Endpoint DLP Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus_White.svg" download="Endpoint DLP Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus_White.svg" alt="Endpoint DLP Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus_with ME_Black.svg" download="Endpoint DLP Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus_with ME_Black.svg" alt="Endpoint DLP Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Endpoint DLP Plus_with ME_White.svg" download="Endpoint DLP Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Endpoint DLP Plus_with ME_White.svg" alt="Endpoint DLP Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Endpoint DLP Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus (1).svg" alt="Endpoint DLP Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus (1).svg" download="Endpoint DLP Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus.svg" alt="Endpoint DLP Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus.svg" download="Endpoint DLP Plus.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus_Black.svg" alt="Endpoint DLP Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus_Black.svg" download="Endpoint DLP Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus_White.svg" alt="Endpoint DLP Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus_White.svg" download="Endpoint DLP Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus_with ME_Black.svg" alt="Endpoint DLP Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus_with ME_Black.svg" download="Endpoint DLP Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Endpoint DLP Plus_with ME_White.svg" alt="Endpoint DLP Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Endpoint DLP Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Endpoint DLP Plus_with ME_White.svg" download="Endpoint DLP Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Malware Protection Plus">
           <h3 class="lib-logo-group-title">Malware Protection Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Malware Protection Plus (1).svg" download="Malware Protection Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Malware Protection Plus (1).svg" alt="Malware Protection Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Malware Protection Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Malware Protection Plus_Black.svg" download="Malware Protection Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Malware Protection Plus_Black.svg" alt="Malware Protection Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Malware Protection Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Malware Protection Plus_White.svg" download="Malware Protection Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Malware Protection Plus_White.svg" alt="Malware Protection Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Malware Protection Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Malware Protection Plus_with ME_Black.svg" download="Malware Protection Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Malware Protection Plus_with ME_Black.svg" alt="Malware Protection Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Malware Protection Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Malware Protection Plus_with ME_White.svg" download="Malware Protection Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Malware Protection Plus_with ME_White.svg" alt="Malware Protection Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Malware Protection Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Malware Protection Plus (1).svg" alt="Malware Protection Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Malware Protection Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Malware Protection Plus (1).svg" download="Malware Protection Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Malware Protection Plus_Black.svg" alt="Malware Protection Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Malware Protection Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Malware Protection Plus_Black.svg" download="Malware Protection Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Malware Protection Plus_White.svg" alt="Malware Protection Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Malware Protection Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Malware Protection Plus_White.svg" download="Malware Protection Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Malware Protection Plus_with ME_Black.svg" alt="Malware Protection Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Malware Protection Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Malware Protection Plus_with ME_Black.svg" download="Malware Protection Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Malware Protection Plus_with ME_White.svg" alt="Malware Protection Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Malware Protection Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Malware Protection Plus_with ME_White.svg" download="Malware Protection Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
-          <h3 class="lib-logo-group-title">Mobile Device Manager Plus MSP</h3>
-          <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP (1).svg" download="Mobile Device Manager Plus MSP (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP (1).svg" alt="Mobile Device Manager Plus MSP" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP.svg" download="Mobile Device Manager Plus MSP.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP.svg" alt="Mobile Device Manager Plus MSP" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP_Black.svg" download="Mobile Device Manager Plus MSP_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP_Black.svg" alt="Mobile Device Manager Plus MSP Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP_White.svg" download="Mobile Device Manager Plus MSP_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP_White.svg" alt="Mobile Device Manager Plus MSP White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_Black.svg" download="Mobile Device Manager Plus MSP_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_Black.svg" alt="Mobile Device Manager Plus MSP with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_White.svg" download="Mobile Device Manager Plus MSP_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_White.svg" alt="Mobile Device Manager Plus MSP with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP with ME White</span><span class="lib-card-sub">SVG</span></div>
-          </div>
-        </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Mobile Device Manager Plus">
           <h3 class="lib-logo-group-title">Mobile Device Manager Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus.svg" download="Mobile Device Manager Plus.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus.svg" alt="Mobile Device Manager Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_Appicon.svg" download="Mobile Device Manager Plus_Appicon.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_Appicon.svg" alt="Mobile Device Manager Plus Appicon" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus Appicon</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_Black.svg" download="Mobile Device Manager Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_Black.svg" alt="Mobile Device Manager Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" download="Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" alt="Mobile Device Manager Plus MSP App Icon(Text) Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP App Icon(Text) Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" download="Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" alt="Mobile Device Manager Plus MSP App Icon(Text) White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP App Icon(Text) White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon.jpg" download="Mobile Device Manager Plus_MSP_App Icon.jpg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon.jpg" alt="Mobile Device Manager Plus MSP App Icon" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus MSP App Icon</span><span class="lib-card-sub">JPG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_White.svg" download="Mobile Device Manager Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_White.svg" alt="Mobile Device Manager Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_with ME_Black.svg" download="Mobile Device Manager Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_with ME_Black.svg" alt="Mobile Device Manager Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Mobile Device Manager Plus_with ME_White.svg" download="Mobile Device Manager Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Mobile Device Manager Plus_with ME_White.svg" alt="Mobile Device Manager Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Mobile Device Manager Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus.svg" alt="Mobile Device Manager Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus.svg" download="Mobile Device Manager Plus.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="icon">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_Appicon.svg" alt="Mobile Device Manager Plus App Icon" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; App Icon</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_Appicon.svg" download="Mobile Device Manager Plus_Appicon.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_Black.svg" alt="Mobile Device Manager Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_Black.svg" download="Mobile Device Manager Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" alt="Mobile Device Manager Plus MSP Text Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; MSP Text Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" download="Mobile Device Manager Plus_MSP_App Icon(Text)_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" alt="Mobile Device Manager Plus MSP Text White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; MSP Text White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" download="Mobile Device Manager Plus_MSP_App Icon(Text)_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="icon">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon.jpg" alt="Mobile Device Manager Plus MSP App Icon" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; MSP App Icon</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_MSP_App Icon.jpg" download="Mobile Device Manager Plus_MSP_App Icon.jpg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> JPG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_White.svg" alt="Mobile Device Manager Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_White.svg" download="Mobile Device Manager Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_with ME_Black.svg" alt="Mobile Device Manager Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_with ME_Black.svg" download="Mobile Device Manager Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus_with ME_White.svg" alt="Mobile Device Manager Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus_with ME_White.svg" download="Mobile Device Manager Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Mobile Device Manager Plus MSP">
+          <h3 class="lib-logo-group-title">Mobile Device Manager Plus MSP</h3>
+          <div class="lib-grid lib-grid-logo">
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP (1).svg" alt="Mobile Device Manager Plus MSP Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP (1).svg" download="Mobile Device Manager Plus MSP (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP.svg" alt="Mobile Device Manager Plus MSP Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP.svg" download="Mobile Device Manager Plus MSP.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP_Black.svg" alt="Mobile Device Manager Plus MSP Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP_Black.svg" download="Mobile Device Manager Plus MSP_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP_White.svg" alt="Mobile Device Manager Plus MSP White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP_White.svg" download="Mobile Device Manager Plus MSP_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_Black.svg" alt="Mobile Device Manager Plus MSP ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_Black.svg" download="Mobile Device Manager Plus MSP_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_White.svg" alt="Mobile Device Manager Plus MSP ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Mobile Device Manager Plus MSP &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Mobile Device Manager Plus MSP_with ME_White.svg" download="Mobile Device Manager Plus MSP_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lib-logo-group" data-product="OS Deployer">
           <h3 class="lib-logo-group-title">OS Deployer</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/OS Deployer (1).svg" download="OS Deployer (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/OS Deployer (1).svg" alt="OS Deployer" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">OS Deployer</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/OS Deployer_Black.svg" download="OS Deployer_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/OS Deployer_Black.svg" alt="OS Deployer Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">OS Deployer Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/OS Deployer_White.svg" download="OS Deployer_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/OS Deployer_White.svg" alt="OS Deployer White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">OS Deployer White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/OS Deployer_with ME_Black.svg" download="OS Deployer_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/OS Deployer_with ME_Black.svg" alt="OS Deployer with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">OS Deployer with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/OS Deployer_with ME_White.svg" download="OS Deployer_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/OS Deployer_with ME_White.svg" alt="OS Deployer with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">OS Deployer with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/OS Deployer (1).svg" alt="OS Deployer Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">OS Deployer &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/OS Deployer (1).svg" download="OS Deployer (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/OS Deployer_Black.svg" alt="OS Deployer Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">OS Deployer &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/OS Deployer_Black.svg" download="OS Deployer_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/OS Deployer_White.svg" alt="OS Deployer White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">OS Deployer &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/OS Deployer_White.svg" download="OS Deployer_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/OS Deployer_with ME_Black.svg" alt="OS Deployer ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">OS Deployer &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/OS Deployer_with ME_Black.svg" download="OS Deployer_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/OS Deployer_with ME_White.svg" alt="OS Deployer ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">OS Deployer &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/OS Deployer_with ME_White.svg" download="OS Deployer_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Patch Connect Plus">
           <h3 class="lib-logo-group-title">Patch Connect Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Connect Plus.svg" download="Patch Connect Plus.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Connect Plus.svg" alt="Patch Connect Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Connect Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Connect Plus_Black.svg" download="Patch Connect Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Connect Plus_Black.svg" alt="Patch Connect Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Connect Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Connect Plus_White.svg" download="Patch Connect Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Connect Plus_White.svg" alt="Patch Connect Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Connect Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Connect Plus_with ME_Black.svg" download="Patch Connect Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Connect Plus_with ME_Black.svg" alt="Patch Connect Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Connect Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Connect Plus_with ME_White.svg" download="Patch Connect Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Connect Plus_with ME_White.svg" alt="Patch Connect Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Connect Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Connect Plus.svg" alt="Patch Connect Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Connect Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Connect Plus.svg" download="Patch Connect Plus.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Connect Plus_Black.svg" alt="Patch Connect Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Connect Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Connect Plus_Black.svg" download="Patch Connect Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Connect Plus_White.svg" alt="Patch Connect Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Connect Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Connect Plus_White.svg" download="Patch Connect Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Connect Plus_with ME_Black.svg" alt="Patch Connect Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Connect Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Connect Plus_with ME_Black.svg" download="Patch Connect Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Connect Plus_with ME_White.svg" alt="Patch Connect Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Connect Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Connect Plus_with ME_White.svg" download="Patch Connect Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Patch Manager Plus">
           <h3 class="lib-logo-group-title">Patch Manager Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Manager Plus (1).svg" download="Patch Manager Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Manager Plus (1).svg" alt="Patch Manager Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Manager Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Manager Plus_Black.svg" download="Patch Manager Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Manager Plus_Black.svg" alt="Patch Manager Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Manager Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Manager Plus_White.svg" download="Patch Manager Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Manager Plus_White.svg" alt="Patch Manager Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Manager Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Manager Plus_with ME_Black.svg" download="Patch Manager Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Manager Plus_with ME_Black.svg" alt="Patch Manager Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Manager Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Patch Manager Plus_with ME_White.svg" download="Patch Manager Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Patch Manager Plus_with ME_White.svg" alt="Patch Manager Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Patch Manager Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Manager Plus (1).svg" alt="Patch Manager Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Manager Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Manager Plus (1).svg" download="Patch Manager Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Manager Plus_Black.svg" alt="Patch Manager Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Manager Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Manager Plus_Black.svg" download="Patch Manager Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Manager Plus_White.svg" alt="Patch Manager Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Manager Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Manager Plus_White.svg" download="Patch Manager Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Manager Plus_with ME_Black.svg" alt="Patch Manager Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Manager Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Manager Plus_with ME_Black.svg" download="Patch Manager Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Patch Manager Plus_with ME_White.svg" alt="Patch Manager Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Patch Manager Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Patch Manager Plus_with ME_White.svg" download="Patch Manager Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Ransomware Protection Plus">
           <h3 class="lib-logo-group-title">Ransomware Protection Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus (2).svg" download="Ransomware Protection Plus (2).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus (2).svg" alt="Ransomware Protection Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus (3).svg" download="Ransomware Protection Plus (3).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus (3).svg" alt="Ransomware Protection Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus_Black.svg" download="Ransomware Protection Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus_Black.svg" alt="Ransomware Protection Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus_White.svg" download="Ransomware Protection Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus_White.svg" alt="Ransomware Protection Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus_with ME_Black.svg" download="Ransomware Protection Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus_with ME_Black.svg" alt="Ransomware Protection Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Ransomware Protection Plus_with ME_White.svg" download="Ransomware Protection Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Ransomware Protection Plus_with ME_White.svg" alt="Ransomware Protection Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Ransomware Protection Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus (2).svg" alt="Ransomware Protection Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus (2).svg" download="Ransomware Protection Plus (2).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus (3).svg" alt="Ransomware Protection Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus (3).svg" download="Ransomware Protection Plus (3).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus_Black.svg" alt="Ransomware Protection Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus_Black.svg" download="Ransomware Protection Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus_White.svg" alt="Ransomware Protection Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus_White.svg" download="Ransomware Protection Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus_with ME_Black.svg" alt="Ransomware Protection Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus_with ME_Black.svg" download="Ransomware Protection Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Ransomware Protection Plus_with ME_White.svg" alt="Ransomware Protection Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Ransomware Protection Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Ransomware Protection Plus_with ME_White.svg" download="Ransomware Protection Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Remote Access Plus">
           <h3 class="lib-logo-group-title">Remote Access Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus (1).svg" download="Remote Access Plus (1).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus (1).svg" alt="Remote Access Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus (2).svg" download="Remote Access Plus (2).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus (2).svg" alt="Remote Access Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus_Black.svg" download="Remote Access Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus_Black.svg" alt="Remote Access Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus_White.svg" download="Remote Access Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus_White.svg" alt="Remote Access Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus_with ME_Black.svg" download="Remote Access Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus_with ME_Black.svg" alt="Remote Access Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Remote Access Plus_with ME_White.svg" download="Remote Access Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Remote Access Plus_with ME_White.svg" alt="Remote Access Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Remote Access Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus (1).svg" alt="Remote Access Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus (1).svg" download="Remote Access Plus (1).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus (2).svg" alt="Remote Access Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus (2).svg" download="Remote Access Plus (2).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus_Black.svg" alt="Remote Access Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus_Black.svg" download="Remote Access Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus_White.svg" alt="Remote Access Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus_White.svg" download="Remote Access Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus_with ME_Black.svg" alt="Remote Access Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus_with ME_Black.svg" download="Remote Access Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Remote Access Plus_with ME_White.svg" alt="Remote Access Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Remote Access Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Remote Access Plus_with ME_White.svg" download="Remote Access Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="lib-logo-group">
+        <div class="lib-logo-group" data-product="Vulnerability Manager Plus">
           <h3 class="lib-logo-group-title">Vulnerability Manager Plus</h3>
           <div class="lib-grid lib-grid-logo">
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus (3).svg" download="Vulnerability Manager Plus (3).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus (3).svg" alt="Vulnerability Manager Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus (4).svg" download="Vulnerability Manager Plus (4).svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus (4).svg" alt="Vulnerability Manager Plus" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus_Black.svg" download="Vulnerability Manager Plus_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus_Black.svg" alt="Vulnerability Manager Plus Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus_White.svg" download="Vulnerability Manager Plus_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus_White.svg" alt="Vulnerability Manager Plus White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus White</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus_with ME_Black.svg" download="Vulnerability Manager Plus_with ME_Black.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus_with ME_Black.svg" alt="Vulnerability Manager Plus with ME Black" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus with ME Black</span><span class="lib-card-sub">SVG</span></div>
-            <div class="lib-card lib-card-logo"><a href="assets/Product Logo/Vulnerability Manager Plus_with ME_White.svg" download="Vulnerability Manager Plus_with ME_White.svg" class="lib-dl-btn" title="Download"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><img src="assets/Product Logo/Vulnerability Manager Plus_with ME_White.svg" alt="Vulnerability Manager Plus with ME White" style="max-height:48px;width:auto;margin-bottom:16px;"><span class="lib-card-label">Vulnerability Manager Plus with ME White</span><span class="lib-card-sub">SVG</span></div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus (3).svg" alt="Vulnerability Manager Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus (3).svg" download="Vulnerability Manager Plus (3).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="color">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus (4).svg" alt="Vulnerability Manager Plus Color" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; Color</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus (4).svg" download="Vulnerability Manager Plus (4).svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus_Black.svg" alt="Vulnerability Manager Plus Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus_Black.svg" download="Vulnerability Manager Plus_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus_White.svg" alt="Vulnerability Manager Plus White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus_White.svg" download="Vulnerability Manager Plus_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="black">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus_with ME_Black.svg" alt="Vulnerability Manager Plus ME Black" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; ME Black</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus_with ME_Black.svg" download="Vulnerability Manager Plus_with ME_Black.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
+            <div class="lib-card lib-card-logo" data-variant="white">
+              <div class="logo-preview"><img src="assets/Product Logo/Vulnerability Manager Plus_with ME_White.svg" alt="Vulnerability Manager Plus ME White" loading="lazy"></div>
+              <div class="logo-info">
+                <span class="logo-name">Vulnerability Manager Plus &mdash; ME White</span>
+                <div class="logo-actions">
+                  <a href="assets/Product Logo/Vulnerability Manager Plus_with ME_White.svg" download="Vulnerability Manager Plus_with ME_White.svg" class="logo-dl-btn"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> SVG</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+      <script>
+      (function(){
+        var select = document.getElementById("logo-product-filter");
+        var groups = document.querySelectorAll("#logo-groups-container .lib-logo-group");
+        if(groups.length > 0){
+          select.value = groups[0].getAttribute("data-product");
+          groups.forEach(function(g){ g.style.display = "none"; });
+          groups[0].style.display = "";
+        }
+        select.addEventListener("change", function(){
+          var v = this.value;
+          groups.forEach(function(g){
+            g.style.display = (v === "all" || g.getAttribute("data-product") === v) ? "" : "none";
+          });
+        });
+      })();
+      </script>
     </div>
 
         <!-- ========== Illustrations Panel ========== -->
     <div class="lib-panel" id="panel-illustrations">
       <h2 class="lib-section-title">Illustrations</h2>
       <p class="lib-section-desc">Contextual illustrations for empty states, onboarding, alerts, and configuration flows. 50 illustrations in SVG format. Hover to download.</p>
-      <div class="lib-grid lib-grid-illust">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <div style="flex:1;max-width:400px;display:flex;align-items:center;background:var(--prism-surface);border:1px solid var(--prism-border);border-radius:10px;padding:10px 16px;gap:8px;transition:all 0.2s;" id="illust-search-wrap">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;color:var(--prism-text-muted);"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="illust-search" placeholder="Search illustrations..." style="background:transparent;border:none;outline:none;color:var(--prism-text);font-family:inherit;font-size:14px;width:100%;">
+        </div>
+        <span id="illust-count" style="font-size:12px;font-weight:600;color:var(--prism-text-muted);white-space:nowrap;"></span>
+      </div>
+      <div class="lib-grid lib-grid-illust" id="illust-grid">
         <div class="lib-card lib-card-illust"><a href="assets/Illustration/access-denied-computer.svg" download="access-denied-computer.svg" class="lib-dl-btn" title="Download" style="top:auto;bottom:8px;z-index:2;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-illust-preview"><img src="assets/Illustration/access-denied-computer.svg" alt="access denied computer" style="max-height:100px;max-width:90%;object-fit:contain;"></div><div class="lib-card-illust-info"><span class="lib-card-label">access denied computer</span><span class="lib-card-sub">SVG</span></div></div>
         <div class="lib-card lib-card-illust"><a href="assets/Illustration/access-denied.svg" download="access-denied.svg" class="lib-dl-btn" title="Download" style="top:auto;bottom:8px;z-index:2;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-illust-preview"><img src="assets/Illustration/access-denied.svg" alt="access denied" style="max-height:100px;max-width:90%;object-fit:contain;"></div><div class="lib-card-illust-info"><span class="lib-card-label">access denied</span><span class="lib-card-sub">SVG</span></div></div>
         <div class="lib-card lib-card-illust"><a href="assets/Illustration/add-certificate.svg" download="add-certificate.svg" class="lib-dl-btn" title="Download" style="top:auto;bottom:8px;z-index:2;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-illust-preview"><img src="assets/Illustration/add-certificate.svg" alt="add certificate" style="max-height:100px;max-width:90%;object-fit:contain;"></div><div class="lib-card-illust-info"><span class="lib-card-label">add certificate</span><span class="lib-card-sub">SVG</span></div></div>
@@ -892,6 +1720,33 @@
         <div class="lib-card lib-card-illust"><a href="assets/Illustration/two-factor-auth.svg" download="two-factor-auth.svg" class="lib-dl-btn" title="Download" style="top:auto;bottom:8px;z-index:2;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-illust-preview"><img src="assets/Illustration/two-factor-auth.svg" alt="two factor auth" style="max-height:100px;max-width:90%;object-fit:contain;"></div><div class="lib-card-illust-info"><span class="lib-card-label">two factor auth</span><span class="lib-card-sub">SVG</span></div></div>
         <div class="lib-card lib-card-illust"><a href="assets/Illustration/upload-cloud.svg" download="upload-cloud.svg" class="lib-dl-btn" title="Download" style="top:auto;bottom:8px;z-index:2;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></a><div class="lib-card-illust-preview"><img src="assets/Illustration/upload-cloud.svg" alt="upload cloud" style="max-height:100px;max-width:90%;object-fit:contain;"></div><div class="lib-card-illust-info"><span class="lib-card-label">upload cloud</span><span class="lib-card-sub">SVG</span></div></div>
       </div>
+      <script>
+      (function(){
+        var searchInput = document.getElementById('illust-search');
+        var countEl = document.getElementById('illust-count');
+        var grid = document.getElementById('illust-grid');
+        var cards = grid.querySelectorAll('.lib-card');
+        var wrap = document.getElementById('illust-search-wrap');
+        wrap.addEventListener('click', function(){ searchInput.focus(); });
+        searchInput.addEventListener('focus', function(){ wrap.style.borderColor = 'var(--prism-violet)'; wrap.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.15)'; });
+        searchInput.addEventListener('blur', function(){ wrap.style.borderColor = ''; wrap.style.boxShadow = ''; });
+        function filterIllust(){
+          var q = searchInput.value.toLowerCase().trim();
+          var visible = 0;
+          cards.forEach(function(card){
+            var label = card.querySelector('.lib-card-label');
+            if(!label) return;
+            var name = label.textContent.toLowerCase();
+            var show = !q || name.indexOf(q) !== -1;
+            card.style.display = show ? '' : 'none';
+            if(show) visible++;
+          });
+          countEl.textContent = visible + ' of ' + cards.length;
+        }
+        searchInput.addEventListener('input', filterIllust);
+        filterIllust();
+      })();
+      </script>
     </div>
   </main>
 

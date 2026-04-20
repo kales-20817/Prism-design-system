@@ -26,7 +26,6 @@ Level 1  ›  ···  ›  Level 3  ›  Level 2  ›  Current
 
 ---
 
-
 ## Component Properties
 
 These text properties are exposed on the parent component for quick prototyping. For production use, select nested `_Breadcrumb Item` instances and edit their own `Label` property directly.

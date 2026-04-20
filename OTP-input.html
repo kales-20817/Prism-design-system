@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OTP Input — UEMS Design System</title>
@@ -79,6 +80,7 @@
   [data-theme="light"] .icon-btn { color: #94a3b8; }
   [data-theme="light"] .icon-btn:hover { color: #1e293b; background: rgba(37,99,235,0.06); }
 
+  
   /* Nav dropdown */
   .nav-dropdown { position: relative; }
   .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
@@ -185,17 +187,26 @@
   .feedback-btn.primary { background: var(--prism-violet); color: #fff; border-color: var(--prism-violet); }
   .feedback-btn.primary:hover { background: #1d4ed8; box-shadow: 0 4px 16px rgba(37,99,235,0.3); transform: translateY(-1px); }
 
-  /* OTP Input component styles */
+  /* OTP Input component styles — dark mode defaults */
   .otp-demo { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-  .otp-label { font-size: 13px; font-weight: 600; color: #292A2E; }
+  .otp-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.92); }
   .otp-boxes { display: flex; gap: 10px; }
-  .otp-box { width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid #C3C9D6; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #8893AD; font-family: 'Zoho Puvi', sans-serif; transition: all 0.2s; }
-  .otp-box.focus { border: 2px solid #006AFF; box-shadow: 0 0 0 3px rgba(0,106,255,0.15); color: #15181E; }
-  .otp-box.filled { border-color: #B4BBCC; color: #15181E; }
-  .otp-box.error { border: 2px solid #E42527; box-shadow: 0 0 0 3px rgba(228,37,39,0.12); color: #C1181B; }
-  .otp-box.disabled { background: #E1E4EB; border-color: #E1E4EB; opacity: 0.5; }
-  .otp-helper { font-size: 12px; color: #626870; display: flex; align-items: center; gap: 4px; }
-  .otp-helper.error { color: #C1181B; }
+  .otp-box { width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.4); font-family: 'Zoho Puvi', sans-serif; transition: all 0.2s; }
+  .otp-box.focus { border: 2px solid #60a5fa; box-shadow: 0 0 0 3px rgba(96,165,250,0.2); color: rgba(255,255,255,0.92); }
+  .otp-box.filled { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.92); }
+  .otp-box.error { border: 2px solid #f87171; box-shadow: 0 0 0 3px rgba(248,113,113,0.15); color: #fca5a5; }
+  .otp-box.disabled { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); opacity: 0.5; }
+  .otp-helper { font-size: 12px; color: rgba(255,255,255,0.48); display: flex; align-items: center; gap: 4px; }
+  .otp-helper.error { color: #fca5a5; }
+  /* OTP Input — light mode overrides */
+  [data-theme="light"] .otp-label { color: #292A2E; }
+  [data-theme="light"] .otp-box { border-color: #C3C9D6; background: #fff; color: #8893AD; }
+  [data-theme="light"] .otp-box.focus { border: 2px solid #006AFF; box-shadow: 0 0 0 3px rgba(0,106,255,0.15); color: #15181E; }
+  [data-theme="light"] .otp-box.filled { border-color: #B4BBCC; color: #15181E; }
+  [data-theme="light"] .otp-box.error { border: 2px solid #E42527; box-shadow: 0 0 0 3px rgba(228,37,39,0.12); color: #C1181B; }
+  [data-theme="light"] .otp-box.disabled { background: #E1E4EB; border-color: #E1E4EB; }
+  [data-theme="light"] .otp-helper { color: #626870; }
+  [data-theme="light"] .otp-helper.error { color: #C1181B; }
   /* OTP sizes */
   .otp-box.otp-sm { width: 36px; height: 36px; border-radius: 6px; font-size: 16px; }
   .otp-box.otp-lg { width: 48px; height: 48px; border-radius: 8px; font-size: 22px; }
@@ -260,7 +271,7 @@
       <a href="Foundation.html">Foundation</a>
       <a href="Components.html" class="active">Components</a>
       <a href="AI-Experience.html">AI Experience</a>
-      <div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Library.html#panel-icons"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Library.html#panel-logos"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Library.html#panel-illustrations"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
+      <div class="nav-dropdown"><a href="Library.html">Resource <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a><div class="nav-dropdown-menu"><a href="Icons.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Icons</a><a href="Logos.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>Product Logo</a><a href="Illustrations.html"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>Illustrations</a></div></div>
       <div style="width:16px;"></div>
       <button id="themeToggle" class="icon-btn" title="Toggle Theme">
         <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -278,64 +289,72 @@
       <h3 class="sidebar-heading">Components</h3>
       <ul class="sidebar-nav">
         <li><a href="Accordion.html" class="sidebar-link">Accordion</a></li>
-        <li><a href="Action-bar.html" class="sidebar-link">Action bar</a></li>
-        <li><a href="Action-button.html" class="sidebar-link">Action button</a></li>
-        <li><a href="Action-list.html" class="sidebar-link">Action list</a></li>
-        <li><a href="Alert-banner.html" class="sidebar-link">Alert banner</a></li>
-        <li><a href="App-bar.html" class="sidebar-link">App bar</a></li>
-        <li><a href="Autocomplete.html" class="sidebar-link">Autocomplete</a></li>
         <li><a href="Avatar.html" class="sidebar-link">Avatar</a></li>
         <li><a href="Badges.html" class="sidebar-link">Badges</a></li>
-        <li><a href="Bottom-sheet.html" class="sidebar-link">Bottom sheet</a></li>
         <li><a href="Breadcrumbs.html" class="sidebar-link">Breadcrumbs</a></li>
         <li><a href="Button.html" class="sidebar-link">Button</a></li>
-        <li><a href="Button-group.html" class="sidebar-link">Button group</a></li>
-        <li><a href="Cards.html" class="sidebar-link">Cards</a></li>
+        <li><a href="Calendar.html" class="sidebar-link">Calendar</a></li>
         <li><a href="Checkbox.html" class="sidebar-link">Checkbox</a></li>
-        <li><a href="Code-snippet.html" class="sidebar-link">Code snippet</a></li>
-        <li><a href="Combobox.html" class="sidebar-link">Combobox</a></li>
+        <li><a href="Chip.html" class="sidebar-link">Chip</a></li>
         <li><a href="Counter.html" class="sidebar-link">Counter</a></li>
         <li><a href="Data-table.html" class="sidebar-link">Data table</a></li>
         <li><a href="Date-picker.html" class="sidebar-link">Date picker</a></li>
-        <li><a href="Dialog.html" class="sidebar-link">Dialog</a></li>
         <li><a href="Divider.html" class="sidebar-link">Divider</a></li>
-        <li><a href="Drawer.html" class="sidebar-link">Drawer</a></li>
         <li><a href="Dropdown.html" class="sidebar-link">Dropdown</a></li>
         <li><a href="Empty-state.html" class="sidebar-link">Empty state</a></li>
-        <li><a href="Filter-input.html" class="sidebar-link">Filter input</a></li>
-        <li><a href="Form.html" class="sidebar-link">Form</a></li>
         <li><a href="Header-navigation.html" class="sidebar-link">Header navigation</a></li>
-        <li><a href="Help-text.html" class="sidebar-link">Help text</a></li>
         <li><a href="Icon.html" class="sidebar-link">Icon</a></li>
         <li><a href="Inline-message.html" class="sidebar-link">Inline message</a></li>
-        <li><a href="Label.html" class="sidebar-link">Label</a></li>
+        <li><a href="Left-sidebar-navigation-level-1.html" class="sidebar-link">Sidebar Nav L1</a></li>
+        <li><a href="Left-sidebar-navigation-level-2.html" class="sidebar-link">Sidebar Nav L2</a></li>
         <li><a href="Link.html" class="sidebar-link">Link</a></li>
-        <li><a href="List.html" class="sidebar-link">List</a></li>
-        <li><a href="Menus.html" class="sidebar-link">Menus</a></li>
-        <li><a href="Modal.html" class="sidebar-link">Modal</a></li>
-        <li><a href="Navigation-bar.html" class="sidebar-link">Navigation bar</a></li>
         <li><a href="OTP-input.html" class="sidebar-link active">OTP input</a></li>
         <li><a href="Page-header.html" class="sidebar-link">Page header</a></li>
-        <li><a href="Pagination.html" class="sidebar-link">Pagination</a></li>
-        <li><a href="Popover.html" class="sidebar-link">Popover</a></li>
         <li><a href="Progress-bar.html" class="sidebar-link">Progress bar</a></li>
-        <li><a href="Progress-indicator.html" class="sidebar-link">Progress indicator</a></li>
         <li><a href="Radio-button.html" class="sidebar-link">Radio button</a></li>
-        <li><a href="Search.html" class="sidebar-link">Search</a></li>
-        <li><a href="Segmented-control.html" class="sidebar-link">Segmented control</a></li>
-        <li><a href="Select.html" class="sidebar-link">Select</a></li>
-        <li><a href="Sidebar.html" class="sidebar-link">Sidebar</a></li>
+        <li><a href="Rich-text-editor.html" class="sidebar-link">Rich text editor</a></li>
+        <li><a href="Right-pane.html" class="sidebar-link">Right pane</a></li>
+        <li><a href="Script-editor.html" class="sidebar-link">Script editor</a></li>
         <li><a href="Slider.html" class="sidebar-link">Slider</a></li>
         <li><a href="Snackbar.html" class="sidebar-link">Toast Message</a></li>
         <li><a href="Split-button.html" class="sidebar-link">Split button</a></li>
         <li><a href="Status-indicator.html" class="sidebar-link">Status indicator</a></li>
         <li><a href="Switch.html" class="sidebar-link">Toggle</a></li>
-        <li><a href="Tabs.html" class="sidebar-link">Tabs</a></li>
         <li><a href="Tag.html" class="sidebar-link">Tag</a></li>
         <li><a href="Text-area.html" class="sidebar-link">Text area</a></li>
         <li><a href="Text-field.html" class="sidebar-link">Text field</a></li>
         <li><a href="Tooltip.html" class="sidebar-link">Tooltip</a></li>
-        <li><a href="Tree-view.html" class="sidebar-link">Tree view</a></li>
+        <li style="padding:16px 12px 8px;"><span style="font-size:10px;font-weight:700;color:var(--prism-text-muted);text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;">Coming Soon</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action button</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Action list</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Alert banner</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">App bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Autocomplete</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Bottom sheet</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Button group</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Cards</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Code snippet</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Combobox</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Dialog</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Drawer</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Filter input</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Form</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Help text</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Label</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">List</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Menus</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Modal</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Navigation bar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Pagination</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Popover</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Progress indicator</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Search</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Segmented control</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Select</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Sidebar</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Tabs</span></li>
+        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Tree view</span></li>
       </ul>
     </aside>
 
@@ -368,10 +387,10 @@
               <!-- Digit boxes row -->
               <div style="position:relative;display:flex;align-items:center;gap:10px;">
                 <div style="position:absolute;left:-36px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
-                <div class="otp-box" style="color:#8893AD;">0</div>
-                <div class="otp-box" style="color:#8893AD;">0</div>
-                <div class="otp-box" style="color:#8893AD;">0</div>
-                <div class="otp-box" style="color:#8893AD;">0</div>
+                <div class="otp-box">0</div>
+                <div class="otp-box">0</div>
+                <div class="otp-box">0</div>
+                <div class="otp-box">0</div>
               </div>
               <!-- Helper row -->
               <div style="position:relative;display:flex;align-items:center;gap:8px;">
@@ -452,7 +471,7 @@
               <div class="do-card"><span class="card-label">Do</span><ul>
                 <li>Set Length to match the actual code length sent to the user.</li>
                 <li>Display the Error state + helper text immediately on incorrect code.</li>
-                <li>Use <code style="font-family:monospace;font-size:12px;padding:1px 6px;border-radius:4px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">autocomplete="one-time-code"</code> for SMS autofill.</li>
+                <li>Use <code style="font-family:monospace;font-size:13px;padding:2px 8px;border-radius:6px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">autocomplete="one-time-code"</code> for SMS autofill.</li>
                 <li>Show a clear helper text (e.g. "Code sent to +91 &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;7890").</li>
                 <li>Clear all boxes and show Error state on wrong code.</li>
               </ul></div>
@@ -684,7 +703,7 @@
                 <h3 style="font-size:15px;font-weight:600;color:var(--prism-text);margin-bottom:16px;display:flex;align-items:center;gap:8px;"><svg width="20" height="20" fill="none" stroke="#e42527" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>When NOT to use</h3>
                 <ul class="doc-list" style="border:none;background:transparent;padding-left:20px;font-size:14.5px;">
                   <li style="border:none;background:transparent;margin-bottom:8px;">For passwords &#8212; use a password input field instead.</li>
-                  <li style="border:none;background:transparent;margin-bottom:8px;">For codes longer than 6 digits &#8212; use a single text input with <code style="font-family:monospace;font-size:12px;padding:1px 6px;border-radius:4px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">inputmode="numeric"</code>.</li>
+                  <li style="border:none;background:transparent;margin-bottom:8px;">For codes longer than 6 digits &#8212; use a single text input with <code style="font-family:monospace;font-size:13px;padding:2px 8px;border-radius:6px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">inputmode="numeric"</code>.</li>
                   <li style="border:none;background:transparent;">For alphanumeric codes &#8212; extend the component or use a standard text input.</li>
                 </ul>
               </div>
@@ -739,7 +758,7 @@
               <div class="do-card"><span class="card-label">Do</span><ul>
                 <li><strong>Match length to code:</strong> Set Length to match the actual code length sent to the user.</li>
                 <li><strong>Immediate error feedback:</strong> Display the Error state + helper text immediately on incorrect code.</li>
-                <li><strong>Enable SMS autofill:</strong> Use <code style="font-family:monospace;font-size:12px;padding:1px 6px;border-radius:4px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">autocomplete="one-time-code"</code> for SMS autofill.</li>
+                <li><strong>Enable SMS autofill:</strong> Use <code style="font-family:monospace;font-size:13px;padding:2px 8px;border-radius:6px;background:rgba(37,99,235,0.06);color:var(--prism-violet);">autocomplete="one-time-code"</code> for SMS autofill.</li>
                 <li><strong>Show context:</strong> Show a clear helper text (e.g. "Code sent to +91 &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;7890").</li>
                 <li><strong>Use Show Label=OFF only</strong> when the label is already provided by surrounding page content.</li>
                 <li><strong>Clear on error:</strong> Clear all boxes and show Error state on wrong code &#8212; users should re-enter cleanly.</li>
@@ -827,7 +846,7 @@
               if(st==='error') helper = isRTL ? '\u0631\u0645\u0632 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D' : 'Invalid code. Please try again.';
 
               // Build preview
-              var html = '<div class="otp-demo" style="'+(isRTL?'direction:rtl;align-items:flex-end;':'')+'"><span class="otp-label" style="font-size:'+s.lfs+'px;'+(st==='disabled'?'opacity:0.5;':'')+'">'+label+'</span><div class="otp-boxes" style="gap:'+s.gap+'px;">';
+              var html = '<div class="otp-demo" style="'+(isRTL?'direction:rtl;':'')+'"><span class="otp-label" style="font-size:'+s.lfs+'px;'+(st==='disabled'?'opacity:0.5;':'')+'">'+label+'</span><div class="otp-boxes" style="gap:'+s.gap+'px;">';
               for(var i=0;i<len;i++){
                 var cls = 'otp-box';
                 var digit = '0';
