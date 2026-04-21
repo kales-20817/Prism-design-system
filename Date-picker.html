@@ -538,50 +538,34 @@
         <div class="tab-content" id="tab-overview">
           <h3 id="anatomy" class="doc-h3">Anatomy</h3>
           <p class="doc-section-subtitle" style="margin-bottom:28px;">The date picker popover is composed of four numbered regions. Each label is anchored to the live preview with a connector line.</p>
-          <div class="anatomy-diagram">
-            <div style="display:flex;justify-content:center;padding:20px 0;">
-              <div class="dp-popover" style="position:relative;top:auto;left:auto;width:340px;padding:20px;">
-                <!-- 1 Header -->
-                <div style="position:absolute;right:calc(100% + 4px);top:20px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">1</span><div style="width:36px;height:2px;background:#2563eb;"></div></div>
-                <div class="dp-popover-header">
-                  <button class="dp-nav-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-                  <div class="dp-month-year">March 2026</div>
-                  <button class="dp-nav-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-                </div>
-                <!-- 2 Weekdays -->
-                <div style="position:absolute;right:calc(100% + 4px);top:62px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">2</span><div style="width:36px;height:2px;background:#2563eb;"></div></div>
-                <div class="dp-weekdays">
-                  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                </div>
-                <!-- 3 Day grid -->
-                <div style="position:absolute;right:calc(100% + 4px);top:190px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">3</span><div style="width:36px;height:2px;background:#2563eb;"></div></div>
-                <div class="dp-days">
-                  <div class="dp-day">1</div><div class="dp-day">2</div><div class="dp-day">3</div><div class="dp-day">4</div><div class="dp-day">5</div><div class="dp-day">6</div><div class="dp-day">7</div>
-                  <div class="dp-day">8</div><div class="dp-day today">9</div><div class="dp-day">10</div><div class="dp-day">11</div><div class="dp-day">12</div><div class="dp-day">13</div><div class="dp-day">14</div>
-                  <div class="dp-day selected">15</div><div class="dp-day">16</div><div class="dp-day">17</div><div class="dp-day">18</div><div class="dp-day">19</div><div class="dp-day">20</div><div class="dp-day">21</div>
-                  <div class="dp-day">22</div><div class="dp-day">23</div><div class="dp-day">24</div><div class="dp-day">25</div><div class="dp-day">26</div><div class="dp-day">27</div><div class="dp-day">28</div>
-                  <div class="dp-day">29</div><div class="dp-day">30</div><div class="dp-day">31</div><div class="dp-day other-month">1</div><div class="dp-day other-month">2</div><div class="dp-day other-month">3</div><div class="dp-day other-month">4</div>
-                </div>
-                <!-- 4 Footer -->
-                <div style="position:absolute;right:calc(100% + 4px);bottom:30px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">4</span><div style="width:36px;height:2px;background:#2563eb;"></div></div>
-                <div class="dp-footer">
-                  <button class="dp-footer-btn secondary">Cancel</button>
-                  <button class="dp-footer-btn primary">Apply</button>
+          <div class="anatomy-diagram" style="overflow:visible;">
+            <div style="display:flex;justify-content:center;padding:40px 0;">
+              <div class="dp-wrapper" style="position:relative;">
+                <!-- 1 Container: marker left of input -->
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">1</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+                <!-- 2 Calendar icon: marker above, vertical line down -->
+                <div style="position:absolute;left:20px;bottom:calc(100% + 6px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:20;"><span class="anat-marker-inline">2</span><div style="width:2px;height:14px;background:#2563eb;"></div></div>
+                <!-- 3 Placeholder / input: marker right of input -->
+                <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">3</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+                <div class="dp-input-field" data-dp-toggle="">
+                  <span class="dp-cal-icon">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+                  </span>
+                  <input class="dp-input" type="text" placeholder="DD/MM/YYYY" readonly="" value="">
                 </div>
               </div>
             </div>
           </div>
           <div class="anat-legend">
-            <div class="anat-legend-item"><span class="anat-marker-inline">1</span><div><strong>Header</strong><span>Month/year label flanked by navigation chevrons. Clicking the label opens the month/year picker.</span></div></div>
-            <div class="anat-legend-item"><span class="anat-marker-inline">2</span><div><strong>Weekday row</strong><span>Sun&ndash;Sat abbreviations. Locale-aware; reorders for locales that start the week on Monday.</span></div></div>
-            <div class="anat-legend-item"><span class="anat-marker-inline">3</span><div><strong>Day grid</strong><span>7-column grid of day numbers. Selected day is filled, today has a tinted ring, outside-month dates are muted.</span></div></div>
-            <div class="anat-legend-item"><span class="anat-marker-inline">4</span><div><strong>Footer</strong><span>Cancel dismisses without committing. Apply confirms the selection. Omit for instant-commit patterns.</span></div></div>
+            <div class="anat-legend-item"><span class="anat-marker-inline">1</span><div><strong>Input Container</strong><span>Wrapper with border, radius, and focus ring. Holds the icon and input. Reacts to hover, focus, error, and disabled states.</span></div></div>
+            <div class="anat-legend-item"><span class="anat-marker-inline">2</span><div><strong>Calendar Icon</strong><span>Leading affordance indicating the field opens a date picker. Clicking the icon toggles the popover.</span></div></div>
+            <div class="anat-legend-item"><span class="anat-marker-inline">3</span><div><strong>Input</strong><span>Read-only text input displaying the selected date in <code style="font-family:monospace;font-size:13px;padding:2px 6px;border-radius:4px;background:rgba(37,99,235,0.06);">DD/MM/YYYY</code> format. Falls back to placeholder when empty.</span></div></div>
           </div>
 
           <hr class="doc-divider"/>
 
           <div style="margin-bottom:64px;">
-            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Live demo</h2>
+            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Preview</h2>
             <p class="doc-section-subtitle" style="margin-bottom:28px;">Click an input to open the calendar. Use navigation arrows to change month; click a day to select it.</p>
             <div class="demo-container">
               <div class="demo-toolbar"><div class="demo-theme-pill">Interactive preview</div></div>

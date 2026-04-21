@@ -566,16 +566,16 @@
           <!-- Left layout anatomy -->
           <h4 style="font-size:16px;font-weight:600;color:var(--prism-text);margin-bottom:16px;">Default &#8212; Left layout (web)</h4>
           <div class="anatomy-diagram">
-            <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;padding:20px 0;">
+            <div style="display:flex;flex-direction:column;gap:20px;align-items:center;padding:20px 0;">
               <!-- Group label row -->
               <div style="position:relative;display:flex;align-items:center;gap:8px;">
-                <div style="position:absolute;left:-32px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">1</span></div>
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">1</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
                 <span style="font-size:15px;font-weight:600;color:var(--prism-text);">Notification frequency</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--prism-text-muted);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
               </div>
               <!-- Radio options row -->
               <div style="position:relative;display:flex;gap:24px;align-items:center;padding-left:4px;">
-                <div style="position:absolute;left:-32px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">2</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
                 <label class="radio-item radio-size-m" style="cursor:default;">
                   <input type="radio" name="anat-demo" checked disabled>
                   <span class="radio-control"></span>
@@ -594,7 +594,7 @@
               </div>
               <!-- Help text row -->
               <div style="position:relative;display:flex;align-items:center;gap:6px;padding-left:4px;">
-                <div style="position:absolute;left:-32px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">3</span></div>
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">3</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--prism-text-muted);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                 <span style="font-size:13px;color:var(--prism-text-muted);">We'll send alerts based on this preference.</span>
               </div>
@@ -609,34 +609,39 @@
           <!-- Top layout anatomy -->
           <h4 style="font-size:16px;font-weight:600;color:var(--prism-text);margin-bottom:16px;">Special case &#8212; Top layout (constrained space / long labels)</h4>
           <div class="anatomy-diagram">
-            <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:20px 0;">
-              <span style="font-size:15px;font-weight:600;color:var(--prism-text);">Select your preferred data export format</span>
-              <label class="radio-item radio-size-m" style="cursor:default;">
-                <input type="radio" name="anat-top" checked disabled>
-                <span class="radio-control"></span>
-                <span class="radio-label">CSV &#8212; Comma-separated values</span>
-              </label>
-              <label class="radio-item radio-size-m" style="cursor:default;">
-                <input type="radio" name="anat-top" disabled>
-                <span class="radio-control"></span>
-                <span class="radio-label">JSON &#8212; JavaScript Object Notation</span>
-              </label>
-              <label class="radio-item radio-size-m" style="cursor:default;">
-                <input type="radio" name="anat-top" disabled>
-                <span class="radio-control"></span>
-                <span class="radio-label">XML &#8212; Extensible Markup Language</span>
-              </label>
+            <div style="display:flex;flex-direction:column;gap:14px;align-items:center;padding:20px 0;">
+              <div style="position:relative;display:flex;align-items:center;">
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">1</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
+                <span style="font-size:15px;font-weight:600;color:var(--prism-text);">Select your preferred data export format</span>
+              </div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-start;">
+                <div style="position:absolute;right:calc(100% + 6px);top:14px;display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">2</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
+                <label class="radio-item radio-size-m" style="cursor:default;">
+                  <input type="radio" name="anat-top" checked disabled>
+                  <span class="radio-control"></span>
+                  <span class="radio-label">CSV &#8212; Comma-separated values</span>
+                </label>
+                <label class="radio-item radio-size-m" style="cursor:default;">
+                  <input type="radio" name="anat-top" disabled>
+                  <span class="radio-control"></span>
+                  <span class="radio-label">JSON &#8212; JavaScript Object Notation</span>
+                </label>
+                <label class="radio-item radio-size-m" style="cursor:default;">
+                  <input type="radio" name="anat-top" disabled>
+                  <span class="radio-control"></span>
+                  <span class="radio-label">XML &#8212; Extensible Markup Language</span>
+                </label>
+              </div>
             </div>
           </div>
 
           <hr class="doc-divider"/>
 
           <div style="margin-bottom:64px;">
-            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Live demo</h2>
+            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Preview</h2>
             <p class="doc-section-subtitle" style="margin-bottom:28px;">Explore radio group variants across sizes, states, and layouts.</p>
             <div class="demo-container">
-              <div class="demo-toolbar"><div class="demo-theme-pill">Preview</div></div>
-              <div class="demo-canvas">
+<div class="demo-canvas">
                 <!-- Default left layout -->
                 <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
                   <span style="font-size:14px;font-weight:600;color:var(--prism-text);">Size M &#8212; Left layout (default)</span>

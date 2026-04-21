@@ -129,6 +129,10 @@
         padding-bottom: 0.05em;
         line-height: 1;
     }
+    :root:not([data-theme="light"]) .nav-logo-mark {
+        background: linear-gradient(135deg, #3b97ff 40%, #0fd095 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
     .nav-logo-sub {
         font-size: 10px; font-weight: 600; color: var(--prism-text-muted);
         letter-spacing: 0.08em; text-transform: none;
@@ -230,6 +234,16 @@
     [data-theme="light"] #container::after {
         background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
     }
+    /* Dark mode: global dark veil over the video */
+    #container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgb(0 0 0 / 31%) 0%, rgb(0 0 0 / 26%) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+    [data-theme="light"] #container::before { display: none; }
     .overlay {
         position: relative;
         z-index: 10;
@@ -802,7 +816,7 @@
 <body>
 <div id="container">
   <video id="bgVideo" autoplay muted loop playsinline>
-    <source src="GettyImages-1195899963 copy.mp4" type="video/mp4">
+    <source src="dfsdfsd.mp4" type="video/mp4">
   </video>
   <video id="bgVideoLight" autoplay muted loop playsinline>
     <source src="425253.mp4" type="video/mp4">

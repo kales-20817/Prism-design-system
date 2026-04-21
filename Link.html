@@ -813,22 +813,30 @@
           .anat-legend-item strong { display: block; font-size: 14.5px; font-weight: 600; color: var(--prism-text); margin-bottom: 6px; }
           .anat-legend-item span { font-size: 13px; line-height: 1.55; color: var(--prism-text-muted); }
           .anat-link-container { display: flex; justify-content: center; gap: 64px; align-items: flex-end; margin: 40px 0; flex-wrap: wrap; }
-          .anat-link-example { display: inline-flex; align-items: center; padding: 12px 16px; border-radius: 8px; border: 2px dashed rgba(37,99,235,0.4); font-size: 16px; font-weight: 500; color: var(--prism-text); position: relative; gap: 8px; flex-direction: column; }
+          .anat-link-example { display: inline-flex; align-items: center; padding: 12px 16px; border-radius: 8px; border: 2px dashed rgba(37,99,235,0.4); font-size: 16px; font-weight: 500; color: var(--prism-text); position: relative; gap: 8px; flex-direction: column; overflow: visible; }
           .anat-link-example-label { font-size: 11px; font-weight: 600; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
           .anat-link-inline { display: inline-flex; align-items: center; gap: 8px; }
         </style>
 
-        <div class="anatomy-diagram">
+        <div class="anatomy-diagram" style="padding:56px 72px;">
           <div class="anat-link-container">
             <!-- Default (Inline) -->
-            <div class="anat-link-example">
+            <div class="anat-link-example" style="overflow:visible;">
+              <!-- 1 Container: marker left of the dashed frame -->
+              <div style="position:absolute; right:calc(100% + 6px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:6px; z-index:5;"><span class="anat-marker-inline">1</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
+              <!-- 3 Label: marker right of the example, horizontal line left -->
+              <div style="position:absolute; left:calc(100% + 6px); top:50%; transform:translateY(-50%); display:flex; flex-direction:row-reverse; align-items:center; gap:6px; z-index:5;"><span class="anat-marker-inline">3</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
+              <!-- 5 Underline: marker below, vertical line up -->
+              <div style="position:absolute; left:50%; top:calc(100% + 6px); transform:translateX(-50%); display:flex; flex-direction:column-reverse; align-items:center; gap:4px; z-index:5;"><span class="anat-marker-inline">5</span><div style="width:2px; height:14px; background:#2563eb;"></div></div>
               <div class="anat-link-example-label">Default (Inline)</div>
               <div class="anat-link-inline">
                 <span style="color: #2C66DD; text-decoration: underline; text-underline-offset: 3px; font-size: 16px;">Text Link</span>
               </div>
             </div>
             <!-- Standalone -->
-            <div class="anat-link-example">
+            <div class="anat-link-example" style="overflow:visible;">
+              <!-- 4 Trailing Icon: marker above the example, vertical line down -->
+              <div style="position:absolute; left:50%; bottom:calc(100% + 6px); transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:4px; z-index:5;"><span class="anat-marker-inline">4</span><div style="width:2px; height:14px; background:#2563eb;"></div></div>
               <div class="anat-link-example-label">Standalone</div>
               <div class="anat-link-inline">
                 <span style="color: #2C66DD; font-size: 16px;">Text Link</span>
@@ -836,7 +844,9 @@
               </div>
             </div>
             <!-- WithIcon -->
-            <div class="anat-link-example">
+            <div class="anat-link-example" style="overflow:visible;">
+              <!-- 2 Leading Icon: marker left of the example, horizontal line right -->
+              <div style="position:absolute; right:calc(100% + 6px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:6px; z-index:5;"><span class="anat-marker-inline">2</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
               <div class="anat-link-example-label">WithIcon</div>
               <div class="anat-link-inline">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#2C66DD" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.172 13.828a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.102 1.101"/></svg>
@@ -859,7 +869,7 @@
 
         <!-- Live Demo Section -->
         <div style="margin-bottom: 64px;">
-          <h2 id="live-demo" class="doc-section-title" style="margin-bottom: 8px;">Live demo</h2>
+          <h2 id="live-demo" class="doc-section-title" style="margin-bottom: 8px;">Preview</h2>
           <p class="doc-section-subtitle" style="margin-bottom: 28px;">Interact with the TextLink variants to explore their visual styles, types, states, sizes, and underline behaviors.</p>
 
           <style>
@@ -1002,8 +1012,6 @@
 </style>
 
           <div class="demo-container">
-            <div class="demo-toolbar">
-              <div class="demo-toolbar-left"><div class="demo-theme-pill">Preview</div></div>
             </div>
             <div class="demo-canvas">
               <div class="link-demo-grid">

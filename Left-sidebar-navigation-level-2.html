@@ -559,32 +559,32 @@
           <div class="anatomy-diagram">
             <div style="display:flex;flex-direction:column;align-items:center;gap:0;margin:8px 0;">
               <!-- Search row -->
-              <div style="position:relative;display:flex;align-items:center;gap:8px;width:260px;margin-bottom:12px;">
-                <span class="anat-marker-inline" style="position:absolute;left:-36px;top:50%;transform:translateY(-50%);">1</span>
+              <div style="position:relative;display:flex;align-items:center;gap:8px;width:260px;margin-bottom:12px;overflow:visible;">
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">1</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                 <div style="width:100%;padding:6px 8px 6px 30px;background:var(--prism-surface);border:1px solid var(--prism-border);border-radius:6px;font-size:13px;color:var(--prism-text-muted);position:relative;">
                   <svg style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--prism-text-muted);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                   Search...
                 </div>
               </div>
               <!-- Group header row -->
-              <div style="position:relative;display:flex;align-items:center;gap:6px;width:260px;margin-bottom:4px;padding:6px 4px;">
-                <span class="anat-marker-inline" style="position:absolute;left:-36px;top:50%;transform:translateY(-50%);">2</span>
+              <div style="position:relative;display:flex;align-items:center;gap:6px;width:260px;margin-bottom:4px;padding:6px 4px;overflow:visible;">
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">2</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                 <svg style="width:12px;height:12px;color:var(--prism-violet);" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
                 <span style="font-size:12px;font-weight:500;color:var(--prism-violet);">Add Configurations</span>
               </div>
               <!-- Nav items -->
-              <div style="position:relative;width:260px;display:flex;flex-direction:column;gap:2px;">
-                <span class="anat-marker-inline" style="position:absolute;left:-36px;top:12px;">3</span>
+              <div style="position:relative;width:260px;display:flex;flex-direction:column;gap:2px;overflow:visible;">
+                <div style="position:absolute;right:calc(100% + 6px);top:12px;display:flex;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">3</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                 <div style="padding:7px 8px 7px 20px;font-size:13px;color:var(--prism-text);border-radius:4px;display:flex;justify-content:space-between;align-items:center;">Configuration <svg style="width:10px;height:10px;color:var(--prism-text-muted);" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></div>
                 <div style="padding:7px 8px 7px 20px;font-size:13px;color:var(--prism-text);border-radius:4px;">Templates</div>
-                <div style="position:relative;padding:7px 8px 7px 20px;font-size:13px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;background:rgba(37,99,235,0.08);color:var(--prism-violet);">
-                  <span class="anat-marker-inline" style="position:absolute;right:-36px;top:50%;transform:translateY(-50%);">4</span>
+                <div style="position:relative;padding:7px 8px 7px 20px;font-size:13px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;background:rgba(37,99,235,0.08);color:var(--prism-violet);overflow:visible;">
+                  <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">4</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                   Collection <svg style="width:10px;height:10px;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
                 </div>
               </div>
               <!-- Count badge item -->
-              <div style="position:relative;width:260px;margin-top:8px;">
-                <span class="anat-marker-inline" style="position:absolute;left:-36px;top:50%;transform:translateY(-50%);">5</span>
+              <div style="position:relative;width:260px;margin-top:8px;overflow:visible;">
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">5</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                 <div style="padding:7px 8px 7px 20px;font-size:13px;color:var(--prism-text);border-radius:4px;display:flex;justify-content:space-between;align-items:center;">
                   Installed Patches
                   <span style="font-size:11px;font-weight:500;color:var(--prism-text-muted);background:var(--prism-surface-hover);border-radius:9999px;padding:1px 6px;">81</span>
@@ -603,10 +603,9 @@
           <hr class="doc-divider"/>
 
           <div style="margin-bottom:64px;">
-            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Live demo</h2>
+            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Preview</h2>
             <p class="doc-section-subtitle" style="margin-bottom:28px;">Explore the Sidebar Navigation Level 2 with interactive expand/collapse, search filtering, and item states.</p>
             <div class="demo-container">
-              <div class="demo-toolbar"><div class="demo-theme-pill">Preview &mdash; Configurations Panel</div></div>
               <div class="demo-canvas" style="padding:48px;min-height:420px;">
                 <nav class="snl2-panel" id="demo-panel" aria-label="Configurations navigation">
                   <div class="snl2-search">

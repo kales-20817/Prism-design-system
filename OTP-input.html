@@ -520,22 +520,24 @@
           <div class="anatomy-diagram">
             <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:20px 0;">
               <!-- Label row -->
-              <div style="position:relative;display:flex;align-items:center;gap:8px;">
+              <div style="position:relative;display:flex;align-items:center;gap:6px;">
                 <span class="anat-marker-inline">1</span>
-                <span style="font-size:13px;font-weight:600;color:var(--prism-text);">Verification Code</span>
+                <div style="width:28px; height:2px; background:#2563eb;"></div>
+                <span style="font-size:13px;font-weight:600;color:var(--prism-text);margin-left:2px;">Verification Code</span>
               </div>
               <!-- Digit boxes row -->
               <div style="position:relative;display:flex;align-items:center;gap:10px;">
-                <div style="position:absolute;left:-36px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;"><span class="anat-marker-inline">2</span><div style="width:28px; height:2px; background:#2563eb;"></div></div>
                 <div class="otp-box">0</div>
                 <div class="otp-box">0</div>
                 <div class="otp-box">0</div>
                 <div class="otp-box">0</div>
               </div>
               <!-- Helper row -->
-              <div style="position:relative;display:flex;align-items:center;gap:8px;">
+              <div style="position:relative;display:flex;align-items:center;gap:6px;">
                 <span class="anat-marker-inline">3</span>
-                <span style="font-size:12px;color:var(--prism-text-muted);display:flex;align-items:center;gap:4px;">&#9432; Help text</span>
+                <div style="width:28px; height:2px; background:#2563eb;"></div>
+                <span style="font-size:12px;color:var(--prism-text-muted);display:flex;align-items:center;gap:4px;margin-left:2px;">&#9432; Help text</span>
               </div>
             </div>
           </div>
@@ -548,11 +550,10 @@
           <hr class="doc-divider"/>
 
           <div style="margin-bottom:64px;">
-            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Live demo</h2>
+            <h2 id="live-demo" class="doc-section-title" style="margin-bottom:8px;">Preview</h2>
             <p class="doc-section-subtitle" style="margin-bottom:28px;">Explore OTP Input across states and lengths.</p>
             <div class="demo-container">
-              <div class="demo-toolbar"><div class="demo-theme-pill">Preview</div></div>
-              <div class="demo-canvas" style="align-items:flex-start;gap:32px;padding:48px 64px;">
+<div class="demo-canvas" style="align-items:flex-start;gap:32px;padding:48px 64px;">
                 <!-- Default 4-digit -->
                 <div class="otp-demo">
                   <span class="otp-label">Verification Code</span>
