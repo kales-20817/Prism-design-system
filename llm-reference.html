@@ -207,6 +207,34 @@
 
   .source-ref { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--prism-text-muted); text-decoration: none; padding: 4px 10px; border-radius: 6px; background: var(--prism-surface); border: 1px solid var(--prism-border); transition: all 0.2s ease; margin-top: 12px; }
   .source-ref:hover { color: var(--prism-violet); border-color: rgba(37,99,235,0.2); background: rgba(37,99,235,0.05); }
+
+  /* File Tree */
+  .file-tree { background: var(--prism-surface); border: 1px solid var(--prism-border); border-radius: 14px; padding: 20px 24px; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; margin-top: 16px; }
+  .ft-root { display: flex; align-items: center; gap: 8px; padding: 4px 0 8px 0; }
+  .ft-root .ft-folder-name { font-size: 14px; font-weight: 700; color: var(--prism-text); }
+  .ft-children { padding-left: 20px; border-left: 1px solid var(--prism-border); margin-left: 7px; display: flex; flex-direction: column; gap: 2px; }
+  .ft-subtree { padding-left: 20px; border-left: 1px solid var(--prism-border); margin-left: 7px; display: none; flex-direction: column; gap: 2px; margin-bottom: 4px; }
+  .ft-subtree.open { display: flex; }
+  .ft-row { display: flex; align-items: center; gap: 7px; padding: 4px 8px; border-radius: 6px; cursor: default; transition: background 0.15s ease; }
+  .ft-row:hover { background: var(--prism-surface-hover); }
+  .ft-folder-row { cursor: pointer; }
+  .ft-chevron { font-size: 8px; color: var(--prism-text-muted); width: 10px; flex-shrink: 0; transition: transform 0.2s ease; display: inline-block; opacity: 0.5; }
+  .ft-folder-row.open .ft-chevron { transform: rotate(90deg); opacity: 1; }
+  .ft-folder-icon { color: #f59e0b; flex-shrink: 0; }
+  .ft-md-icon { color: var(--prism-text-muted); flex-shrink: 0; opacity: 0.5; }
+  .ft-folder-name { color: var(--prism-text); font-weight: 600; }
+  .ft-name { color: var(--prism-text-muted); }
+  .ft-badge { font-family: 'Zoho Puvi', sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; margin-left: 8px; flex-shrink: 0; }
+  .ft-badge-1 { background: rgba(139,92,246,0.12); color: #a78bfa; border: 1px solid rgba(139,92,246,0.2); }
+  .ft-badge-2 { background: rgba(37,99,235,0.10); color: var(--prism-violet); border: 1px solid rgba(37,99,235,0.18); }
+  .ft-badge-3 { background: rgba(6,182,212,0.10); color: #22d3ee; border: 1px solid rgba(6,182,212,0.2); }
+  .ft-hl { border-radius: 6px; padding: 5px 8px; }
+  .ft-hl-blue { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.18); }
+  .ft-hl-green { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.18); }
+  .ft-hl-amber { background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.18); }
+  .ft-hint { font-family: 'Zoho Puvi', sans-serif; font-size: 11.5px; color: var(--prism-text-muted); margin-left: 6px; opacity: 0.7; }
+  [data-theme="light"] .file-tree { background: #fff; border-color: rgba(37,99,235,0.10); }
+  [data-theme="light"] .ft-children, [data-theme="light"] .ft-subtree { border-left-color: rgba(37,99,235,0.10); }
 </style>
 </head>
 <body>
@@ -222,6 +250,7 @@
       <a href="Foundation.html" class="active">Foundation</a>
       <a href="Components.html">Components</a>
       <a href="zia-experience.html">Zia Experience</a>
+      <a href="llm-reference.html" class="active">LLM Reference</a>
       <div class="nav-dropdown">
         <a href="Icons.html">Resources <svg class="nav-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="nav-dropdown-menu">
@@ -439,90 +468,204 @@ grep -rn <span class="code-string">'&lt;button '</span> src/ | grep -v <span cla
             <h2 id="file-hierarchy" class="doc-section-title">File hierarchy</h2>
             <p class="doc-section-subtitle">The Prism repository is organized so that LLMs can locate context quickly. Every component lives alongside its spec, and tokens are centralized at the root.</p>
 
-            <div class="code-block">
-<span class="code-comment">your-project/</span>
-├── <span class="code-key">specs/</span>
-│   ├── <span class="code-key">foundations/</span>                     <span class="code-comment"># Tier 1: Visual primitives</span>
-│   │   ├── color.md
-│   │   ├── typography.md
-│   │   ├── spacing.md
-│   │   ├── radius.md
-│   │   ├── elevation.md
-│   │   ├── motion.md
-│   │   ├── z-index.md
-│   │   ├── iconography.md
-│   │   ├── accessibility.md
-│   │   ├── breakpoints.md
-│   │   ├── grid.md
-│   │   ├── borders.md
-│   │   └── opacity.md
-│   │
-│   ├── <span class="code-key">tokens/</span>                         <span class="code-comment"># Tier 1: CSS variable reference</span>
-│   │   ├── token-reference.md
-│   │   ├── color-tokens.md
-│   │   ├── spacing-tokens.md
-│   │   ├── typography-tokens.md
-│   │   ├── elevation-tokens.md
-│   │   └── motion-tokens.md
-│   │
-│   ├── <span class="code-key">atoms/</span>                          <span class="code-comment"># Tier 2: Components</span>
-│   │   ├── button.md
-│   │   ├── icon-button.md
-│   │   ├── input.md
-│   │   ├── textarea.md
-│   │   ├── checkbox.md
-│   │   ├── radio.md
-│   │   ├── toggle.md
-│   │   ├── avatar.md
-│   │   ├── badge.md
-│   │   ├── lozenge.md
-│   │   ├── tag.md
-│   │   ├── spinner.md
-│   │   └── link.md
-│   │
-│   ├── <span class="code-key">molecules/</span>                      <span class="code-comment"># Tier 2: Composed components</span>
-│   │   ├── tabs.md
-│   │   ├── breadcrumbs.md
-│   │   ├── dropdown-menu.md
-│   │   ├── modal-dialog.md
-│   │   ├── banner.md
-│   │   ├── flag.md
-│   │   ├── inline-message.md
-│   │   ├── tooltip.md
-│   │   ├── form.md
-│   │   ├── select.md
-│   │   ├── date-picker.md
-│   │   ├── pagination.md
-│   │   ├── inline-edit.md
-│   │   ├── search.md
-│   │   ├── popup.md
-│   │   ├── progress-bar.md
-│   │   ├── side-navigation.md
-│   │   └── empty-state.md
-│   │
-│   ├── <span class="code-key">organisms/</span>                      <span class="code-comment"># Tier 2: Product-specific assemblies</span>
-│   │   ├── table.md
-│   │   ├── navigation.md
-│   │   ├── page-header.md
-│   │   ├── content-panel.md
-│   │   ├── chat-panel.md
-│   │   ├── dashboard-card.md
-│   │   └── work-item-header.md
-│   │
-│   └── <span class="code-key">patterns/</span>                       <span class="code-comment"># Tier 3: Layout &amp; composition rules</span>
-│       ├── canvas-content-flow.md
-│       ├── three-column-layout.md
-│       ├── responsive-grid.md
-│       ├── panel-expand-collapse.md
-│       ├── form-layout.md
-│       ├── list-detail.md
-│       └── error-handling.md
-│
-<span style="background:rgba(37,99,235,0.12);border-radius:4px;padding:1px 4px;">├── tokens.css                          <span class="code-comment"># ← Every CSS variable (3-layer indirection)</span></span>
-├── scripts/
-<span style="background:rgba(34,197,94,0.10);border-radius:4px;padding:1px 4px;">│   └── token-audit.js                  <span class="code-comment"># ← Catches hardcoded values in CI</span></span>
-<span style="background:rgba(245,158,11,0.10);border-radius:4px;padding:1px 4px;">└── CLAUDE.md                           <span class="code-comment"># ← AI reads this at the start of every session</span></span>
-            </div>
+            <div class="file-tree" id="fileTree">
+
+              <!-- Root -->
+              <div class="ft-root">
+                <span class="ft-icon ft-folder-icon">
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                </span>
+                <span class="ft-name ft-folder-name">Prism Design System</span>
+              </div>
+
+              <!-- specs/ -->
+              <div class="ft-children">
+                <div class="ft-row ft-folder-row" data-tree="specs">
+                  <span class="ft-chevron">▶</span>
+                  <span class="ft-icon ft-folder-icon">
+                    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                  </span>
+                  <span class="ft-name ft-folder-name">specs/</span>
+                </div>
+                <div class="ft-subtree" id="specs">
+
+                  <!-- foundations/ -->
+                  <div class="ft-row ft-folder-row" data-tree="ft-foundations">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">foundations/</span>
+                    <span class="ft-badge ft-badge-1">Tier 1 — Visual primitives</span>
+                  </div>
+                  <div class="ft-subtree" id="ft-foundations">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">color.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">typography.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">spacing.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">radius.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">elevation.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">motion.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">z-index.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">iconography.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">accessibility.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">breakpoints.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">grid.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">borders.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">opacity.md</span></div>
+                  </div>
+
+                  <!-- tokens/ -->
+                  <div class="ft-row ft-folder-row" data-tree="spec-tokens">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">tokens/</span>
+                    <span class="ft-badge ft-badge-1">Tier 1 — CSS variable reference</span>
+                  </div>
+                  <div class="ft-subtree" id="spec-tokens">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">token-reference.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">color-tokens.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">spacing-tokens.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">typography-tokens.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">elevation-tokens.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">motion-tokens.md</span></div>
+                  </div>
+
+                  <!-- atoms/ -->
+                  <div class="ft-row ft-folder-row" data-tree="atoms">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">atoms/</span>
+                    <span class="ft-badge ft-badge-2">Tier 2 — Components</span>
+                  </div>
+                  <div class="ft-subtree" id="atoms">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">button.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">icon-button.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">input.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">textarea.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">checkbox.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">radio.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">toggle.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">avatar.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">badge.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">lozenge.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">tag.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">spinner.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">link.md</span></div>
+                  </div>
+
+                  <!-- molecules/ -->
+                  <div class="ft-row ft-folder-row" data-tree="molecules">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">molecules/</span>
+                    <span class="ft-badge ft-badge-2">Tier 2 — Composed components</span>
+                  </div>
+                  <div class="ft-subtree" id="molecules">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">tabs.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">breadcrumbs.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">dropdown-menu.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">modal-dialog.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">banner.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">flag.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">inline-message.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">tooltip.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">form.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">select.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">date-picker.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">pagination.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">inline-edit.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">search.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">popup.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">progress-bar.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">side-navigation.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">empty-state.md</span></div>
+                  </div>
+
+                  <!-- organisms/ -->
+                  <div class="ft-row ft-folder-row" data-tree="organisms">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">organisms/</span>
+                    <span class="ft-badge ft-badge-2">Tier 2 — Product-specific assemblies</span>
+                  </div>
+                  <div class="ft-subtree" id="organisms">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">table.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">navigation.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">page-header.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">content-panel.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">chat-panel.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">dashboard-card.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">work-item-header.md</span></div>
+                  </div>
+
+                  <!-- patterns/ -->
+                  <div class="ft-row ft-folder-row" data-tree="patterns">
+                    <span class="ft-chevron">▶</span>
+                    <span class="ft-icon ft-folder-icon">
+                      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                    </span>
+                    <span class="ft-name ft-folder-name">patterns/</span>
+                    <span class="ft-badge ft-badge-3">Tier 3 — Layout &amp; composition rules</span>
+                  </div>
+                  <div class="ft-subtree" id="patterns">
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">canvas-content-flow.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">three-column-layout.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">responsive-grid.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">panel-expand-collapse.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">form-layout.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">list-detail.md</span></div>
+                    <div class="ft-row ft-file-row"><span class="ft-icon ft-md-icon"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="ft-name">error-handling.md</span></div>
+                  </div>
+
+                </div><!-- /specs subtree -->
+
+                <!-- tokens.css — highlighted blue -->
+                <div class="ft-row ft-file-row ft-hl ft-hl-blue">
+                  <span class="ft-icon" style="color:#60a5fa;">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  </span>
+                  <span class="ft-name" style="color:#60a5fa;">tokens.css</span>
+                  <span class="ft-hint">← Every CSS variable (3-layer indirection)</span>
+                </div>
+
+                <!-- scripts/ -->
+                <div class="ft-row ft-folder-row" data-tree="scripts">
+                  <span class="ft-chevron">▶</span>
+                  <span class="ft-icon ft-folder-icon">
+                    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+                  </span>
+                  <span class="ft-name ft-folder-name">scripts/</span>
+                </div>
+                <div class="ft-subtree" id="scripts">
+                  <div class="ft-row ft-file-row ft-hl ft-hl-green">
+                    <span class="ft-icon" style="color:#4ade80;">
+                      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    </span>
+                    <span class="ft-name" style="color:#4ade80;">token-audit.js</span>
+                    <span class="ft-hint">← Catches hardcoded values in CI</span>
+                  </div>
+                </div>
+
+                <!-- CLAUDE.md — highlighted amber -->
+                <div class="ft-row ft-file-row ft-hl ft-hl-amber">
+                  <span class="ft-icon" style="color:#fbbf24;">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </span>
+                  <span class="ft-name" style="color:#fbbf24;">CLAUDE.md</span>
+                  <span class="ft-hint">← AI reads this at the start of every session</span>
+                </div>
+
+              </div><!-- /root children -->
+
+            </div><!-- /file-tree -->
 
             <h3 id="specs-directory" class="doc-h3">The complete specs/ directory</h3>
             <p class="doc-section-subtitle">Each file in <code style="font-family:monospace; font-size:13px;">specs/</code> is a self-contained markdown document that an LLM can consume as context. Files follow a strict, consistent template so LLMs parse them predictably.</p>
@@ -912,7 +1055,7 @@ Named breakdown of each visual and functional part.
               <div class="fb-sub">Share your feedback to help shape the LLM Reference documentation.</div>
             </div>
             <div style="display: flex; gap: 12px;">
-              <button class="feedback-btn primary">Give Feedback</button>
+              <button class="feedback-btn primary" onclick="window.open('https://cliq.zoho.in/company/60002085329/channels/prismdesignsystembyuemssupportfeedback','_blank')">Give Feedback</button>
             </div>
           </div>
 
@@ -965,6 +1108,24 @@ Named breakdown of each visual and functional part.
       sections.forEach(s => _tocObserver.observe(s));
     }
     buildTOC();
+
+    // File tree expand/collapse
+    document.querySelectorAll('.ft-folder-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const id = row.getAttribute('data-tree');
+        const subtree = document.getElementById(id);
+        if (!subtree) return;
+        const open = subtree.classList.toggle('open');
+        row.classList.toggle('open', open);
+      });
+    });
+    // Open specs/ by default
+    const specsRow = document.querySelector('[data-tree="specs"]');
+    const specsTree = document.getElementById('specs');
+    if (specsRow && specsTree) { specsTree.classList.add('open'); specsRow.classList.add('open'); }
+    const scriptsRow = document.querySelector('[data-tree="scripts"]');
+    const scriptsTree = document.getElementById('scripts');
+    if (scriptsRow && scriptsTree) { scriptsTree.classList.add('open'); scriptsRow.classList.add('open'); }
 
     const themeToggle = document.getElementById('themeToggle');
     const moonIcon = document.getElementById('moonIcon');
