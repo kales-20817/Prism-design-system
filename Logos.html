@@ -420,7 +420,7 @@
           <option value="Browser Security Plus">Browser Security Plus</option>
           <option value="DEX Manager Plus">DEX Manager Plus</option>
           <option value="Device Control Plus">Device Control Plus</option>
-          <option value="Endpoint Central">Endpoint Central</option>
+          <option value="Endpoint Central" selected>Endpoint Central</option>
           <option value="Endpoint DLP Plus">Endpoint DLP Plus</option>
           <option value="Malware Protection Plus">Malware Protection Plus</option>
           <option value="Mobile Device Manager Plus">Mobile Device Manager Plus</option>
@@ -1374,10 +1374,12 @@
       (function(){
         var select = document.getElementById("logo-product-filter");
         var groups = document.querySelectorAll("#logo-groups-container .lib-logo-group");
+        var DEFAULT_PRODUCT = "Endpoint Central";
         if(groups.length > 0){
-          select.value = groups[0].getAttribute("data-product");
-          groups.forEach(function(g){ g.style.display = "none"; });
-          groups[0].style.display = "";
+          select.value = DEFAULT_PRODUCT;
+          groups.forEach(function(g){
+            g.style.display = (g.getAttribute("data-product") === DEFAULT_PRODUCT) ? "" : "none";
+          });
         }
         select.addEventListener("change", function(){
           var v = this.value;

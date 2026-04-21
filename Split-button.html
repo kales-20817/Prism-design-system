@@ -781,25 +781,28 @@
           <div class="anat-split-container">
             <div class="anat-split-button">
               <div class="anat-split-action">
-                <div style="position: absolute; top: -34px; left: 16px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                <div style="position: absolute; top: -34px; left: 30px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
                   <span class="anat-marker-inline">1</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
                 </div>
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
                 <span>Label Text</span>
+                <!-- 3 Divider: sits on action's right edge (the divider line) -->
+                <div style="position: absolute; top: -34px; right: -1px; transform: translateX(50%); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                  <span class="anat-marker-inline">3</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
+                </div>
+                <!-- 2 Label Text: centered below action -->
                 <div style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
                   <span class="anat-marker-inline">2</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
                 </div>
               </div>
-              <div style="position: absolute; top: -34px; left: calc(50% + 20px); display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                <span class="anat-marker-inline">3</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
-              </div>
               <div class="anat-split-chevron">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
-                <div style="position: absolute; top: -34px; right: 8px; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                <div style="position: absolute; top: -34px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px;">
                   <span class="anat-marker-inline">4</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
                 </div>
               </div>
-              <div style="position: absolute; bottom: -34px; right: 50%; transform: translateX(50%); display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
+              <!-- 5 Container: centered below full button -->
+              <div style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
                 <span class="anat-marker-inline">5</span><div style="width: 2px; height: 16px; background: #2563eb;"></div>
               </div>
             </div>

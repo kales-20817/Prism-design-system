@@ -784,10 +784,12 @@
                 <div style="width: 48px; height: 26px; border-radius: 999px; background: #C3C9D6; position: relative;">
                   <div style="width: 22px; height: 22px; border-radius: 50%; background: #fff; position: absolute; top: 2px; left: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);"></div>
                 </div>
-                <div style="position: absolute; top: -32px; left: 12px; display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                  <span class="anat-marker-inline">1</span><div style="width: 2px; height: 10px; background: #2563eb;"></div>
+                <!-- 1 Track: left of pill, horizontal line -->
+                <div style="position: absolute; right: calc(100% + 6px); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px;">
+                  <span class="anat-marker-inline">1</span><div style="width: 28px; height: 2px; background: #2563eb;"></div>
                 </div>
-                <div style="position: absolute; top: -32px; right: -4px; display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <!-- 2 Thumb: below, over thumb position (left side when off) -->
+                <div style="position: absolute; bottom: -32px; left: 13px; display: flex; flex-direction: column-reverse; align-items: center; gap: 2px;">
                   <span class="anat-marker-inline">2</span><div style="width: 2px; height: 10px; background: #2563eb;"></div>
                 </div>
               </div>
