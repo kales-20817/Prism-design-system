@@ -679,6 +679,12 @@
     .sc-vuln-stat { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease; }
     .sc-vuln-card:hover .sc-vuln-stat { transform: translateY(-4px) scale(1.05); }
     .sc-vuln-card:hover .sc-vuln-bar { width: 82% !important; background: linear-gradient(90deg, var(--prism-emerald), #34d399) !important; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease; }
+    .sc-vuln-search { transition: border-color 0.2s ease, background 0.2s ease; }
+    .sc-vuln-search:focus-within { border-color: rgba(239,68,68,0.4) !important; background: rgba(239,68,68,0.04) !important; }
+    .sc-vuln-search input::placeholder { color: var(--prism-text-muted); }
+    [data-theme="light"] .sc-vuln-search { border-color: rgba(15,23,42,0.08) !important; background: rgba(15,23,42,0.02) !important; }
+    [data-theme="light"] .sc-vuln-search:focus-within { border-color: rgba(239,68,68,0.35) !important; background: rgba(239,68,68,0.05) !important; }
+    [data-theme="light"] .sc-vuln-search span { background: rgba(15,23,42,0.05) !important; border-color: rgba(15,23,42,0.08) !important; color: var(--prism-text-muted); }
 
     @media (max-width: 640px) {
         .meta { font-size: 0.7rem; gap: 16px; }
@@ -966,50 +972,84 @@
           <div style="flex:1; display:flex; flex-direction:column; gap:4px;"><div><strong>Scan Complete</strong></div><div style="font-size:10px; color:var(--prism-text-muted);">Full audit passed · 09:30</div></div>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 260px; text-align: center;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-          <div style="text-align:left;">
-            <h4 class="sc-card-title" style="margin:0; text-align:left;">Data Center</h4>
-            <div style="font-size:10px; color:var(--prism-emerald); font-weight:600; text-align:left;">All systems operational</div>
+      <div class="sc-card sc-hover-anim sc-dc-card" style="min-width: 320px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(96,165,250,0.14); display:flex; align-items:center; justify-content:center; color:#60a5fa; flex-shrink:0;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/></svg>
           </div>
-          <div style="padding:3px 10px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25);">
-            <span style="font-size:10px; font-weight:700; color:var(--prism-emerald);">LIVE</span>
+          <div style="flex:1;">
+            <div class="sc-progress-title" style="margin:0;">Data Centers</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">Distribution across 9 regions</div>
           </div>
-        </div>
-        <div style="display:flex; gap:8px; margin-bottom:14px;">
-          <div style="flex:1; padding:10px 8px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.15); border-radius:10px; text-align:center;">
-            <div style="font-size:20px; font-weight:800; color:var(--prism-emerald);">99.9%</div>
-            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Uptime</div>
-          </div>
-          <div style="flex:1; padding:10px 8px; background:rgba(6,182,212,0.06); border:1px solid rgba(6,182,212,0.15); border-radius:10px; text-align:center;">
-            <div style="font-size:20px; font-weight:800; color:var(--prism-cyan);">12ms</div>
-            <div style="font-size:10px; color:var(--prism-text-muted); font-weight:500;">Latency</div>
+          <div style="padding:3px 8px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); flex-shrink:0;">
+            <span style="font-size:9px; font-weight:700; color:var(--prism-emerald); letter-spacing:0.04em;">LIVE</span>
           </div>
         </div>
-        <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
-          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">US-East &#10003;</span>
-          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">EU-West &#10003;</span>
-          <span style="padding:3px 10px; border-radius:6px; font-size:10px; font-weight:600; background:rgba(245,158,11,0.1); color:var(--prism-orange); border:1px solid rgba(245,158,11,0.2);">AP-South &#9888;</span>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <svg class="sc-dc-donut" width="110" height="110" viewBox="0 0 100 100" style="flex-shrink:0; transform:rotate(-90deg);">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="12" stroke-dasharray="76.63 251.33" stroke-dashoffset="0"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="12" stroke-dasharray="45.99 251.33" stroke-dashoffset="-76.63"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="12" stroke-dasharray="30.66 251.33" stroke-dashoffset="-122.62"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="12" stroke-dasharray="25.38 251.33" stroke-dashoffset="-153.28"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#a855f7" stroke-width="12" stroke-dasharray="21.36 251.33" stroke-dashoffset="-178.66"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#c084fc" stroke-width="12" stroke-dasharray="19.60 251.33" stroke-dashoffset="-200.02"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#d946ef" stroke-width="12" stroke-dasharray="15.08 251.33" stroke-dashoffset="-219.62"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#ec4899" stroke-width="12" stroke-dasharray="9.05 251.33" stroke-dashoffset="-234.70"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f43f5e" stroke-width="12" stroke-dasharray="7.54 251.33" stroke-dashoffset="-243.75"/>
+          </svg>
+          <div style="flex:1; display:grid; grid-template-columns:1fr 1fr; gap:4px 10px; font-size:10px; line-height:1.4;">
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#60a5fa; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Lithuania</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#3b82f6; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Czechia</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#6366f1; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Ireland</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#8b5cf6; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Germany</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#a855f7; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Australia</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#c084fc; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Austria</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#d946ef; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">UK</span></div>
+            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#ec4899; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Belgium</span></div>
+          </div>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim sc-vuln-card" style="min-width: 280px;">
-        <div class="sc-progress-title" style="text-align:center; margin-bottom:14px;">Statistics Vulnerabilities</div>
-        <div style="display:flex; justify-content:space-between; gap:10px; margin-bottom:14px;">
-          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:12px;">
-            <div style="font-size:22px; font-weight:800; color:var(--prism-red);">24</div>
-            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">Critical</div>
+      <div class="sc-card sc-hover-anim sc-vuln-card" style="min-width: 290px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(239,68,68,0.12); display:flex; align-items:center; justify-content:center; color:var(--prism-red); flex-shrink:0;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5 4 9 9 10 5-1 9-5 9-10V7l-9-5z"/><path d="M12 8v4M12 16h.01"/></svg>
           </div>
-          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); border-radius:12px;">
-            <div style="font-size:22px; font-weight:800; color:var(--prism-orange);">87</div>
-            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">High</div>
+          <div style="flex:1;">
+            <div class="sc-progress-title" style="margin:0; display:flex; align-items:center; gap:6px;">
+              Vulnerabilities
+              <span style="font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; background:rgba(239,68,68,0.14); color:var(--prism-red); letter-spacing:0.04em;">253</span>
+            </div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">Across 1,240 devices</div>
           </div>
-          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 8px; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.2); border-radius:12px;">
-            <div style="font-size:22px; font-weight:800; color:var(--prism-cyan);">142</div>
-            <div style="font-size:10px; font-weight:600; color:var(--prism-text-muted); margin-top:2px;">Medium</div>
+        </div>
+        <div class="sc-vuln-search" style="display:flex; align-items:center; gap:6px; padding:7px 10px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.08); border-radius:8px; background:rgba(255,255,255,0.02);">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--prism-text-muted); flex-shrink:0;"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+          <input type="text" placeholder="Search CVE, device, or software" aria-label="Search vulnerabilities" style="flex:1; border:none; background:transparent; outline:none; font-size:11px; color:var(--prism-text); font-family:inherit; min-width:0;">
+          <span style="font-size:9px; font-weight:700; color:var(--prism-text-muted); padding:1px 5px; border-radius:4px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); flex-shrink:0;">&#8984;K</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:8px; margin-bottom:14px;">
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 6px; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.18); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-red); line-height:1.1;">24</div>
+            <div style="font-size:9px; font-weight:700; color:var(--prism-text-muted); margin-top:3px; text-transform:uppercase; letter-spacing:0.05em;">Critical</div>
+          </div>
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 6px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.18); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-orange); line-height:1.1;">87</div>
+            <div style="font-size:9px; font-weight:700; color:var(--prism-text-muted); margin-top:3px; text-transform:uppercase; letter-spacing:0.05em;">High</div>
+          </div>
+          <div class="sc-vuln-stat" style="flex:1; text-align:center; padding:10px 6px; background:rgba(6,182,212,0.08); border:1px solid rgba(6,182,212,0.18); border-radius:10px;">
+            <div style="font-size:20px; font-weight:800; color:var(--prism-cyan); line-height:1.1;">142</div>
+            <div style="font-size:9px; font-weight:700; color:var(--prism-text-muted); margin-top:3px; text-transform:uppercase; letter-spacing:0.05em;">Medium</div>
           </div>
         </div>
         <div class="sc-progress-bar"><div class="sc-progress-fill sc-vuln-bar" style="width: 68%; background:linear-gradient(90deg, var(--prism-red), var(--prism-orange));"></div></div>
-        <div class="sc-progress-label"><span style="color:var(--prism-red);">68%</span><span>Remediated</span></div>
+        <div class="sc-progress-label" style="margin-top:8px;">
+          <span style="display:inline-flex; align-items:center; gap:4px; color:var(--prism-emerald); font-weight:700;">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            68% Remediated
+          </span>
+          <span style="color:var(--prism-emerald); font-weight:600;">&#9660; 12 today</span>
+        </div>
       </div>
       <!-- Duplicates for seamless loop -->
       <div id="sc-patch-compliance-dup" class="sc-card sc-hover-anim" style="min-width: 270px;">
