@@ -97,7 +97,7 @@
   [data-theme="light"] .faq-item { background: #fff; border: 1px solid rgba(37, 99, 235, 0.10); }
   [data-theme="light"] .tldr-box { background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(6,182,212,0.04) 100%); border: 1px solid rgba(37, 99, 235, 0.15); }
 
-  .components-layout { display: grid; grid-template-columns: 260px 1fr; width: 100%; padding-top: 72px; min-height: 100vh; }
+  .components-layout { display: block; width: 100%; padding-top: 72px; min-height: 100vh; }
   .sidebar { grid-column: 1; grid-row: 1; width: 260px; border-right: 1px solid var(--prism-border); padding: 32px 24px 64px; position: sticky; top: 72px; height: calc(100vh - 72px); overflow-y: auto; }
   .sidebar::-webkit-scrollbar { width: 4px; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--prism-border); border-radius: 4px; }
@@ -110,7 +110,7 @@
   .sidebar-search input::placeholder { color: var(--prism-text-muted); }
   .search-shortcut { font-size: 11px; font-weight: 600; color: var(--prism-text-muted); background: var(--prism-surface-hover); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--prism-border); }
 
-  .main-panel { grid-column: 2; grid-row: 1; padding: 48px 64px 0 64px; display: flex; flex-direction: column; }
+  .main-panel { padding: 48px 64px 0 64px; display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; width: 100%; }
   .page-header-area { width: 100%; max-width: none; }
   .page-title { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-right: 8px; padding-bottom: 4px; }
   .page-desc { color: var(--prism-text); font-size: 20px; font-weight: 400; line-height: 1.5; margin-bottom: 32px; margin-top: 8px; max-width: 900px; }
@@ -247,7 +247,7 @@
       <span class="nav-logo-sub">Design System</span>
     </a>
     <div class="nav-links">
-      <a href="Foundation.html" class="active">Foundation</a>
+      <a href="Foundation.html">Foundation</a>
       <a href="Components.html">Components</a>
       <a href="zia-experience.html">Zia Experience</a>
       <a href="llm-reference.html" class="active">LLM Reference</a>
@@ -268,31 +268,6 @@
   </nav>
 
   <div class="components-layout">
-    <aside class="sidebar">
-      <div class="sidebar-search">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <input type="text" placeholder="Search...">
-        <span class="search-shortcut">&#8984;K</span>
-      </div>
-      <h3 class="sidebar-heading" id="foundations">Foundations</h3>
-      <ul class="foundation-nav">
-        <li><a href="foundation-tokens.html" class="foundation-link">Tokens</a></li>
-        <li><a href="foundation-accessibility.html" class="foundation-link">Accessibility</a></li>
-        <li><a href="foundation-content.html" class="foundation-link">Content</a></li>
-        <li><a href="foundation-spacing.html" class="foundation-link">Spacing</a></li>
-        <li><a href="foundation-grid.html" class="foundation-link">Grid</a></li>
-        <li><a href="foundation-color.html" class="foundation-link">Color</a></li>
-        <li><a href="foundation-typography.html" class="foundation-link">Typography</a></li>
-        <li><a href="foundation-iconography.html" class="foundation-link">Iconography</a></li>
-        <li><a href="foundation-illustrations.html" class="foundation-link">Illustrations</a></li>
-        <li><a href="foundation-patterns.html" class="foundation-link">Patterns</a></li>
-        <li><a href="foundation-elevation.html" class="foundation-link">Elevation</a></li>
-        <li><a href="foundation-border.html" class="foundation-link">Border</a></li>
-        <li><a href="foundation-radius.html" class="foundation-link">Radius</a></li>
-        <li><a href="llm-reference.html" class="foundation-link active">LLM Reference</a></li>
-      </ul>
-    </aside>
-
     <main class="main-panel">
       <div class="page-header-area">
         <h1 class="page-title">LLM Reference</h1>

@@ -173,11 +173,12 @@
     }
     .hero-section {
         position: relative;
-        min-height: 62vh;
+        min-height: 50vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 80px 20px 100px;
+        padding: 20px 20px 49px;
+        padding-bottom: 8px;
     }
     .showcase-section {
         padding: 0px 0 0px;
@@ -207,11 +208,9 @@
         height: 100%;
         object-fit: cover;
         pointer-events: none;
+        opacity: 0.9;
         transition: opacity 1s ease;
     }
-    #bgVideo { opacity: 0.6; }
-    #bgVideoLight { opacity: 0.8; }
-    #bgVideo.fading, #bgVideoLight.fading { opacity: 0; }
     /* Hide canvas in both themes */
     #container canvas { display: none !important; }
     /* Dark mode: show dark video, hide light video */
@@ -291,7 +290,7 @@
         color: var(--text-soft);
         line-height: 1.6;
         max-width: 620px;
-        margin: 0 auto 40px;
+        /* margin: 0 auto 40px; */
         text-shadow: 0 1px 20px var(--text-glow);
     }
     .scroll-btn {
@@ -676,6 +675,9 @@
     .sc-hover-anim:hover .badge-anim { background: var(--prism-violet) !important; color: #fff !important; border-color:var(--prism-violet) !important; }
     .sc-hover-anim:hover .ring-anim { border-top-color: var(--prism-cyan) !important; animation-duration: 1s !important; }
     .sc-card:hover .gauge-fill { stroke-dashoffset: 44 !important; }
+    .sc-vuln-gauge-card .gauge-val-hover { display: none; }
+    .sc-vuln-gauge-card:hover .gauge-val-default { display: none; }
+    .sc-vuln-gauge-card:hover .gauge-val-hover { display: inline; }
     .sc-vuln-stat { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease; }
     .sc-vuln-card:hover .sc-vuln-stat { transform: translateY(-4px) scale(1.05); }
     .sc-vuln-card:hover .sc-vuln-bar { width: 82% !important; background: linear-gradient(90deg, var(--prism-emerald), #34d399) !important; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease; }
@@ -800,10 +802,10 @@
 <body>
 <div id="container">
   <video id="bgVideo" autoplay muted loop playsinline>
-    <source src="0_Wind_Flowing_1920x1080 (1).mp4" type="video/mp4">
+    <source src="GettyImages-1195899963 copy.mp4" type="video/mp4">
   </video>
   <video id="bgVideoLight" autoplay muted loop playsinline>
-    <source src="0_Wind_Flowing_1920x1080.mp4" type="video/mp4">
+    <source src="425253.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -843,10 +845,6 @@
 <div class="page">
 <section class="hero-section">
 <main class="overlay">
-    <div class="badge">
-        <span class="dot"></span>
-        <span>Design System 3.0</span>
-    </div>
     <h1><span class="accent">Prism</span> Design<br>for every endpoints.</h1>
     <p class="subtext">
         Everything teams need to design, build, and scale consistent endpoint workflows—from tokens and foundations to production-ready components.
@@ -928,11 +926,11 @@
         </div>
         <div class="sc-profile-name" style="font-size:16px; font-weight:700; color:var(--prism-text);">Admin Node</div>
         <div class="sc-profile-status" style="font-size:11px; color:var(--prism-text-muted); margin-bottom:10px;">Elevated Privilege</div>
-        <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
           <span style="padding:3px 10px; border-radius:99px; font-size:10px; font-weight:600; background:rgba(124,58,237,0.12); color:var(--prism-violet-light); border:1px solid rgba(124,58,237,0.2);">Sysadmin Tier 1</span>
           <span style="padding:3px 10px; border-radius:99px; font-size:10px; font-weight:600; background:rgba(16,185,129,0.1); color:var(--prism-emerald); border:1px solid rgba(16,185,129,0.2);">Online</span>
         </div>
-        <div style="display:flex; gap:12px; justify-content:center; margin-top:12px;">
+        <div style="display:flex; gap:24px; justify-content:center; margin-top:16px;">
           <div style="text-align:center;">
             <div style="font-size:14px; font-weight:800; color:var(--prism-text);">342</div>
             <div style="font-size:9px; color:var(--prism-text-muted); font-weight:500;">Tasks</div>
@@ -979,34 +977,26 @@
           </div>
           <div style="flex:1;">
             <div class="sc-progress-title" style="margin:0;">Data Centers</div>
-            <div style="font-size:10px; color:var(--prism-text-muted);">Distribution across 9 regions</div>
+            <div style="font-size:10px; color:var(--prism-text-muted);">Distribution across 3 regions</div>
           </div>
           <div style="padding:3px 8px; border-radius:99px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); flex-shrink:0;">
             <span style="font-size:9px; font-weight:700; color:var(--prism-emerald); letter-spacing:0.04em;">LIVE</span>
           </div>
         </div>
-        <div style="display:flex; align-items:center; gap:14px;">
+        <div style="display:flex; flex:1; align-items:center; justify-content:center; gap:20px;">
           <svg class="sc-dc-donut" width="110" height="110" viewBox="0 0 100 100" style="flex-shrink:0; transform:rotate(-90deg);">
             <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="12" stroke-dasharray="76.63 251.33" stroke-dashoffset="0"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="12" stroke-dasharray="45.99 251.33" stroke-dashoffset="-76.63"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="12" stroke-dasharray="30.66 251.33" stroke-dashoffset="-122.62"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="12" stroke-dasharray="25.38 251.33" stroke-dashoffset="-153.28"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#a855f7" stroke-width="12" stroke-dasharray="21.36 251.33" stroke-dashoffset="-178.66"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#c084fc" stroke-width="12" stroke-dasharray="19.60 251.33" stroke-dashoffset="-200.02"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#d946ef" stroke-width="12" stroke-dasharray="15.08 251.33" stroke-dashoffset="-219.62"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#ec4899" stroke-width="12" stroke-dasharray="9.05 251.33" stroke-dashoffset="-234.70"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#f43f5e" stroke-width="12" stroke-dasharray="7.54 251.33" stroke-dashoffset="-243.75"/>
+            <!-- Lithuania 59.8% -->
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="12" stroke-dasharray="150.30 251.33" stroke-dashoffset="0"/>
+            <!-- Ireland 23.9% -->
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="12" stroke-dasharray="60.07 251.33" stroke-dashoffset="-150.30"/>
+            <!-- Australia 16.3% -->
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#a855f7" stroke-width="12" stroke-dasharray="40.96 251.33" stroke-dashoffset="-210.37"/>
           </svg>
-          <div style="flex:1; display:grid; grid-template-columns:1fr 1fr; gap:4px 10px; font-size:10px; line-height:1.4;">
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#60a5fa; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Lithuania</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#3b82f6; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Czechia</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#6366f1; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Ireland</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#8b5cf6; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Germany</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#a855f7; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Australia</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#c084fc; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Austria</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#d946ef; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">UK</span></div>
-            <div style="display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:2px; background:#ec4899; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Belgium</span></div>
+          <div style="display:grid; grid-template-columns:1fr; gap:6px; font-size:11px; line-height:1.4;">
+            <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px; height:8px; border-radius:2px; background:#60a5fa; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Lithuania</span></div>
+            <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px; height:8px; border-radius:2px; background:#6366f1; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Ireland</span></div>
+            <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px; height:8px; border-radius:2px; background:#a855f7; flex-shrink:0;"></span><span style="color:var(--prism-text-muted);">Australia</span></div>
           </div>
         </div>
       </div>
@@ -1139,7 +1129,7 @@
         <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px; margin-bottom:6px;"><div class="sc-radio-custom"></div><div style="flex:1;">Standard Cloud Access</div></label>
         <label class="sc-radio-label" style="padding:8px 12px; border-radius:10px;"><div class="sc-radio-custom"></div><div style="flex:1;">Open Developer Network</div></label>
       </div>
-      <div class="sc-card sc-hover-anim" style="min-width: 280px;">
+      <div class="sc-card sc-hover-anim sc-vuln-gauge-card" style="min-width: 280px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
           <div>
             <div style="font-size:11px; color:var(--prism-text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Statistics</div>
@@ -1147,7 +1137,7 @@
           </div>
           <div style="text-align:right;">
             <div style="font-size:11px; color:var(--prism-text-muted); font-weight:600;">Remaining</div>
-            <div style="font-size:16px; font-weight:800; color:var(--prism-violet-light);">1,204</div>
+            <div style="font-size:16px; font-weight:800; color:var(--prism-violet-light);"><span class="gauge-val-default">3,018</span><span class="gauge-val-hover">1,204</span></div>
           </div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; width:100%;">
@@ -1160,10 +1150,10 @@
               </linearGradient>
             </defs>
             <path d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="8" stroke-linecap="round"></path>
-            <path class="gauge-fill" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="url(#gaugeGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" style="transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);"></path>
+            <path class="gauge-fill" d="M10,60 A50,50 0 0,1 110,60" fill="none" stroke="url(#gaugeGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="110" style="transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);"></path>
           </svg>
-          <div style="font-size:24px; font-weight:800; color:var(--prism-text); margin-top:-4px;">72%</div>
-          <div style="font-size:11px; color:var(--prism-text-muted);">Patched: <span style="font-weight:700; color:var(--prism-text);">3,108</span></div>
+          <div style="font-size:24px; font-weight:800; color:var(--prism-text); margin-top:-4px;"><span class="gauge-val-default">30%</span><span class="gauge-val-hover">72%</span></div>
+          <div style="font-size:11px; color:var(--prism-text-muted);">Patched: <span style="font-weight:700; color:var(--prism-text);"><span class="gauge-val-default">1,294</span><span class="gauge-val-hover">3,108</span></span></div>
         </div>
       </div>
       <div class="sc-card sc-hover-anim" style="min-width: 320px;">
@@ -1198,7 +1188,7 @@
           <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 240px; align-items:center; text-align:center;">
+      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 260px; width: 260px; align-items:center; text-align:center;">
         <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
           <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
@@ -1296,7 +1286,7 @@
           <div class="sc-toggle"><div class="sc-toggle-knob"></div></div>
         </div>
       </div>
-      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 240px; align-items:center; text-align:center;">
+      <div class="sc-card sc-hover-anim sc-enrolled-card" style="min-width: 260px; width: 260px; align-items:center; text-align:center;">
         <div style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg, #0058ff 40%, #3c50ff 30%, #0fd095 100%); display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
           <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
