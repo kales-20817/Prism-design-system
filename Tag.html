@@ -1396,6 +1396,150 @@
 
       <!-- ═══ CODE TAB ═══ -->
       <div class="tab-content" id="tab-code" style="display: none; padding-top: 32px;">
+        <h2 id="live-demo-code" class="doc-section-title">Live demo (Code)</h2>
+        <p class="doc-section-subtitle">Configure the Tag and view the generated HTML.</p>
+
+        <style>
+          .tag-playground { border: 1px solid var(--prism-border); border-radius: 12px; overflow: hidden; background: var(--prism-surface); margin-bottom: 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+          [data-theme="light"] .tag-playground { background: #fff; border: 1px solid rgba(37,99,235,0.1); box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+          .tag-pg-toolbar { display: flex; flex-wrap: wrap; gap: 20px; padding: 16px 24px; border-bottom: 1px solid var(--prism-border); background: var(--prism-surface-hover); }
+          [data-theme="light"] .tag-pg-toolbar { background: rgba(248, 250, 255, 0.6); border-bottom: 1px solid rgba(37,99,235,0.1); }
+          .tag-pg-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 140px; }
+          .tag-pg-label { font-size: 13px; font-weight: 600; color: var(--prism-text-muted); }
+          .tag-pg-select, .tag-pg-input { background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); padding: 8px 12px; border-radius: 8px; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+          [data-theme="light"] .tag-pg-select, [data-theme="light"] .tag-pg-input { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
+          .tag-pg-select:focus, .tag-pg-input:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+          .tag-pg-preview { padding: 60px; min-height: 180px; display: flex; align-items: center; justify-content: center; background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .tag-pg-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .tag-pg-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
+          [data-theme="light"] .tag-pg-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
+          .tag-pg-copy { display: flex; align-items: center; gap: 8px; background: transparent; border: none; font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+          .tag-pg-copy:hover { background: var(--prism-surface-hover); color: var(--prism-text); }
+          [data-theme="light"] .tag-pg-copy:hover { background: rgba(37,99,235,0.08); color: var(--prism-violet); }
+          .tag-pg-code { background: #0a0a0c; padding: 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; margin: 0; white-space: pre; }
+          .tag-pg-code .tk-tag { color: #a78bfa; }
+          .tag-pg-code .tk-attr { color: #38bdf8; }
+          .tag-pg-code .tk-str { color: #34d399; }
+          .tag-pg-code .tk-punct { color: #94a3b8; }
+        </style>
+
+        <div class="tag-playground">
+          <div class="tag-pg-toolbar">
+            <div class="tag-pg-group">
+              <label class="tag-pg-label">Variant</label>
+              <select class="tag-pg-select" id="tag-pg-variant">
+                <option value="neutral">Neutral</option>
+                <option value="primary" selected>Primary</option>
+                <option value="success">Success</option>
+                <option value="warning">Warning</option>
+                <option value="error">Error</option>
+                <option value="outline">Outline</option>
+              </select>
+            </div>
+            <div class="tag-pg-group">
+              <label class="tag-pg-label">Size</label>
+              <select class="tag-pg-select" id="tag-pg-size">
+                <option value="sm">Small</option>
+                <option value="md" selected>Medium</option>
+                <option value="lg">Large</option>
+              </select>
+            </div>
+            <div class="tag-pg-group">
+              <label class="tag-pg-label">Leading</label>
+              <select class="tag-pg-select" id="tag-pg-leading">
+                <option value="none">None</option>
+                <option value="dot" selected>Status dot</option>
+                <option value="icon">Icon</option>
+              </select>
+            </div>
+            <div class="tag-pg-group">
+              <label class="tag-pg-label">Close button</label>
+              <select class="tag-pg-select" id="tag-pg-close">
+                <option value="on" selected>Show</option>
+                <option value="off">Hide</option>
+              </select>
+            </div>
+            <div class="tag-pg-group">
+              <label class="tag-pg-label">Label</label>
+              <input class="tag-pg-input" id="tag-pg-text" type="text" value="Design">
+            </div>
+          </div>
+
+          <div class="tag-pg-preview">
+            <span class="tag-demo tag-md tag-primary" id="tag-pg-preview"></span>
+          </div>
+
+          <div class="tag-pg-code-header">
+            <div style="font-size: 13.5px; font-weight: 600; color: var(--prism-text);">HTML</div>
+            <button class="tag-pg-copy" id="tag-pg-copy-btn">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre class="tag-pg-code" id="tag-pg-code"></pre>
+        </div>
+
+        <script>
+          (function(){
+            const el = {
+              variant: document.getElementById('tag-pg-variant'),
+              size: document.getElementById('tag-pg-size'),
+              leading: document.getElementById('tag-pg-leading'),
+              close: document.getElementById('tag-pg-close'),
+              text: document.getElementById('tag-pg-text'),
+              preview: document.getElementById('tag-pg-preview'),
+              code: document.getElementById('tag-pg-code'),
+              copy: document.getElementById('tag-pg-copy-btn')
+            };
+            if (!el.preview) return;
+
+            const ICON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>';
+            const CLOSE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+            function escape(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+            function render(){
+              const variant = el.variant.value;
+              const size = el.size.value;
+              const leading = el.leading.value;
+              const showClose = el.close.value === 'on';
+              const label = el.text.value || 'Tag';
+              const classes = ['tag-demo', 'tag-' + size, 'tag-' + variant];
+
+              let inner = '';
+              if (leading === 'dot') inner += '<span class="tag-dot"></span>';
+              else if (leading === 'icon') inner += '<span class="tag-icon">' + ICON_SVG + '</span>';
+              inner += '<span>' + escape(label) + '</span>';
+              if (showClose) inner += '<span class="tag-close">' + CLOSE_SVG + '</span>';
+
+              el.preview.className = classes.join(' ');
+              el.preview.innerHTML = inner;
+
+              const classAttr = classes.join(' ');
+              let parts = [];
+              parts.push('<span class="tk-punct">&lt;</span><span class="tk-tag">span</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;</span>');
+              if (leading === 'dot') parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"tag-dot"</span><span class="tk-punct">&gt;&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+              else if (leading === 'icon') parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"tag-icon"</span><span class="tk-punct">&gt;</span>...<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+              parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>' + escape(label) + '<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+              if (showClose) parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"tag-close"</span><span class="tk-punct">&gt;</span>...<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+              parts.push('<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+              el.code.innerHTML = parts.join('\n');
+            }
+            ['variant','size','leading','close'].forEach(k => el[k].addEventListener('change', render));
+            el.text.addEventListener('input', render);
+            el.copy.addEventListener('click', () => {
+              navigator.clipboard.writeText(el.code.innerText).then(() => {
+                const orig = el.copy.innerHTML;
+                el.copy.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => { el.copy.innerHTML = orig; }, 1800);
+              });
+            });
+            render();
+          })();
+        </script>
+
+        <hr class="doc-divider" />
+
         <h2 id="code-overview" class="doc-section-title">Code</h2>
         <p class="doc-section-subtitle">Component properties, variant axes, and instance override instructions for the Tag component.</p>
 

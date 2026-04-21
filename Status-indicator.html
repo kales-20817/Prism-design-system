@@ -1317,6 +1317,127 @@
 
       <!-- ═══ CODE TAB ═══ -->
       <div class="tab-content" id="tab-code" style="display: none; padding-top: 32px;">
+        <h2 id="live-demo-code" class="doc-section-title">Live demo (Code)</h2>
+        <p class="doc-section-subtitle">Configure the Status Indicator and view the generated HTML.</p>
+
+        <style>
+          .si-playground { border: 1px solid var(--prism-border); border-radius: 12px; overflow: hidden; background: var(--prism-surface); margin-bottom: 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+          [data-theme="light"] .si-playground { background: #fff; border: 1px solid rgba(37,99,235,0.1); box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+          .si-pg-toolbar { display: flex; flex-wrap: wrap; gap: 20px; padding: 16px 24px; border-bottom: 1px solid var(--prism-border); background: var(--prism-surface-hover); }
+          [data-theme="light"] .si-pg-toolbar { background: rgba(248, 250, 255, 0.6); border-bottom: 1px solid rgba(37,99,235,0.1); }
+          .si-pg-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 140px; }
+          .si-pg-label { font-size: 13px; font-weight: 600; color: var(--prism-text-muted); }
+          .si-pg-select, .si-pg-input { background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); padding: 8px 12px; border-radius: 8px; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+          [data-theme="light"] .si-pg-select, [data-theme="light"] .si-pg-input { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
+          .si-pg-select:focus, .si-pg-input:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+          .si-pg-preview { padding: 60px; min-height: 180px; display: flex; align-items: center; justify-content: center; background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .si-pg-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .si-pg-preview .si-demo { color: #e2e8f0; }
+          [data-theme="light"] .si-pg-preview .si-demo { color: #1e293b; }
+          .si-pg-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
+          [data-theme="light"] .si-pg-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
+          .si-pg-copy { display: flex; align-items: center; gap: 8px; background: transparent; border: none; font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+          .si-pg-copy:hover { background: var(--prism-surface-hover); color: var(--prism-text); }
+          [data-theme="light"] .si-pg-copy:hover { background: rgba(37,99,235,0.08); color: var(--prism-violet); }
+          .si-pg-code { background: #0a0a0c; padding: 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; margin: 0; white-space: pre; }
+          .si-pg-code .tk-tag { color: #a78bfa; }
+          .si-pg-code .tk-attr { color: #38bdf8; }
+          .si-pg-code .tk-str { color: #34d399; }
+          .si-pg-code .tk-punct { color: #94a3b8; }
+        </style>
+
+        <div class="si-playground">
+          <div class="si-pg-toolbar">
+            <div class="si-pg-group">
+              <label class="si-pg-label">Status</label>
+              <select class="si-pg-select" id="si-pg-status">
+                <option value="neutral">Idle</option>
+                <option value="success" selected>Online</option>
+                <option value="warning">Degraded</option>
+                <option value="critical">Offline</option>
+                <option value="info">In Progress</option>
+              </select>
+            </div>
+            <div class="si-pg-group">
+              <label class="si-pg-label">Size</label>
+              <select class="si-pg-select" id="si-pg-size">
+                <option value="sm">Small</option>
+                <option value="md">Medium</option>
+                <option value="lg" selected>Large</option>
+              </select>
+            </div>
+            <div class="si-pg-group">
+              <label class="si-pg-label">Label</label>
+              <input class="si-pg-input" id="si-pg-label" type="text" value="Online">
+            </div>
+            <div class="si-pg-group">
+              <label class="si-pg-label">Hover bg</label>
+              <select class="si-pg-select" id="si-pg-hover">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="si-pg-preview">
+            <div class="si-demo si-lg si-success" id="si-pg-preview"><div class="si-dot"></div><span>Online</span></div>
+          </div>
+
+          <div class="si-pg-code-header">
+            <div style="font-size: 13.5px; font-weight: 600; color: var(--prism-text);">HTML</div>
+            <button class="si-pg-copy" id="si-pg-copy-btn">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre class="si-pg-code" id="si-pg-code"></pre>
+        </div>
+
+        <script>
+          (function(){
+            const sel = {
+              status: document.getElementById('si-pg-status'),
+              size: document.getElementById('si-pg-size'),
+              label: document.getElementById('si-pg-label'),
+              hover: document.getElementById('si-pg-hover'),
+              preview: document.getElementById('si-pg-preview'),
+              code: document.getElementById('si-pg-code'),
+              copy: document.getElementById('si-pg-copy-btn')
+            };
+            if (!sel.preview) return;
+
+            function render(){
+              const status = sel.status.value;
+              const size = sel.size.value;
+              const label = sel.label.value || '';
+              const hover = sel.hover.value === 'on';
+              const classes = ['si-demo', 'si-' + size, 'si-' + status];
+              if (hover) classes.push('si-hover-' + status);
+              sel.preview.className = classes.join(' ');
+              sel.preview.innerHTML = '<div class="si-dot"></div><span></span>';
+              sel.preview.querySelector('span').textContent = label;
+              const classAttr = classes.join(' ');
+              const html = '<span class="tk-punct">&lt;</span><span class="tk-tag">div</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;</span>\n  <span class="tk-punct">&lt;</span><span class="tk-tag">div</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"si-dot"</span><span class="tk-punct">&gt;&lt;/</span><span class="tk-tag">div</span><span class="tk-punct">&gt;</span>\n  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>' + label.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>\n<span class="tk-punct">&lt;/</span><span class="tk-tag">div</span><span class="tk-punct">&gt;</span>';
+              sel.code.innerHTML = html;
+            }
+            sel.status.addEventListener('change', render);
+            sel.size.addEventListener('change', render);
+            sel.label.addEventListener('input', render);
+            sel.hover.addEventListener('change', render);
+            sel.copy.addEventListener('click', () => {
+              const plain = sel.code.innerText;
+              navigator.clipboard.writeText(plain).then(() => {
+                const orig = sel.copy.innerHTML;
+                sel.copy.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => { sel.copy.innerHTML = orig; }, 1800);
+              });
+            });
+            render();
+          })();
+        </script>
+
+        <hr class="doc-divider" />
+
         <h2 id="component-properties" class="doc-section-title">Component Properties</h2>
         <p class="doc-section-subtitle">Figma component properties and their defaults for the Status Indicator.</p>
 

@@ -1303,6 +1303,162 @@
 
       <!-- ======= CODE TAB ======= -->
       <div class="tab-content" id="tab-code" style="display: none; padding-top: 32px;">
+        <h2 id="live-demo-code" class="doc-section-title">Live demo (Code)</h2>
+        <p class="doc-section-subtitle">Configure the Link and view the generated HTML.</p>
+
+        <style>
+          .link-playground { border: 1px solid var(--prism-border); border-radius: 12px; overflow: hidden; background: var(--prism-surface); margin-bottom: 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+          [data-theme="light"] .link-playground { background: #fff; border: 1px solid rgba(37,99,235,0.1); box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+          .link-pg-toolbar { display: flex; flex-wrap: wrap; gap: 20px; padding: 16px 24px; border-bottom: 1px solid var(--prism-border); background: var(--prism-surface-hover); }
+          [data-theme="light"] .link-pg-toolbar { background: rgba(248, 250, 255, 0.6); border-bottom: 1px solid rgba(37,99,235,0.1); }
+          .link-pg-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 140px; }
+          .link-pg-label { font-size: 13px; font-weight: 600; color: var(--prism-text-muted); }
+          .link-pg-select, .link-pg-input { background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); padding: 8px 12px; border-radius: 8px; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+          [data-theme="light"] .link-pg-select, [data-theme="light"] .link-pg-input { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
+          .link-pg-select:focus, .link-pg-input:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+          .link-pg-preview { padding: 60px; min-height: 180px; display: flex; align-items: center; justify-content: center; background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .link-pg-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .link-pg-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
+          [data-theme="light"] .link-pg-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
+          .link-pg-copy { display: flex; align-items: center; gap: 8px; background: transparent; border: none; font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+          .link-pg-copy:hover { background: var(--prism-surface-hover); color: var(--prism-text); }
+          [data-theme="light"] .link-pg-copy:hover { background: rgba(37,99,235,0.08); color: var(--prism-violet); }
+          .link-pg-code { background: #0a0a0c; padding: 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; margin: 0; white-space: pre; }
+          .link-pg-code .tk-tag { color: #a78bfa; }
+          .link-pg-code .tk-attr { color: #38bdf8; }
+          .link-pg-code .tk-str { color: #34d399; }
+          .link-pg-code .tk-punct { color: #94a3b8; }
+        </style>
+
+        <div class="link-playground">
+          <div class="link-pg-toolbar">
+            <div class="link-pg-group">
+              <label class="link-pg-label">Style</label>
+              <select class="link-pg-select" id="link-pg-style">
+                <option value="primary" selected>Primary</option>
+                <option value="secondary">Secondary</option>
+                <option value="subtle">Subtle</option>
+                <option value="danger">Danger</option>
+              </select>
+            </div>
+            <div class="link-pg-group">
+              <label class="link-pg-label">Size</label>
+              <select class="link-pg-select" id="link-pg-size">
+                <option value="sm">Small</option>
+                <option value="md" selected>Medium</option>
+                <option value="lg">Large</option>
+              </select>
+            </div>
+            <div class="link-pg-group">
+              <label class="link-pg-label">Underline</label>
+              <select class="link-pg-select" id="link-pg-underline">
+                <option value="always" selected>Always</option>
+                <option value="hover">Hover only</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div class="link-pg-group">
+              <label class="link-pg-label">Icon</label>
+              <select class="link-pg-select" id="link-pg-icon">
+                <option value="none" selected>None</option>
+                <option value="leading">Leading</option>
+                <option value="trailing">Trailing</option>
+              </select>
+            </div>
+            <div class="link-pg-group">
+              <label class="link-pg-label">Label</label>
+              <input class="link-pg-input" id="link-pg-text" type="text" value="Read more">
+            </div>
+            <div class="link-pg-group">
+              <label class="link-pg-label">href</label>
+              <input class="link-pg-input" id="link-pg-href" type="text" value="#">
+            </div>
+          </div>
+
+          <div class="link-pg-preview">
+            <a href="#" class="link-demo link-primary link-md link-underline-always" id="link-pg-preview" onclick="return false;">Read more</a>
+          </div>
+
+          <div class="link-pg-code-header">
+            <div style="font-size: 13.5px; font-weight: 600; color: var(--prism-text);">HTML</div>
+            <button class="link-pg-copy" id="link-pg-copy-btn">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre class="link-pg-code" id="link-pg-code"></pre>
+        </div>
+
+        <script>
+          (function(){
+            const el = {
+              style: document.getElementById('link-pg-style'),
+              size: document.getElementById('link-pg-size'),
+              underline: document.getElementById('link-pg-underline'),
+              icon: document.getElementById('link-pg-icon'),
+              text: document.getElementById('link-pg-text'),
+              href: document.getElementById('link-pg-href'),
+              preview: document.getElementById('link-pg-preview'),
+              code: document.getElementById('link-pg-code'),
+              copy: document.getElementById('link-pg-copy-btn')
+            };
+            if (!el.preview) return;
+
+            const ARROW_SVG = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>';
+
+            function escape(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+            function render(){
+              const style = el.style.value;
+              const size = el.size.value;
+              const underline = el.underline.value;
+              const icon = el.icon.value;
+              const label = el.text.value || 'Link';
+              const href = el.href.value || '#';
+              const classes = ['link-demo', 'link-' + style, 'link-' + size, 'link-underline-' + underline];
+
+              let inner = '';
+              if (icon === 'leading') inner += ARROW_SVG + '<span>' + escape(label) + '</span>';
+              else if (icon === 'trailing') inner += '<span>' + escape(label) + '</span>' + ARROW_SVG;
+              else inner += escape(label);
+
+              el.preview.className = classes.join(' ');
+              el.preview.setAttribute('href', href);
+              el.preview.innerHTML = inner;
+
+              const classAttr = classes.join(' ');
+              let parts = [];
+              const attrLine = '<span class="tk-punct">&lt;</span><span class="tk-tag">a</span> <span class="tk-attr">href</span><span class="tk-punct">=</span><span class="tk-str">"' + escape(href) + '"</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;</span>';
+              if (icon === 'leading') {
+                parts.push(attrLine);
+                parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">svg</span> <span class="tk-attr">...</span><span class="tk-punct">&gt;&lt;/</span><span class="tk-tag">svg</span><span class="tk-punct">&gt;</span>');
+                parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>' + escape(label) + '<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+                parts.push('<span class="tk-punct">&lt;/</span><span class="tk-tag">a</span><span class="tk-punct">&gt;</span>');
+              } else if (icon === 'trailing') {
+                parts.push(attrLine);
+                parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>' + escape(label) + '<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>');
+                parts.push('  <span class="tk-punct">&lt;</span><span class="tk-tag">svg</span> <span class="tk-attr">...</span><span class="tk-punct">&gt;&lt;/</span><span class="tk-tag">svg</span><span class="tk-punct">&gt;</span>');
+                parts.push('<span class="tk-punct">&lt;/</span><span class="tk-tag">a</span><span class="tk-punct">&gt;</span>');
+              } else {
+                parts.push(attrLine + escape(label) + '<span class="tk-punct">&lt;/</span><span class="tk-tag">a</span><span class="tk-punct">&gt;</span>');
+              }
+              el.code.innerHTML = parts.join('\n');
+            }
+            ['style','size','underline','icon'].forEach(k => el[k].addEventListener('change', render));
+            ['text','href'].forEach(k => el[k].addEventListener('input', render));
+            el.copy.addEventListener('click', () => {
+              navigator.clipboard.writeText(el.code.innerText).then(() => {
+                const orig = el.copy.innerHTML;
+                el.copy.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => { el.copy.innerHTML = orig; }, 1800);
+              });
+            });
+            render();
+          })();
+        </script>
+
+        <hr class="doc-divider" />
+
         <h2 id="component-properties" class="doc-section-title">Component Properties</h2>
         <p class="doc-section-subtitle">Configurable properties exposed by the TextLink component.</p>
 

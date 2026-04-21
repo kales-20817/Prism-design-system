@@ -1269,6 +1269,126 @@
 
       <!-- ═══ CODE TAB ═══ -->
       <div class="tab-content" id="tab-code" style="display: none; padding-top: 32px;">
+        <h2 id="live-demo-code" class="doc-section-title">Live demo (Code)</h2>
+        <p class="doc-section-subtitle">Configure the Counter and view the generated HTML.</p>
+
+        <style>
+          .counter-playground { border: 1px solid var(--prism-border); border-radius: 12px; overflow: hidden; background: var(--prism-surface); margin-bottom: 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+          [data-theme="light"] .counter-playground { background: #fff; border: 1px solid rgba(37,99,235,0.1); box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+          .counter-pg-toolbar { display: flex; flex-wrap: wrap; gap: 20px; padding: 16px 24px; border-bottom: 1px solid var(--prism-border); background: var(--prism-surface-hover); }
+          [data-theme="light"] .counter-pg-toolbar { background: rgba(248, 250, 255, 0.6); border-bottom: 1px solid rgba(37,99,235,0.1); }
+          .counter-pg-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 140px; }
+          .counter-pg-label { font-size: 13px; font-weight: 600; color: var(--prism-text-muted); }
+          .counter-pg-select, .counter-pg-input { background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); padding: 8px 12px; border-radius: 8px; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+          [data-theme="light"] .counter-pg-select, [data-theme="light"] .counter-pg-input { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
+          .counter-pg-select:focus, .counter-pg-input:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+          .counter-pg-preview { padding: 60px; min-height: 180px; display: flex; align-items: center; justify-content: center; background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .counter-pg-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .counter-pg-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
+          [data-theme="light"] .counter-pg-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
+          .counter-pg-copy { display: flex; align-items: center; gap: 8px; background: transparent; border: none; font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+          .counter-pg-copy:hover { background: var(--prism-surface-hover); color: var(--prism-text); }
+          [data-theme="light"] .counter-pg-copy:hover { background: rgba(37,99,235,0.08); color: var(--prism-violet); }
+          .counter-pg-code { background: #0a0a0c; padding: 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; margin: 0; white-space: pre; }
+          .counter-pg-code .tk-tag { color: #a78bfa; }
+          .counter-pg-code .tk-attr { color: #38bdf8; }
+          .counter-pg-code .tk-str { color: #34d399; }
+          .counter-pg-code .tk-punct { color: #94a3b8; }
+        </style>
+
+        <div class="counter-playground">
+          <div class="counter-pg-toolbar">
+            <div class="counter-pg-group">
+              <label class="counter-pg-label">Style</label>
+              <select class="counter-pg-select" id="counter-pg-style">
+                <option value="subtle" selected>Subtle</option>
+                <option value="intense">Intense</option>
+              </select>
+            </div>
+            <div class="counter-pg-group">
+              <label class="counter-pg-label">State</label>
+              <select class="counter-pg-select" id="counter-pg-state">
+                <option value="active" selected>Active</option>
+                <option value="critical">Critical</option>
+                <option value="moderate">Moderate</option>
+                <option value="important">Important</option>
+                <option value="success">Success</option>
+                <option value="default">Default</option>
+                <option value="acknowledge">Acknowledge</option>
+              </select>
+            </div>
+            <div class="counter-pg-group">
+              <label class="counter-pg-label">Size</label>
+              <select class="counter-pg-select" id="counter-pg-size">
+                <option value="sm">Small</option>
+                <option value="md" selected>Medium</option>
+                <option value="lg">Large</option>
+              </select>
+            </div>
+            <div class="counter-pg-group">
+              <label class="counter-pg-label">Number</label>
+              <input class="counter-pg-input" id="counter-pg-number" type="text" value="57">
+            </div>
+          </div>
+
+          <div class="counter-pg-preview">
+            <span class="counter-demo counter-md counter-subtle-active" id="counter-pg-preview">57</span>
+          </div>
+
+          <div class="counter-pg-code-header">
+            <div style="font-size: 13.5px; font-weight: 600; color: var(--prism-text);">HTML</div>
+            <button class="counter-pg-copy" id="counter-pg-copy-btn">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre class="counter-pg-code" id="counter-pg-code"></pre>
+        </div>
+
+        <script>
+          (function(){
+            const el = {
+              style: document.getElementById('counter-pg-style'),
+              state: document.getElementById('counter-pg-state'),
+              size: document.getElementById('counter-pg-size'),
+              number: document.getElementById('counter-pg-number'),
+              preview: document.getElementById('counter-pg-preview'),
+              code: document.getElementById('counter-pg-code'),
+              copy: document.getElementById('counter-pg-copy-btn')
+            };
+            if (!el.preview) return;
+
+            function escape(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+            function render(){
+              const style = el.style.value;
+              const state = el.state.value;
+              const size = el.size.value;
+              const number = el.number.value || '0';
+              const classes = ['counter-demo', 'counter-' + size, 'counter-' + style + '-' + state];
+
+              el.preview.className = classes.join(' ');
+              el.preview.textContent = number;
+
+              const classAttr = classes.join(' ');
+              const html = '<span class="tk-punct">&lt;</span><span class="tk-tag">span</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;</span>' + escape(number) + '<span class="tk-punct">&lt;/</span><span class="tk-tag">span</span><span class="tk-punct">&gt;</span>';
+              el.code.innerHTML = html;
+            }
+            ['style','state','size'].forEach(k => el[k].addEventListener('change', render));
+            el.number.addEventListener('input', render);
+            el.copy.addEventListener('click', () => {
+              navigator.clipboard.writeText(el.code.innerText).then(() => {
+                const orig = el.copy.innerHTML;
+                el.copy.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => { el.copy.innerHTML = orig; }, 1800);
+              });
+            });
+            render();
+          })();
+        </script>
+
+        <hr class="doc-divider" />
+
         <h2 id="code-overview" class="doc-section-title">Code</h2>
         <p class="doc-section-subtitle">Component properties, sizing specifications, and variant matrix for implementing the Counter.</p>
 
