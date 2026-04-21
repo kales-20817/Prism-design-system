@@ -102,7 +102,7 @@
 
   .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: var(--nav-bg); border-bottom: 1px solid var(--prism-border); backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); }
   .nav-logo { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
-  .nav-logo-mark { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-right: 0.1em; padding-bottom: 0.1em; }
+   .nav-logo-mark { font-size: 26px; font-weight: 900; letter-spacing: 0.02em; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-right: 0.1em; padding-bottom: 0.1em; }
   .nav-logo-sub { font-size: 13px; font-weight: 700; color: var(--prism-text); letter-spacing: 0.05em; text-transform: uppercase; }
   .nav-links { display: flex; align-items: center; gap: 6px; }
   .nav-links a { color: var(--nav-link-color, var(--prism-text-muted)); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px; transition: all 0.3s ease; border: none; }
@@ -276,7 +276,13 @@
   <div class="bg-glow glow-2"></div>
 
   <nav class="nav">
-    <a class="nav-logo" href="index.html"><span class="nav-logo-mark">Prism</span><span class="nav-logo-sub">Design System</span></a>
+    <a class="nav-logo" href="index.html">
+<img src="assets/Prism-logo.svg" alt="" class="nav-logo-img" width="40" height="40">
+<span class="nav-logo-text">
+  <span class="nav-logo-mark">Prism</span>
+  <span class="nav-logo-sub">Design System</span>
+</span>
+    </a>
     <div class="nav-links">
       <a href="Foundation.html">Foundation</a>
       <a href="Components.html" class="active">Components</a>
