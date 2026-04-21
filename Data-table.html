@@ -455,7 +455,6 @@
         <li><a href="Button.html" class="sidebar-link">Button</a></li>
         <li><a href="Calendar.html" class="sidebar-link">Calendar</a></li>
         <li><a href="Checkbox.html" class="sidebar-link">Checkbox</a></li>
-        <li><a href="Chip.html" class="sidebar-link">Chip</a></li>
         <li><a href="Counter.html" class="sidebar-link">Counter</a></li>
         <li><a href="Data-table.html" class="sidebar-link active">Data table</a></li>
         <li><a href="Divider.html" class="sidebar-link">Divider</a></li>
@@ -537,46 +536,58 @@
         <!-- ========== OVERVIEW ========== -->
         <div class="tab-content" id="tab-overview">
           <h3 id="anatomy" class="doc-h3">Anatomy</h3>
-          <div class="anatomy-diagram">
-            <div class="dt-wrapper" style="margin:12px auto;max-width:820px;position:relative;">
-              <div style="position:absolute;left:-36px;top:18px;"><span class="anat-marker-inline">1</span></div>
-              <div class="dt-toolbar">
-                <div style="position:relative;">
-                  <div style="position:absolute;left:-24px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
-                  <div class="dt-search" style="width:260px;">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    <input type="text" placeholder="Search...">
-                  </div>
+          <div class="anatomy-diagram" style="padding-top:56px;padding-bottom:56px;">
+            <div class="dt-wrapper" style="margin:12px auto;max-width:680px;position:relative;overflow:visible;">
+              <!-- 1 Toolbar: marker left of wrapper, horizontal line pointing right -->
+              <div style="position:absolute;right:calc(100% + 6px);top:24px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">1</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+              <div class="dt-toolbar" style="overflow:visible;position:relative;">
+                <!-- 2 Search: marker above the search input -->
+                <div style="position:absolute;left:130px;top:-28px;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:20;"><span class="anat-marker-inline">2</span><div style="width:2px;height:10px;background:#2563eb;"></div></div>
+                <div class="dt-search" style="width:260px;">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <input type="text" placeholder="Search...">
                 </div>
                 <div style="flex:1;"></div>
                 <div style="position:relative;">
-                  <div style="position:absolute;right:-6px;top:-24px;"><span class="anat-marker-inline">3</span></div>
+                  <!-- 3 Filter: marker above Filter button -->
+                  <div style="position:absolute;left:50%;transform:translateX(-50%);top:-38px;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:20;"><span class="anat-marker-inline">3</span><div style="width:2px;height:10px;background:#2563eb;"></div></div>
                   <button class="dt-toolbar-btn with-label"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg> Filter</button>
                 </div>
                 <div style="position:relative;">
-                  <div style="position:absolute;right:-6px;top:-24px;"><span class="anat-marker-inline">4</span></div>
+                  <!-- 4 Overflow: marker above overflow button -->
+                  <div style="position:absolute;left:50%;transform:translateX(-50%);top:-38px;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:20;"><span class="anat-marker-inline">4</span><div style="width:2px;height:10px;background:#2563eb;"></div></div>
                   <button class="dt-toolbar-btn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
                 </div>
               </div>
-              <table class="dt-table">
-                <thead>
-                  <tr>
-                    <th class="dt-check-cell" style="position:relative;"><div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">5</span></div><input type="checkbox" class="dt-checkbox"></th>
-                    <th style="position:relative;"><div style="position:absolute;right:8px;top:-18px;"><span class="anat-marker-inline">6</span></div>Name</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td class="dt-check-cell" style="position:relative;"><div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">7</span></div><input type="checkbox" class="dt-checkbox"></td><td>MacBook Pro</td><td>Laptop</td><td><span class="dt-badge success">Online</span></td></tr>
-                  <tr><td class="dt-check-cell"><input type="checkbox" class="dt-checkbox"></td><td>iPhone 15</td><td>Mobile</td><td><span class="dt-badge success">Online</span></td></tr>
-                </tbody>
-              </table>
-              <div class="dt-footer" style="position:relative;">
-                <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">8</span></div>
+              <div style="position:relative;">
+                <!-- 5 Select-all: marker left of header row, horizontal line pointing right -->
+                <div style="position:absolute;right:calc(100% + 6px);top:24px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">5</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+                <!-- 6 Column headers: marker right of Name column, horizontal line pointing left -->
+                <div style="position:absolute;left:260px;top:8px;display:flex;align-items:center;gap:6px;z-index:20;"><div style="width:20px;height:2px;background:#2563eb;"></div><span class="anat-marker-inline">6</span></div>
+                <table class="dt-table">
+                  <thead>
+                    <tr>
+                      <th class="dt-check-cell"><input type="checkbox" class="dt-checkbox"></th>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="dt-check-cell"><input type="checkbox" class="dt-checkbox"></td><td>MacBook Pro</td><td>Laptop</td><td><span class="dt-badge success">Online</span></td></tr>
+                    <tr><td class="dt-check-cell"><input type="checkbox" class="dt-checkbox"></td><td>iPhone 15</td><td>Mobile</td><td><span class="dt-badge success">Online</span></td></tr>
+                  </tbody>
+                </table>
+                <!-- 7 Rows: marker left of first data row, horizontal line pointing right -->
+                <div style="position:absolute;right:calc(100% + 6px);top:70px;display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">7</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+              </div>
+              <div class="dt-footer" style="position:relative;overflow:visible;">
+                <!-- 8 Footer: marker left of footer -->
+                <div style="position:absolute;right:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">8</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
+                <!-- 9 Pagination: marker right of wrapper, horizontal line pointing left -->
+                <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:20;"><span class="anat-marker-inline">9</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                 <div class="dt-footer-left">Rows per page <select class="dt-rows-select"><option>20</option></select> <span>1&ndash;20 of 243</span></div>
-                <div class="dt-pagination" style="position:relative;">
-                  <div style="position:absolute;right:-6px;top:-20px;"><span class="anat-marker-inline">9</span></div>
+                <div class="dt-pagination">
                   <button class="dt-page-btn">&lsaquo; Previous</button>
                   <button class="dt-page-btn">Next &rsaquo;</button>
                 </div>

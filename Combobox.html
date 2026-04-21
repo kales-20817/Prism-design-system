@@ -20,108 +20,6 @@
 @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_bold_italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Zoho Puvi'; src: url('https://fonts.zohowebstatic.com/zohopuvi/3.5/zoho_puvi_semibold_italic.woff2') format('woff2'); font-weight: 600; font-style: italic; font-display: swap; }
 
-  /* ══ Mobile responsive (added globally) ══ */
-  .nav-hamburger { display: none; background: transparent; border: none; color: var(--prism-text); padding: 8px; margin-right: 8px; cursor: pointer; border-radius: 8px; align-items: center; justify-content: center; }
-  .nav-hamburger:hover { background: var(--prism-surface-hover); }
-  .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; opacity: 0; transition: opacity 0.25s ease; }
-  .sidebar-backdrop.open { display: block; opacity: 1; }
-  .sidebar-mobile-nav { display: none; }
-
-  @media (max-width: 900px) {
-    .nav { padding: 0 16px; height: 64px; justify-content: flex-start; gap: 4px; }
-    .nav-links { margin-left: auto; }
-    .nav-hamburger { display: inline-flex; order: -1; margin-right: 4px; }
-    .nav-logo-mark { font-size: 22px; }
-    .nav-logo-sub { font-size: 9px; }
-    .nav-links > a,
-    .nav-links > .nav-dropdown,
-    .nav-links > div[style] { display: none !important; }
-    .nav-links { gap: 0; }
-
-    .components-layout { display: block; padding-top: 64px; grid-template-columns: 1fr; }
-    .sidebar { position: fixed; top: 64px; left: 0; width: 300px; max-width: 86vw; height: calc(100vh - 64px); max-height: none; padding: 20px 18px 32px; border-right: 1px solid var(--prism-border); border-bottom: none; overflow-y: auto; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 96; background: var(--prism-black); }
-    [data-theme="light"] .sidebar { background: #ffffff; }
-    .sidebar.open { transform: translateX(0); box-shadow: 12px 0 40px rgba(0,0,0,0.25); }
-    body.sidebar-locked { overflow: hidden; }
-
-    .sidebar-mobile-nav { display: block; margin: 0 -18px 16px; padding: 0 18px 18px; border-bottom: 1px solid var(--prism-border); }
-    .sidebar-mobile-nav h4 { font-size: 11px; font-weight: 700; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; padding-left: 4px; }
-    .sidebar-mobile-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
-    .sidebar-mobile-nav a { display: block; padding: 10px 12px; font-size: 14px; font-weight: 600; color: var(--prism-text); text-decoration: none; border-radius: 8px; transition: all 0.2s ease; }
-    .sidebar-mobile-nav a:hover { background: var(--prism-surface-hover); color: var(--prism-violet); }
-    .sidebar-mobile-nav a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); }
-
-    .main-panel { padding: 24px 20px 48px; grid-column: auto; grid-row: auto; }
-    .main-content-area { display: flex; flex-direction: column; grid-template-columns: 1fr; }
-    .main-content-inner { padding-bottom: 32px; }
-    .toc-sidebar { display: none; }
-
-    .page-header-area .page-title,
-    .page-title { font-size: 30px; line-height: 1.15; }
-    .page-desc { font-size: 16px; }
-    .doc-section h2, .doc-section-title { font-size: 22px; }
-
-    .do-dont-grid,
-    .illus-type-grid,
-    .comp-grid,
-    .density-grid,
-    .illus-showcase-grid,
-    .pattern-category-grid,
-    .tone-grid,
-    .voice-traits,
-    .principles-grid,
-    .theme-grid,
-    .message-grid,
-    .weight-grid,
-    .pattern-grid,
-    .collection-grid,
-    .anti-pattern-list,
-    .dodont-grid,
-    .icon-metaphor-grid { grid-template-columns: 1fr !important; }
-
-    table { display: block; overflow-x: auto; }
-    .size-table, .token-table, .anatomy-table, .doc-table, .tone-table { display: block; overflow-x: auto; white-space: nowrap; min-width: 0; }
-
-    .feedback-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
-    .illus-type-card { grid-template-columns: 1fr !important; }
-    .illus-type-preview { min-height: 180px; padding: 24px 16px; }
-
-    /* Component detail page grids */
-    .state-grid,
-    .anatomy-grid,
-    .usecase-grid,
-    .anat-legend,
-    /* Zia Experience hub grids */
-    .zia-prompt-grid,
-    /* Resource hub grids */
-    .lib-grid,
-    .lib-grid-logo,
-    .lib-grid-illust { grid-template-columns: 1fr !important; gap: 12px !important; }
-
-    /* Inline-styled 2- or 3-column grids */
-    [style*="grid-template-columns: repeat(3, 1fr)"],
-    [style*="grid-template-columns: repeat(2, 1fr)"],
-    [style*="grid-template-columns:repeat(3,1fr)"],
-    [style*="grid-template-columns:repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
-
-    /* Resource hub outer padding */
-    .page-content { padding: 88px 16px 48px !important; }
-  }
-
-  @media (max-width: 600px) {
-    .nav { padding: 0 12px; height: 60px; }
-    .components-layout { padding-top: 60px; }
-    .sidebar { top: 60px; height: calc(100vh - 60px); }
-    .nav-logo-mark { font-size: 20px; }
-    .main-panel { padding: 18px 14px 36px; }
-    .page-header-area .page-title,
-    .page-title { font-size: 26px; }
-    .page-desc { font-size: 15px; }
-    .sidebar-heading { font-size: 10px; }
-    .search-shortcut { display: none; }
-    .page-content { padding: 72px 12px 32px !important; }
-  }
-
 </style>
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -733,6 +631,108 @@
     background: #1d4ed8; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
     transform: translateY(-1px);
   }
+
+  /* ══ Mobile responsive (added globally) ══ */
+  .nav-hamburger { display: none; background: transparent; border: none; color: var(--prism-text); padding: 8px; margin-right: 8px; cursor: pointer; border-radius: 8px; align-items: center; justify-content: center; }
+  .nav-hamburger:hover { background: var(--prism-surface-hover); }
+  .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 95; opacity: 0; transition: opacity 0.25s ease; }
+  .sidebar-backdrop.open { display: block; opacity: 1; }
+  .sidebar-mobile-nav { display: none; }
+
+  @media (max-width: 900px) {
+    .nav { padding: 0 16px; height: 64px; justify-content: flex-start; gap: 4px; }
+    .nav-links { margin-left: auto; }
+    .nav-hamburger { display: inline-flex; order: -1; margin-right: 4px; }
+    .nav-logo-mark { font-size: 22px; }
+    .nav-logo-sub { font-size: 9px; }
+    .nav-links > a,
+    .nav-links > .nav-dropdown,
+    .nav-links > div[style] { display: none !important; }
+    .nav-links { gap: 0; }
+
+    .components-layout { display: block; padding-top: 64px; grid-template-columns: 1fr; }
+    .sidebar { position: fixed; top: 64px; left: 0; width: 300px; max-width: 86vw; height: calc(100vh - 64px); max-height: none; padding: 20px 18px 32px; border-right: 1px solid var(--prism-border); border-bottom: none; overflow-y: auto; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 96; background: var(--prism-black); }
+    [data-theme="light"] .sidebar { background: #ffffff; }
+    .sidebar.open { transform: translateX(0); box-shadow: 12px 0 40px rgba(0,0,0,0.25); }
+    body.sidebar-locked { overflow: hidden; }
+
+    .sidebar-mobile-nav { display: block; margin: 0 -18px 16px; padding: 0 18px 18px; border-bottom: 1px solid var(--prism-border); }
+    .sidebar-mobile-nav h4 { font-size: 11px; font-weight: 700; color: var(--prism-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; padding-left: 4px; }
+    .sidebar-mobile-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .sidebar-mobile-nav a { display: block; padding: 10px 12px; font-size: 14px; font-weight: 600; color: var(--prism-text); text-decoration: none; border-radius: 8px; transition: all 0.2s ease; }
+    .sidebar-mobile-nav a:hover { background: var(--prism-surface-hover); color: var(--prism-violet); }
+    .sidebar-mobile-nav a.active { color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); }
+
+    .main-panel { padding: 24px 20px 48px; grid-column: auto; grid-row: auto; }
+    .main-content-area { display: flex; flex-direction: column; grid-template-columns: 1fr; }
+    .main-content-inner { padding-bottom: 32px; }
+    .toc-sidebar { display: none; }
+
+    .page-header-area .page-title,
+    .page-title { font-size: 30px; line-height: 1.15; }
+    .page-desc { font-size: 16px; }
+    .doc-section h2, .doc-section-title { font-size: 22px; }
+
+    .do-dont-grid,
+    .illus-type-grid,
+    .comp-grid,
+    .density-grid,
+    .illus-showcase-grid,
+    .pattern-category-grid,
+    .tone-grid,
+    .voice-traits,
+    .principles-grid,
+    .theme-grid,
+    .message-grid,
+    .weight-grid,
+    .pattern-grid,
+    .collection-grid,
+    .anti-pattern-list,
+    .dodont-grid,
+    .icon-metaphor-grid { grid-template-columns: 1fr !important; }
+
+    table { display: block; overflow-x: auto; }
+    .size-table, .token-table, .anatomy-table, .doc-table, .tone-table { display: block; overflow-x: auto; white-space: nowrap; min-width: 0; }
+
+    .feedback-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
+    .illus-type-card { grid-template-columns: 1fr !important; }
+    .illus-type-preview { min-height: 180px; padding: 24px 16px; }
+
+    /* Component detail page grids */
+    .state-grid,
+    .anatomy-grid,
+    .usecase-grid,
+    .anat-legend,
+    /* Zia Experience hub grids */
+    .zia-prompt-grid,
+    /* Resource hub grids */
+    .lib-grid,
+    .lib-grid-logo,
+    .lib-grid-illust { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+    /* Inline-styled 2- or 3-column grids */
+    [style*="grid-template-columns: repeat(3, 1fr)"],
+    [style*="grid-template-columns: repeat(2, 1fr)"],
+    [style*="grid-template-columns:repeat(3,1fr)"],
+    [style*="grid-template-columns:repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
+
+    /* Resource hub outer padding */
+    .page-content { padding: 88px 16px 48px !important; }
+  }
+
+  @media (max-width: 600px) {
+    .nav { padding: 0 12px; height: 60px; }
+    .components-layout { padding-top: 60px; }
+    .sidebar { top: 60px; height: calc(100vh - 60px); }
+    .nav-logo-mark { font-size: 20px; }
+    .main-panel { padding: 18px 14px 36px; }
+    .page-header-area .page-title,
+    .page-title { font-size: 26px; }
+    .page-desc { font-size: 15px; }
+    .sidebar-heading { font-size: 10px; }
+    .search-shortcut { display: none; }
+    .page-content { padding: 72px 12px 32px !important; }
+  }
 </style>
 </head>
 <body>
@@ -777,7 +777,6 @@
         <li><a href="Button.html" class="sidebar-link">Button</a></li>
         <li><a href="Calendar.html" class="sidebar-link">Calendar</a></li>
         <li><a href="Checkbox.html" class="sidebar-link">Checkbox</a></li>
-        <li><a href="Chip.html" class="sidebar-link">Chip</a></li>
         <li><a href="Counter.html" class="sidebar-link">Counter</a></li>
         <li><a href="Data-table.html" class="sidebar-link">Data table</a></li>
         <li><a href="Date-picker.html" class="sidebar-link">Date picker</a></li>
@@ -852,11 +851,69 @@
       <div class="main-content-area">
         <div class="main-content-inner">
       <div class="tab-content" id="tab-usage" style="padding-top: 32px;">
-        <div style="border: 2px dashed var(--prism-border); border-radius: 16px; padding: 64px 20px; text-align: center; background: rgba(37,99,235,0.02);">
-           <svg width="48" height="48" fill="none" stroke="var(--prism-text-muted)" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom: 24px; opacity: 0.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
-           <h3 style="color: var(--prism-text); font-size: 20px; font-weight: 500; margin-bottom: 8px;">Combobox components</h3>
-           <p style="color: var(--prism-text-muted); font-size: 15px; max-width: 400px; margin: 0 auto;">Documentation and examples for the Combobox component will go here.</p>
+      <div class="doc-section" id="anatomy" style="margin-bottom: 56px;">
+        <h2 class="doc-section-title">Anatomy</h2>
+        <p class="doc-section-subtitle">The combobox is composed of the following numbered parts. Each label is anchored to the live preview with a connector line.</p>
+
+      <style>
+        .anatomy-diagram { background: var(--prism-surface); border: 1px solid var(--prism-border); border-radius: 16px; padding: 48px 40px; margin-bottom: 28px; position: relative; overflow: hidden; }
+        [data-theme="light"] .anatomy-diagram { background: #fff; border: 1px solid rgba(37, 99, 235, 0.07); box-shadow: 0 2px 12px rgba(37, 99, 235, 0.05); }
+        .anatomy-diagram::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #2563eb, #60a5fa, #06b6d4); }
+        .anat-marker-inline { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff !important; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35); }
+        .anat-legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .anat-legend-item { display: flex; align-items: flex-start; gap: 14px; padding: 20px; background: var(--prism-surface); border: 1px solid var(--prism-border); border-radius: 14px; }
+        [data-theme="light"] .anat-legend-item { background: #fff; border: 1px solid rgba(37, 99, 235, 0.07); box-shadow: 0 1px 4px rgba(37, 99, 235, 0.04); }
+        .anat-legend-item strong { display: block; font-size: 14.5px; font-weight: 600; color: var(--prism-text); margin-bottom: 6px; }
+        .anat-legend-item span { font-size: 13px; line-height: 1.55; color: var(--prism-text-muted); }
+        .anat-preview-wrap { display: flex; justify-content: center; margin: 40px 0; }
+      </style>
+
+      <style>
+
+        .anat-combobox { position: relative; width: 360px; }
+        .anat-cb-field { position: relative; border: 2px dashed rgba(37,99,235,0.4); border-radius: 12px; background: var(--prism-surface); color: var(--prism-text); padding: 8px 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        [data-theme="light"] .anat-cb-field { background: #fff; }
+        .anat-cb-chip { padding: 4px 10px; border-radius: 999px; background: rgba(37,99,235,0.18); color: var(--prism-text); font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
+        .anat-cb-chip span.x { cursor: pointer; opacity: 0.7; }
+        .anat-cb-input { flex: 1; min-width: 80px; font-size: 13px; color: var(--prism-text-muted); }
+        .anat-cb-chev { color: var(--prism-text-muted); }
+        .anat-cb-list { margin-top: 6px; position: relative; border: 2px dashed rgba(37,99,235,0.4); border-radius: 12px; background: var(--prism-surface); color: var(--prism-text); padding: 6px; }
+        [data-theme="light"] .anat-cb-list { background: #fff; }
+        .anat-cb-option { padding: 8px 10px; border-radius: 6px; font-size: 13px; color: var(--prism-text); display: flex; align-items: center; gap: 8px; }
+        .anat-cb-option.selected { background: rgba(37,99,235,0.14); }
+        .anat-cb-check { color: #60a5fa; }
+      </style>
+        <div class="anatomy-diagram">
+          <div class="anat-preview-wrap">
+              <div class="anat-combobox">
+                <div class="anat-cb-field">
+                  <div style="position: absolute; top: -30px; left: 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; z-index: 5;"><span class="anat-marker-inline">1</span><div style="width: 2px; height: 16px; background: #2563eb;"></div></div>
+                  <span class="anat-cb-chip">Design <span class="x">×</span></span>
+                  <span class="anat-cb-chip">Mobile <span class="x">×</span></span>
+                  <div style="position: absolute; top: -30px; left: 160px; display: flex; flex-direction: column; align-items: center; gap: 4px; z-index: 5;"><span class="anat-marker-inline">2</span><div style="width: 2px; height: 16px; background: #2563eb;"></div></div>
+                  <span class="anat-cb-input">Add tag…</span>
+                  <span class="anat-cb-chev">▾</span>
+                  <div style="position: absolute; top: -30px; left: calc(100% - 28px); display: flex; flex-direction: column; align-items: center; gap: 4px; z-index: 5;"><span class="anat-marker-inline">3</span><div style="width: 2px; height: 16px; background: #2563eb;"></div></div>
+                </div>
+                <div class="anat-cb-list">
+                  <div style="position: absolute; top: 42px; left: -50px; display: flex; align-items: center; gap: 6px; z-index: 5;"><span class="anat-marker-inline">4</span><div style="width: 36px; height: 2px; background: #2563eb;"></div></div>
+                  <div class="anat-cb-option selected"><span class="anat-cb-check">✓</span>Design</div>
+                  <div class="anat-cb-option">Engineering</div>
+                  <div class="anat-cb-option">Research</div>
+                  <div style="position: absolute; top: 42px; right: -50px; display: flex; flex-direction: row-reverse; align-items: center; gap: 6px; z-index: 5;"><span class="anat-marker-inline">5</span><div style="width: 36px; height: 2px; background: #2563eb;"></div></div>
+                </div>
+              </div>
+          </div>
         </div>
+        <div class="anat-legend">
+          <div class="anat-legend-item"><span class="anat-marker-inline">1</span><div><strong>Selected chip</strong><span>Currently chosen value. Remove with the × control or backspace.</span></div></div>
+          <div class="anat-legend-item"><span class="anat-marker-inline">2</span><div><strong>Input</strong><span>Free-text entry. Matches the query against the options.</span></div></div>
+          <div class="anat-legend-item"><span class="anat-marker-inline">3</span><div><strong>Chevron</strong><span>Toggles the option list open and closed.</span></div></div>
+          <div class="anat-legend-item"><span class="anat-marker-inline">4</span><div><strong>Selected state</strong><span>Checkmark identifies the option currently applied.</span></div></div>
+          <div class="anat-legend-item"><span class="anat-marker-inline">5</span><div><strong>Option list</strong><span>Filtered set of choices. Keyboard-navigable.</span></div></div>
+        </div>
+      </div>
+
       </div>
         </div><!-- main-content-inner -->
 

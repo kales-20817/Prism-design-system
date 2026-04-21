@@ -433,12 +433,12 @@
         <li><a href="Button.html" class="sidebar-link">Button</a></li>
         <li><a href="Calendar.html" class="sidebar-link">Calendar</a></li>
         <li><a href="Checkbox.html" class="sidebar-link">Checkbox</a></li>
-        <li><a href="Chip.html" class="sidebar-link">Chip</a></li>
         <li><a href="Counter.html" class="sidebar-link">Counter</a></li>
         <li><a href="Data-table.html" class="sidebar-link">Data table</a></li>
         <li><a href="Date-picker.html" class="sidebar-link">Date picker</a></li>
         <li><a href="Divider.html" class="sidebar-link">Divider</a></li>
         <li><a href="Dropdown.html" class="sidebar-link active">Dropdown</a></li>
+        <li><a href="Empty-state.html" class="sidebar-link">Empty state</a></li>
         <li><a href="Header-navigation.html" class="sidebar-link">Header navigation</a></li>
         <li><a href="Icon.html" class="sidebar-link">Icon</a></li>
         <li><a href="Inline-message.html" class="sidebar-link">Inline message</a></li>
@@ -475,7 +475,6 @@
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Combobox</span></li>
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Dialog</span></li>
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Drawer</span></li>
-        <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Empty state</span></li>
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Filter input</span></li>
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Form</span></li>
         <li><span class="sidebar-link" style="opacity:0.4;cursor:default;pointer-events:none;">Help text</span></li>
@@ -515,17 +514,19 @@
         <!-- ========== OVERVIEW ========== -->
         <div class="tab-content" id="tab-overview">
           <h3 id="anatomy" class="doc-h3">Anatomy</h3>
-          <div class="anatomy-diagram">
-            <div style="display:flex;gap:40px;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin:20px 0;">
+          <div class="anatomy-diagram" style="padding:72px 100px;">
+            <div style="display:flex;gap:60px;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin:20px 0;">
               <!-- Single Select anatomy -->
               <div style="position:relative;">
                 <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--prism-text-muted);margin-bottom:10px;text-align:center;">Single Select</div>
-                <div class="dd-panel" style="position:relative;">
-                  <div style="position:absolute;left:-30px;top:4px;"><span class="anat-marker-inline">1</span></div>
+                <div class="dd-panel" style="position:relative;overflow:visible;">
+                  <!-- 1 Panel Container: marker left of panel, horizontal line right -->
+                  <div style="position:absolute;right:calc(100% + 6px);top:10px;display:flex;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">1</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                   <div class="dd-item" style="position:relative;">
+                    <!-- 2 Action Item: marker right of Edit row, horizontal line left -->
+                    <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">2</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                     <svg class="dd-item-icon" viewBox="0 0 24 24" fill="none" stroke="#626870" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>
                     <span>Edit</span>
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">2</span></div>
                   </div>
                   <div class="dd-item">
                     <svg class="dd-item-icon" viewBox="0 0 24 24" fill="none" stroke="#626870" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
@@ -540,16 +541,18 @@
               <!-- Multi Select anatomy -->
               <div style="position:relative;">
                 <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--prism-text-muted);margin-bottom:10px;text-align:center;">Multi Select</div>
-                <div class="dd-panel" style="position:relative;">
+                <div class="dd-panel" style="position:relative;overflow:visible;">
                   <div class="dd-header" style="position:relative;">
+                    <!-- 6 Header: marker above, vertical line down -->
+                    <div style="position:absolute;left:20px;bottom:calc(100% + 6px);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:5;"><span class="anat-marker-inline">6</span><div style="width:2px;height:14px;background:#2563eb;"></div></div>
                     <span>Select Options</span>
                     <svg class="dd-header-dismiss" viewBox="0 0 24 24" fill="none" stroke="#626870" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">6</span></div>
                   </div>
                   <div class="dd-item" style="position:relative;">
+                    <!-- 3 Checkbox Item: marker right of Option A, horizontal line left -->
+                    <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">3</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                     <div class="dd-item-check checked"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
                     <span>Option A</span>
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">3</span></div>
                   </div>
                   <div class="dd-item">
                     <div class="dd-item-check"></div>
@@ -560,19 +563,21 @@
                     <span>Option C</span>
                   </div>
                   <div class="dd-footer" style="position:relative;">
+                    <!-- 7 Footer: marker below, vertical line up -->
+                    <div style="position:absolute;right:20px;top:calc(100% + 6px);display:flex;flex-direction:column-reverse;align-items:center;gap:4px;z-index:5;"><span class="anat-marker-inline">7</span><div style="width:2px;height:14px;background:#2563eb;"></div></div>
                     <button class="dd-clear-btn">Clear All</button>
                     <button class="dd-apply-btn">Apply</button>
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">7</span></div>
                   </div>
                 </div>
               </div>
               <!-- With Sections anatomy -->
               <div style="position:relative;">
                 <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--prism-text-muted);margin-bottom:10px;text-align:center;">With Sections</div>
-                <div class="dd-panel" style="position:relative;">
+                <div class="dd-panel" style="position:relative;overflow:visible;">
                   <div class="dd-section-heading" style="position:relative;">
                     Actions
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">4</span></div>
+                    <!-- 4 Section Heading: marker right, horizontal line left -->
+                    <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">4</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                   </div>
                   <div class="dd-item">
                     <svg class="dd-item-icon" viewBox="0 0 24 24" fill="none" stroke="#626870" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>
@@ -583,7 +588,8 @@
                     <span>Duplicate</span>
                   </div>
                   <div class="dd-divider" style="position:relative;">
-                    <div style="position:absolute;right:-30px;top:50%;transform:translateY(-50%);"><span class="anat-marker-inline">5</span></div>
+                    <!-- 5 Divider: marker right, horizontal line left -->
+                    <div style="position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;gap:6px;z-index:5;"><span class="anat-marker-inline">5</span><div style="width:28px;height:2px;background:#2563eb;"></div></div>
                   </div>
                   <div class="dd-section-heading">More</div>
                   <div class="dd-item">
