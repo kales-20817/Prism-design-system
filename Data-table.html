@@ -1034,10 +1034,6 @@
             </ul>
           </div>
 
-          <div id="feedback" class="feedback-banner">
-            <div><div class="fb-text">Was this page helpful?</div><div class="fb-sub">Help us improve by sharing your feedback on this component's documentation.</div></div>
-            <div style="display:flex;gap:10px;"><button class="feedback-btn">Not helpful</button><button class="feedback-btn primary">Yes, helpful</button></div>
-          </div>
         </div>
 
         <!-- ========== CODE ========== -->
@@ -1451,6 +1447,12 @@
           </div>
         </aside>
       </div><!-- main-content-area -->
+
+    <div id="feedback" class="feedback-banner" style="display: none;">
+    <div><div class="fb-text">Was this page helpful?</div><div class="fb-sub">Help us improve by sharing your feedback on this component's documentation.</div></div>
+    <div style="display:flex;gap:10px;"><button class="feedback-btn">Not helpful</button><button class="feedback-btn primary">Yes, helpful</button></div>
+    </div>
+
     </main>
   </div>
 
@@ -1641,5 +1643,46 @@
   sidebar.addEventListener('click', (e) => { if (e.target.closest('a')) close(); });
 })();
 </script>
+
+<!-- Floating Feedback Button -->
+<style>
+  .float-cliq-btn {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .float-cliq-label {
+    background: #1a1a2e; color: #fff;
+    padding: 7px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; white-space: nowrap;
+    opacity: 0; transform: translateX(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .float-cliq-btn:hover .float-cliq-label {
+    opacity: 1; transform: translateX(0);
+  }
+  .float-cliq-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: #2563eb; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+  }
+  .float-cliq-btn:hover .float-cliq-icon {
+    transform: translateY(-3px) scale(1.07);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.55);
+  }
+  .float-cliq-btn:active .float-cliq-icon { transform: scale(0.95); }
+</style>
+<a href="https://cliq.zoho.in/company/60002085329/channels/prismdesignsystembyuemssupportfeedback" target="_blank" rel="noopener" class="float-cliq-btn" aria-label="Share feedback on Cliq">
+  <span class="float-cliq-label">Share feedback</span>
+  <span class="float-cliq-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </span>
+</a>
 </body>
 </html>
