@@ -112,7 +112,7 @@
   [data-theme="light"] .nav-dropdown-menu a:hover { color: #1e293b; background: rgba(37,99,235,0.05); }
   [data-theme="light"] .nav-dropdown-menu a:hover svg { color: #2563eb; }
 
-  .components-layout { display: grid; grid-template-columns: 1fr; width: 100%; padding-top: 72px; min-height: 100vh; }
+  .components-layout { display: block; width: 100%; padding-top: 72px; min-height: 100vh; }
   .sidebar { grid-column: 1; grid-row: 1; width: 260px; border-right: 1px solid var(--prism-border); padding: 32px 24px 64px; position: sticky; top: 72px; height: calc(100vh - 72px); overflow-y: auto; }
   .sidebar::-webkit-scrollbar { width: 4px; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--prism-border); border-radius: 4px; }
@@ -125,7 +125,7 @@
   .sidebar-search input::placeholder { color: var(--prism-text-muted); }
   .search-shortcut { font-size: 11px; font-weight: 600; color: var(--prism-text-muted); background: var(--prism-surface-hover); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--prism-border); }
 
-  .main-panel { grid-column: 2; grid-row: 1; padding: 48px 64px 0 64px; display: flex; flex-direction: column; }
+  .main-panel { padding: 48px 64px 0 64px; display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; width: 100%; }
   .page-header-area { width: 100%; max-width: none; }
   .page-title { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; background: var(--logo-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; padding-right: 8px; padding-bottom: 4px; }
   .page-desc { color: var(--prism-text); font-size: 20px; font-weight: 400; line-height: 1.5; margin-bottom: 32px; margin-top: 8px; max-width: 900px; }
@@ -506,9 +506,6 @@
   <div id="bg-glow-2" class="bg-glow glow-2"></div>
 
   <nav class="nav">
-    <button class="nav-hamburger" aria-label="Open sidebar" aria-expanded="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    </button>
     <a class="nav-logo" href="index.html">
       <img src="assets/Prism-logo.svg" alt="" class="nav-logo-img" width="40" height="40">
       <span class="nav-logo-text">
@@ -528,7 +525,6 @@
       </button>
     </div>
   </nav>
-  <div class="sidebar-backdrop" aria-hidden="true"></div>
 
   <div id="components-layout" class="components-layout">
     <main class="main-panel">
@@ -795,9 +791,9 @@
                 </svg>
               </div>
               <!-- Zia popover -->
-              <div style="position:relative;margin-left:350px;margin-top:4px;">
-                <!-- Arrow -->
-                <div class="zia-error-arrow" style="position:absolute;top:-8px;left:56px;width:16px;height:16px;background:#fff;border-left:1px solid #FFC6F7;border-top:1px solid #FFC6F7;border-right:none;border-bottom:none;transform:rotate(45deg);z-index:1;"></div>
+              <div style="position:relative;margin-left:126px;margin-top:4px;width:100%;max-width:400px;">
+                <!-- Arrow pointing up to zia-sparkle-icon (end of warning row) -->
+                <div class="zia-error-arrow" style="position:absolute;top:-8px;left:262px;width:16px;height:16px;background:#fff;border-left:1px solid #FFC6F7;border-top:1px solid #FFC6F7;border-right:none;border-bottom:none;transform:rotate(45deg);z-index:1;"></div>
                 <div class="zia-error-popover" style="position:relative;z-index:2;border:1px solid #FFC6F7;border-radius:10px;background:#fff;padding:20px 24px;width:100%;max-width:400px;box-shadow:0 4px 20px rgba(219,24,193,0.08);">
                   <p style="font-size:13px;line-height:1.65;color:#505564;margin:0 0 14px 0;">The Port (Outgoing) field determines which network port your mail server uses to send emails (SMTP/SMTPS).</p>
                   <p style="font-size:13px;font-weight:700;color:#1a1a2e;margin:0 0 8px 0;">Depending on your configuration:</p>
