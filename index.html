@@ -704,11 +704,12 @@
         .nav-dropdown { display: none !important; }
         #themeToggle { width: 36px !important; height: 36px !important; padding: 6px !important; margin-left: 4px !important; }
 
-        .hero-section { min-height: 72vh !important; padding: 72px 16px 80px !important; }
+        .hero-section { min-height: auto !important; padding: 72px 16px 24px !important; flex-direction: column !important; justify-content: center !important; gap: 8px !important; }
         h1 { white-space: normal !important; font-size: clamp(1.75rem, 8vw, 2.5rem) !important; }
-        .subtext { font-size: 0.95rem !important; margin-bottom: 28px !important; padding: 0 8px; }
+        .subtext { font-size: 0.95rem !important; margin-bottom: 16px !important; padding: 0 8px; }
         .badge { font-size: 0.7rem !important; padding: 6px 12px !important; margin-bottom: 20px !important; }
-        .hero-cta { bottom: 24px !important; padding: 12px 28px !important; font-size: 14px !important; }
+        .hero-cta { position: static !important; transform: none !important; bottom: auto !important; left: auto !important; margin: 0 auto !important; padding: 12px 32px !important; font-size: 14px !important; }
+        .hero-cta:hover { transform: translateY(-3px) !important; }
 
         #features-section { padding: 64px 20px !important; }
         .features-title, #features-section h2 { font-size: 30px !important; line-height: 1.15 !important; }
@@ -745,13 +746,14 @@
 
         /* Showcase marquee sizing */
         .showcase-section { padding: 0 !important; }
+        .hero-showcase { margin-top: 16px !important; padding: 8px 0 !important; }
     }
 
     @media (max-width: 480px) {
         .nav-logo-sub { display: none !important; }
         .nav-links a:not(.nav-dropdown-menu a) { font-size: 12px !important; padding: 6px 8px !important; }
 
-        .hero-section { min-height: 68vh !important; padding: 64px 14px 72px !important; }
+        .hero-section { min-height: auto !important; padding: 64px 14px 20px !important; }
         h1 { font-size: clamp(1.6rem, 9vw, 2.25rem) !important; }
 
         #features-section { padding: 48px 16px !important; }
@@ -2502,10 +2504,12 @@
         border: 1px solid var(--border);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
       }
-      #zia-section .zia-container:hover {
+      #zia-section .zia-container:hover,
+      [data-theme="light"] #zia-section .zia-container:hover,
+      :root:not([data-theme="light"]) #zia-section .zia-container:hover {
         transform: translateY(-4px);
         border-color: rgba(124, 58, 237, 0.25);
-        box-shadow: 0 20px 50px rgba(0, 88, 255, 0.12);
+        /* box-shadow: 0 20px 50px rgba(0, 88, 255, 0.12); */
         background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%);
       }
 
@@ -2514,11 +2518,21 @@
       @media (max-width: 992px) {
         .zia-section { height: auto; padding: 80px 24px; margin-top: 96px; }
         .zia-container { grid-template-columns: 1fr; gap: 56px; text-align: center; padding: 64px 40px; }
+        #zia-section .zia-container { gap: 56px !important; padding: 48px 16px !important; }
         .zia-right { text-align: center; order: 1; }
-        .zia-left { order: 2; }
+        .zia-left { order: 2; display: flex; justify-content: center; align-items: center; width: 100%; overflow: visible; }
         .zia-title { font-size: 36px; white-space: normal; }
         .zia-subtitle { margin-left: auto; margin-right: auto; }
         .zia-window { width: 100%; max-width: 516px; height: 340px; }
+        #zia-section .llm-diagram { transform: scale(1.2) !important; transform-origin: center !important; margin: 0 auto !important; max-width: 100% !important; width: 100% !important; }
+      }
+      @media (max-width: 768px) {
+        #zia-section .llm-diagram { transform: scale(1.15) !important; }
+        #zia-section .zia-container { padding: 40px 12px !important; }
+      }
+      @media (max-width: 480px) {
+        #zia-section .llm-diagram { transform: scale(1.08) !important; }
+        #zia-section .zia-container { padding: 32px 8px !important; }
       }
       @media (max-width: 768px) {
         .zia-section { padding: 64px 16px; margin-top: 80px; }
@@ -2673,7 +2687,7 @@
       .rs-card:hover {
         transform: translateY(-4px);
         border-color: rgba(124, 58, 237, 0.25);
-        box-shadow: 0 20px 50px rgba(0, 88, 255, 0.12);
+        /* box-shadow: 0 20px 50px rgba(0, 88, 255, 0.12); */
         background: linear-gradient(135deg, rgba(0, 88, 255, 0.1) 40%, rgba(60, 80, 255, 0.1) 30%, rgba(15, 208, 149, 0.1) 100%);
       }
       .rs-card-icon {
@@ -2799,13 +2813,13 @@
           <text x="306" y="50" text-anchor="end" font-size="12" font-weight="700" letter-spacing="2" fill="#a399c2">INPUT</text>
           <g fill="#1e1b4b">
             <rect x="318" y="95" width="4" height="28" fill="#6d28d9" rx="1"></rect>
-            <text x="306" y="114" text-anchor="end" font-size="17" font-weight="700">Color</text>
+            <text x="306" y="114" text-anchor="end" font-size="17" font-weight="700">color.md</text>
 
             <rect x="318" y="170" width="4" height="28" fill="#6d28d9" rx="1"></rect>
-            <text x="306" y="189" text-anchor="end" font-size="17" font-weight="700">Token</text>
+            <text x="306" y="189" text-anchor="end" font-size="17" font-weight="700">token.md</text>
 
             <rect x="318" y="245" width="4" height="28" fill="#6d28d9" rx="1"></rect>
-            <text x="306" y="264" text-anchor="end" font-size="17" font-weight="700">Grid</text>
+            <text x="306" y="264" text-anchor="end" font-size="17" font-weight="700">grid.md</text>
           </g>
 
           <g>
