@@ -82,14 +82,14 @@
     border-right: 1px solid rgba(37, 99, 235, 0.06);
     background: linear-gradient(180deg, rgba(248, 250, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);
   }
-  [data-theme="light"] .sidebar-link {
+  [data-theme="light"] .foundation-link {
     color: #64748b;
   }
-  [data-theme="light"] .sidebar-link:hover {
+  [data-theme="light"] .foundation-link:hover {
     color: #1e293b;
     background: rgba(37, 99, 235, 0.05);
   }
-  [data-theme="light"] .sidebar-link.active {
+  [data-theme="light"] .foundation-link.active {
     color: #2563eb;
     background: rgba(37, 99, 235, 0.06);
     box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
@@ -423,23 +423,18 @@
   }
 
   /* ── Sidebar Nav ── */
-  .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-  .sidebar-link {
-    display: flex; align-items: center;
-    padding: 8px 12px; font-size: 13.5px; font-weight: 500;
+  .foundation-nav { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; margin: 0; }
+  .foundation-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px; font-size: 14px; font-weight: 500;
     color: var(--prism-text-muted); text-decoration: none;
     border-radius: 8px; transition: all 0.2s ease;
   }
-  .sidebar-link:hover {
+  .foundation-link:hover {
     color: var(--prism-text); background: var(--prism-surface-hover);
-    transform: translateX(4px);
   }
-  .sidebar-link.active {
+  .foundation-link.active {
     color: var(--prism-violet); background: rgba(37, 99, 235, 0.08); font-weight: 600;
-  }
-  .sidebar-link.active::before {
-    content: ''; width: 4px; height: 16px; background: var(--prism-violet);
-    border-radius: 4px; margin-right: 12px; margin-left: -4px;
   }
 
 
@@ -667,19 +662,19 @@
         <span class="search-shortcut">&#8984;K</span>
       </div>
       <h3 class="sidebar-heading" id="foundations">Foundations</h3>
-      <ul class="sidebar-nav">
-        <li><a href="foundation-tokens.html" class="sidebar-link">Tokens</a></li>
-        <li><a href="foundation-accessibility.html" class="sidebar-link">Accessibility</a></li>
-        <li><a href="foundation-content.html" class="sidebar-link">Content</a></li>
-        <li><a href="foundation-spacing.html" class="sidebar-link">Spacing</a></li>
-        <li><a href="foundation-grid.html" class="sidebar-link">Grid</a></li>
-        <li><a href="foundation-color.html" class="sidebar-link">Color</a></li>
-        <li><a href="foundation-typography.html" class="sidebar-link">Typography</a></li>
-        <li><a href="foundation-iconography.html" class="sidebar-link">Iconography</a></li>
-        <li><a href="foundation-illustrations.html" class="sidebar-link">Illustrations</a></li>
-        <li><a href="foundation-elevation.html" class="sidebar-link">Elevation</a></li>
-        <li><a href="foundation-border.html" class="sidebar-link">Border</a></li>
-        <li><a href="foundation-radius.html" class="sidebar-link">Radius</a></li>
+      <ul class="foundation-nav">
+        <li><a href="foundation-tokens.html" class="foundation-link">Tokens</a></li>
+        <li><a href="foundation-accessibility.html" class="foundation-link">Accessibility</a></li>
+        <li><a href="foundation-content.html" class="foundation-link">Content</a></li>
+        <li><a href="foundation-spacing.html" class="foundation-link">Spacing</a></li>
+        <li><a href="foundation-grid.html" class="foundation-link">Grid</a></li>
+        <li><a href="foundation-color.html" class="foundation-link">Color</a></li>
+        <li><a href="foundation-typography.html" class="foundation-link">Typography</a></li>
+        <li><a href="foundation-iconography.html" class="foundation-link">Iconography</a></li>
+        <li><a href="foundation-illustrations.html" class="foundation-link">Illustrations</a></li>
+        <li><a href="foundation-elevation.html" class="foundation-link">Elevation</a></li>
+        <li><a href="foundation-border.html" class="foundation-link">Border</a></li>
+        <li><a href="foundation-radius.html" class="foundation-link">Radius</a></li>
       </ul>
     </aside>
 
@@ -955,7 +950,7 @@
 
     // Sidebar search: filter foundation nav links by query
     const sidebarSearchInput = document.querySelector('.sidebar-search input');
-    const sidebarNavItems = document.querySelectorAll('.sidebar-nav li');
+    const sidebarNavItems = document.querySelectorAll('.foundation-nav li');
     if (sidebarSearchInput && sidebarNavItems.length) {
       sidebarSearchInput.addEventListener('input', (e) => {
         const q = e.target.value.trim().toLowerCase();
@@ -1006,7 +1001,7 @@
 
     // Scroll sidebar to active link on page load
     (function(){
-      var active = document.querySelector('.sidebar-link.active');
+      var active = document.querySelector('.foundation-link.active');
       if (active) {
         var sidebar = active.closest('.sidebar');
         if (sidebar) {
