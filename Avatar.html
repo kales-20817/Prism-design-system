@@ -1153,6 +1153,137 @@
 
       <!-- ═══ CODE TAB ═══ -->
       <div class="tab-content" id="tab-code" style="display: none; padding-top: 32px;">
+        <h2 id="live-demo-code" class="doc-section-title">Live demo (Code)</h2>
+        <p class="doc-section-subtitle">Configure the Avatar and view the generated HTML.</p>
+
+        <style>
+          .avatar-playground { border: 1px solid var(--prism-border); border-radius: 12px; overflow: hidden; background: var(--prism-surface); margin-bottom: 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+          [data-theme="light"] .avatar-playground { background: #fff; border: 1px solid rgba(37,99,235,0.1); box-shadow: 0 8px 30px rgba(37,99,235,0.08); }
+          .avatar-pg-toolbar { display: flex; flex-wrap: wrap; gap: 20px; padding: 16px 24px; border-bottom: 1px solid var(--prism-border); background: var(--prism-surface-hover); }
+          [data-theme="light"] .avatar-pg-toolbar { background: rgba(248, 250, 255, 0.6); border-bottom: 1px solid rgba(37,99,235,0.1); }
+          .avatar-pg-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 140px; }
+          .avatar-pg-label { font-size: 13px; font-weight: 600; color: var(--prism-text-muted); }
+          .avatar-pg-select, .avatar-pg-input { background: var(--prism-surface); border: 1px solid var(--prism-border); color: var(--prism-text); padding: 8px 12px; border-radius: 8px; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+          [data-theme="light"] .avatar-pg-select, [data-theme="light"] .avatar-pg-input { background: #fff; border-color: rgba(37,99,235,0.15); color: #1e293b; }
+          .avatar-pg-select:focus, .avatar-pg-input:focus { border-color: var(--prism-violet); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+          .avatar-pg-preview { padding: 60px; min-height: 180px; display: flex; align-items: center; justify-content: center; background: #0a0a0c; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+          [data-theme="light"] .avatar-pg-preview { background: #ffffff; background-image: radial-gradient(circle, rgba(37,99,235,0.08) 1px, transparent 1px); background-size: 20px 20px; }
+          .avatar-pg-code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: var(--prism-surface); border-top: 1px solid var(--prism-border); border-bottom: 1px solid var(--prism-border); }
+          [data-theme="light"] .avatar-pg-code-header { background: rgba(248, 250, 255, 0.8); border-color: rgba(37,99,235,0.1); }
+          .avatar-pg-copy { display: flex; align-items: center; gap: 8px; background: transparent; border: none; font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--prism-text-muted); cursor: pointer; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+          .avatar-pg-copy:hover { background: var(--prism-surface-hover); color: var(--prism-text); }
+          [data-theme="light"] .avatar-pg-copy:hover { background: rgba(37,99,235,0.08); color: var(--prism-violet); }
+          .avatar-pg-code { background: #0a0a0c; padding: 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; margin: 0; white-space: pre; }
+          .avatar-pg-code .tk-tag { color: #a78bfa; }
+          .avatar-pg-code .tk-attr { color: #38bdf8; }
+          .avatar-pg-code .tk-str { color: #34d399; }
+          .avatar-pg-code .tk-punct { color: #94a3b8; }
+        </style>
+
+        <div class="avatar-playground">
+          <div class="avatar-pg-toolbar">
+            <div class="avatar-pg-group">
+              <label class="avatar-pg-label">Type</label>
+              <select class="avatar-pg-select" id="avatar-pg-type">
+                <option value="image" selected>Image</option>
+                <option value="initials">Initials</option>
+                <option value="placeholder">Placeholder</option>
+                <option value="hover">Hover (editable)</option>
+              </select>
+            </div>
+            <div class="avatar-pg-group">
+              <label class="avatar-pg-label">Size</label>
+              <select class="avatar-pg-select" id="avatar-pg-size">
+                <option value="sm">Small (32px)</option>
+                <option value="md" selected>Medium (48px)</option>
+                <option value="lg">Large (72px)</option>
+              </select>
+            </div>
+            <div class="avatar-pg-group">
+              <label class="avatar-pg-label">Initials</label>
+              <input class="avatar-pg-input" id="avatar-pg-initials" type="text" value="JD" maxlength="2">
+            </div>
+            <div class="avatar-pg-group">
+              <label class="avatar-pg-label">Disabled</label>
+              <select class="avatar-pg-select" id="avatar-pg-disabled">
+                <option value="off" selected>No</option>
+                <option value="on">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="avatar-pg-preview">
+            <div class="avatar-demo avatar-md avatar-image" id="avatar-pg-preview"></div>
+          </div>
+
+          <div class="avatar-pg-code-header">
+            <div style="font-size: 13.5px; font-weight: 600; color: var(--prism-text);">HTML</div>
+            <button class="avatar-pg-copy" id="avatar-pg-copy-btn">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre class="avatar-pg-code" id="avatar-pg-code"></pre>
+        </div>
+
+        <script>
+          (function(){
+            const el = {
+              type: document.getElementById('avatar-pg-type'),
+              size: document.getElementById('avatar-pg-size'),
+              initials: document.getElementById('avatar-pg-initials'),
+              disabled: document.getElementById('avatar-pg-disabled'),
+              preview: document.getElementById('avatar-pg-preview'),
+              code: document.getElementById('avatar-pg-code'),
+              copy: document.getElementById('avatar-pg-copy-btn')
+            };
+            if (!el.preview) return;
+
+            const PLACEHOLDER_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
+            const EDIT_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>';
+
+            function escape(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+            function render(){
+              const type = el.type.value;
+              const size = el.size.value;
+              const initials = (el.initials.value || '').slice(0, 2).toUpperCase();
+              const disabled = el.disabled.value === 'on';
+              const classes = ['avatar-demo', 'avatar-' + size, 'avatar-' + type];
+              if (disabled) classes.push('avatar-disabled');
+
+              let inner = '';
+              if (type === 'initials') inner = escape(initials);
+              else if (type === 'placeholder') inner = PLACEHOLDER_SVG;
+              else if (type === 'hover') inner = '<span class="avatar-overlay">' + EDIT_SVG + '</span>';
+
+              el.preview.className = classes.join(' ');
+              el.preview.innerHTML = inner;
+
+              const classAttr = classes.join(' ');
+              let html;
+              if (inner) {
+                html = '<span class="tk-punct">&lt;</span><span class="tk-tag">div</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;</span>' + (type === 'initials' ? escape(initials) : '...') + '<span class="tk-punct">&lt;/</span><span class="tk-tag">div</span><span class="tk-punct">&gt;</span>';
+              } else {
+                html = '<span class="tk-punct">&lt;</span><span class="tk-tag">div</span> <span class="tk-attr">class</span><span class="tk-punct">=</span><span class="tk-str">"' + classAttr + '"</span><span class="tk-punct">&gt;&lt;/</span><span class="tk-tag">div</span><span class="tk-punct">&gt;</span>';
+              }
+              el.code.innerHTML = html;
+            }
+            ['type','size','disabled'].forEach(k => el[k].addEventListener('change', render));
+            el.initials.addEventListener('input', render);
+            el.copy.addEventListener('click', () => {
+              navigator.clipboard.writeText(el.code.innerText).then(() => {
+                const orig = el.copy.innerHTML;
+                el.copy.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => { el.copy.innerHTML = orig; }, 1800);
+              });
+            });
+            render();
+          })();
+        </script>
+
+        <hr class="doc-divider" />
+
         <h2 id="component-api" class="doc-section-title">Component API</h2>
         <p class="doc-section-subtitle">Properties configuration for integrating the Avatar component.</p>
 
